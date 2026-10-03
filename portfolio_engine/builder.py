@@ -60,6 +60,8 @@ class Line:
     weight_hint: float = 0.0
     sector: str = ""
     region: str = ""
+    style: str = ""
+    fit_score: float = 0.0
 
 
 @dataclass
@@ -152,6 +154,10 @@ def _eligible(universe: pd.DataFrame, profiles: Profiles, asset_class: str, tier
             df = df.copy()
             df["_income_rank"] = (~df["vehicle"].isin(["lic", "etf", "fund"])).astype(int)
             df["priority"] = df["priority"].astype(float) + 0.5 * df["_income_rank"] * (df["role"] == "satellite").astype(int)
+    if "_excluded" in df.columns:
+        ok = df[df["_excluded"] == ""]
+        if len(ok):
+            df = ok
     model = df[df["role"] != "fallback"]
     fallback = df[df["role"] == "fallback"]
     if tier == "starter" or model.empty:
@@ -159,6 +165,10 @@ def _eligible(universe: pd.DataFrame, profiles: Profiles, asset_class: str, tier
         chosen = pd.concat([fallback, model]) if tier == "starter" else fallback
     else:
         chosen = model
+    if "_fit" in chosen.columns:
+        # Index cores (priority 1) stay in front; everything else ranks on how well it fits the profile today.
+        chosen = chosen.assign(_order=_priority_offset(chosen["priority"]) - chosen["_fit"])
+        return chosen.sort_values(["_order", "weight_hint"], ascending=[True, False]).drop(columns="_order")
     return chosen.sort_values(["priority", "weight_hint"], ascending=[True, False])
 
 
@@ -188,6 +198,91 @@ def fill_sector_region(universe: pd.DataFrame, research: dict | None) -> pd.Data
     return df
 
 
+GROWTH_SECTORS = {"Technology", "Healthcare", "Communication", "Small companies", "Covered call income"}
+INCOME_SECTORS = {"Dividend income", "Covered call income", "Hybrids", "Bank subordinated debt", "High yield credit", "Private debt", "Securitised credit", "Floating rate", "Bank floating rate", "Resource royalties"}
+
+
+def derive_style(row: pd.Series, r) -> str:
+    """growth, income, quality or defensive: what job the holding does, from its sector, yield and record."""
+    if str(row.get("style", "") or "").strip():
+        return str(row["style"]).strip().lower()
+    cls, sec, veh = row["asset_class"], str(row.get("sector", "") or ""), row["vehicle"]
+    if cls in ("fixed_income", "cash"):
+        return "defensive"
+    if cls == "credit":
+        return "income"
+    if cls == "alternatives" and veh != "direct":
+        return "quality"   # gold, silver, private equity vehicles: diversifiers rather than growth or income bets
+    yld = getattr(r, "dividend_yield_pct", None)
+    yld = float(row["yield"]) if yld is None else float(yld)
+    r5 = getattr(r, "return_5y_pct_pa", None)
+    if sec in INCOME_SECTORS or yld >= 4.5:
+        return "income"
+    if veh != "direct" and sec in ("Diversified fund", "Diversified fund (hedged)", "Quality"):
+        return "quality"
+    # Growth means the business is growing, not that the share price has run: technology, healthcare,
+    # communication, consumer growth and small companies. A rallying bank, refiner or steelmaker is quality.
+    if sec in GROWTH_SECTORS and yld < 3.0:
+        return "growth"
+    if sec == "Consumer discretionary" and yld < 1.5 and (r5 is None or r5 >= 12):
+        return "growth"
+    return "quality"
+
+
+def _clip(x, lo=-1.0, hi=1.0):
+    return max(lo, min(hi, x))
+
+
+def _priority_offset(priority: pd.Series) -> pd.Series:
+    """Priority is a prior, fit is the evidence: index cores (1) come first, hand-picked names (2) start 0.4 ahead of
+    screened names (3), which start 0.3 ahead of the long tail (4+). A better fit can still overturn it."""
+    return priority.astype(float).map(lambda p: 0.0 if p <= 1 else 0.6 if p <= 2 else 1.0 if p <= 3 else 1.3)
+
+
+def fit_scores(universe: pd.DataFrame, research: dict, profile: str, ls: dict, cfg: dict) -> tuple[pd.Series, pd.Series, pd.Series]:
+    """How well each holding fits the risk profile, from its own record: trend, momentum, 3/5/10 year returns,
+    volatility, analyst consensus, yield and style. Returns (score, style, excluded-reason) per universe row.
+    Weights per profile come from profiles.yaml (`selection.weights`); the rules are deliberately simple so
+    any choice can be traced to the numbers on the holding's fact sheet."""
+    w = dict((cfg.get("weights") or {}).get(profile) or cfg.get("default_weights") or {})
+    inc_pref = float(ls.get("income_preference", 0) or 0)
+    w["yield"] = float(w.get("yield", 0)) + 0.3 * inc_pref
+    cons_map = {"Strong Buy": 1.0, "Buy": 0.5, "Hold": 0.0, "Underperform": -0.6, "Sell": -1.0}
+    scores, styles, excl = [], [], []
+    rules = cfg.get("rules") or {}
+    for _, row in universe.iterrows():
+        r = research.get(row["ticker"])
+        style = derive_style(row, r)
+        g = lambda k: getattr(r, k, None) if r is not None else None
+        mom, r3, r5, r10, vol = g("momentum_12_1_pct"), g("return_3y_pct_pa"), g("return_5y_pct_pa"), g("return_10y_pct_pa"), g("volatility_1y_pct")
+        above = g("above_200dma")
+        yld = g("dividend_yield_pct")
+        yld = float(row["yield"]) if yld is None else float(yld)
+        gy = yld * (1 + FRANKING_GROSS_UP * float(row["franking"]) / 100.0)
+        parts = {
+            "trend": 0.0 if above is None else (1.0 if above else -1.0),
+            "momentum": 0.0 if mom is None else _clip(mom / 30.0),
+            "r3": 0.0 if r3 is None else _clip(r3 / 20.0),
+            "r5": 0.0 if r5 is None else _clip(r5 / 15.0),
+            "r10": 0.0 if r10 is None else _clip(r10 / 12.0),
+            "low_vol": 0.0 if vol is None else _clip((30.0 - vol) / 20.0),
+            "consensus": cons_map.get(g("consensus_label") or "", 0.0),
+            "yield": _clip(gy / 5.0, 0.0, 1.2),
+        }
+        score = sum(float(w.get(k, 0)) * v for k, v in parts.items())
+        score += float((w.get("style") or {}).get(style, 0))
+        reason = ""
+        if row["vehicle"] == "direct":
+            if (g("consensus_label") == "Sell") and rules.get("exclude_sell_consensus", True):
+                reason = "analyst consensus Sell"
+            if profile in (rules.get("derated_excluded_profiles") or []) and r3 is not None and r5 is not None and r3 < 0 and r5 < 0:
+                reason = f"down over 3 and 5 years ({r3:+.0f}% and {r5:+.0f}% a year): not a growth holding"
+            if profile in (rules.get("volatile_excluded_profiles") or []) and vol is not None and vol > float(rules.get("max_volatility_pct", 45)):
+                reason = f"too volatile for this profile (±{vol:.0f}% a year)"
+        scores.append(score); styles.append(style); excl.append(reason)
+    return pd.Series(scores, index=universe.index), pd.Series(styles, index=universe.index), pd.Series(excl, index=universe.index)
+
+
 def _pick_diverse(elig: pd.DataFrame, n: int, tier: str, cfg: dict, warnings: list[str], asset_class: str) -> pd.DataFrame:
     """Take the first `n` eligible holdings in priority order, but skip a single company when its sector already has
     the tier's quota in this class, or when its country would hold more than the allowed share of the class's single
@@ -200,13 +295,22 @@ def _pick_diverse(elig: pd.DataFrame, n: int, tier: str, cfg: dict, warnings: li
     # second name from a sector already represented, so two banks or four overlapping world index funds are not
     # chosen ahead of a healthcare or industrial name the model also holds.
     if cfg.get("spread_sectors_first", True):
+        # Spread only among candidates that fit the profile: the top pool (twice the slots wanted) is spread
+        # across sectors; the rest queue behind it in fit order, so an unrepresented sector does not pull in a
+        # poor fit just to tick a box.
+        if "_fit" in elig.columns:
+            pool_n = max(n * 2, 4)
+            elig = pd.concat([elig.head(pool_n).assign(_pool=0), elig.iloc[pool_n:].assign(_pool=1)])
         seen: dict[tuple, int] = {}
         ranks = []
         for _, r in elig.iterrows():
             key = (str(r.get("sector", "")),) if r["vehicle"] == "direct" else (str(r.get("sector", "")), str(r.get("region", "")))
             ranks.append(seen.get(key, 0))
             seen[key] = seen.get(key, 0) + 1
-        elig = elig.assign(_rank=ranks).sort_values(["_rank", "priority", "weight_hint"], ascending=[True, True, False]).drop(columns="_rank")
+        if "_fit" in elig.columns:
+            elig = elig.assign(_rank=ranks, _order=_priority_offset(elig["priority"]) - elig["_fit"]).sort_values(["_pool", "_rank", "_order", "weight_hint"], ascending=[True, True, True, False]).drop(columns=["_rank", "_order", "_pool"])
+        else:
+            elig = elig.assign(_rank=ranks).sort_values(["_rank", "priority", "weight_hint"], ascending=[True, True, False]).drop(columns="_rank")
 
     def attempt(sector_cap: int, region_cap: float) -> list:
         picked, sectors, regions = [], {}, {}
@@ -467,6 +571,7 @@ def build_portfolio(settings: Settings, profiles: Profiles, universe: pd.DataFra
     rcfg = settings.raw.get("research", {})
     research = research or {}
     universe = fill_sector_region(universe, research)
+    scfg = getattr(profiles, "selection", {}) or {}
     esg_info: dict = {}
     if esg:
         universe, changes = apply_esg_screen(universe, universe_all if universe_all is not None else universe, esg, research)
@@ -482,6 +587,25 @@ def build_portfolio(settings: Settings, profiles: Profiles, universe: pd.DataFra
 
     saa, tilts, target = strategic_plus_tactical(profiles, profile_used, view)
     target = apply_life_stage(profiles, target, life_stage, warnings)
+    if scfg.get("enabled", True):
+        fit, style, excluded = fit_scores(universe, research, profile_used, ls, scfg)
+        universe = universe.assign(_fit=fit, style=style, _excluded=excluded)
+        # Hand-picked lists lead the profiles they were written for: the income list in Conservative and Moderate
+        # (and every pension-phase portfolio), the growth list in Growth and High Growth, both in Balanced.
+        if "lists" in universe.columns:
+            want = set()
+            if profile_used in ("conservative", "moderate", "balanced") or life_stage in ("retirement", "pre_retirement"):
+                want.add("income")
+            if profile_used in ("growth", "high_growth", "balanced") and life_stage not in ("retirement",):
+                want.add("growth")
+            tags = universe["lists"].fillna("").astype(str)
+            lead = tags.apply(lambda x: any(w in x.split() for w in want))
+            other = (tags != "") & ~lead & (universe["vehicle"] == "direct")
+            universe.loc[lead & (universe["priority"].astype(float) > 1), "priority"] = 2
+            universe.loc[other, "priority"] = 3
+        dropped = universe[(universe["_excluded"] != "") & (universe["vehicle"] == "direct")]
+        if len(dropped):
+            warnings.append("Left out for this profile: " + "; ".join(f"{r['ticker']} ({r['_excluded']})" for _, r in dropped.head(8).iterrows()) + (f"; and {len(dropped) - 8} more" if len(dropped) > 8 else ""))
 
     prices, origin = price_lookup(universe, md, manual)
     unpriced = sorted(set(universe["ticker"]) - set(prices))
@@ -537,6 +661,7 @@ def build_portfolio(settings: Settings, profiles: Profiles, universe: pd.DataFra
                          "yield_source": "live" if live_yield is not None else "config",
                          "franking_pct": float(r.franking), "price_aud": prices[r.ticker], "priced_from": origin[r.ticker],
                          "weight_hint": float(r.weight_hint), "sector": str(r.get("sector", "") or ""), "region": str(r.get("region", "") or ""),
+                         "style": str(r.get("style", "") or ""), "fit_score": round(float(r.get("_fit", 0) or 0), 2),
                          "consensus_label": getattr(hr, "consensus_label", "") or "", "consensus_mean": cm,
                          "analysts": getattr(hr, "analysts", None), "consensus_multiplier": float(mult[idx])})
     df = pd.DataFrame(rows)
@@ -689,10 +814,13 @@ def compute_metrics(settings: Settings, profiles: Profiles, df: pd.DataFrame, md
     }
     # Realised volatility and trailing return from the covariance of daily returns.
     proxies = profiles.tactical.get("proxies", {})
+    twins = dict(zip(universe["ticker"], universe["twin"])) if universe is not None and "twin" in universe.columns else {}
     series = {}
     for r in df.itertuples():
         if r.ticker in md.prices.columns:
             series[r.ticker] = md.prices[r.ticker]
+        elif twins.get(r.ticker) and twins[r.ticker] in md.prices.columns:
+            series[r.ticker] = md.prices[twins[r.ticker]]       # unlisted fund: its listed twin stands in
         elif r.asset_class in proxies and proxies[r.asset_class]:
             p = [t for t in proxies[r.asset_class] if t in md.prices.columns]
             if p:
@@ -793,6 +921,11 @@ def monthly_history(md: MarketData, settings: Settings, profiles: Profiles, univ
                     r = filled
                     break
         series[t] = [None if pd.isna(v) else round(float(v), 5) for v in r]
+    # Unlisted funds: the listed twin's whole history stands in, and is recorded as a stand-in for every month.
+    if universe is not None and "twin" in universe.columns:
+        for t, tw in zip(universe["ticker"], universe["twin"]):
+            if tw and t not in series and tw in series:
+                series[t] = list(series[tw]); stand_in[t] = tw; stand_months[t] = len(months)
     return {"months": months, "series": series, "stand_in": stand_in, "stand_in_months": stand_months,
             "class_proxy": {c: next((t for t in ps if t in series), None) for c, ps in profiles.tactical.get("proxies", {}).items()}}
 

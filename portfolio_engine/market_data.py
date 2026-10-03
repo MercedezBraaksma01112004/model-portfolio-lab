@@ -176,10 +176,20 @@ def _fetch_synthetic(tickers: list[str], days: int) -> pd.DataFrame:
 
 def load_manual_prices(settings: Settings) -> dict[str, float]:
     p = settings.path("manual_prices")
-    if not p.exists():
-        return {}
-    df = pd.read_csv(p)
-    return {str(r.ticker): float(r.price) for r in df.itertuples()}
+    out: dict[str, float] = {}
+    if p.exists():
+        df = pd.read_csv(p)
+        out.update({str(r.ticker): float(r.price) for r in df.itertuples()})
+    unl = settings.root / "config" / "unlisted_funds.csv"
+    if unl.exists():
+        try:
+            uf = pd.read_csv(unl, dtype=str).fillna("")
+            for _, r in uf.iterrows():
+                if r["unit_price"]:
+                    out.setdefault(str(r["ticker"]).strip().upper(), float(r["unit_price"]))
+        except pd.errors.EmptyDataError:
+            pass
+    return out
 
 
 def _read_cache(path: Path) -> pd.DataFrame | None:

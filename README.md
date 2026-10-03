@@ -281,3 +281,31 @@ retirement variant yields more than the accumulation variant.
   documents page for managed portfolios).
 * Franking credits are not modelled beyond a scoring preference until `franking` is
   populated in the universe.
+
+### The research screen
+
+`python scripts/universe_scorecard.py` scores every listing the site knows about (about 1,100: ASX companies over
+$300 million, the S&P 500 and the Australian ETF list, plus everything already in the universe) on size, 1, 3, 5
+and 10 year returns, volatility, worst fall, recent momentum and analyst consensus, 0 to 100, and writes the whole
+table to `config/universe_scorecard.csv` (also published at `/data/universe_scorecard.csv`). With `--apply` it adds
+the best-scoring large listings that are not yet in the universe (at most 80 a run, $8 billion or more, three years
+of history) and moves an active share to the watchlist when it is down over three and five years and below its
+200 day average, or carries a Sell consensus with a falling price. Amcor is never added. The daily workflow runs
+the screen every day and applies it on Mondays.
+
+### Profile fit
+
+Each holding gets a fit score per risk profile (`selection` in `config/profiles.yaml`): trend, momentum, 3, 5 and
+10 year returns, low volatility, consensus, grossed-up yield and its style (growth, quality, income, defensive),
+weighted differently for High Growth than for Conservative. Index cores stay in front; everything else is ranked
+on fit, and the sector spread is applied only within the best-fitting pool. A company that is down over three
+and five years is not eligible for the Growth and High Growth profiles; one above the volatility limit is not
+eligible for Conservative and Moderate; a Sell consensus excludes a share everywhere. The notes on each portfolio
+say what was left out and why.
+
+### Unlisted funds
+
+`config/unlisted_funds.csv` holds managed funds without a daily price feed: the manager's unit price and
+published returns (dated), a listed twin whose daily and monthly history stands in for risk and the backtest,
+the liquidity terms and the PDS link. They appear in the universe as `fund` holdings priced "manual", are
+limited to the larger balance tiers, and the page and workbook say which twin is standing in.

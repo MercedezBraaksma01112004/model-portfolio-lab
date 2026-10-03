@@ -246,8 +246,8 @@ function lineFromUniverse(u){
   const r = R[u.ticker] || {};
   return { ticker: u.ticker, name: u.name, asset_class: u.asset_class, vehicle: u.vehicle, role: u.role, currency: u.currency, mer_pct: +u.mer || 0,
     yield_pct: r.dividend_yield_pct != null ? r.dividend_yield_pct : (+u.yield || 0), yield_source: r.dividend_yield_pct != null ? "live" : "config",
-    franking_pct: +u.franking || 0, sector: u.sector || "", region: u.region || "", price_aud: u.price_aud, priced_from: u.price_aud == null ? "unpriced" : "feed",
-    weight_pct: 0, source: "universe" };
+    franking_pct: +u.franking || 0, sector: u.sector || "", region: u.region || "", price_aud: u.price_aud, priced_from: u.twin ? "manual" : (u.price_aud == null ? "unpriced" : "feed"),
+    weight_pct: 0, source: "universe", liquidity: u.liquidity || "" };
 }
 function guessClass(sym, name, sector){
   if (sector && CLASSES.some(c => c.key === sector)) return sector;
@@ -303,8 +303,9 @@ function platformFee(bal, menu){ let c = DATA.platform; if (!c) return 0; if (c.
   for (const b of c.bands) { const upper = b.up_to == null ? Infinity : b.up_to; fee += Math.max(0, Math.min(bal, upper) - lower) * b.rate; lower = upper; if (bal <= upper) break; }
   fee = Math.min(Math.max(fee, c.min_admin_fee||0), c.max_admin_fee||Infinity); fee += c.account_keeping_fee||0; fee += Math.min(bal*(c.expense_recovery_rate||0), c.expense_recovery_cap||0); return fee; }
 function dailySeries(l){
-  const R0 = DATA.returns || {}; if (l.vehicle === "cash" || l.priced_from === "manual") return null;
+  const R0 = DATA.returns || {}; if (l.vehicle === "cash") return null;
   if (R0.series && R0.series[l.ticker]) return R0.series[l.ticker];
+  if (l.priced_from === "manual") return null;
   const ex = EXTRA[l.ticker]; if (ex && ex.daily && ex.daily.returns.length >= 60) { // align to the embedded calendar by date
     const map = {}; ex.daily.dates.forEach((d, i) => map[d] = ex.daily.returns[i]); return R0.dates.map(d => map[d] ?? 0); }
   const px = (R0.class_proxy||{})[l.asset_class]; return px && R0.series && R0.series[px] ? R0.series[px] : null; }
@@ -405,7 +406,7 @@ function render(){
   sel("htable").hidden = !pf.lines.length; sel("holdings-empty").hidden = !!pf.lines.length;
   const maxW = Math.max(1, ...pf.lines.map(l => l.weight_pct || 0));
   sel("holdings").innerHTML = pf.lines.map(l => { const r = R[l.ticker] || {}; const col = cssColor(l.asset_class) || "var(--accent)";
-    return `<tr class="row wrow ${state.ticker===l.ticker?"active":""}" data-t="${esc(l.ticker)}"><td><b>${esc(l.name)}</b><br><span class="mono" style="font-size:11.5px;color:var(--faint)">${esc(l.ticker)} · ${l.vehicle}${l.source==="live" ? " · live" : ""}</span> ${qualityChip(l.ticker)}</td>
+    return `<tr class="row wrow ${state.ticker===l.ticker?"active":""}" data-t="${esc(l.ticker)}"><td><b>${esc(l.name)}</b><br><span class="mono" style="font-size:11.5px;color:var(--faint)">${esc(l.ticker)} · ${l.vehicle}${l.source==="live" ? " · live" : ""}${l.priced_from==="manual" ? " · unlisted" : ""}</span> ${qualityChip(l.ticker)}${l.liquidity ? `<span class="chip neutral" title="Unlisted fund: priced by the manager; ${esc(l.liquidity)}">${esc(l.liquidity.split(" (")[0])}</span>` : ""}</td>
       <td><select class="cls" data-t="${esc(l.ticker)}" style="font:inherit;font-size:12.5px;padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--text)">${CLASSES.map(c => `<option value="${c.key}" ${c.key===l.asset_class?"selected":""}>${c.label}</option>`).join("")}</select></td>
       <td style="font-size:12.5px;color:var(--muted)">${esc(l.sector||"–")}<br>${esc(l.region||"–")}</td>
       <td class="num"><input class="w ${state.readOnly?"":""}" data-t="${esc(l.ticker)}" type="text" inputmode="decimal" value="${(l.weight_pct||0).toFixed(1)}" ${state.readOnly?"disabled":""}></td>
@@ -530,7 +531,7 @@ let qTimer;
 function renderResults(q){
   const held = new Set(state.lines.map(l => l.ticker)); const uni = searchUniverse(q).slice(0, q ? 12 : 40); const ext = q.length >= 2 ? searchIndex(q) : [];
   const row = (sym, name, d, cls, extra) => `<div class="result"><div><b>${esc(name)}</b> <span class="mono" style="color:var(--faint);font-size:12px">${esc(sym)}</span><div class="d">${d}</div></div><div>${held.has(sym) ? '<span class="chip neutral">in portfolio</span>' : `<button type="button" class="btn small primary" data-add="${esc(sym)}" data-cls="${cls}" ${extra?`data-type="${esc(extra.type||"")}" data-sector="${esc(extra.sector||"")}"`:""}>Add</button>`}</div></div>`;
-  let html = uni.map(u => { const r = R[u.ticker] || {}; return row(u.ticker, u.name, `${label(CLASSES, u.asset_class)} · ${esc(u.sector)} · ${esc(u.region)} · ${u.vehicle}${u.status === "watchlist" ? " · watchlist" : ""} · yield ${fmtP(r.dividend_yield_pct != null ? r.dividend_yield_pct : u.yield,1)} · cost ${fmtP(u.mer,2)} · 1y ${fmtS(r.return_1y_pct)} · 5y ${fmtS(r.return_5y_pct_pa)} ${qualityChip(u.ticker)} ${consensusChip(r)}`, u.asset_class); }).join("");
+  let html = uni.map(u => { const r = R[u.ticker] || {}; return row(u.ticker, u.name, `${label(CLASSES, u.asset_class)} · ${esc(u.sector)} · ${esc(u.region)} · ${u.vehicle}${u.twin ? " · unlisted, " + esc((u.liquidity||"").toLowerCase()) : ""}${u.status === "watchlist" ? " · watchlist" : ""} · yield ${fmtP(r.dividend_yield_pct != null ? r.dividend_yield_pct : u.yield,1)} · cost ${fmtP(u.mer,2)} · 1y ${fmtS(r.return_1y_pct)} · 5y ${fmtS(r.return_5y_pct_pa)} ${qualityChip(u.ticker)} ${consensusChip(r)}`, u.asset_class); }).join("");
   if (ext.length) html += `<div class="result" style="background:var(--surface-2)"><div class="d">Outside the engine's universe: fetched live when added</div></div>` + ext.map(x => row(x.symbol, x.name, `${esc(x.exchange)} · ${esc(x.type)}${x.sector ? " · " + esc(x.sector) : ""}`, guessClass(x.symbol, x.name, x.sector), x)).join("");
   if (!uni.length && !ext.length && q.length >= 2) html += `<div class="result"><div class="d">No match in the index. <button type="button" class="btn small" id="btn-yahoo">Search the price feed for "${esc(q)}"</button></div></div>`;
   sel("results").innerHTML = html ? `<div class="results">${html}</div>` : "";
@@ -722,7 +723,8 @@ def write_builder(path: Path, portfolios: list[Portfolio], profiles: Profiles, m
     for _, r in uni.iterrows():
         universe_rows.append({"ticker": r["ticker"], "name": r["name"], "asset_class": r["asset_class"], "vehicle": r["vehicle"], "role": r["role"], "currency": r["currency"],
                               "mer": float(r["mer"]), "yield": float(r["yield"]), "franking": float(r["franking"]), "sector": r["sector"], "region": r["region"],
-                              "status": r.get("status", "active"), "price_aud": prices.get(r["ticker"]), "max_weight": float(r["max_weight"]), "weight_hint": float(r["weight_hint"])})
+                              "status": r.get("status", "active"), "price_aud": prices.get(r["ticker"]), "max_weight": float(r["max_weight"]), "weight_hint": float(r["weight_hint"]),
+                              "twin": r.get("twin", "") or "", "liquidity": r.get("liquidity", "") or "", "style": r.get("style", "") or ""})
     tiers = sorted(profiles.balance_tiers.items(), key=lambda kv: kv[1]["order"])
 
     def split(lbl: str) -> tuple[str, str]:

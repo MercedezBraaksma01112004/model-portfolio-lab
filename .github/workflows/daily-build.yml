@@ -101,6 +101,9 @@ jobs:
           python scripts/generate_quality_verdicts.py
           python scripts/quality_report.py > /dev/null && cp output/quality_review.html site/quality.html
           python scripts/build_listing_data.py
+          # Screen every listing; apply additions and watchlist moves on Mondays only, so the models do not churn daily.
+          if [ "$(date -u +%u)" = "1" ]; then python scripts/universe_scorecard.py --apply; else python scripts/universe_scorecard.py; fi
+          cp config/universe_scorecard.csv site/data/universe_scorecard.csv
           mkdir -p site/data && cp data/applied_changes.json site/data/applied_changes.json 2>/dev/null || echo '{"ids":[]}' > site/data/applied_changes.json
           ls -la site | head -20
 
@@ -109,7 +112,7 @@ jobs:
         run: |
           git config user.name "portfolio-engine bot"
           git config user.email "actions@users.noreply.github.com"
-          for f in config/universe.csv config/quality_review.csv data/my_holdings.csv data/cache/state.json data/applied_changes.json; do [ -f "$f" ] && git add "$f"; done
+          for f in config/universe.csv config/quality_review.csv config/universe_scorecard.csv data/my_holdings.csv data/cache/state.json data/applied_changes.json; do [ -f "$f" ] && git add "$f"; done
           git diff --cached --quiet || git commit -m "Daily build: holdings and tactical state as of $(date -u +%Y-%m-%d)"
           git push
 

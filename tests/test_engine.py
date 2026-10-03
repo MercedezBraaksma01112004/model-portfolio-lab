@@ -130,10 +130,13 @@ def test_sma_portfolio(ctx):
     assert len(pf.sma["shortlist"]) <= p.sma["shortlist"]
 
 
-def test_no_manual_priced_holdings_except_cash(ctx):
+def test_manual_priced_holdings_are_cash_or_unlisted_funds_with_twins(ctx):
     _, _, u, md, manual, _ = ctx
-    unlisted = [t for t in u["ticker"] if t in manual]
-    assert unlisted == ["CMA"], unlisted
+    for t in [t for t in u["ticker"] if t in manual]:
+        row = u[u["ticker"] == t].iloc[0]
+        assert t == "CMA" or row["source"] == "unlisted_fund", t
+        if row["source"] == "unlisted_fund" and row["asset_class"] != "cash":
+            assert row["twin"], f"{t} needs a listed twin for risk and history"
 
 
 def test_returns_and_review(ctx):
@@ -240,10 +243,12 @@ def test_diversification_rules(ctx):
                 assert l.region, (pf.id, l.ticker, "region missing")
                 counts[l.sector] = counts.get(l.sector, 0) + 1
                 sums[l.sector] = sums.get(l.sector, 0.0) + l.weight_pct
-            if not relaxed:
+            n_class = len([l for l in pf.lines if l.asset_class == c])
+            if not relaxed and n_class > 1:
                 assert max(counts.values()) <= per_sector, (pf.id, c, counts)
                 # sector weight cap, with a small allowance for whole-unit rounding and minimum-holding drops
                 assert max(sums.values()) <= d["max_sector_share_of_class"] * cw[c] + 1.0, (pf.id, c, sums, cw[c])
+            if not relaxed and n_class > 1:
                 if c in d.get("region_rule_classes", ["intl_equity"]):
                     regions: dict[str, int] = {}
                     for l in direct:

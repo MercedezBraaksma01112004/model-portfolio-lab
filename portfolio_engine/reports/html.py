@@ -131,7 +131,11 @@ table { width:100%; border-collapse:collapse; font-size:13.5px; }
 th, td { text-align:left; padding:9px 9px; border-bottom:1px solid var(--line); vertical-align:middle; }
 th { color:var(--muted); font-weight:600; font-size:12px; letter-spacing:.02em; position:sticky; top:0; background:var(--surface); z-index:1; }
 td.num, th.num { text-align:right; }
-.tscroll { overflow-x:auto; max-width:100%; }
+.tscroll { overflow-x:auto; max-width:100%; -webkit-overflow-scrolling:touch; }
+table.htable { min-width:1180px; }
+table.htable td:first-child, table.htable th:first-child { white-space:nowrap; min-width:230px; max-width:320px; overflow:hidden; text-overflow:ellipsis; }
+table.htable td:nth-child(2) { white-space:nowrap; }
+.two { align-items:start; }
 .why { margin:12px 0 0; padding-left:18px; font-size:14px; color:var(--muted); }
 .why li { margin:4px 0; }
 
@@ -320,7 +324,8 @@ a.btn { text-decoration:none; }
   <p class="sub no-print">Click a row for the fact sheet: what the business does, how it has performed, and what the analysts covering it think on average.</p>
   <div class="recs" id="recs"></div>
   <div class="recs" id="esgchanges"></div>
-  <div class="tscroll"><table><thead><tr><th>Holding</th><th>Asset class</th><th class="num">Weight</th><th></th><th>Analyst view</th><th>ESG</th><th class="num">Dollars</th><th class="num">Units</th><th class="num">Price</th><th>Last 12 months</th><th class="num">1y</th><th class="num">3y pa</th><th class="num">5y pa</th><th class="num">10y pa</th><th class="num">Yield</th><th class="num">Beta</th><th class="no-print">Documents</th><th class="no-print"></th></tr></thead><tbody id="holdings"></tbody></table></div>
+  <div class="tscroll"><table class="htable"><thead><tr><th>Holding</th><th>Asset class</th><th class="num">Weight</th><th></th><th>Analyst view</th><th>ESG</th><th class="num">Dollars</th><th class="num">Units</th><th class="num">Price</th><th>Last 12 months</th><th class="num">1y</th><th class="num">3y pa</th><th class="num">5y pa</th><th class="num">10y pa</th><th class="num">Yield</th><th class="num">Beta</th><th class="no-print">Documents</th><th class="no-print"></th></tr></thead><tbody id="holdings"></tbody></table></div>
+  <p class="muted no-print" style="font-size:12.5px;margin:6px 0 0">Scroll the table sideways for more columns; click a row for its fact sheet.</p>
   <p class="muted" style="font-size:12.5px">† return of the asset class index ETF used because the holding is younger than the period. Yields marked ° are from the price feed (trailing 12 months); others are the configured figure.</p>
   <div id="sheet" class="sheet no-print" hidden></div>
   <div id="sheets" class="print-only"></div>
@@ -564,7 +569,11 @@ function render(){
   renderRisk(pf);
   renderDiversification(pf);
   renderBacktest(pf);
-  sel("warnings").innerHTML = pf.warnings.filter(w => !w.startsWith("Requested")).map(w => `<div class="note">${w}</div>`).join("");
+  (() => { const ws = pf.warnings.filter(w => !w.startsWith("Requested")); const left = ws.filter(w => / left out: /.test(w)), rev = ws.filter(w => /review this holding/.test(w)), other = ws.filter(w => !left.includes(w) && !rev.includes(w));
+    const notes = [...other];
+    if (left.length) notes.push(`${left.length} holding${left.length > 1 ? "s" : ""} left out because the share would be under the ${fmtM(T.min_holding)} minimum at this balance: ${left.map(w => w.split(" left out")[0]).join(", ")}.`);
+    if (rev.length) notes.push(`Analyst consensus leans negative on ${rev.map(w => w.split(":")[0]).join(", ")}; kept at a trimmed weight and flagged for review.`);
+    sel("warnings").innerHTML = notes.map(w => `<div class="note">${w}</div>`).join(""); })();
 
   sel("stack").innerHTML = CLASSES.filter(c => (cw[c.key]||0) > 0).map(c =>
     `<span style="width:${cw[c.key]}%;background:${cssColor(c.key)}" data-l="${c.label}: ${fmtP(cw[c.key])}"></span>`).join("");
@@ -1109,8 +1118,13 @@ def _daily_returns(md: MarketData, universe: pd.DataFrame | None, profiles: Prof
     if not cols:
         return {}
     rets = md.prices[cols].ffill().pct_change().iloc[-252:].fillna(0.0)
+    series = {t: [round(float(v), 5) for v in rets[t]] for t in cols}
+    if universe is not None and "twin" in universe.columns:   # unlisted funds borrow their listed twin's daily returns
+        for t, tw in zip(universe["ticker"], universe["twin"]):
+            if tw and t not in series and tw in series:
+                series[t] = series[tw]
     return {"dates": [d.strftime("%Y-%m-%d") for d in rets.index],
-            "series": {t: [round(float(v), 5) for v in rets[t]] for t in cols},
+            "series": series,
             "class_proxy": {c: next((t for t in ps if t in md.prices.columns), None) for c, ps in proxies.items()}}
 
 

@@ -156,6 +156,30 @@ def _returns_from_prices(s: pd.Series) -> dict:
     return out
 
 
+def _unlisted_research(r, u, md: MarketData) -> HoldingResearch:
+    """A research record for an unlisted fund: the manager's published returns and price, with day-to-day risk,
+    momentum and the sparkline taken from its listed twin and labelled as such."""
+    def num(k):
+        v = str(u.get(k, "") or "").strip()
+        return float(v) if v else None
+    twin = str(u.get("twin", "") or "").strip()
+    hr = HoldingResearch(ticker=r.ticker, name=str(u.get("name") or r.name), sector=str(u.get("sector") or ""), industry=str(u.get("liquidity") or ""),
+                         summary=str(u.get("notes") or ""), quote_type="UNLISTED", price=num("unit_price"), price_currency="AUD",
+                         dividend_yield_pct=num("yield"), yield_basis="manager's distribution figure", consensus_label="no coverage",
+                         return_1y_pct=num("return_1y"), return_3y_pct_pa=num("return_3y"), return_5y_pct_pa=num("return_5y"), return_10y_pct_pa=num("return_10y"),
+                         fetched=str(u.get("returns_as_at") or u.get("price_date") or ""), source=f"manager published; risk from listed twin {twin}" if twin else "manager published")
+    if twin and twin in md.prices.columns:
+        tw = _returns_from_prices(md.prices[twin])
+        for k in ("momentum_12_1_pct", "above_200dma", "max_drawdown_1y_pct", "volatility_1y_pct", "sparkline", "history_years"):
+            if k in tw:
+                setattr(hr, k, tw[k])
+        for period, key in [("1y", "return_1y_pct"), ("3y", "return_3y_pct_pa"), ("5y", "return_5y_pct_pa"), ("10y", "return_10y_pct_pa")]:
+            if getattr(hr, key) is None and tw.get(key) is not None:
+                setattr(hr, key, tw[key]); hr.return_proxy[period] = twin
+        hr.data_flags.append(f"unlisted: volatility, drawdown and chart are the listed twin {twin}")
+    return hr
+
+
 def get_research(settings: Settings, universe: pd.DataFrame, md: MarketData, *, force: bool = False,
                  offline: bool = False) -> dict[str, HoldingResearch]:
     cfg = settings.raw.get("research", {})
@@ -166,7 +190,12 @@ def get_research(settings: Settings, universe: pd.DataFrame, md: MarketData, *, 
     result: dict[str, HoldingResearch] = {}
     listed = [r for r in universe.itertuples() if r.ticker in md.prices.columns and not md.synthetic]
     changed = False
+    from .config import load_unlisted_funds
+    unlisted = load_unlisted_funds(settings)
     for r in universe.itertuples():
+        if r.ticker in unlisted.index and r.ticker not in md.prices.columns:
+            result[r.ticker] = _unlisted_research(r, unlisted.loc[r.ticker], md)
+            continue
         entry = cache.get(r.ticker, {})
         fresh = entry and (now - entry.get("_ts", 0)) < max_age_days * 86400
         stale_format = entry and "_dividends_12m" not in entry.get("info", {}) and entry.get("info")   # cached before dividend history was collected

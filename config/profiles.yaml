@@ -187,9 +187,29 @@ sma:
 diversification:
   enabled: true
   spread_sectors_first: true           # the first name from each sector is chosen before any sector gets a second
-  max_direct_per_sector: {starter: 1, core: 1, established: 2, high: 3}   # single companies from one sector within a class
+  max_direct_per_sector: {starter: 1, core: 2, established: 3, high: 4}   # single companies from one sector within a class
   max_sector_share_of_class: 0.35      # single companies in one sector may not exceed this share of the class weight
   max_region_share_of_direct: 0.75     # at most this share of a class's single companies may come from one country
   region_rule_classes: [intl_equity]   # the country rule only makes sense where the names span countries
   min_sectors_direct: 3                # when a class holds three or more single companies they must span at least this many sectors
   max_single_holding_pct: 10           # no single company above this share of the whole portfolio (ETF cores can be larger)
+
+# Which holdings a profile reaches for, from each holding's own record. Every holding gets a fit score:
+# trend (above or below its 200 day average), 12-1 month momentum, 3, 5 and 10 year returns, low volatility,
+# analyst consensus and grossed-up yield, each scaled to roughly -1..+1, weighted per profile, plus a bonus or
+# penalty for the holding's style (growth, quality, income, defensive). Index cores (priority 1) stay in front;
+# everything else is ranked on fit, so a derated large cap does not sit in a High Growth portfolio just because
+# it was once tagged "core". Drawdown stages add yield weight through income_preference.
+selection:
+  enabled: true
+  rules:
+    exclude_sell_consensus: true
+    derated_excluded_profiles: [growth, high_growth]      # down over 3 and 5 years: not a growth holding
+    volatile_excluded_profiles: [conservative, moderate]  # too volatile for a cautious investor
+    max_volatility_pct: 40
+  weights:
+    high_growth: {momentum: 0.25, trend: 0.15, r3: 0.25, r5: 0.25, r10: 0.10, consensus: 0.15, low_vol: 0.0,  yield: 0.0,  style: {growth: 0.6, quality: -0.15, income: -0.5, defensive: -0.5}}
+    growth:      {momentum: 0.20, trend: 0.15, r3: 0.20, r5: 0.25, r10: 0.15, consensus: 0.15, low_vol: 0.05, yield: 0.0,  style: {growth: 0.35, quality: 0.1, income: -0.15, defensive: -0.25}}
+    balanced:    {momentum: 0.10, trend: 0.10, r3: 0.15, r5: 0.20, r10: 0.20, consensus: 0.15, low_vol: 0.15, yield: 0.10, style: {growth: 0.1, quality: 0.25, income: 0.1, defensive: 0.0}}
+    moderate:    {momentum: 0.05, trend: 0.10, r3: 0.10, r5: 0.15, r10: 0.20, consensus: 0.10, low_vol: 0.30, yield: 0.20, style: {growth: -0.1, quality: 0.2, income: 0.25, defensive: 0.1}}
+    conservative: {momentum: 0.0, trend: 0.10, r3: 0.05, r5: 0.10, r10: 0.20, consensus: 0.10, low_vol: 0.35, yield: 0.30, style: {growth: -0.3, quality: 0.2, income: 0.3, defensive: 0.2}}

@@ -41,6 +41,7 @@ class Profiles:
     tactical: dict[str, Any]
     sma: dict[str, Any] = field(default_factory=dict)
     diversification: dict[str, Any] = field(default_factory=dict)
+    selection: dict[str, Any] = field(default_factory=dict)
 
     @property
     def growth_classes(self) -> list[str]:
@@ -115,6 +116,7 @@ def load_profiles(settings: Settings) -> Profiles:
         tactical=raw.get("tactical", {"enabled": False}),
         sma=raw.get("sma", {}),
         diversification=raw.get("diversification", {}),
+        selection=raw.get("selection", {}),
     )
     p.validate()
     return p
@@ -199,6 +201,29 @@ def load_universe(settings: Settings, profiles: Profiles, *, include_watchlist: 
                              "notes": "Manual addition (data/my_holdings.csv). " + str(getattr(r, "notes", "") or ""), "source": "manual_addition",
                              "hub24_code": "", "status": "active", "sector": "", "region": ""})
             df = pd.concat([df, pd.DataFrame(rows)], ignore_index=True)
+    # Unlisted funds (config/unlisted_funds.csv): manager-priced, with a listed twin for day-to-day risk.
+    unl = settings.root / "config" / "unlisted_funds.csv"
+    if unl.exists():
+        try:
+            uf = pd.read_csv(unl, dtype=str).fillna("")
+        except pd.errors.EmptyDataError:
+            uf = pd.DataFrame()
+        rows = []
+        for _, r in uf.iterrows():
+            t = str(r["ticker"]).strip().upper()
+            if t in set(df["ticker"]):
+                continue
+            rows.append({"ticker": t, "name": r["name"], "asset_class": r["asset_class"], "vehicle": "fund", "role": r["role"] or "satellite", "currency": "AUD",
+                         "mer": float(r["mer"] or 0), "yield": float(r["yield"] or 0), "franking": float(r["franking"] or 0), "weight_hint": float(r["weight_hint"] or 2),
+                         "min_tier": r["min_tier"] or "established", "max_weight": float(r["max_weight"] or 5), "priority": float(r["priority"] or 3),
+                         "notes": f"Unlisted fund ({r['liquidity']}); unit price {r['unit_price']} as at {r['price_date']}. " + r["notes"], "source": "unlisted_fund",
+                         "hub24_code": "", "status": "active", "sector": r["sector"], "region": r["region"], "twin": r["twin"], "liquidity": r["liquidity"]})
+        if rows:
+            df = pd.concat([df, pd.DataFrame(rows)], ignore_index=True)
+    for col in ("twin", "liquidity"):
+        if col not in df.columns:
+            df[col] = ""
+        df[col] = df[col].fillna("")
     if not include_watchlist:
         df = df[df["status"] == "active"].copy()
     missing = set(UNIVERSE_COLUMNS) - set(df.columns)
@@ -206,7 +231,7 @@ def load_universe(settings: Settings, profiles: Profiles, *, include_watchlist: 
         raise ValueError(f"universe.csv missing columns {missing}")
     for col in ["mer", "yield", "franking", "weight_hint", "max_weight", "priority"]:
         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0.0)
-    for col in ["sector", "region"]:
+    for col in ["sector", "region", "style", "lists"]:
         df[col] = df[col].fillna("") if col in df.columns else ""
     df["region"] = [r if r else guess_region(t, n) for r, t, n in zip(df["region"], df["ticker"], df["name"])]
     unknown = set(df["asset_class"]) - set(profiles.asset_classes)
@@ -264,6 +289,16 @@ def load_pds_links(settings: Settings, universe: pd.DataFrame, sma_menu: pd.Data
             url, label = _pds_default(str(code), "sma")
             out[str(code)] = overrides.get(str(code)) or {"url": url, "label": label}
     return out
+
+
+def load_unlisted_funds(settings: Settings) -> pd.DataFrame:
+    """config/unlisted_funds.csv as a frame indexed by ticker (empty if absent)."""
+    p = settings.root / "config" / "unlisted_funds.csv"
+    if not p.exists():
+        return pd.DataFrame()
+    df = pd.read_csv(p, dtype=str).fillna("")
+    df["ticker"] = df["ticker"].str.strip().str.upper()
+    return df.set_index("ticker")
 
 
 def load_sma_twins(settings: Settings) -> dict[str, dict]:
