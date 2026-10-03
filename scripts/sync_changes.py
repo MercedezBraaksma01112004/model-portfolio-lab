@@ -46,6 +46,16 @@ def main() -> int:
         done.append(c["id"])
     uni.to_csv(uni_path, index=False)
     mine_path.write_text("\n".join(mine_lines) + "\n")
+    # Record the applied ids in a file the site publishes (site/data/applied_changes.json); the changes function
+    # reads it and clears those from the queue, so the build needs no PIN or token.
+    applied_path = ROOT / "data" / "applied_changes.json"
+    try:
+        applied = json.load(open(applied_path)) if applied_path.exists() else {"ids": []}
+    except Exception:  # noqa: BLE001
+        applied = {"ids": []}
+    applied["ids"] = (applied.get("ids", []) + done)[-500:]
+    applied["updated"] = pd.Timestamp.utcnow().isoformat()
+    applied_path.write_text(json.dumps(applied))
     if PIN:
         req = urllib.request.Request(url, data=json.dumps({"pin": PIN, "action": "applied", "ids": done}).encode(),
                                      headers={"Content-Type": "application/json"}, method="POST")

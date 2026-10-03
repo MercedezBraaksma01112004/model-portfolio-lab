@@ -218,25 +218,29 @@ function guessRegion(sym, name){
   if (/\.(PA|MI|DE|AS|MC|BR|SW)$/.test(sym)) return "Europe"; if (/\.(TO|V)$/.test(sym)) return "Canada"; if (sym.endsWith(".L")) return "United Kingdom"; if (sym.endsWith(".NZ")) return "New Zealand";
   if (/\.(HK|T|SI)$/.test(sym)) return "Asia"; return "United States";
 }
-const YSEC = {"Financial Services":"Financials","Basic Materials":"Materials","Technology":"Technology","Healthcare":"Healthcare","Communication Services":"Communication","Consumer Cyclical":"Consumer discretionary","Consumer Defensive":"Consumer staples","Industrials":"Industrials","Utilities":"Utilities","Real Estate":"Real estate","Energy":"Energy"};
-function sectorFromIndex(sector, type){ if (type === "ETF") return "Diversified fund"; const s = sector || ""; for (const k in YSEC) if (s.toLowerCase().includes(k.toLowerCase().split(" ")[0])) return YSEC[k];
-  const m = {"banks":"Financials","diversified financials":"Financials","insurance":"Financials","materials":"Materials","energy":"Energy","health":"Healthcare","pharma":"Healthcare","software":"Technology","technology":"Technology","semiconductor":"Technology","media":"Communication","telecommunication":"Communication","retailing":"Consumer discretionary","consumer durables":"Consumer discretionary","automobiles":"Consumer discretionary","food":"Consumer staples","household":"Consumer staples","capital goods":"Industrials","transportation":"Industrials","commercial":"Industrials","utilities":"Utilities","real estate":"Real estate"};
-  for (const k in m) if (s.toLowerCase().includes(k)) return m[k]; return "Other"; }
+const SECTOR_GROUPS = [["food","Consumer staples"],["beverage","Consumer staples"],["household","Consumer staples"],["consumer staples","Consumer staples"],["consumer defensive","Consumer staples"],
+  ["consumer discretionary","Consumer discretionary"],["consumer cyclical","Consumer discretionary"],["retail","Consumer discretionary"],["automobile","Consumer discretionary"],["consumer durables","Consumer discretionary"],["consumer services","Consumer discretionary"],
+  ["bank","Financials"],["financial","Financials"],["insurance","Financials"],["materials","Materials"],["energy","Energy"],["health","Healthcare"],["pharma","Healthcare"],
+  ["software","Technology"],["technology","Technology"],["semiconductor","Technology"],["media","Communication"],["telecommunication","Communication"],["communication","Communication"],
+  ["capital goods","Industrials"],["transportation","Industrials"],["commercial","Industrials"],["industrial","Industrials"],["utilities","Utilities"],["real estate","Real estate"]];
+function sectorFromIndex(sector, type){ if (type === "ETF") return "Diversified fund"; const s = (sector || "").toLowerCase(); for (const [k, g] of SECTOR_GROUPS) if (s.includes(k)) return g; return "Other"; }
 
 async function api(path){ if (!FN) throw new Error("Live lookups only work on the published site"); const r = await fetch(FN + path); const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || r.statusText); return j; }
 async function addSymbol(symbol, cls, meta){
   if (state.lines.some(l => l.ticker === symbol)) { toast(symbol + " is already in the portfolio"); return; }
   if (UMAP[symbol]) { const l = lineFromUniverse(UMAP[symbol]); if (cls) l.asset_class = cls; pushLine(l); return; }
-  toast("Fetching " + symbol + " from the price feed…");
-  let h;
-  try { h = await api("/history?symbol=" + encodeURIComponent(symbol)); } catch(e) { toast("Could not fetch " + symbol + ": " + e.message); return; }
+  toast("Fetching " + symbol + "…");
+  let h = null;
+  // Pre-computed by the daily build for every listing in the search index; the live function is the fallback.
+  try { const r = await fetch("/data/listings/" + encodeURIComponent(symbol) + ".json", { cache: "no-cache" }); if (r.ok) h = await r.json(); } catch(e) {}
+  if (!h) { try { h = await api("/history?symbol=" + encodeURIComponent(symbol)); } catch(e) { toast("No data for " + symbol + ": " + e.message + ". Only listings in the search index are available offline."); return; } }
   const fx = DATA.fx_aud_per || {}; const rate = h.currency === "AUD" ? 1 : (fx[h.currency] || null);
   if (rate == null) { toast("No exchange rate for " + h.currency + "; cannot price " + symbol); return; }
   const vehicle = (h.type === "ETF" || (meta && meta.type === "ETF")) ? "etf" : "direct";
-  const sector = vehicle === "etf" ? "Diversified fund" : sectorFromIndex(meta && meta.sector, h.type);
+  const sector = vehicle === "etf" ? "Diversified fund" : (h.sector_group || sectorFromIndex((meta && meta.sector) || h.sector, h.type));
   R[symbol] = { ticker: symbol, name: h.name, sparkline: h.spark || [], return_1y_pct: h.return_1y_pct, return_3y_pct_pa: h.return_3y_pct_pa, return_5y_pct_pa: h.return_5y_pct_pa, return_10y_pct_pa: h.return_10y_pct_pa,
     history_years: h.history_years, dividend_yield_pct: h.yield_pct, price: h.price, price_currency: h.currency, volatility_1y_pct: h.volatility_1y_pct, max_drawdown_1y_pct: h.max_drawdown_1y_pct,
-    source: "price feed (live)", consensus_label: "no coverage", return_proxy: {}, sector: meta && meta.sector || "", fetched: new Date().toISOString().slice(0,10) };
+    source: h.built ? "price feed (daily build)" : "price feed (live)", consensus_label: "no coverage", return_proxy: {}, sector: (meta && meta.sector) || h.sector || "", fetched: h.built || new Date().toISOString().slice(0,10) };
   EXTRA[symbol] = { daily: h.daily, monthly: h.monthly };
   pushLine({ ticker: symbol, name: h.name, asset_class: cls || guessClass(symbol, h.name, meta && meta.sector), vehicle, role: "satellite", currency: h.currency, mer_pct: vehicle === "etf" ? 0.2 : 0,
     yield_pct: h.yield_pct || 0, yield_source: "live", franking_pct: 0, sector, region: guessRegion(symbol, h.name), price_aud: h.price * rate, priced_from: "live", weight_pct: 0, source: "live" });

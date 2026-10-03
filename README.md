@@ -195,11 +195,11 @@ records (`config/universe.csv`, `data/my_holdings.csv`, the tactical state) back
 three-hourly schedule rebuilds only when the website has queued changes. "Run workflow" on the Actions tab
 forces a build at any time.
 
-The workflow needs three repository secrets (Settings, Secrets and variables, Actions):
-
-* `NETLIFY_AUTH_TOKEN`: a Netlify personal access token (User settings, Applications).
-* `NETLIFY_SITE_ID`: the site id from the Netlify site's Project configuration (also in `.netlify/state.json`).
-* `EDIT_PIN`: the website's edit PIN, so applied changes can be marked done on the site.
+Publishing needs no secrets. The workflow force-pushes the finished site (pages, functions and their config) to
+the `site` branch, with history discarded each day so the repository stays small, and Netlify, linked to the
+repository with `site` as its production branch and `site` as the publish directory, deploys it from there.
+Holding changes queued on the website are cleared the same way: the build publishes the ids it has applied in
+`site/data/applied_changes.json` and the `changes` function reads that file.
 
 Nothing runs on your Mac any more. If the old launchd jobs are still installed, double-click
 `Stop Mac schedule.command` once to remove them; otherwise they would publish stale pages over the cloud build.

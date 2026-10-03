@@ -47,6 +47,27 @@ def download(tickers: list[str], **kw) -> pd.DataFrame:
     return pd.concat(frames, axis=1) if frames else pd.DataFrame()
 
 
+SECTOR_GROUPS = [  # first match wins; GICS industry groups (ASX directory) and Wikipedia sectors (S&P 500)
+    ("food", "Consumer staples"), ("beverage", "Consumer staples"), ("household", "Consumer staples"), ("consumer staples", "Consumer staples"),
+    ("consumer discretionary", "Consumer discretionary"), ("retail", "Consumer discretionary"), ("automobile", "Consumer discretionary"), ("consumer durables", "Consumer discretionary"), ("consumer services", "Consumer discretionary"),
+    ("bank", "Financials"), ("financial", "Financials"), ("insurance", "Financials"), ("materials", "Materials"), ("energy", "Energy"),
+    ("health", "Healthcare"), ("pharma", "Healthcare"), ("software", "Technology"), ("technology", "Technology"), ("semiconductor", "Technology"),
+    ("media", "Communication"), ("telecommunication", "Communication"), ("communication", "Communication"),
+    ("capital goods", "Industrials"), ("transportation", "Industrials"), ("commercial", "Industrials"), ("industrial", "Industrials"),
+    ("utilities", "Utilities"), ("real estate", "Real estate"),
+]
+
+
+def sector_group(raw: str, kind: str) -> str:
+    if kind == "ETF":
+        return "Diversified fund"
+    r = (raw or "").lower()
+    for key, grp in SECTOR_GROUPS:
+        if key in r:
+            return grp
+    return "Other"
+
+
 def col(df: pd.DataFrame, t: str, name: str) -> pd.Series | None:
     try:
         s = df[t][name] if isinstance(df.columns, pd.MultiIndex) else df[name]
@@ -105,7 +126,9 @@ def main() -> int:
         months = list(lv.index)
         rets = lv.pct_change().dropna()
         n = len(lv)
-        ann = lambda k: round(float((lv.iloc[-1] / lv.iloc[-1 - k]) ** (12 / k) - 1) * 100, 2) if n > k else None
+        def ann(k: int):
+            kk = k if n > k else (n - 1 if n - 1 >= k - 2 else None)   # the feed's "10y" window can be a month or two short
+            return round(float((lv.iloc[-1] / lv.iloc[-1 - kk]) ** (12 / kk) - 1) * 100, 2) if kk else None
         dr = dc.pct_change().dropna()
         divs = col(daily, s, "Dividends")
         div_sum = float(divs.sum()) if divs is not None else 0.0
@@ -114,7 +137,7 @@ def main() -> int:
         mdd = float((lvl / lvl.cummax() - 1).min()) if len(lvl) else 0.0
         rec = {
             "symbol": s, "name": it.get("name", s), "currency": ccy, "price": round(last, 4), "exchange": it.get("exchange", ""), "type": it.get("type", "EQUITY"),
-            "sector": it.get("sector", ""),
+            "sector": it.get("sector", ""), "sector_group": sector_group(it.get("sector", ""), it.get("type", "EQUITY")),
             "yield_pct": round(div_sum / last * 100, 2) if last else 0.0,
             "return_1y_pct": round(float(dc.iloc[-1] / dc.iloc[0] - 1) * 100, 2),
             "return_3y_pct_pa": ann(36), "return_5y_pct_pa": ann(60), "return_10y_pct_pa": ann(120), "history_years": round(n / 12, 1),

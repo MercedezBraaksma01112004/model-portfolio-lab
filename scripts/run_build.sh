@@ -13,6 +13,7 @@ if [ ! -f data/cache/search_index.json ] || [ -n "$(find data/cache/search_index
 mkdir -p site && cp output/dashboard.html site/index.html && cp output/builder.html site/builder.html
 "$PY" scripts/quality_report.py >/dev/null && cp output/quality_review.html site/quality.html
 cp output/model_portfolios_latest.xlsx site/model_portfolios_latest.xlsx
+"$PY" scripts/build_listing_data.py >/dev/null 2>&1 || echo "listing data build failed (the builder page falls back to the live function)"
 [ -f .netlify/auth_token ] && export NETLIFY_AUTH_TOKEN="$(cat .netlify/auth_token)"
 if [ -f .netlify/state.json ] && command -v npx >/dev/null 2>&1; then
   if npx --yes netlify-cli deploy --prod --dir site --functions netlify/functions --no-build >site/deploy.log 2>&1; then

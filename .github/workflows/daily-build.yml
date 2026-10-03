@@ -1,8 +1,12 @@
 name: Daily build and publish
 
-# Rebuilds every model portfolio from fresh prices and publishes the site to Netlify. Runs on GitHub's
-# computers, so nothing depends on a laptop being awake. 08:40 UTC is 18:40 in Brisbane: after the
-# ASX close and before the United States open, so Australian prices are final for the day.
+# Rebuilds every model portfolio from fresh prices and publishes the site. Runs on GitHub's computers, so
+# nothing depends on a laptop being awake. 08:40 UTC is 18:40 in Brisbane: after the ASX close and before
+# the United States open, so Australian prices are final for the day.
+#
+# Publishing needs no secrets: the finished site is force-pushed to the "site" branch (history discarded each
+# day so the repository stays small) and Netlify, linked to this repository with "site" as its production
+# branch, deploys it from there.
 on:
   schedule:
     - cron: "40 8 * * 1-5"
@@ -73,11 +77,9 @@ jobs:
         if: steps.gate.outputs.run == 'true'
         env:
           SITE_URL: ${{ vars.SITE_URL || 'https://model-portfolio-lab.netlify.app' }}
-          EDIT_PIN: ${{ secrets.EDIT_PIN }}
         run: |
           mkdir -p .netlify
           echo "$SITE_URL" > .netlify/site_url
-          [ -n "$EDIT_PIN" ] && echo "$EDIT_PIN" > .netlify/edit_pin
           python scripts/sync_changes.py
 
       - name: Refresh the search index weekly
@@ -97,22 +99,30 @@ jobs:
           cp output/builder.html site/builder.html
           cp output/model_portfolios_latest.xlsx site/model_portfolios_latest.xlsx
           python scripts/quality_report.py > /dev/null && cp output/quality_review.html site/quality.html
-          ls -la site
-
-      - name: Publish to Netlify
-        if: steps.gate.outputs.run == 'true'
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          EDIT_PIN: ${{ secrets.EDIT_PIN }}
-        run: |
-          npx --yes netlify-cli deploy --prod --dir site --functions netlify/functions --no-build --message "Daily build $(date -u +%Y-%m-%d)"
+          python scripts/build_listing_data.py
+          mkdir -p site/data && cp data/applied_changes.json site/data/applied_changes.json 2>/dev/null || echo '{"ids":[]}' > site/data/applied_changes.json
+          ls -la site | head -20
 
       - name: Keep the engine's own records in the repository
         if: steps.gate.outputs.run == 'true'
         run: |
           git config user.name "portfolio-engine bot"
           git config user.email "actions@users.noreply.github.com"
-          git add config/universe.csv data/my_holdings.csv data/cache/state.json
+          git add config/universe.csv data/my_holdings.csv data/cache/state.json data/applied_changes.json
           git diff --cached --quiet || git commit -m "Daily build: holdings and tactical state as of $(date -u +%Y-%m-%d)"
           git push
+
+      - name: Publish the site branch for Netlify
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          # A fresh, history-free branch holding only what Netlify needs: the pages, the functions and their config.
+          rm -rf /tmp/publish && mkdir -p /tmp/publish
+          cp -r site netlify netlify.toml package.json package-lock.json /tmp/publish/
+          cd /tmp/publish
+          git init -q -b site
+          git config user.name "portfolio-engine bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Site build $(date -u +%Y-%m-%dT%H:%M)"
+          git push --force "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" site:site
+          echo "published branch 'site' (Netlify deploys it)"

@@ -8,6 +8,18 @@ const KEY = "changes";
 export default async (req) => {
   const store = getStore({ name: "portfolio-engine", consistency: "strong" });
   const state = (await store.get(KEY, { type: "json" })) || { pending: [], applied: [] };
+  // The daily build publishes the ids it has applied (data/applied_changes.json); clear those from the queue.
+  try {
+    const base = process.env.URL || process.env.DEPLOY_PRIME_URL;
+    if (base && state.pending.length) {
+      const r = await fetch(`${base}/data/applied_changes.json`, { headers: { "Cache-Control": "no-cache" } });
+      if (r.ok) { const ids = new Set(((await r.json()).ids) || []);
+        const moved = state.pending.filter(c => ids.has(c.id));
+        if (moved.length) { state.pending = state.pending.filter(c => !ids.has(c.id));
+          state.applied = [...moved.map(c => ({ ...c, applied_at: new Date().toISOString() })), ...state.applied].slice(0, 200);
+          await store.setJSON(KEY, state); } }
+    }
+  } catch (e) { /* the queue is still served; reconciliation retries on the next call */ }
   if (req.method === "GET") return json(state);
   if (req.method !== "POST") return json({ error: "method" }, 405);
   let body;
