@@ -1,0 +1,195 @@
+# Strategic asset allocation and rules. Class weights for Balanced come from the HUB24 true
+# balanced model; the other profiles scale the growth and defensive sleeves around it. Every number here is an assumption you should
+# be able to defend. Growth classes: aus_equity, intl_equity, infrastructure, alternatives.
+# Defensive classes: fixed_income, credit, cash. Weights are percentages and must sum to 100.
+
+asset_classes:
+  aus_equity:      {label: "Australian equities",        kind: growth}
+  intl_equity:     {label: "International equities",     kind: growth}
+  infrastructure:  {label: "Property and infrastructure", kind: growth}
+  alternatives:    {label: "Alternatives",               kind: growth}
+  fixed_income:    {label: "Fixed income",               kind: defensive}
+  credit:          {label: "Credit and hybrids",         kind: defensive}
+  cash:            {label: "Cash",                       kind: defensive}
+
+risk_profiles:
+  conservative:
+    label: Conservative
+    order: 1
+    saa: {aus_equity: 11, intl_equity: 14, infrastructure: 3, alternatives: 2, fixed_income: 35, credit: 15, cash: 20}
+    tolerance_pp: 3          # asset class drift band, percentage points
+    min_horizon_years: 2
+  moderate:
+    label: Moderate
+    order: 2
+    saa: {aus_equity: 18, intl_equity: 23, infrastructure: 5, alternatives: 4, fixed_income: 25, credit: 15, cash: 10}
+    tolerance_pp: 3
+    min_horizon_years: 3
+  balanced:
+    label: Balanced
+    order: 3
+    saa: {aus_equity: 26, intl_equity: 32, infrastructure: 6, alternatives: 6, fixed_income: 15, credit: 10, cash: 5}   # growth split from the HUB24 true balanced model; international ahead of Australian for accumulation
+    tolerance_pp: 4
+    min_horizon_years: 5
+  growth:
+    label: Growth
+    order: 4
+    saa: {aus_equity: 30, intl_equity: 41, infrastructure: 8, alternatives: 6, fixed_income: 7, credit: 5, cash: 3}
+    tolerance_pp: 4
+    min_horizon_years: 7
+  high_growth:
+    label: High Growth
+    order: 5
+    saa: {aus_equity: 34, intl_equity: 46, infrastructure: 9, alternatives: 6, fixed_income: 0, credit: 2, cash: 3}
+    tolerance_pp: 5
+    min_horizon_years: 9
+
+# Life stage changes: the most aggressive profile permitted, the cash floor (a liquidity
+# bucket), how strongly holdings are scored on income and franking, and for the drawdown
+# stages a minimum grossed-up yield for equity holdings. home_bias_pp moves weight from
+# international to Australian equities: a zero-tax pension account is refunded franking
+# credits in cash, so a 4% fully franked dividend is worth 5.7% to it, and that is the reason
+# pension portfolios lean Australian. Income scoring uses the grossed-up yield
+# (cash yield x (1 + franking% x 30/70)) so franked income is preferred over unfranked.
+life_stages:
+  early_accumulation:
+    label: "Early accumulation (under 40)"
+    order: 1
+    max_profile: high_growth
+    default_profile: high_growth
+    cash_floor_pp: 2
+    income_preference: 0.0
+    franking_preference: 0.0
+    home_bias_pp: 0
+  mid_accumulation:
+    label: "Mid accumulation (40 to 55)"
+    order: 2
+    max_profile: high_growth
+    default_profile: growth
+    cash_floor_pp: 3
+    income_preference: 0.1
+    franking_preference: 0.1
+    home_bias_pp: 0
+  pre_retirement:
+    label: "Pre-retirement (55 to 65)"
+    order: 3
+    max_profile: growth
+    default_profile: balanced
+    cash_floor_pp: 5
+    income_preference: 0.5
+    franking_preference: 0.5
+    home_bias_pp: 0               # only retirement leans Australian
+    min_equity_yield_pct: 1.5     # grossed-up; equity holdings below this are skipped when alternatives exist
+  retirement:
+    label: "Retirement / pension phase (65+)"
+    order: 4
+    max_profile: balanced
+    default_profile: moderate
+    cash_floor_pp: 8
+    income_preference: 1.0        # weight within a class scales with grossed-up yield
+    franking_preference: 1.0
+    home_bias_pp: 18              # of the international sleeve moves to Australian equities for franking (retirement only)
+    home_bias_max_share_of_intl: 0.6   # but never more than this share of the international sleeve, so some overseas exposure remains
+    min_equity_yield_pct: 3.0     # grossed-up; growth-only names (no dividend) are left out
+    prefer_income_vehicles: true  # income LICs and high-yield ETFs rank ahead of growth satellites
+
+# Balance tier decides implementation. Tiers are ordered; a holding whose min_tier is
+# "established" is eligible for established and high only.
+balance_tiers:
+  starter:
+    label: "Starter (under $50,000)"
+    order: 1
+    min_balance: 0
+    representative_balance: 25000
+    allowed_vehicles: [etf, fund, lic, cash, td]
+    max_holdings: 7
+    max_per_class: 1
+    min_holding_dollars: 2000
+    brokerage_dollars: 15
+  core:
+    label: "Core ($50,000 to $250,000)"
+    order: 2
+    min_balance: 50000
+    representative_balance: 150000
+    allowed_vehicles: [etf, fund, lic, lit, cash, td, direct, hybrid]
+    max_holdings: 14
+    max_per_class: 3
+    min_holding_dollars: 3000
+    brokerage_dollars: 20
+  established:
+    label: "Established ($250,000 to $1,000,000)"
+    order: 3
+    min_balance: 250000
+    representative_balance: 500000
+    allowed_vehicles: [etf, fund, lic, lit, cash, td, direct, hybrid]
+    max_holdings: 26
+    max_per_class: 8
+    min_holding_dollars: 5000
+    brokerage_dollars: 30
+  high:
+    label: "High balance (over $1,000,000)"
+    order: 4
+    min_balance: 1000000
+    representative_balance: 2000000
+    allowed_vehicles: [etf, fund, lic, lit, cash, td, direct, hybrid]
+    max_holdings: 36
+    max_per_class: 12
+    min_holding_dollars: 10000
+    brokerage_dollars: 50
+
+# Tactical tilts. Signals are computed on a proxy ticker per asset class. Each class can
+# move at most max_tilt_pp away from its SAA weight. A tilt only changes when the new
+# value differs from the stored one by more than hysteresis_pp, so small wobbles in the
+# signal do not generate trades. The net of the growth tilts is funded from, or paid into,
+# the defensive classes in proportion to their SAA weights, so the total stays at 100.
+tactical:
+  enabled: true
+  max_tilt_pp: 5
+  max_growth_shift_pp: 5   # net growth-versus-defensive shift across all classes is also capped
+  hysteresis_pp: 1.0
+  signal_weights: {trend: 0.4, momentum: 0.4, volatility: 0.2}
+  trend_scale: 0.10        # 10% above/below 200 day average = full score
+  momentum_scale: 0.15     # 15% excess 12-1 month return = full score
+  volatility_scale: 0.5    # 20 day vol 50% above 1 year vol = full penalty
+  proxies:
+    aus_equity: [VAS.AX]
+    intl_equity: [VGS.AX]
+    infrastructure: [VAP.AX, IFRA.AX]
+    alternatives: []       # no tilt: no clean proxy
+    fixed_income: [VAF.AX]
+    credit: [CRED.AX]
+    cash: []
+  cash_proxy: AAA.AX
+
+# Managed portfolio (SMA) implementation for smaller balances. Instead of buying holdings
+# one by one, the account holds a single diversified managed portfolio from the HUB24 menu
+# (config/sma_menu.csv) that matches the risk profile, plus the life stage cash floor.
+# Candidates are the multi-sector portfolios in the matching category, ranked by total fee
+# then by track record; the top shortlist is shown and the first is used.
+sma:
+  enabled: true
+  tiers: [starter, core]
+  count_by_tier: {starter: 1, core: 2}   # core balances split across two managers
+  shortlist: 5
+  min_track_record_years: 3
+  prefer_managers: []              # for example ["BetaShares", "Vanguard", "State Street"] to rank these first
+  category_by_profile:
+    conservative: "Multi Sector - Conservative"
+    moderate: "Multi Sector - Moderately Conservative"
+    balanced: "Multi Sector - Balanced"
+    growth: "Multi Sector - Growth"
+    high_growth: "Multi Sector - High Growth"
+
+# Diversification rules for choosing and weighting holdings within an asset class. "Direct" means
+# a single company; ETFs, LICs and funds are already spread across many companies and are exempt
+# from the sector counts but still count toward the region limits. Every cap is relaxed, in order,
+# if it would otherwise leave a class without enough holdings to carry its weight.
+diversification:
+  enabled: true
+  spread_sectors_first: true           # the first name from each sector is chosen before any sector gets a second
+  max_direct_per_sector: {starter: 1, core: 1, established: 2, high: 3}   # single companies from one sector within a class
+  max_sector_share_of_class: 0.35      # single companies in one sector may not exceed this share of the class weight
+  max_region_share_of_direct: 0.75     # at most this share of a class's single companies may come from one country
+  region_rule_classes: [intl_equity]   # the country rule only makes sense where the names span countries
+  min_sectors_direct: 3                # when a class holds three or more single companies they must span at least this many sectors
+  max_single_holding_pct: 10           # no single company above this share of the whole portfolio (ETF cores can be larger)

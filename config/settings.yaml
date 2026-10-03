@@ -1,0 +1,112 @@
+# Runtime settings.
+paths:
+  universe: config/universe.csv
+  profiles: config/profiles.yaml
+  price_cache: data/cache/prices.csv
+  manual_prices: data/manual_prices.csv     # unlisted funds and platform cash, edit by hand
+  csv_price_dir: data/prices                 # optional per-ticker CSVs (date,close) as a fallback
+  state: data/cache/state.json               # last tilts, for hysteresis
+  research_cache: data/cache/research.json  # fundamentals and analyst consensus
+  output_dir: output
+
+market_data:
+  # Sources tried in order. "synthetic" generates deterministic random walks for offline
+  # testing and is never used unless listed here or --offline is passed.
+  sources: [yfinance, stooq, csv]
+  history_days: 3900           # about 10.7 years, enough for 10 year returns
+  max_cache_age_hours: 20
+  fx_ticker: AUDUSD=X          # AUD per USD conversion for USD-denominated holdings
+  fx_tickers:                  # other trading currencies in the universe (Yahoo quotes these as AUD per one unit)
+    EUR: EURAUD=X
+    CAD: CADAUD=X
+    GBP: GBPAUD=X
+    NZD: NZDAUD=X
+
+# Published site (Netlify). The dashboard's add/remove controls talk to this site's functions.
+publish:
+  site_url: https://model-portfolio-lab.netlify.app
+
+# Accounts for the "Build your own portfolio" page (Supabase). The URL and the publishable (anon) key are
+# meant to be public: they go into the page, and row level security on the portfolios table decides what a
+# signed-in visitor may read or change (see supabase/schema.sql). Never put the secret or service role key here.
+accounts:
+  supabase:
+    url: https://dmeypgcdjtudqreifgoe.supabase.co
+    anon_key: sb_publishable_Hl5Cn1f6Bk7hIqdFQYefqA_YpCo5gRI
+
+# Trailing returns. Where a holding is younger than the period, the asset class index ETF
+# below stands in and the figure is marked as a proxy.
+returns:
+  long_history_proxies:          # tried in order; the first with a record for the period is used
+    aus_equity: [VAS.AX]
+    intl_equity: [VGS.AX]
+    infrastructure: [IFRA.AX, VAP.AX]
+    alternatives: [GOLD.AX]
+    fixed_income: [VAF.AX]
+    credit: [CRED.AX, SUBD.AX, VAF.AX]
+    cash: [AAA.AX]
+
+# Holding review: screens active holdings and the watchlist on market data and proposes
+# additions and removals. With auto_apply false the proposals are written to the outputs and
+# nothing changes until `python -m portfolio_engine review --apply`.
+review:
+  auto_apply: false
+  max_changes_per_run: 2
+  cooling_off_days: 90          # a removed name cannot return, and an added name cannot be removed, inside this window
+  min_market_cap_aud: 2000000000
+  momentum_lag_pp: 15           # 12-1 month return this far below the class index is a strike
+  drawdown_limit_pct: -35       # worst 1 year fall beyond this is a strike
+  strikes_to_remove: 3          # strikes: below 200 day average, momentum lag, drawdown, consensus Underperform or worse, thin liquidity
+  add_requirements: 3           # of: above 200 day average, momentum ahead of class index, consensus Buy or better, market cap, volatility below class median
+
+# Holding research and analyst consensus (Yahoo Finance aggregate of covering brokers).
+research:
+  max_age_days: 7              # fundamentals refresh weekly; returns recompute every build
+  consensus_weighting: 0.25    # within-class weight scales by up to +/-25% between Strong Buy (1) and Sell (5)
+  min_analysts: 3
+  review_threshold: 3.5        # consensus mean at or above this is flagged for review
+
+rebalance:
+  holding_tolerance_relative: 0.25   # holding more than 25% away from its target weight is flagged
+  min_trade_dollars: 500
+
+# HUB24 platform fees by investment menu (Super account). Choice and Core rates are the HUB24
+# rate card dated 2024-09-11 in the Platform, Invest and Adviser Fee Calculator; Discover is
+# HUB24's low-cost menu (hub24.com.au/discover: "no administration fee, no account keeping fee,
+# no minimum fee"; only the managed portfolio's investment fee applies). HUB24 announced
+# reductions to percentage administration fees after this card; update when the new card is
+# in hand. Menu rules: an account holding listed securities needs Choice; a managed-portfolio-
+# only account uses Core, or Discover under the balance threshold.
+platform:
+  name: "HUB24 Super"
+  rate_card_date: "2024-09-11"
+  discover_max_balance: 100000
+  menus:
+    choice:
+      label: "Choice menu"
+      bands: [{up_to: 250000, rate: 0.0028}, {up_to: 500000, rate: 0.0016}, {up_to: 1000000, rate: 0.0012}, {up_to: 2000000, rate: 0.0003}, {up_to: null, rate: 0.0}]
+      account_keeping_fee: 240
+      min_admin_fee: 350
+      max_admin_fee: 2000
+      expense_recovery_rate: 0.00025
+      expense_recovery_cap: 350
+    core:
+      label: "Core menu"
+      bands: [{up_to: 250000, rate: 0.0028}, {up_to: 500000, rate: 0.0016}, {up_to: 1000000, rate: 0.0012}, {up_to: 2000000, rate: 0.0003}, {up_to: null, rate: 0.0}]
+      account_keeping_fee: 0
+      min_admin_fee: 150
+      max_admin_fee: 2000
+      expense_recovery_rate: 0.00025
+      expense_recovery_cap: 350
+    discover:
+      label: "Discover menu"
+      bands: [{up_to: null, rate: 0.0}]
+      account_keeping_fee: 0
+      min_admin_fee: 0
+      max_admin_fee: 0
+      expense_recovery_rate: 0.0
+      expense_recovery_cap: 0
+      note: "Managed portfolio fees on Discover are the manager's Discover-menu tiered fee (typically 0.13% to 0.19% for index portfolios); the Core menu fee is used here until the Discover booklet figure is entered."
+  sources:
+    - "https://www.hub24.com.au/discover/"
+    - "https://www.hub24.com.au/features-benefits/investment-menu/"

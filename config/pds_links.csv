@@ -1,0 +1,22 @@
+ticker,url,label
+VAS.AX,https://fund-docs.vanguard.com/AU-ETFPDS-Vanguard_Australian_Shares_ETFs-VAS-VHY-VAP-VLC-VSO.pdf,Vanguard PDS (Australian Shares ETFs)
+VAP.AX,https://fund-docs.vanguard.com/AU-ETFPDS-Vanguard_Australian_Shares_ETFs-VAS-VHY-VAP-VLC-VSO.pdf,Vanguard PDS (Australian Shares ETFs)
+VSO.AX,https://fund-docs.vanguard.com/AU-ETFPDS-Vanguard_Australian_Shares_ETFs-VAS-VHY-VAP-VLC-VSO.pdf,Vanguard PDS (Australian Shares ETFs)
+VAF.AX,https://fund-docs.vanguard.com/AU-ETFPDS-Vanguard_Australian_Fixed_Interest_ETFs-VAF-VGB-VACF.pdf,Vanguard PDS (Australian Fixed Interest ETFs)
+VGB.AX,https://fund-docs.vanguard.com/AU-ETFPDS-Vanguard_Australian_Fixed_Interest_ETFs-VAF-VGB-VACF.pdf,Vanguard PDS (Australian Fixed Interest ETFs)
+VGS.AX,https://fund-docs.vanguard.com/AU-ETFPDS-Vanguard_International_Shares_ETFs-VAE_VGS-VGAD-VIHY.pdf,Vanguard PDS (International Shares ETFs)
+VGAD.AX,https://fund-docs.vanguard.com/AU-ETFPDS-Vanguard_International_Shares_ETFs-VAE_VGS-VGAD-VIHY.pdf,Vanguard PDS (International Shares ETFs)
+VGE.AX,https://fund-docs.vanguard.com/AU-ETFPDS-Vanguard_FTSE_Emerging_Markets_Shares_ETF-VGE.pdf,Vanguard PDS (Emerging Markets Shares ETF)
+VTS.AX,https://www.vanguard.com.au/personal/support/pds-and-offer-documents,Vanguard PDS and offer documents
+NDQ.AX,https://www.betashares.com.au/files/collateral/pds/NDQ-pds.pdf,Betashares PDS
+ASIA.AX,https://www.betashares.com.au/files/collateral/pds/RBTZ-ASIA-INCM-QLTY-RCKT-pds.pdf,Betashares PDS
+CRED.AX,https://www.betashares.com.au/files/collateral/pds/CRED-pds.pdf,Betashares PDS
+AAA.AX,https://www.betashares.com.au/files/collateral/pds/AAA-pds.pdf,Betashares PDS
+QUAL.AX,https://www.vaneck.com.au/globalassets/home.au/media/managedassets/library/assets/pds/pds---global-equities.pdf,VanEck PDS (global equities ETFs)
+IFRA.AX,https://www.vaneck.com.au/globalassets/home.au/media/managedassets/library/assets/pds/pds---global-equities.pdf,VanEck PDS (global equities ETFs)
+SUBD.AX,https://www.vaneck.com.au/globalassets/home.au/media/managedassets/library/assets/pds/pds---fixed-income.pdf,VanEck PDS (fixed income ETFs)
+GOLD.AX,https://www.globalxetfs.com.au/funds/gold/,Global X fund page (prospectus; GOLD is a structured product)
+YLDX.XA,https://coolabahcapital.com/coolabah-global-floating-rate-high-yield-complex-etf-product-disclosure-statement/,Coolabah PDS
+MQSD.AX,https://etf.macquarie.com/assets/etf/au/pds/macquarie-subordinated-debt-active-etf-pds.pdf,Macquarie PDS
+PE1.AX,https://pe1.pengana.com/,Pengana PE1 fund page (PDS and reports)
+CMA,https://www.hub24.com.au/product-documents/cash-account/,HUB24 cash account information

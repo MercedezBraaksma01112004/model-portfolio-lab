@@ -1,0 +1,75 @@
+ticker,band,involvement,note,reviewed
+WDS.AX,excluded,fossil_fuels,Oil and gas producer (Scarborough; North West Shelf); fails the fossil fuel screen outright.,2026-09-04
+ORG.AX,excluded,fossil_fuels,Gas producer (APLNG stake) and owner of the Eraring coal-fired power station; fails the fossil fuel screen despite the Octopus Energy stake.,2026-09-04
+BHP.AX,excluded,fossil_fuels,Sold its petroleum business to Woodside in 2022 but still mines metallurgical coal in Queensland; most fossil fuel screens exclude coal of any kind.,2026-09-04
+SGH.AX,excluded,fossil_fuels,Seven Group owns about 30% of Beach Energy (oil and gas) alongside WesTrac and Coates; excluded through the Beach stake.,2026-09-04
+SOL.AX,excluded,fossil_fuels,Soul Pattinson's largest holding is New Hope Corporation; a thermal coal miner; excluded.,2026-09-04
+ALL.AX,excluded,gambling,Poker machines and online gaming are the business; fails the gambling screen.,2026-09-04
+AXON.AX,excluded,weapons,Tasers and body cameras for police; treated as weapons under most screens even though it is not a defence contractor.,2026-09-04
+AXON,excluded,weapons,Tasers and body cameras for police; treated as weapons under most screens even though it is not a defence contractor.,2026-09-04
+RIO.AX,watch,,Exited coal in 2018; iron ore; copper and aluminium. Kept; but the 2020 Juukan Gorge destruction remains the defining controversy and cultural heritage is the issue to follow.,2026-09-04
+FMG.AX,watch,,Iron ore miner with a large green hydrogen and renewables programme; kept. Watch governance (concentrated control) and the pace of the decarbonisation spend.,2026-09-04
+MIN.AX,watch,,Lithium and iron ore; no fossil fuel involvement; kept. The 2024 governance findings against the founder are the reason for the watch band.,2026-09-04
+NST.AX,watch,,Gold miner; no exclusion involvement; kept. Mining carries tailings; water and land rehabilitation obligations; ordinary for the industry.,2026-09-04
+NAB.AX,watch,,Bank; kept. Lends to fossil fuel projects within a published transition policy; the usual reason banks sit on watch lists rather than exclusion lists.,2026-09-04
+WBC.AX,watch,,Bank; kept. Fossil fuel lending inside a transition policy; the 2020 AUSTRAC penalty is the governance history to know.,2026-09-04
+ANZ.AX,watch,,Bank; kept. Fossil fuel lending inside a transition policy; 2024 bond trading and conduct findings.,2026-09-04
+MQG.AX,watch,,Investment bank; kept. Large renewable energy developer through Macquarie Asset Management; some fossil fuel financing remains.,2026-09-04
+COL.AX,watch,,Supermarkets; kept. Owns Liquorland and Vintage Cellars (alcohol retail; not production); screens usually exclude producers only.,2026-09-04
+WES.AX,acceptable,,Bunnings; Kmart; Officeworks; chemicals; lithium via Covalent. Clear of the screens; ordinary retail labour and supply chain risk.,2026-09-04
+QBE.AX,acceptable,,Insurer with a policy to exit thermal coal underwriting; clear of the screens.,2026-09-04
+CSL.AX,leader,,Plasma and vaccines; strong governance and safety record; clear of the screens.,2026-09-04
+TLS.AX,acceptable,,Telecommunications; clear of the screens; data privacy is the material issue.,2026-09-04
+TCL.AX,acceptable,,Toll roads; clear of the screens; social licence over toll pricing is the issue to follow.,2026-09-04
+IFT.AX,leader,,Infratil: renewables (Longroad; Galileo); data centres (CDC); telecommunications. Clear of the screens with a renewables tilt.,2026-09-04
+GMG.AX,acceptable,,Industrial property and data centres; clear of the screens; energy use of data centres is the material issue.,2026-09-04
+REA.AX,acceptable,,Property portals; clear of the screens.,2026-09-04
+CAR.AX,acceptable,,Vehicle marketplaces; clear of the screens.,2026-09-04
+SEK.AX,acceptable,,Employment marketplaces; clear of the screens.,2026-09-04
+CPU.AX,acceptable,,Share registry and services; clear of the screens.,2026-09-04
+PME.AX,acceptable,,Medical imaging software; clear of the screens.,2026-09-04
+TNE.AX,acceptable,,Enterprise software; clear of the screens.,2026-09-04
+XRO.AX,acceptable,,Accounting software; clear of the screens.,2026-09-04
+WTC.AX,watch,,Logistics software; clear of the screens; 2024 to 2025 governance controversies around the founder are the reason for the watch band.,2026-09-04
+SIG.AX,acceptable,,Pharmacy wholesale and retail (Chemist Warehouse); clear of the screens.,2026-09-04
+PNI.AX,acceptable,,Fund manager holding company; clear of the screens.,2026-09-04
+DRR.AX,acceptable,,Royalty over BHP's Mining Area C iron ore; no coal or petroleum exposure; clear of the screens.,2026-09-04
+MSFT,leader,,Carbon negative by 2030 commitment; strong governance; clear of the screens.,2026-09-04
+NVDA,acceptable,,Semiconductors; clear of the screens; energy intensity of AI computing is the material issue.,2026-09-04
+GOOGL,watch,,Clear of the screens; kept. Privacy; antitrust and content moderation are recurring controversies.,2026-09-04
+AMZN,watch,,Clear of the screens; kept. Warehouse labour practices and antitrust are recurring controversies.,2026-09-04
+AAPL,acceptable,,Clear of the screens; supply chain labour audits are the material issue.,2026-09-04
+META,watch,,Clear of the screens; kept. Content moderation; youth safety and privacy controversies are persistent.,2026-09-04
+ASML,leader,,Lithography equipment; strong governance and disclosure; clear of the screens.,2026-09-04
+LLY,acceptable,,Pharmaceuticals; clear of the screens; drug pricing is the material issue.,2026-09-04
+VRT,acceptable,,Data centre power and cooling; clear of the screens.,2026-09-04
+PANW,acceptable,,Cybersecurity; clear of the screens.,2026-09-04
+VAS.AX,substituted,fossil_fuels,Broad index; holds Woodside; BHP; Santos and others; swapped for VETH (same market with exclusion screens).,2026-09-04
+VGS.AX,substituted,fossil_fuels,Broad index; holds Exxon; Chevron; Shell and others; swapped for VESG.,2026-09-04
+VGAD.AX,substituted,fossil_fuels,Hedged broad index; swapped for VESG (no hedged ethical equivalent; currency hedge is lost).,2026-09-04
+VAF.AX,substituted,fossil_fuels,Australian bonds including bank and energy issuers; swapped for VEFI (global screened bonds; hedged).,2026-09-04
+QUAL.AX,substituted,fossil_fuels,Quality index without exclusion screens; swapped for ESGI (MSCI ESG Leaders).,2026-09-04
+NDQ.AX,substituted,,Nasdaq 100 has no exclusion screens; swapped for ETHI (global sustainability leaders).,2026-09-04
+VSO.AX,substituted,fossil_fuels,Small caps index holds coal and gas producers; swapped for FAIR.,2026-09-04
+ARG.AX,substituted,fossil_fuels,Listed investment company holding BHP; Woodside and banks; swapped for VETH.,2026-09-04
+PL8.AX,substituted,fossil_fuels,Income LIC holding BHP; Woodside and Rio; swapped for FAIR.,2026-09-04
+ASIA.AX,excluded,,Asian technology index without exclusion screens and no screened equivalent on the ASX; left out under the screen.,2026-09-04
+VGE.AX,excluded,fossil_fuels,Emerging markets index holds oil; coal and state-owned producers; no screened equivalent on the ASX; left out under the screen.,2026-09-04
+FGX.AX,watch,,Fund of funds run for charity; underlying managers are not screened; kept for its philanthropic purpose.,2026-09-04
+PE1.AX,watch,,Private equity fund of funds; holdings are not visible enough to screen; kept.,2026-09-04
+VAP.AX,acceptable,,Listed property; no exclusion involvement.,2026-09-04
+IFRA.AX,watch,,Global infrastructure index includes gas pipelines and utilities burning coal; kept because there is no screened infrastructure ETF on the ASX.,2026-09-04
+GOLD.AX,acceptable,,Physical gold bullion; no operating company involvement.,2026-09-04
+VGB.AX,acceptable,,Australian government bonds; no company involvement.,2026-09-04
+CRED.AX,acceptable,,Investment grade corporate bonds (banks; utilities; property); no producer involvement to speak of.,2026-09-04
+SUBD.AX,acceptable,,Bank subordinated debt; clear of the screens.,2026-09-04
+YLDX.XA,acceptable,,Global bank and corporate floating rate credit; clear of the screens.,2026-09-04
+MQSD.AX,acceptable,,Bank subordinated debt; clear of the screens.,2026-09-04
+AAA.AX,acceptable,,Bank deposits; clear of the screens.,2026-09-04
+CMA,acceptable,,Platform cash account.,2026-09-04
+VETH.AX,screened_fund,,Vanguard's ethically conscious Australian index: excludes fossil fuels; tobacco; weapons; gambling; alcohol and adult entertainment.,2026-09-04
+VESG.AX,screened_fund,,Vanguard's ethically conscious international index with the same exclusions.,2026-09-04
+VEFI.AX,screened_fund,,Vanguard's ethically conscious global bond index with the same exclusions.,2026-09-04
+ESGI.AX,screened_fund,,MSCI World ex Australia ESG Leaders; fossil fuel reserves excluded.,2026-09-04
+ETHI.AX,screened_fund,,Betashares climate leaders screen plus exclusions.,2026-09-04
+FAIR.AX,screened_fund,,Betashares Australian sustainability leaders screen plus exclusions.,2026-09-04

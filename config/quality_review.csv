@@ -1,0 +1,71 @@
+ticker,verdict,note,reviewed
+VAS.AX,core,Whole-market Australian index at 0.07%. The anchor every Australian sleeve should have; 10 year return 9.3% a year with a 9% worst fall.,2026-09-03
+VGS.AX,core,"1,500 developed-market companies at 0.18%; 13.7% a year over 10 years. The international core, unhedged.",2026-09-03
+VGAD.AX,core,"Same index hedged to AUD. Holding both hedged and unhedged halves the currency bet, which is sensible when AUD sits near 0.72.",2026-09-03
+QUAL.AX,core,"Quality-factor screen (high return on equity, low leverage); 14.8% a year over 10 years, lower volatility than the index. Fine as a second international core at 0.40%.",2026-09-03
+VAF.AX,core,Australian bond index. Boring by design; the point is the -4% worst fall while equities dropped 20%.,2026-09-03
+VGB.AX,core,Government bonds only. Overlaps VAF; keep one unless you want the credit-free version for the most conservative profile.,2026-09-03
+AAA.AX,core,Cash ETF at 4% with zero drawdown. Fine as the cash sleeve alongside the platform cash account.,2026-09-03
+CMA,core,Platform cash account. Needed for settlement and the spending buffer.,2026-09-03
+GOLD.AX,core,"Physical gold; 12.8% a year over 10 years with a low correlation to shares. The one liquid alternative that earns its place, but it is a 27% volatility asset, so 5% not 15%.",2026-09-03
+IFRA.AX,core,"Global listed infrastructure, hedged; 12% volatility and a 6% worst fall. The sleeve's core.",2026-09-03
+VAP.AX,satellite,Australian listed property is a concentrated sector (Goodman is a third of it) and fell 22% in the year. Acceptable at small weight; not a core.,2026-09-03
+NDQ.AX,satellite,"NASDAQ 100 at 0.48%: 20.7% a year for a decade, but it is a concentrated technology bet with 32x earnings. Growth profiles only, and it overlaps the US direct names.",2026-09-03
+VGE.AX,satellite,"Emerging markets at 7.6% a year over 10 years with 14% volatility. Diversifier, small weight.",2026-09-03
+ASIA.AX,speculative,"Asian technology: 62% in the year, 37% volatility, 0.67% fee. A thematic ETF, not a core; growth profiles only and keep it small.",2026-09-03
+CRED.AX,satellite,"Investment-grade corporate bonds at 5.2% yield; fine, low volatility. Note the 10 year figure is a proxy.",2026-09-03
+SUBD.AX,satellite,"Bank subordinated debt at 5.3%; behaves like credit not cash, which the 2020 and 2022 periods showed. Acceptable within the credit sleeve.",2026-09-03
+YLDX.XA,satellite,"Coolabah floating-rate high yield at 6.4%, 1% fee, 18 months of history. Actively managed credit; fine at a few percent, do not treat it as fixed income.",2026-09-03
+MQSD.AX,satellite,Macquarie subordinated notes at 5.3%. Single-issuer credit; keep small and remember APRA is phasing bank hybrids out by 2032.,2026-09-03
+AYUPA.AX,not recommended,"Australian Unity capital notes: -20% in the year, -5% a year over five, 19% volatility, 32% drawdown and thin liquidity. That is not fixed income behaviour. Replace with VAF or CRED.",2026-09-03
+ARG.AX,satellite,"Argo LIC: 4.1% franked yield, 10% volatility, but 6.7% a year over 10 years lags VAS's 9.3% at twice the cost. Income holding for pension accounts, otherwise VAS does the job.",2026-09-03
+PL8.AX,satellite,"Plato income LIC: 4.6% franked monthly income, 9.3% a year; 0.8% fee. A reasonable pension-phase income holding, not an accumulation one.",2026-09-03
+FGX.AX,satellite,"Future Generation: 5.5% yield and 6.8% a year over 10 years; the fee goes to charity, which is the reason to own it. Small.",2026-09-03
+VSO.AX,satellite,"Small-cap index at 0.30%; 9.1% a year over 10 years, in line with large caps with more volatility. Fine at 2 to 3%.",2026-09-03
+BHP.AX,core,"Largest miner, 21.6% a year over 10 years, fully franked. Cyclical, so 6% not 10%, but it belongs in an Australian core.",2026-09-03
+RIO.AX,satellite,Second diversified miner; nearly the same iron-ore exposure as BHP. Own one or the other unless the account is large.,2026-09-03
+CSL.AX,core,"Down 13% in the year and -9% a year over five: the market has stopped paying 40x for it. Still Australia's only global healthcare franchise at 19x forward earnings. Core, and the last five years are the argument for buying it, not against.",2026-09-03
+MQG.AX,core,"Macquarie: 16.4% a year over 10 years, global earnings, partially franked. Core financial.",2026-09-03
+NAB.AX,core,"Major bank at 16x forward earnings, fully franked income, Hold consensus. Yield is now computed from the dividends actually paid in the last 12 months rather than Yahoo's summary field, which had double counted. Core income holding.",2026-09-03
+WBC.AX,satellite,"Westpac: same business as NAB with a worse cost base; consensus Underperform (3.9). One bank is enough below $1m; if you keep two, this is the one to question.",2026-09-03
+ANZ.AX,satellite,"Watchlist. 21% in the year, 4.4% yield, but three of the big four in a portfolio is not diversification. Only as a swap for Westpac.",2026-09-03
+WES.AX,core,"Wesfarmers: 15.2% a year over 10 years, Bunnings and Kmart, fully franked. Consensus Underperform on valuation (26x forward), which is a fair complaint; still the best-run conglomerate on the ASX.",2026-09-03
+COL.AX,satellite,"Coles: defensive staple, 3.3% franked. Fine, dull. Overlaps Woolworths; own one.",2026-09-03
+WOW.AX,satellite,"Woolworths (added from the website): 51% in the year after a poor 2025; 2.4% yield, Hold consensus. Same comment as Coles: own one.",2026-09-03
+TLS.AX,satellite,"Telstra: 4.4% franked, 15% volatility, 4.3% a year over 10 years. Income only; it does not grow.",2026-09-03
+QBE.AX,satellite,QBE at 11.6x forward earnings with 12.6% a year over 10 years and low volatility. A reasonable financial that is not a bank.,2026-09-03
+SOL.AX,satellite,"Soul Pattinson: 13% a year over 10 years, fully franked, a listed investment company in disguise. Fine at small weight; the trailing PE is distorted by the Brickworks merger.",2026-09-03
+WDS.AX,satellite,"Woodside: 30% in the year, 3.6% franked, but 7.6% a year over 10 years and entirely gas-price dependent. Energy exposure for those who want it; small.",2026-09-03
+ALL.AX,satellite,"Aristocrat: 16.8% a year over 10 years, global gaming, Strong Buy consensus, unfranked. Good business; the 36% drawdown shows how it trades.",2026-09-03
+SIG.AX,speculative,"Sigma: 53% a year over three years is the Chemist Warehouse merger, and 45x trailing earnings is what you pay for it. Buy consensus, but the return that already happened is not repeatable. Small, growth profiles.",2026-09-03
+SGH.AX,satellite,"Seven Group: 19.6% a year over 10 years, Boral and WesTrac; Buy consensus and a 26% upside target. Decent industrial, though the Stokes family control is a governance discount.",2026-09-03
+PNI.AX,speculative,Pinnacle: 26% a year over 10 years but 0.6% over five and a 37% drawdown; a leveraged bet on fund flows. Strong Buy consensus with 53% upside says how far it fell. Small.,2026-09-03
+NST.AX,speculative,"Northern Star: 56% volatility and a 45% drawdown in a year gold rose. Gold miners are a worse way to own gold than GOLD.AX. If you want gold, hold the metal.",2026-09-03
+DRR.AX,satellite,"Deterra: iron-ore royalty, 5.6% franked, 13x earnings, Hold consensus. A cleaner way to own iron ore than a miner, but it is the same bet as BHP. Your removal list has it; I would keep it only if BHP goes.",2026-09-03
+TNE.AX,satellite,"TechnologyOne: 25.5% a year over five years, then 72x earnings and a 49% drawdown. Excellent business, extreme price. Satellite for growth profiles, sized as if it can fall by half, because it just did.",2026-09-03
+REA.AX,satellite,"REA: down 30% in the year and 45% from the high; 25x forward with a Buy consensus. The screen says remove on price; I say a classifieds monopoly after a de-rating is exactly what to keep. Compromise: kept, capped at 3%.",2026-09-03
+XRO.AX,speculative,"Xero: down 46% in the year, 62% from the high, no dividend, 41x forward. The screen gave it three strikes and I agree it is optional; moved to the watchlist 3 Sep 2026. Add it back from the website if you want it in High Growth at 2%.",2026-09-03
+WTC.AX,speculative,"WiseTech: down 61% in the year, 70% from the high, after governance problems. Strong Buy consensus does not fix that; moved to the watchlist 3 Sep 2026 with the screen's agreement.",2026-09-03
+GMG.AX,satellite,"Goodman: data centres and logistics property, Strong Buy, 1.1% yield. A growth stock inside the property sleeve; fine at 3%.",2026-09-03
+TCL.AX,satellite,"Transurban: 5% yield from toll roads, 15% volatility, 6.5% a year over 10 years. Reliable income; the 115x PE is an accounting artefact. Consensus Hold at 3.4 is the valuation concern.",2026-09-03
+IFT.AX,satellite,"Infratil: 17.4% a year over 10 years from data centres and renewables; only 4 analysts. Its negative forward PE from the feed is now flagged and ignored. Good record, thin coverage. Small.",2026-09-03
+PE1.AX,speculative,"Pengana private equity trust: 36% volatility for 7.4% a year over five years, 1.25% fee plus underlying. Listed private equity is expensive and illiquid in stress; not worth it under $250,000.",2026-09-03
+WMA.AX,not recommended,"WAM Alternatives: 2.3% a year over 10 years, 4% over five, 1% fee, trades at a discount. That is a cash return with equity risk. Replace with GOLD.AX or simply more bonds.",2026-09-03
+MSFT,core,"Microsoft: 25.8% a year over 10 years, 22x forward, 52 analysts Strong Buy. The single most defensible large-cap growth holding.",2026-09-03
+GOOGL,core,"Alphabet: 24% a year over 10 years at 17x trailing earnings, the cheapest of the mega-caps. Core.",2026-09-03
+AMZN,core,"Amazon: 21% a year over 10 years; 25x forward. Core, with the note that AWS is the business you are buying.",2026-09-03
+NVDA,speculative,"NVIDIA: 65% a year over 10 years and 15x forward on current earnings, which is the point: the forward multiple assumes the AI capex cycle continues. Extraordinary company, cyclical semiconductor. Small.",2026-09-03
+LLY,satellite,"Lilly: 33% a year over 10 years on GLP-1 drugs; 25x forward. The best pharma franchise in the world priced as one. Satellite, because a single drug class is the story.",2026-09-03
+PANW,speculative,"Palo Alto: 44% volatility, 67x forward earnings, no dividend. Good cybersecurity business at a price that needs everything to go right. Small, growth only.",2026-09-03
+VRT,speculative,"Vertiv: 114% in the year and 89% a year over three; 64% volatility and a 41% drawdown. This is the AI data-centre trade in its purest form. If it stays, it should be 1 to 2% and you should expect to lose half of it in a bad year.",2026-09-03
+AXON,speculative,"Axon: 61% volatility, 56% drawdown, 51x forward, no dividend. A fine business; the price is a growth-stock lottery ticket. Small or out below High Growth.",2026-09-03
+AAPL,core,"Apple: 29.6% a year over 10 years, 25% volatility, 34x forward; Buy consensus from 39 analysts. Screen and reviewer agreed, so it was activated as the fourth US core name on 3 Sep 2026.",2026-09-03
+META,satellite,"Watchlist. Meta at 17.5x forward with 27.6% a year over three years; down 17% in the year. Cheaper than Apple, more volatile. Reasonable candidate.",2026-09-03
+ASML,satellite,"Watchlist. ASML: the only maker of EUV lithography machines; 125% in the year, 46% volatility. Strong Buy. A better semiconductor holding than NVIDIA on monopoly grounds, and just as cyclical.",2026-09-03
+CAR.AX,satellite,"Watchlist. CAR Group: down 32% in the year, 20x forward, no consensus mean but 29% target upside. Quality classifieds business after a de-rating; worth watching.",2026-09-03
+CPU.AX,satellite,"Watchlist. Computershare: 23% a year over five years, benefits from higher rates. Hold consensus. Fine, but not obviously better than what is held.",2026-09-03
+SEK.AX,not recommended,"Watchlist. Seek: -14% a year over five years, 59% drawdown, no consensus mean. Structurally challenged by AI in job matching. Do not add.",2026-09-03
+PME.AX,speculative,"Watchlist. Pro Medicus: 40% a year over 10 years and 76x forward earnings, down 40% in the year. Best software business on the ASX, worst entry discipline. Only for someone who accepts a 66% drawdown, which it just had.",2026-09-03
+FMG.AX,not recommended,Watchlist. Fortescue: single-commodity iron ore with a founder-driven hydrogen strategy; consensus 3.3 (Hold to Underperform). BHP covers this exposure with less key-person risk.,2026-09-03
+ORG.AX,satellite,"Watchlist. Origin: 27.6% a year over five years, 5.2% franked, Buy consensus. Reasonable utility; would replace Woodside as the energy holding.",2026-09-03
+MIN.AX,not recommended,"Watchlist. Mineral Resources: 74% in the year after a 29% fall, 47% volatility, governance problems in 2024 and 2025. The screen's momentum merit is exactly the kind of signal that gets people into it at the wrong time.",2026-09-03

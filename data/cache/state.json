@@ -1,0 +1,12 @@
+{
+  "as_of": "2026-10-02",
+  "tilts": {
+    "aus_equity": 0.04,
+    "intl_equity": 2.086,
+    "infrastructure": -4.257,
+    "alternatives": 0.0,
+    "fixed_income": -0.278,
+    "credit": -0.363,
+    "cash": 0.0
+  }
+}

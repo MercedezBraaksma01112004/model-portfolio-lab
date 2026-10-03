@@ -1,0 +1,69 @@
+ticker,name,asset_class
+VAS.AX,Vanguard Australian Shares Index ETF,aus_equity
+A200.AX,Betashares Australia 200 ETF,aus_equity
+IOZ.AX,iShares Core S&P/ASX 200 ETF,aus_equity
+STW.AX,SPDR S&P/ASX 200 ETF,aus_equity
+VHY.AX,Vanguard Australian Shares High Yield ETF,aus_equity
+IHD.AX,iShares S&P/ASX Dividend Opportunities ETF,aus_equity
+VSO.AX,Vanguard MSCI Australian Small Companies ETF,aus_equity
+MVW.AX,VanEck Australian Equal Weight ETF,aus_equity
+QOZ.AX,Betashares FTSE RAFI Australia 200 ETF,aus_equity
+EX20.AX,Betashares Australian Ex-20 ETF,aus_equity
+VGS.AX,Vanguard MSCI Index International Shares ETF,intl_equity
+VGAD.AX,Vanguard MSCI International Shares (Hedged) ETF,intl_equity
+IVV.AX,iShares S&P 500 ETF,intl_equity
+IHVV.AX,iShares S&P 500 (AUD Hedged) ETF,intl_equity
+NDQ.AX,Betashares NASDAQ 100 ETF,intl_equity
+HNDQ.AX,Betashares NASDAQ 100 Currency Hedged ETF,intl_equity
+QUAL.AX,VanEck MSCI International Quality ETF,intl_equity
+QHAL.AX,VanEck MSCI International Quality (Hedged) ETF,intl_equity
+VGE.AX,Vanguard FTSE Emerging Markets Shares ETF,intl_equity
+IEM.AX,iShares MSCI Emerging Markets ETF,intl_equity
+VEU.AX,Vanguard All-World ex-US Shares ETF,intl_equity
+VTS.AX,Vanguard US Total Market Shares ETF,intl_equity
+VAE.AX,Vanguard FTSE Asia ex Japan Shares ETF,intl_equity
+ASIA.AX,Betashares Asia Technology Tigers ETF,intl_equity
+IOO.AX,iShares Global 100 ETF,intl_equity
+IJP.AX,iShares MSCI Japan ETF,intl_equity
+VEQ.AX,Vanguard FTSE Europe Shares ETF,intl_equity
+ETHI.AX,Betashares Global Sustainability Leaders ETF,intl_equity
+FAIR.AX,Betashares Australian Sustainability Leaders ETF,aus_equity
+HACK.AX,Betashares Global Cybersecurity ETF,intl_equity
+RBTZ.AX,Betashares Global Robotics and AI ETF,intl_equity
+MOAT.AX,VanEck Morningstar Wide Moat ETF,intl_equity
+HGEN.AX,Betashares Global Healthcare ETF,intl_equity
+DRUG.AX,Betashares Global Healthcare ETF (Hedged),intl_equity
+VAP.AX,Vanguard Australian Property Securities ETF,infrastructure
+SLF.AX,SPDR S&P/ASX 200 Listed Property ETF,infrastructure
+MVA.AX,VanEck Australian Property ETF,infrastructure
+DJRE.AX,SPDR Dow Jones Global Real Estate ETF,infrastructure
+IFRA.AX,VanEck FTSE Global Infrastructure (Hedged) ETF,infrastructure
+VBLD.AX,Vanguard Global Infrastructure ETF,infrastructure
+GLIN.AX,AMP Capital Global Infrastructure Securities ETF,infrastructure
+GOLD.AX,Global X Physical Gold,alternatives
+PMGOLD.AX,Perth Mint Gold,alternatives
+QAU.AX,Betashares Gold Bullion ETF (Hedged),alternatives
+ETPMAG.AX,Global X Physical Silver,alternatives
+GDX.AX,VanEck Gold Miners ETF,alternatives
+VAF.AX,Vanguard Australian Fixed Interest ETF,fixed_income
+VGB.AX,Vanguard Australian Government Bond ETF,fixed_income
+IAF.AX,iShares Core Composite Bond ETF,fixed_income
+VIF.AX,Vanguard International Fixed Interest (Hedged) ETF,fixed_income
+VBND.AX,Vanguard Global Aggregate Bond (Hedged) ETF,fixed_income
+AGVT.AX,Betashares Australian Government Bond ETF,fixed_income
+IGB.AX,iShares Treasury ETF,fixed_income
+CRED.AX,Betashares Australian Investment Grade Corporate Bond ETF,credit
+VACF.AX,Vanguard Australian Corporate Fixed Interest ETF,credit
+SUBD.AX,VanEck Australian Subordinated Debt ETF,credit
+BHYB.AX,Betashares Australian Major Bank Hybrids ETF,credit
+HBRD.AX,Betashares Active Australian Hybrids Fund,credit
+FLOT.AX,VanEck Australian Floating Rate ETF,credit
+QPON.AX,Betashares Australian Bank Senior Floating Rate Bond ETF,credit
+YLDX.XA,Coolabah Global Floating-Rate High Yield Complex ETF,credit
+AAA.AX,Betashares Australian High Interest Cash ETF,cash
+BILL.AX,iShares Core Cash ETF,cash
+ISEC.AX,iShares Enhanced Cash ETF,cash
+VDHG.AX,Vanguard Diversified High Growth Index ETF,intl_equity
+VDGR.AX,Vanguard Diversified Growth Index ETF,intl_equity
+VDBA.AX,Vanguard Diversified Balanced Index ETF,intl_equity
+DHHF.AX,Betashares Diversified All Growth ETF,intl_equity

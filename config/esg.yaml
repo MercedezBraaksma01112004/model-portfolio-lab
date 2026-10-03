@@ -1,0 +1,34 @@
+# ESG screen. Switched on per portfolio with the "ESG screen" toggle on the website (every portfolio is
+# built twice, once unscreened and once screened). Rules are applied in this order:
+#   1. manual verdicts in config/esg_review.csv (band "excluded" removes the holding; "substituted" swaps it)
+#   2. sector and industry patterns from the research feed, for any holding without a written verdict
+#   3. ETF substitutions below (index funds cannot be screened by sector, only swapped for a screened fund)
+#   4. managed portfolios: only those whose name matches the sma_name_pattern are eligible
+# There is no ESG data feed behind this: Yahoo Finance stopped serving Sustainalytics scores, so the
+# bands in esg_review.csv are written reviews (opinion, dated) and say so on the page.
+exclusions:
+  fossil_fuels: {label: "Fossil fuels (oil, gas, thermal and metallurgical coal)", patterns: ["oil & gas", "oil and gas", "coal", "thermal coal", "petroleum"]}
+  tobacco: {label: "Tobacco", patterns: ["tobacco"]}
+  gambling: {label: "Gambling", patterns: ["gambling", "casino", "gaming"]}
+  weapons: {label: "Weapons and defence", patterns: ["aerospace & defense", "aerospace and defence", "defense", "weapons", "firearms"]}
+  alcohol: {label: "Alcohol production", patterns: ["beverages - brewers", "beverages - wineries", "distillers"]}
+  adult: {label: "Adult entertainment", patterns: ["adult entertainment"]}
+substitutions:
+  VAS.AX: VETH.AX
+  VGS.AX: VESG.AX
+  VGAD.AX: VESG.AX
+  VAF.AX: VEFI.AX
+  QUAL.AX: ESGI.AX
+  NDQ.AX: ETHI.AX
+  VSO.AX: FAIR.AX
+  ARG.AX: VETH.AX
+  PL8.AX: FAIR.AX
+drop_without_substitute: [ASIA.AX, VGE.AX]
+sma_name_pattern: "ethical|sustainab|esg|responsible"
+bands:
+  leader: "Leader: clear of the exclusion screens and a strong record on the issues that matter for its industry"
+  acceptable: "Acceptable: clear of the exclusion screens; ordinary ESG risk for its industry"
+  watch: "Watch: kept, but with a controversy or a minor involvement worth knowing about"
+  substituted: "Substituted: an unscreened fund that holds excluded companies; swapped for a screened equivalent"
+  excluded: "Excluded: fails one of the exclusion screens"
+  screened_fund: "Screened fund: the index provider applies exclusion screens inside the fund"

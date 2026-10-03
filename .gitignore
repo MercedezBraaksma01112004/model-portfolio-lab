@@ -1,0 +1,14 @@
+output/
+data/cache/prices.csv
+data/cache/research.json
+data/cache/search_index.json
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+site/
+.netlify/
+node_modules/
+*.zip
+*.tgz
+.DS_Store

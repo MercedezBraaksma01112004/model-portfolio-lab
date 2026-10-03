@@ -1,0 +1,112 @@
+ticker,name,asset_class,vehicle,role,currency,mer,yield,franking,weight_hint,min_tier,max_weight,priority,notes,source,hub24_code,status,sector,region
+SIG.AX,Sigma Healthcare,aus_equity,direct,satellite,AUD,0.0,0.73,100,3.0,core,6,3,HUB24 model (SIG.ASX); ,hub24_model,SIG.ASX,active,Healthcare,Australia
+SGH.AX,Seven Group Holdings,aus_equity,direct,satellite,AUD,0.0,2.0,100,3.0,core,6,3,HUB24 model (SGH.ASX); ,hub24_model,SGH.ASX,active,Industrials,Australia
+DRR.AX,Deterra Royalties,aus_equity,direct,satellite,AUD,0.0,8.1,100,3.0,core,6,3,"HUB24 model (DRR.ASX); on your removal list - kept for now, BHP added as the resources anchor",hub24_model,DRR.ASX,active,Materials,Australia
+PNI.AX,Pinnacle Investment Mgmt,aus_equity,direct,satellite,AUD,0.0,3.42,100,3.0,core,6,3,HUB24 model (PNI.ASX); ,hub24_model,PNI.ASX,active,Financials,Australia
+TNE.AX,TechnologyOne,aus_equity,direct,satellite,AUD,0.0,0.95,100,3.0,core,6,3,HUB24 model (TNE.ASX); ,hub24_model,TNE.ASX,active,Technology,Australia
+NST.AX,Northern Star Resources,aus_equity,direct,satellite,AUD,0.0,2.51,100,3.0,high,3,3,HUB24 model (NST.ASX); ,hub24_model,NST.ASX,active,Materials,Australia
+ARG.AX,Argo Investments,aus_equity,lic,core,AUD,0.15,4.0,100,2.0,starter,20,2,HUB24 model (ARG.ASX); ,hub24_model,ARG.ASX,active,Diversified fund,Australia
+FGX.AX,Future Generation Investment,aus_equity,lic,core,AUD,0.0,5.5,100,2.0,starter,20,2,HUB24 model (FGX.ASX); ,hub24_model,FGX.ASX,active,Diversified fund,Australia
+VSO.AX,Vanguard MSCI AU Small Companies ETF,aus_equity,etf,core,AUD,0.3,0.0,40,2.0,starter,25,2,HUB24 model (VSO.ASX); ,hub24_model,VSO.ASX,active,Small companies,Australia
+PL8.AX,Plato Income Maximiser,aus_equity,lic,core,AUD,0.8,4.84,100,2.0,starter,20,2,HUB24 model (PL8.ASX); ,hub24_model,PL8.ASX,active,Dividend income,Australia
+MSFT,Microsoft Corp,intl_equity,direct,satellite,USD,0.1,0.88,0,2.0,established,6,3,HUB24 model (MSFT.NAS); ,hub24_model,MSFT.NAS,active,Technology,United States
+VRT,Vertiv Holdings,intl_equity,direct,satellite,USD,0.1,0.06,0,2.0,high,3,3,HUB24 model (VRT.NYS); ,hub24_model,VRT.NYS,active,Industrials,United States
+LLY,Eli Lily & Co,intl_equity,direct,satellite,USD,0.1,0.0,0,2.0,established,6,3,HUB24 model (LLY.NYS); ,hub24_model,LLY.NYS,active,Healthcare,United States
+AXON,Axon Enterprise,intl_equity,direct,satellite,USD,0.1,0.0,0,2.0,high,3,3,HUB24 model (AXON.NAS); ,hub24_model,AXON.NAS,active,Industrials,United States
+PANW,Palo Alto Networks,intl_equity,direct,satellite,USD,0.1,0.79,0,2.0,high,3,3,HUB24 model (PANW.NAS); ,hub24_model,PANW.NAS,active,Technology,United States
+VGS.AX,Vanguard MSCI Index International Shares,intl_equity,etf,core,AUD,0.18,2.0,0,6.0,starter,25,1,HUB24 model (VGS.ASX); ,hub24_model,VGS.ASX,active,Diversified fund,Global
+QUAL.AX,VanEck MSCI International Quality ETF,intl_equity,etf,core,AUD,0.4,2.0,0,5.0,starter,25,2,HUB24 model (QUAL.ASX); ,hub24_model,QUAL.ASX,active,Quality,Global
+ASIA.AX,Betashares Asian Tech Tigers,intl_equity,etf,core,AUD,0.67,0.5,0,3.0,starter,25,2,HUB24 model (ASIA.ASX); ,hub24_model,ASIA.ASX,active,Technology,Asia
+IFT.AX,Infratil Ltd,infrastructure,direct,satellite,AUD,0.0,1.32,0,3.0,core,6,3,HUB24 model (IFT.ASX); ,hub24_model,IFT.ASX,active,Utilities,New Zealand
+PE1.AX,Pengana Private Equity Trust,alternatives,lit,satellite,AUD,1.25,3.94,0,3.0,high,3,3,HUB24 model (PE1.ASX); ,hub24_model,PE1.ASX,active,Private equity,Australia
+WMA.AX,WAM Alternative Assets,alternatives,lic,core,AUD,1.0,6.22,50,3.0,starter,20,2,Moved to watchlist 2026-09-03 after quality review: 2.3% a year over 10 years for equity risk and a 1% fee,hub24_model,WMA.ASX,watchlist,Alternatives,Australia
+AYUPA.AX,Aus Unity MCI,fixed_income,fund,core,AUD,0.0,3.8,0,5.0,starter,20,2,"Moved to watchlist 2026-09-03 after quality review: not fixed income behaviour: -20% in a year, 32% drawdown, thin liquidity",hub24_model,AYUPA,watchlist,Hybrids,Australia
+YLDX.XA,Coolabah Global Floating-Rate High Yield Complex ETF,credit,etf,core,AUD,1.0,6.86,0,5.0,starter,25,2,HUB24 model (YLDX.CXA); ,hub24_model,YLDX.CXA,active,High yield credit,Global
+MQSD.AX,Macquarie Sub Debt,credit,hybrid,satellite,AUD,0.29,5.4,0,5.0,core,10,3,HUB24 model (MQSD.ASX); ,hub24_model,MQSD.ASX,active,Bank subordinated debt,Australia
+CMA,CMA Cash Account,cash,cash,core,AUD,0.0,4.35,0,5.0,starter,100,2,HUB24 model (CMA); manual price,hub24_model,CMA,active,Cash,Australia
+VAS.AX,Vanguard Australian Shares ETF,aus_equity,etf,core,AUD,0.07,3.8,70,8.0,starter,60,1,Low cost broad market core at every tier; the direct names are satellites around it,engine_addition,,active,Diversified fund,Australia
+VAP.AX,Vanguard Australian Property Securities ETF,infrastructure,etf,core,AUD,0.23,3.5,0,3.0,starter,60,2,Australian listed property,engine_addition,,active,Real estate,Australia
+IFRA.AX,VanEck FTSE Global Infrastructure (Hedged) ETF,infrastructure,etf,core,AUD,0.52,3.2,0,4.0,starter,60,2,"Global listed infrastructure, hedged; replaces the unlisted Lazard fund",engine_addition,,active,Infrastructure,Global
+GOLD.AX,Global X Physical Gold,alternatives,etf,fallback,AUD,0.4,0.0,0,30.0,starter,100,1,Engine addition: only liquid alternative for small balances,engine_addition,,active,Gold,Global
+VAF.AX,Vanguard Australian Fixed Interest ETF,fixed_income,etf,core,AUD,0.1,3.6,0,8.0,starter,100,1,Australian government and corporate bonds; listed core for the fixed income sleeve,engine_addition,,active,Bonds,Australia
+CRED.AX,BetaShares Australian Investment Grade Corporate Bond ETF,credit,etf,fallback,AUD,0.25,5.2,0,30.0,starter,100,1,Engine addition,engine_addition,,active,Corporate bonds,Australia
+AAA.AX,BetaShares Australian High Interest Cash ETF,cash,etf,fallback,AUD,0.18,4.3,0,20.0,core,60,2,Engine addition,engine_addition,,active,Cash,Australia
+BHP.AX,BHP Group,aus_equity,direct,core,AUD,0.0,4.5,100,4.0,core,6,2,Added: large cap diversified resources anchor replacing single-commodity royalty exposure; fully franked,engine_addition,BHP,active,Materials,Australia
+CSL.AX,CSL Limited,aus_equity,direct,core,AUD,0.0,1.3,10,4.0,core,6,2,Added: large cap healthcare growth anchor; low franking,engine_addition,CSL,active,Healthcare,Australia
+MQG.AX,Macquarie Group,aus_equity,direct,core,AUD,0.0,3.0,40,4.0,core,6,2,Added: large cap financial with global earnings; partial franking,engine_addition,MQG,active,Financials,Australia
+REA.AX,REA Group,aus_equity,direct,satellite,AUD,0.0,1.0,100,3.0,established,3,3,"Kept small 2026-09-03: screen says remove on price, reviewer says keep as a monopoly business after a de-rating; capped at 3%",engine_addition,REA,active,Communication,Australia
+TCL.AX,Transurban Group,infrastructure,direct,core,AUD,0.0,4.5,10,3.0,core,8,2,"Added: ASX listed toll road operator with live pricing, replaces BIPC",engine_addition,TCL,active,Industrials,Australia
+WES.AX,Wesfarmers,aus_equity,direct,core,AUD,0.0,2.7,100,3.0,core,6,2,"Added: large cap retail and industrial conglomerate, fully franked",engine_addition,,active,Consumer discretionary,Australia
+RIO.AX,Rio Tinto,aus_equity,direct,satellite,AUD,0.0,5.0,100,3.0,established,6,3,"Added: diversified miner, fully franked",engine_addition,,active,Materials,Australia
+NAB.AX,National Australia Bank,aus_equity,direct,core,AUD,0.0,4.4,100,3.0,core,6,2,"Added: major bank, fully franked income",engine_addition,,active,Financials,Australia
+WBC.AX,Westpac,aus_equity,direct,satellite,AUD,0.0,4.8,100,2.0,established,6,3,"Added: major bank, fully franked income",engine_addition,,active,Financials,Australia
+GMG.AX,Goodman Group,infrastructure,direct,satellite,AUD,0.0,1.0,0,3.0,established,6,3,Added: industrial property and data centres; listed property sleeve,engine_addition,,active,Real estate,Australia
+WDS.AX,Woodside Energy,aus_equity,direct,satellite,AUD,0.0,6.0,100,2.0,established,6,4,"Added: energy exposure, fully franked",engine_addition,,active,Energy,Australia
+TLS.AX,Telstra,aus_equity,direct,satellite,AUD,0.0,4.5,100,2.0,established,5,4,Added: defensive income,engine_addition,,active,Communication,Australia
+COL.AX,Coles Group,aus_equity,direct,satellite,AUD,0.0,3.5,100,2.0,established,5,4,Added: defensive consumer staple,engine_addition,,active,Consumer staples,Australia
+ALL.AX,Aristocrat Leisure,aus_equity,direct,satellite,AUD,0.0,1.4,0,2.0,established,5,4,"Added: global gaming technology, unfranked",engine_addition,,active,Consumer discretionary,Australia
+XRO.AX,Xero,aus_equity,direct,satellite,AUD,0.0,0.0,0,2.0,high,3,5,Moved to watchlist 2026-09-03: screen (three strikes) and reviewer agree it is optional; analysts disagree. Re-add via the website if wanted.,engine_addition,,watchlist,Technology,Australia
+WTC.AX,WiseTech Global,aus_equity,direct,satellite,AUD,0.0,0.2,0,2.0,high,3,5,Moved to watchlist 2026-09-03: screen (three strikes) and reviewer agree it is optional; analysts disagree. Re-add via the website if wanted.,engine_addition,,watchlist,Technology,Australia
+QBE.AX,QBE Insurance,aus_equity,direct,satellite,AUD,0.0,3.5,10,2.0,established,5,4,"Added: global insurer, mostly unfranked",engine_addition,,active,Financials,Australia
+SOL.AX,Washington H. Soul Pattinson,aus_equity,direct,satellite,AUD,0.0,2.5,100,2.0,established,5,4,"Added: diversified investment house, fully franked",engine_addition,,active,Financials,Australia
+ANZ.AX,ANZ Group,aus_equity,direct,satellite,AUD,0.0,4.9,70,2.0,established,6,4,Watchlist candidate,engine_addition,,watchlist,Financials,Australia
+CPU.AX,Computershare,aus_equity,direct,satellite,AUD,0.0,2.0,0,2.0,established,5,4,Watchlist candidate,engine_addition,,watchlist,Financials,Australia
+SEK.AX,Seek,aus_equity,direct,satellite,AUD,0.0,1.8,100,2.0,established,5,4,Watchlist candidate,engine_addition,,watchlist,Communication,Australia
+CAR.AX,CAR Group,aus_equity,direct,satellite,AUD,0.0,2.0,100,2.0,established,5,4,Watchlist candidate,engine_addition,,watchlist,Communication,Australia
+PME.AX,Pro Medicus,aus_equity,direct,satellite,AUD,0.0,0.2,100,2.0,high,4,5,Watchlist candidate,engine_addition,,watchlist,Healthcare,Australia
+FMG.AX,Fortescue,aus_equity,direct,satellite,AUD,0.0,6.0,100,2.0,established,5,4,Watchlist candidate,engine_addition,,watchlist,Materials,Australia
+ORG.AX,Origin Energy,aus_equity,direct,satellite,AUD,0.0,4.5,100,2.0,established,5,4,Watchlist candidate,engine_addition,,watchlist,Utilities,Australia
+MIN.AX,Mineral Resources,aus_equity,direct,satellite,AUD,0.0,0.0,100,2.0,high,4,5,Watchlist candidate,engine_addition,,watchlist,Materials,Australia
+NVDA,NVIDIA,intl_equity,direct,satellite,USD,0.1,0.03,0,2.0,established,6,3,Added: AI hardware leader,engine_addition,,active,Technology,United States
+GOOGL,Alphabet,intl_equity,direct,satellite,USD,0.1,0.4,0,2.0,established,6,3,Added: search and cloud,engine_addition,,active,Communication,United States
+AMZN,Amazon,intl_equity,direct,satellite,USD,0.1,0.0,0,2.0,established,6,3,Added: retail and cloud,engine_addition,,active,Consumer discretionary,United States
+AAPL,Apple,intl_equity,direct,core,USD,0.1,0.5,0,3.0,established,6,2,Activated 2026-09-03: screen add candidate and reviewer core verdict agree,engine_addition,,active,Technology,United States
+META,Meta Platforms,intl_equity,direct,satellite,USD,0.1,0.3,0,2.0,established,6,3,Watchlist candidate,engine_addition,,watchlist,Communication,United States
+ASML,ASML Holding,intl_equity,direct,satellite,USD,0.1,0.8,0,2.0,high,6,4,Watchlist candidate,engine_addition,,watchlist,Technology,Europe
+NDQ.AX,BetaShares NASDAQ 100 ETF,intl_equity,etf,satellite,AUD,0.48,0.5,0,3.0,core,12,3,Added: US technology tilt,engine_addition,,active,Technology,United States
+VGAD.AX,Vanguard MSCI International Shares (Hedged) ETF,intl_equity,etf,core,AUD,0.21,2.2,0,4.0,core,20,2,Added: currency hedged international core,engine_addition,,active,Diversified fund (hedged),Global
+VGE.AX,Vanguard FTSE Emerging Markets Shares ETF,intl_equity,etf,satellite,AUD,0.48,2.5,0,2.0,core,10,4,Added: emerging markets,engine_addition,,active,Diversified fund,Emerging markets
+VGB.AX,Vanguard Australian Government Bond ETF,fixed_income,etf,core,AUD,0.16,3.4,0,4.0,core,40,2,Added: government bonds,engine_addition,,active,Government bonds,Australia
+SUBD.AX,VanEck Australian Subordinated Debt ETF,credit,etf,satellite,AUD,0.29,6.2,0,3.0,core,20,3,Added: bank subordinated debt,engine_addition,,active,Bank subordinated debt,Australia
+VETH.AX,Vanguard Ethically Conscious Australian Shares ETF,aus_equity,etf,core,AUD,0.16,3.2,60,8.0,starter,60,1,ESG substitute for VAS: FTSE Australia 300 screened for fossil fuels; tobacco; weapons; gambling; alcohol; adult entertainment,esg_substitute,,esg,Diversified fund,Australia
+VESG.AX,Vanguard Ethically Conscious International Shares ETF,intl_equity,etf,core,AUD,0.18,1.8,0,6.0,starter,25,1,ESG substitute for VGS and VGAD (unhedged only): FTSE Developed ex Australia screened for fossil fuels; tobacco; weapons; gambling; alcohol; adult entertainment,esg_substitute,,esg,Diversified fund,Global
+VEFI.AX,Vanguard Ethically Conscious Global Aggregate Bond ETF (Hedged),fixed_income,etf,core,AUD,0.26,3.5,0,4.0,starter,40,1,ESG substitute for VAF: global investment grade bonds screened for fossil fuels; tobacco; weapons; gambling; alcohol; adult entertainment (hedged to AUD),esg_substitute,,esg,Bonds,Global
+ESGI.AX,VanEck MSCI International Sustainable Equity ETF,intl_equity,etf,core,AUD,0.55,1.5,0,3.0,starter,20,2,ESG substitute for QUAL: MSCI World ex Australia ESG Leaders with fossil fuel reserves excluded,esg_substitute,,esg,Sustainability,Global
+ETHI.AX,Betashares Global Sustainability Leaders ETF,intl_equity,etf,satellite,AUD,0.59,1.0,0,3.0,starter,15,2,ESG substitute for NDQ: global climate leaders with exclusion screens; growth tilt,esg_substitute,,esg,Sustainability,Global
+FAIR.AX,Betashares Australian Sustainability Leaders ETF,aus_equity,etf,satellite,AUD,0.49,2.8,55,3.0,starter,20,2,ESG substitute for VSO and PL8: Australian companies passing sustainability and exclusion screens,esg_substitute,,esg,Sustainability,Australia
+SUN.AX,Suncorp Group,aus_equity,direct,satellite,AUD,0,4.1,100,2,established,5,3,"From the Wealth+ Balanced Income model: general insurer, fully franked",wealth_plus_income_model,,active,Financials,Australia
+JBH.AX,JB Hi-Fi,aus_equity,direct,satellite,AUD,0,5.2,100,2,established,5,3,"From the Wealth+ Balanced Income model: consumer electronics retailer, fully franked",wealth_plus_income_model,,active,Consumer discretionary,Australia
+MMS.AX,McMillan Shakespeare,aus_equity,direct,satellite,AUD,0,6.8,100,2,high,3,4,"From the Wealth+ Balanced Income model: salary packaging and novated leasing; small cap, so high balances only",wealth_plus_income_model,,active,Industrials,Australia
+CCP.AX,Credit Corp Group,aus_equity,direct,satellite,AUD,0,5.6,100,2,high,3,4,"From the Wealth+ Balanced Income model: consumer credit; small cap, so high balances only",wealth_plus_income_model,,active,Financials,Australia
+MP1.AX,Megaport,aus_equity,direct,satellite,AUD,0,0,0,2,high,3,5,"From the Wealth+ Balanced Income model: cloud connectivity, no dividend; growth satellite for high balances",wealth_plus_income_model,,active,Technology,Australia
+DBI.AX,Dalrymple Bay Infrastructure,infrastructure,direct,satellite,AUD,0,4.9,0,2,established,5,3,"From the Wealth+ Balanced Income model: coal export terminal with regulated revenue, unfranked",wealth_plus_income_model,,active,Industrials,Australia
+HDN.AX,HomeCo Daily Needs REIT,infrastructure,direct,satellite,AUD,0,7.8,0,2,established,5,3,From the Wealth+ Balanced Income model: convenience retail property trust,wealth_plus_income_model,,active,Real estate,Australia
+RFF.AX,Rural Funds Group,infrastructure,direct,satellite,AUD,0,6.1,0,2,high,3,4,From the Wealth+ Balanced Income model: agricultural property trust; small cap,wealth_plus_income_model,,active,Real estate,Australia
+VHY.AX,Vanguard Australian Shares High Yield ETF,aus_equity,etf,core,AUD,0.25,3.5,84,3,starter,20,2,"From the Wealth+ Balanced Income model: high dividend Australian shares, mostly franked",wealth_plus_income_model,,active,Dividend income,Australia
+SET.AX,Solaris Australian Equity Income Plus Active ETF,aus_equity,etf,core,AUD,0.65,6.0,80,2,core,12,3,"From the Investment Guide: monthly franked income from an active manager; listed 2026, so returns use index stand-ins until it has its own history",investment_guide_accumulation,,active,Dividend income,Australia
+V,Visa,intl_equity,direct,core,USD,0.1,0.7,0,3,established,6,2,From the Wealth+ Balanced Income model: global payments network,wealth_plus_income_model,,active,Financials,United States
+MA,Mastercard,intl_equity,direct,core,USD,0.1,0.6,0,3,established,6,2,From the Investment Guide: global payments network,investment_guide_accumulation,,active,Financials,United States
+AVGO,Broadcom,intl_equity,direct,satellite,USD,0.1,1.0,0,2,established,5,3,From the Investment Guide: custom AI accelerators and networking silicon,investment_guide_accumulation,,active,Technology,United States
+ETN,Eaton,intl_equity,direct,satellite,USD,0.1,1.0,0,2,established,5,3,From the Investment Guide: electrical and power management for data centres and grids,investment_guide_accumulation,,active,Industrials,United States
+SU.PA,Schneider Electric,intl_equity,direct,satellite,EUR,0.1,1.5,0,2,established,5,3,From the Investment Guide: energy management and automation; Paris listed,investment_guide_accumulation,,active,Industrials,Europe
+PRY.MI,Prysmian,intl_equity,direct,satellite,EUR,0.1,0.8,0,2,high,4,4,From the Investment Guide: power and telecom cables for grid build-out; Milan listed,investment_guide_accumulation,,active,Industrials,Europe
+EME,EMCOR Group,intl_equity,direct,satellite,USD,0.1,0.2,0,2,high,4,4,From the Investment Guide: electrical and mechanical construction for data centres,investment_guide_accumulation,,active,Industrials,United States
+ISRG,Intuitive Surgical,intl_equity,direct,satellite,USD,0.1,0,0,2,established,5,3,From the Investment Guide: robotic surgery systems,investment_guide_accumulation,,active,Healthcare,United States
+GTT.PA,GTT (Gaztransport et Technigaz),intl_equity,direct,satellite,EUR,0.1,3.5,0,2,high,4,4,From the Investment Guide: LNG containment technology and royalties; Paris listed,investment_guide_accumulation,,active,Energy,Europe
+LUN.TO,Lundin Mining,intl_equity,direct,satellite,CAD,0.1,2.5,0,2,high,4,4,From the Investment Guide: copper miner; Toronto listed,investment_guide_accumulation,,active,Materials,Canada
+VEU.AX,Vanguard All-World ex-US Shares ETF,intl_equity,etf,core,AUD,0.07,2.8,0,4,starter,25,1,"From the Investment Guide: developed and emerging markets outside the United States, to balance the US weight of the direct names",investment_guide_accumulation,,active,Diversified fund,Global ex US
+JEPI.AX,JPMorgan Equity Premium Income Active ETF,intl_equity,etf,satellite,AUD,0.4,7.8,0,2,core,10,3,From the Wealth+ Balanced Income model: US shares with call options written for monthly income; lower growth than the index,wealth_plus_income_model,,active,Covered call income,United States
+JHPI.AX,JPMorgan Equity Premium Income Active ETF (Hedged),intl_equity,etf,satellite,AUD,0.4,8.0,0,2,core,10,3,From the Wealth+ Balanced Income model: hedged version of JEPI,wealth_plus_income_model,,active,Covered call income,United States
+INCM.AX,Betashares Global Income Leaders ETF,intl_equity,etf,satellite,AUD,0.45,5.0,0,2,core,10,3,From the Wealth+ Balanced Income model: global high dividend shares,wealth_plus_income_model,,active,Dividend income,Global
+HQLT.AX,Betashares Global Quality Leaders ETF (Hedged),intl_equity,etf,core,AUD,0.38,2.0,0,3,core,15,2,"From the Wealth+ Balanced Income model: quality global companies, hedged to AUD",wealth_plus_income_model,,active,Quality,Global
+FGG.AX,Future Generation Global,intl_equity,lic,core,AUD,1.0,5.0,100,2,starter,15,2,"From the Wealth+ Balanced Income model: fund of global managers, fully franked dividend",wealth_plus_income_model,,active,Diversified fund,Global
+GIFL.XA,Lazard Global Listed Infrastructure Active ETF,infrastructure,etf,core,AUD,0.98,4.3,0,3,core,15,2,From both files: global listed infrastructure; Cboe listed,investment_guide_accumulation,,active,Infrastructure,Global
+GDX.AX,VanEck Gold Miners ETF,alternatives,etf,satellite,AUD,0.53,0.5,0,2,core,5,3,From the Wealth+ Balanced Income model: gold miners as a satellite beside physical gold,wealth_plus_income_model,,active,Gold miners,Global
+QPON.AX,Betashares Australian Bank Senior Floating Rate Bond ETF,credit,etf,core,AUD,0.22,4.3,0,3,starter,20,2,From the Wealth+ Balanced Income model: senior bank floating rate notes,wealth_plus_income_model,,active,Bank floating rate,Australia
+FLOT.AX,VanEck Australian Floating Rate ETF,credit,etf,core,AUD,0.22,4.5,0,3,starter,20,2,From the Wealth+ Balanced Income model: investment grade floating rate notes,wealth_plus_income_model,,active,Floating rate,Australia
+GCI.AX,Gryphon Capital Income Trust,credit,lit,satellite,AUD,0.72,7.5,0,2,core,8,3,"From the Wealth+ Balanced Income model: Australian RMBS and ABS, monthly income",wealth_plus_income_model,,active,Securitised credit,Australia
+IHHY.AX,iShares Global High Yield Bond ETF (Hedged),credit,etf,satellite,AUD,0.56,7.0,0,2,core,10,3,"From the Wealth+ Balanced Income model: global high yield corporate bonds, hedged",wealth_plus_income_model,,active,High yield credit,Global
+CGFPD.AX,Challenger Capital Notes 4,credit,hybrid,satellite,AUD,0,6.3,100,2,core,6,3,From the Investment Guide: franked floating rate hybrid; price shown is per $100 note,investment_guide_accumulation,,active,Hybrids,Australia
+AGVT.AX,Betashares Australian Government Bond ETF,fixed_income,etf,core,AUD,0.22,4.1,0,3,starter,40,2,From the Wealth+ Balanced Income model: Australian government bonds,wealth_plus_income_model,,active,Government bonds,Australia
+IHCB.AX,iShares Core Global Corporate Bond ETF (Hedged),fixed_income,etf,core,AUD,0.26,4.3,0,3,core,30,2,"From the Wealth+ Balanced Income model: global investment grade corporate bonds, hedged",wealth_plus_income_model,,active,Corporate bonds,Global
+BILL.AX,iShares Core Cash ETF,cash,etf,core,AUD,0.07,4.1,0,3,core,60,3,From the Wealth+ Balanced Income model: cash ETF alternative to the platform cash account,wealth_plus_income_model,,active,Cash,Australia
