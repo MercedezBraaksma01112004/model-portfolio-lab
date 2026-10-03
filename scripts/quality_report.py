@@ -20,6 +20,9 @@ CSS = """
 --good:#4ade80;--neutral:#a1a1aa;--serious:#fbbf24;--critical:#f87171;--good-bg:#12291a;--neutral-bg:#26292e;--serious-bg:#33260c;--critical-bg:#3a1512}
 body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 "IBM Plex Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 .wrap{max-width:980px;margin:0 auto;padding:28px 24px 60px}
+.hero{background:linear-gradient(135deg,#16304f 0%,#1f3a5f 55%,#2a4d7a 100%);color:#fff;margin:-28px -24px 24px;padding:26px 24px}.hero h1{color:#fff}.hero .lede,.hero .meta{color:rgba(255,255,255,.78)}
+.nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;font-size:14px}.nav a{color:rgba(255,255,255,.85);text-decoration:none;padding:9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.22);display:inline-flex;align-items:center;min-height:40px}.nav a[aria-current="page"]{background:#fff;color:#1f3a5f;border-color:#fff;font-weight:600}.nav a:hover{background:rgba(255,255,255,.14)}.nav a[aria-current="page"]:hover{background:#fff}
+.tile{border-top:3px solid var(--accent)}.card{box-shadow:0 1px 2px rgba(16,19,17,.04),0 8px 24px -18px rgba(16,19,17,.25);border-radius:14px}
 h1{font-family:"IBM Plex Serif",Georgia,serif;font-weight:600;font-size:28px;margin:0 0 6px;letter-spacing:-.01em;text-wrap:balance}
 h2{font-family:"IBM Plex Serif",Georgia,serif;font-weight:600;font-size:20px;margin:34px 0 10px}
 .lede{color:var(--muted);max-width:70ch;margin:0 0 6px}.meta{font-size:12.5px;color:var(--faint)}
@@ -55,11 +58,12 @@ def main() -> int:
     out = [f"<title>Holdings Quality Review</title>",
            '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&family=IBM+Plex+Mono&display=swap">',
            f"<style>{CSS}</style>", '<div class="wrap">',
-           '<nav style="display:flex;gap:18px;margin-bottom:14px;font-size:13.5px"><a href="/" style="color:var(--muted);text-decoration:none">Model portfolios</a><a href="/builder.html" style="color:var(--muted);text-decoration:none">Build your own portfolio</a><a href="/quality.html" aria-current="page" style="color:var(--text);text-decoration:none;font-weight:600;border-bottom:2px solid var(--accent)">Holdings quality review</a></nav>',
+           '<div class="hero"><nav class="nav"><a href="/">Model portfolios</a><a href="/builder.html">Build your own portfolio</a><a href="/quality.html" aria-current="page">Holdings quality review</a></nav>',
            "<h1>Holdings Quality Review</h1>",
            "<p class=\"lede\">Every holding in the model universe, judged on what the business is and what the data says: ten years of returns, volatility, "
            "worst falls, valuation, yield, franking and the analyst consensus. One verdict each, with the reason written out.</p>",
-           f"<div class=\"meta\">Research as of {as_of or 'latest build'}; verdicts dated on each note. Personal learning project; opinion, not financial advice.</div>",
+           f"<div class=\"meta\">Research as of {as_of or 'latest build'}; verdicts dated on each note. Personal learning project; opinion, not financial advice. "
+           f"Verdicts marked \"generated from the data feed\" were produced by rules from the research figures and have not yet been reviewed by hand.</div></div>",
            '<div class="summary">' + "".join(f'<div class="tile"><div class="k">{v.capitalize()}</div><div class="v">{counts.get(v, 0)}</div></div>' for v in ORDER if counts.get(v)) + "</div>",
            '<p class="verdicts"><b>Core</b>: can anchor its asset class at full weight. <b>Satellite</b>: fine at a limited weight around a core. '
            '<b>Speculative</b>: high volatility or valuation; growth profiles only, sized so that losing half of it does not matter. '

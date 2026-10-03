@@ -98,6 +98,7 @@ jobs:
           cp output/dashboard.html site/index.html
           cp output/builder.html site/builder.html
           cp output/model_portfolios_latest.xlsx site/model_portfolios_latest.xlsx
+          python scripts/generate_quality_verdicts.py
           python scripts/quality_report.py > /dev/null && cp output/quality_review.html site/quality.html
           python scripts/build_listing_data.py
           mkdir -p site/data && cp data/applied_changes.json site/data/applied_changes.json 2>/dev/null || echo '{"ids":[]}' > site/data/applied_changes.json
@@ -108,7 +109,7 @@ jobs:
         run: |
           git config user.name "portfolio-engine bot"
           git config user.email "actions@users.noreply.github.com"
-          git add config/universe.csv data/my_holdings.csv data/cache/state.json data/applied_changes.json
+          for f in config/universe.csv config/quality_review.csv data/my_holdings.csv data/cache/state.json data/applied_changes.json; do [ -f "$f" ] && git add "$f"; done
           git diff --cached --quiet || git commit -m "Daily build: holdings and tactical state as of $(date -u +%Y-%m-%d)"
           git push
 

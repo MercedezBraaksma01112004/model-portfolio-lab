@@ -82,8 +82,13 @@ def _fetch_yfinance(tickers: list[str], days: int) -> pd.DataFrame:
             continue
         s = s.dropna()
         if len(s):
-            frames[t] = s
+            frames[t] = s / 100.0 if _quotes_in_pence(t) else s
     return pd.DataFrame(frames)
+
+
+def _quotes_in_pence(ticker: str) -> bool:
+    """London listings are quoted in pence (GBp) on Yahoo Finance; the engine keeps them in pounds."""
+    return ticker.upper().endswith(".L")
 
 
 def _quotes_foreign_per_aud(fx_ticker: str) -> bool:

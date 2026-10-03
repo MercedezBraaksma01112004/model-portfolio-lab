@@ -29,15 +29,18 @@ __CSS__
 .acct { display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; font-size:13.5px; }
 .acct input { font:inherit; padding:7px 10px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); min-width:180px; }
 .acct select { font:inherit; padding:7px 10px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); max-width:260px; }
-.wrow input.w { width:72px; font:inherit; padding:5px 7px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--text); text-align:right; font-family:"IBM Plex Mono", ui-monospace, monospace; }
+.wrow input.w { width:84px; font:inherit; font-size:15px; padding:9px 9px; border:1.5px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); text-align:right; font-family:"IBM Plex Mono", ui-monospace, monospace; min-height:40px; }
+.wrow input.w:focus { outline:2px solid var(--accent); outline-offset:1px; border-color:transparent; }
 .wrow input.w.bad { border-color:var(--critical); }
 .setup { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; }
 .setup label { display:block; font-size:12.5px; color:var(--muted); margin-bottom:4px; }
-.setup input, .setup select { width:100%; font:inherit; padding:8px 10px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); }
+.setup input, .setup select { width:100%; font:inherit; font-size:15px; padding:11px 12px; border:1.5px solid var(--line); border-radius:10px; background:var(--bg); color:var(--text); min-height:46px; }
+.setup input:focus, .setup select:focus { outline:2px solid var(--accent); outline-offset:1px; border-color:transparent; }
 .total { font-family:"IBM Plex Mono", ui-monospace, monospace; font-weight:500; }
 .total.bad { color:var(--critical); }
 .chips { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
-.chips button { border:1px solid var(--line); background:var(--surface-2); color:var(--text); padding:4px 10px; border-radius:999px; font-size:12.5px; }
+.chips button { border:1.5px solid var(--line); background:var(--surface); color:var(--text); padding:7px 13px; border-radius:999px; font-size:13px; min-height:36px; }
+.chips button:hover { border-color:var(--accent); }
 .chips button[aria-pressed="true"] { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
 .result { grid-template-columns: 1fr auto; }
 .result .d { font-size:12px; color:var(--faint); }
@@ -45,6 +48,31 @@ __CSS__
 .empty { padding:22px; text-align:center; color:var(--faint); border:1px dashed var(--line); border-radius:10px; }
 .readonly { background:var(--accent-soft); padding:10px 14px; border-radius:10px; font-size:13.5px; margin-top:10px; }
 .mine { display:grid; gap:6px; margin-top:8px; }
+dialog.auth { border:1px solid var(--line); border-radius:14px; padding:0; width:min(440px, 92vw); background:var(--surface); color:var(--text); box-shadow:0 20px 60px rgba(0,0,0,.25); }
+dialog.auth::backdrop { background:rgba(10,12,11,.45); }
+.auth-head { display:flex; justify-content:space-between; align-items:center; padding:16px 20px 0; }
+.auth-head h3 { margin:0; font-family:"IBM Plex Serif", Georgia, serif; font-size:19px; font-weight:600; }
+.auth-close { border:0; background:transparent; font-size:22px; line-height:1; color:var(--faint); padding:4px 8px; border-radius:6px; }
+.auth-close:hover { background:var(--surface-2); color:var(--text); }
+.auth-tabs { display:flex; gap:4px; margin:14px 20px 0; border-bottom:1px solid var(--line); }
+.auth-tabs button { border:0; background:transparent; padding:8px 10px; color:var(--muted); border-bottom:2px solid transparent; margin-bottom:-1px; font-weight:500; }
+.auth-tabs button[aria-selected="true"] { color:var(--text); border-bottom-color:var(--accent); }
+.auth-body { padding:16px 20px 20px; display:grid; gap:12px; }
+.auth-body label { display:grid; gap:5px; font-size:13px; color:var(--muted); }
+.auth-body input { font:inherit; padding:10px 12px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); width:100%; }
+.auth-body input:focus { outline:2px solid var(--accent); outline-offset:1px; border-color:transparent; }
+.pwrow { position:relative; }
+.pwrow input { padding-right:64px; }
+.pwrow button { position:absolute; right:6px; top:50%; transform:translateY(-50%); border:0; background:transparent; color:var(--accent); font-size:12.5px; font-weight:500; padding:4px 6px; }
+.auth-msg { font-size:13.5px; padding:10px 12px; border-radius:8px; display:none; }
+.auth-msg.err { display:block; background:var(--critical-bg); color:var(--critical); }
+.auth-msg.ok { display:block; background:var(--good-bg); color:var(--good); }
+.auth-msg.info { display:block; background:var(--accent-soft); color:var(--text); }
+.auth-foot { font-size:12.5px; color:var(--faint); }
+.auth-foot button { border:0; background:transparent; color:var(--accent); padding:0; font-size:12.5px; text-decoration:underline; }
+.btn.wide { width:100%; padding:11px 14px; font-size:15px; }
+.signed { display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; }
+.avatar { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:50%; background:var(--accent); color:var(--accent-ink); font-weight:600; font-size:13px; }
 .mine .pend { display:grid; grid-template-columns:1fr auto auto auto; gap:10px; }
 @media (max-width:700px) { .mine .pend { grid-template-columns:1fr; } }
 </style>
@@ -167,6 +195,25 @@ __CSS__
 </section>
 
 </main>
+<dialog class="auth" id="authdlg">
+  <div class="auth-head"><h3 id="auth-title">Sign in</h3><button type="button" class="auth-close" id="auth-close" aria-label="Close">×</button></div>
+  <div class="auth-tabs" role="tablist" id="auth-tabs"><button type="button" role="tab" data-mode="signin">Sign in</button><button type="button" role="tab" data-mode="signup">Create account</button><button type="button" role="tab" data-mode="link">Email me a link</button></div>
+  <form class="auth-body" id="auth-form" novalidate>
+    <label>Email<input id="au-email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+    <label id="au-pw-wrap">Password<span class="pwrow"><input id="au-pw" type="password" autocomplete="current-password" placeholder="At least 8 characters" minlength="8"><button type="button" id="au-show">Show</button></span></label>
+    <div class="auth-msg" id="au-msg"></div>
+    <button class="btn primary wide" id="au-submit" type="submit">Sign in</button>
+    <div class="auth-foot" id="au-foot"></div>
+  </form>
+</dialog>
+<dialog class="auth" id="resetdlg">
+  <div class="auth-head"><h3>Choose a new password</h3><button type="button" class="auth-close" id="reset-close" aria-label="Close">×</button></div>
+  <form class="auth-body" id="reset-form" novalidate>
+    <label>New password<span class="pwrow"><input id="rs-pw" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8"><button type="button" id="rs-show">Show</button></span></label>
+    <div class="auth-msg" id="rs-msg"></div>
+    <button class="btn primary wide" type="submit">Save password</button>
+  </form>
+</dialog>
 <div class="tip" id="tip"></div>
 <div class="toast" id="toast"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -547,18 +594,52 @@ function hydrate(d, { readOnly=false, id=null, ownerId=null, isPublic=false } = 
   sel("readonly").hidden = !readOnly; if (readOnly) sel("readonly").innerHTML = `This is a shared, read-only portfolio. Sign in and click <b>Save as a copy</b> to edit your own version.`;
   render();
 }
+const AUTH = { mode: "signin" };
+const authDlg = sel("authdlg"), resetDlg = sel("resetdlg");
+function authMsg(kind, text){ const m = sel("au-msg"); m.className = "auth-msg" + (kind ? " " + kind : ""); m.textContent = text || ""; }
+function openAuth(mode){ if (!SB) { toast("Accounts are not set up on this copy of the page"); return; } AUTH.mode = mode || "signin"; authMsg("", ""); renderAuthDialog(); if (!authDlg.open) authDlg.showModal(); setTimeout(() => sel("au-email").focus(), 50); }
+function renderAuthDialog(){
+  const m = AUTH.mode; const T = { signin: "Sign in", signup: "Create your account", link: "Sign in with an emailed link", forgot: "Reset your password" };
+  sel("auth-title").textContent = T[m]; sel("auth-tabs").hidden = m === "forgot";
+  sel("auth-tabs").querySelectorAll("button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.mode === m)));
+  sel("au-pw-wrap").hidden = (m === "link" || m === "forgot"); sel("au-pw").autocomplete = m === "signup" ? "new-password" : "current-password";
+  sel("au-submit").textContent = { signin: "Sign in", signup: "Create account", link: "Send me a link", forgot: "Send reset email" }[m];
+  sel("au-foot").innerHTML = m === "signin" ? `<button type="button" data-go="forgot">Forgotten your password?</button> · No account yet? <button type="button" data-go="signup">Create one</button>`
+    : m === "signup" ? `Your portfolios are saved to this account only. We email you a confirmation link first. Already have an account? <button type="button" data-go="signin">Sign in</button>`
+    : m === "link" ? `No password needed: we email you a link that signs you in on this device. <button type="button" data-go="signin">Use a password instead</button>`
+    : `Enter your email and we will send a link to choose a new password. <button type="button" data-go="signin">Back to sign in</button>`;
+  sel("au-foot").querySelectorAll("button[data-go]").forEach(b => b.onclick = () => { AUTH.mode = b.dataset.go; authMsg("", ""); renderAuthDialog(); });
+}
+sel("auth-tabs").querySelectorAll("button").forEach(b => b.onclick = () => { AUTH.mode = b.dataset.mode; authMsg("", ""); renderAuthDialog(); });
+sel("auth-close").onclick = () => authDlg.close(); sel("reset-close").onclick = () => resetDlg.close();
+sel("au-show").onclick = () => { const i = sel("au-pw"); i.type = i.type === "password" ? "text" : "password"; sel("au-show").textContent = i.type === "password" ? "Show" : "Hide"; };
+sel("rs-show").onclick = () => { const i = sel("rs-pw"); i.type = i.type === "password" ? "text" : "password"; sel("rs-show").textContent = i.type === "password" ? "Show" : "Hide"; };
+function friendly(err){ const t = String(err && err.message || err || ""); if (/invalid login credentials/i.test(t)) return "That email and password do not match. Check both, or use \"Forgotten your password?\"."; if (/email not confirmed/i.test(t)) return "Your email is not confirmed yet. Open the confirmation link we sent you, then sign in."; if (/already registered|already been registered/i.test(t)) return "There is already an account for that email. Sign in instead, or reset the password."; if (/rate limit|too many/i.test(t)) return "Too many attempts for now. Wait a minute and try again."; if (/password should be at least|weak/i.test(t)) return "Choose a longer password: at least 8 characters."; if (/valid email/i.test(t)) return "That does not look like an email address."; return t || "Something went wrong. Try again."; }
+sel("auth-form").onsubmit = async (e) => {
+  e.preventDefault(); const email = sel("au-email").value.trim(), pw = sel("au-pw").value; const btn = sel("au-submit");
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { authMsg("err", "Enter a valid email address."); return; }
+  if ((AUTH.mode === "signin" || AUTH.mode === "signup") && pw.length < 8) { authMsg("err", "Your password needs at least 8 characters."); return; }
+  btn.disabled = true; authMsg("info", "One moment…");
+  try {
+    if (AUTH.mode === "signin") { const { error } = await SB.auth.signInWithPassword({ email, password: pw }); if (error) throw error; authDlg.close(); toast("Signed in as " + email); }
+    else if (AUTH.mode === "signup") { const { data, error } = await SB.auth.signUp({ email, password: pw, options: { emailRedirectTo: location.origin + "/builder.html" } }); if (error) throw error;
+      if (data.session) { authDlg.close(); toast("Account created"); } else if (data.user && data.user.identities && data.user.identities.length === 0) { authMsg("err", "There is already an account for that email. Sign in instead, or reset the password."); }
+      else authMsg("ok", `Almost there. We sent a confirmation link to ${email}. Open it (check spam if it has not arrived in a minute), then come back here and sign in.`); }
+    else if (AUTH.mode === "link") { const { error } = await SB.auth.signInWithOtp({ email, options: { emailRedirectTo: location.origin + "/builder.html", shouldCreateUser: true } }); if (error) throw error; authMsg("ok", `Check ${email} for your sign-in link. It opens this page already signed in.`); }
+    else if (AUTH.mode === "forgot") { const { error } = await SB.auth.resetPasswordForEmail(email, { redirectTo: location.origin + "/builder.html" }); if (error) throw error; authMsg("ok", `If there is an account for ${email}, a reset link is on its way.`); }
+  } catch (err) { authMsg("err", friendly(err)); } finally { btn.disabled = false; }
+};
+sel("reset-form").onsubmit = async (e) => { e.preventDefault(); const pw = sel("rs-pw").value; const m = sel("rs-msg"); if (pw.length < 8) { m.className = "auth-msg err"; m.textContent = "At least 8 characters."; return; }
+  const { error } = await SB.auth.updateUser({ password: pw }); if (error) { m.className = "auth-msg err"; m.textContent = friendly(error); return; } resetDlg.close(); toast("Password saved. You are signed in."); };
 function renderAccount(){
   const a = sel("acct");
-  if (!SB) { a.innerHTML = `<span class="muted">Accounts are not set up on this copy of the page, so portfolios stay in this browser only (they are kept as a draft here until you clear your browsing data).</span>`; sel("mine").innerHTML = ""; return; }
+  if (!SB) { a.innerHTML = `<span class="muted">Accounts are not set up on this copy of the page, so portfolios stay in this browser only (kept as a draft until you clear your browsing data).</span>`; sel("mine").innerHTML = ""; return; }
   const s = user.session;
-  if (!s) { a.innerHTML = `<input id="em" type="email" placeholder="email" autocomplete="email"><input id="pw" type="password" placeholder="password (8+ characters)" autocomplete="current-password"><button class="btn primary" id="btn-signin" type="button">Sign in</button><button class="btn" id="btn-signup" type="button">Create account</button><button class="btn" id="btn-magic" type="button" title="Emails you a sign-in link">Email me a link</button><span class="muted">Sign in to save portfolios and reopen them on any device. Experimenting below needs no account.</span>`;
-    sel("btn-signin").onclick = async () => { const { error } = await SB.auth.signInWithPassword({ email: sel("em").value.trim(), password: sel("pw").value }); if (error) toast(error.message); };
-    sel("btn-signup").onclick = async () => { const email = sel("em").value.trim(), password = sel("pw").value; if (!email || password.length < 8) { toast("Enter an email and a password of at least 8 characters"); return; }
-      const { data, error } = await SB.auth.signUp({ email, password, options: { emailRedirectTo: location.origin + "/builder.html" } }); if (error) { toast(error.message); return; } toast(data.session ? "Account created" : "Check your email for a confirmation link, then sign in"); };
-    sel("btn-magic").onclick = async () => { const email = sel("em").value.trim(); if (!email) { toast("Enter your email first"); return; } const { error } = await SB.auth.signInWithOtp({ email, options: { emailRedirectTo: location.origin + "/builder.html" } }); toast(error ? error.message : "Check your email for the sign-in link"); };
-    sel("mine").innerHTML = ""; return; }
-  a.innerHTML = `<span>Signed in as <b>${esc(s.user.email)}</b></span><button class="btn small" id="btn-signout" type="button">Sign out</button><span class="muted" id="minecount"></span>`;
-  sel("btn-signout").onclick = async () => { await SB.auth.signOut(); };
+  if (!s) { a.innerHTML = `<button class="btn primary" id="btn-open-signin" type="button">Sign in</button><button class="btn" id="btn-open-signup" type="button">Create account</button><span class="muted">Sign in to save portfolios, reopen them on any device and share them. Experimenting below needs no account.</span>`;
+    sel("btn-open-signin").onclick = () => openAuth("signin"); sel("btn-open-signup").onclick = () => openAuth("signup"); sel("mine").innerHTML = ""; return; }
+  const initial = (s.user.email || "?").slice(0, 1).toUpperCase();
+  a.innerHTML = `<div class="signed"><span class="avatar">${initial}</span><span>Signed in as <b>${esc(s.user.email)}</b></span><span class="muted" id="minecount"></span><button class="btn small" id="btn-signout" type="button">Sign out</button></div>`;
+  sel("btn-signout").onclick = async () => { await SB.auth.signOut(); toast("Signed out"); };
   listMine();
 }
 async function listMine(){
@@ -572,7 +653,7 @@ async function listMine(){
 }
 async function save(asCopy){
   if (!SB) { toast("Accounts are not set up yet; your draft stays in this browser"); return; }
-  if (!user.session) { toast("Sign in (or create an account) to save"); sel("account").scrollIntoView({ behavior: "smooth" }); return; }
+  if (!user.session) { toast("Sign in or create an account to save"); openAuth("signin"); return; }
   if (!state.lines.length) { toast("Add some holdings first"); return; }
   if (!state.name) { state.name = prompt("Name this portfolio", "My portfolio") || ""; if (!state.name) return; sel("pname").value = state.name; }
   const payload = { user_id: user.session.user.id, name: state.name, data: serialise(), updated_at: new Date().toISOString() };
@@ -587,7 +668,8 @@ async function save(asCopy){
 sel("btn-save").onclick = () => save(false);
 sel("btn-saveas").onclick = () => { if (state.name && !state.name.endsWith("(copy)")) { /* keep name; insert as new */ } save(true); };
 sel("btn-share").onclick = async () => {
-  if (!SB || !user.session || !state.id || state.ownerId !== user.session.user.id) { toast("Save the portfolio to your account first"); return; }
+  if (SB && !user.session) { openAuth("signin"); return; }
+  if (!SB || !state.id || state.ownerId !== user.session.user.id) { toast("Save the portfolio to your account first"); return; }
   if (state.dirty) { toast("Save your changes first so the link shows them"); return; }
   const makePublic = !state.isPublic; const { error } = await SB.from("portfolios").update({ is_public: makePublic }).eq("id", state.id); if (error) { toast(error.message); return; }
   state.isPublic = makePublic; const link = location.origin + location.pathname + "?p=" + state.id;
@@ -606,7 +688,10 @@ if (DATA.banner) { sel("banner").querySelector(".wrap").textContent = DATA.banne
 renderFilters();
 (async () => {
   const params = new URLSearchParams(location.search); const shared = params.get("p");
-  if (SB) { const { data } = await SB.auth.getSession(); user.session = data.session; SB.auth.onAuthStateChange((_e, s) => { user.session = s; renderAccount(); if (shared && !state.id) openShared(shared); }); }
+  if (SB) { const { data } = await SB.auth.getSession(); user.session = data.session;
+    SB.auth.onAuthStateChange((event, s) => { user.session = s; renderAccount(); if (event === "PASSWORD_RECOVERY") { sel("rs-msg").className = "auth-msg"; resetDlg.showModal(); }
+      if (event === "SIGNED_IN" && location.hash.includes("access_token")) { history.replaceState(null, "", location.pathname + location.search); toast("Email confirmed: you are signed in"); }
+      if (shared && !state.id) openShared(shared); }); }
   renderAccount();
   if (shared && await openShared(shared)) return;
   try { const d = JSON.parse(localStorage.getItem("mpl-builder-draft") || "null"); if (d && d.lines && d.lines.length) { hydrate(d, { id: d.id || null }); state.dirty = !!d.id; toast("Restored your last draft from this browser"); return; } } catch(e) {}

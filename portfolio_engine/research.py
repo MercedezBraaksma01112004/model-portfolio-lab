@@ -179,6 +179,8 @@ def get_research(settings: Settings, universe: pd.DataFrame, md: MarketData, *, 
             cache_path.write_text(json.dumps(cache))   # save as we go so an interrupted refresh keeps its progress
             time.sleep(0.15)
         info = entry.get("info", {}) if entry else {}
+        if str(info.get("currency", "")) == "GBp":   # London quotes in pence: express everything in pounds, as the price feed does
+            info = {**info, "currency": "GBP", **{k: info[k] / 100.0 for k in ("currentPrice", "regularMarketPrice", "fiftyTwoWeekHigh", "fiftyTwoWeekLow", "targetMeanPrice", "_dividends_12m") if info.get(k) is not None}}   # trailingAnnualDividendRate is already in pounds
         hr = HoldingResearch(ticker=r.ticker, name=info.get("longName") or r.name, sector=info.get("sector") or info.get("category") or "",
                              industry=info.get("industry") or info.get("fundFamily") or "", summary=info.get("longBusinessSummary") or "",
                              quote_type=info.get("quoteType") or "", market_cap=info.get("marketCap") or info.get("totalAssets"),

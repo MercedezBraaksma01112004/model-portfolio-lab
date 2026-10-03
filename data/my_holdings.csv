@@ -2,4 +2,3 @@ ticker,asset_class,vehicle,role,min_tier,weight_hint,notes
 # Add your own holdings here, one per line, then rebuild. Name, price, yield and research are fetched automatically.
 # asset_class: aus_equity intl_equity infrastructure alternatives fixed_income credit cash
 # vehicle: direct or etf (guessed if blank)   role: core or satellite   min_tier: starter core established high   weight_hint: relative size within the class (2 to 5 is typical)
-WOW.AX,aus_equity,direct,satellite,core,3,added from the website
