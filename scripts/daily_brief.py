@@ -394,10 +394,13 @@ def market_price_sensitive(pages: int = 2) -> list[dict]:
 
 # ------------------------------------------------------------------ regulatory, legal and policy
 
-ADVICE_TERMS = re.compile(r"financial advi|advis|superannuation|\bsuper\b|SMSF|retirement|best interests|design and distribution|DDO|"
-                          r"managed investment|platform|CSLR|compensation scheme|life insurance|scam|greenwashing|Div(ision)? 296|"
-                          r"trustee|MySuper|choice product|AFS licen|responsible entit|product disclosure|financial product|"
-                          r"tax|franking|pension|annuit|aged care|Centrelink|ASIC|APRA|AFCA|Corporations", re.I)
+# What makes an item "advice-related" for the page's filter: the subjects an adviser or paraplanner acts on.
+ADVICE_TERMS = re.compile(r"financial advi|\badvisers?\b|\badvice\b|superannuation|\bsuper(annuation)? fund|\bsuper\b|SMSF|retirement|best interests|"
+                          r"design and distribution|\bDDO\b|managed investment|investment platform|CSLR|compensation scheme|life insurance|"
+                          r"\bscams?\b|greenwashing|Div(ision)? 296|trustee|MySuper|choice product|AFS licen|responsible entit|"
+                          r"product disclosure|financial product|franking|pension|annuit|aged care|Centrelink|investors?\b|"
+                          r"ASIC (Corporations|Superannuation|Credit)|Corporations (Amendment|Regulations)|Superannuation Industry|"
+                          r"Shield|First Guardian|capital gains|negative gearing|deeming|transfer balance|contribution caps?", re.I)
 
 
 def reg_item(src, title, link, when, summary="", tag="", relevant=None) -> dict:
@@ -487,7 +490,7 @@ def legislation(days: int = 30) -> list[dict]:
                 continue
             seen.add(x["id"])
             out.append(reg_item("Legislation", x.get("name", ""), f"https://www.legislation.gov.au/{x['id']}/asmade", parse_date(x.get("asMadeRegisteredAt")),
-                                (x.get("collection") or "").replace("LegislativeInstrument", "Legislative instrument"), "New law or instrument", relevant=True))
+                                (x.get("collection") or "").replace("LegislativeInstrument", "Legislative instrument"), "New law or instrument"))
         time.sleep(1)
     if not out and not seen:
         raise RuntimeError("no results (API may be unavailable)")
@@ -503,12 +506,12 @@ def regulatory() -> list[dict]:
         ("Financial Services minister media releases", "https://ministers.treasury.gov.au/ministers/daniel-mulino-2025/media-releases/feed", "Financial Services minister", "Minister"),
         ("RBA media releases", "https://www.rba.gov.au/rss/rss-cb-media-releases.xml", "RBA", "Media release"),
         ("FAAA media releases", "https://faaa.au/category/media-releases/feed/", "FAAA", "Industry"),
-        ("APRA statistics releases", "https://www.apra.gov.au/rss.xml", "APRA", "Statistics"),
     ]
     for name, url, src, tag in feeds:
         allx += rss_source(name, url, src, tag) or []
     allx += rss_source("Federal Court judgments (ASIC, tax, super, advice)", "https://www.judgments.fedcourt.gov.au/rss/fca-judgments", "Federal Court", "Judgment",
-                       relevant=True, keep=lambda t, d: bool(re.search(r"ASIC|Australian Securities|Commissioner of Taxation|superannuation|financial advi|Corporations Act", t + " " + d)), limit=25) or []
+                       relevant=True, keep=lambda t, d: bool(re.search(r"\bASIC\b|Australian Securities and Investments Commission|Commissioner of Taxation|superannuation|"
+                                                                      r"financial advi|financial services licen|managed investment scheme", t + " " + d)), limit=25) or []
     gn = "https://news.google.com/rss/search?q={q}+when:14d&hl=en-AU&gl=AU&ceid=AU:en"
     allx += rss_source("ATO news (via Google News)", gn.format(q="site:ato.gov.au"), "ATO", "Tax", limit=12) or []
     allx += rss_source("AFCA news and determinations (via Google News)", gn.format(q="site:afca.org.au"), "AFCA", "Complaints", relevant=True, limit=12) or []

@@ -605,7 +605,7 @@ const CLASS_PURPOSE = {
   credit: () => "It provides income above cash with less volatility than shares",
   cash: () => "It provides liquidity for fees, pension payments and rebalancing without forced selling" };
 function draftBoa(l){
-  const r = R[l.ticker] || {}; const q = DATA.quality[l.ticker]; const cls = label(CLASSES, l.asset_class).toLowerCase();
+  const r = R[l.ticker] || {}; const q = DATA.quality[l.ticker]; const cls = label(CLASSES, l.asset_class).toLowerCase().replace(/^australian/, "Australian");
   const role = l.role === "core" ? "a core holding" : l.role === "satellite" ? "a satellite holding" : "a holding";
   const where = [l.vehicle === "direct" && l.sector ? l.sector.toLowerCase() : "", l.region && l.vehicle !== "cash" ? l.region + " exposure" : ""].filter(Boolean).join(", ");
   const out = [`${l.name} (${l.ticker}) is ${role} in the ${cls} sleeve at ${fmtP(l.weight_pct, 1)} of the portfolio (${fmtM(l.dollars)}), held as ${VEHICLE_WORDS[l.vehicle] || l.vehicle}${where ? " (" + where + ")" : ""}.`];

@@ -170,14 +170,15 @@ if (M.up && M.up.length) { sel("moves-title").textContent = `Biggest moves on ${
 } else sel("moves").hidden = true;
 
 // ---- announcements
-const AF = { ps: false, today: false, q: "" };
+const ROUTINE = /^(Distribution Announcement|Issued Capital|Security Holder Details|Dividend Announcement)$/i;   // distributions, buy-back tallies, substantial holder notices
+const AF = { ps: false, today: false, q: "", routine: false };
 function annRow(a, heldShade){ return `<div class="arow ${heldShade && a.held ? "held" : ""}"><span class="when">${fmtWhen(a.date)}</span><span class="code">${esc(a.code)}</span><span><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.headline)}</a> <span class="co">${esc(a.name)}${a.type ? " · " + esc(a.type) : ""}</span></span><span>${a.price_sensitive ? '<span class="chip serious">price sensitive</span>' : ""}</span></div>`; }
 function renderAnns(){ const latestDay = (B.announcements[0] || {}).date ? D(B.announcements[0].date).toLocaleDateString("en-AU", { timeZone: "Australia/Brisbane" }) : "";
   const q = AF.q.trim().toUpperCase();
-  const rows = B.announcements.filter(a => (!AF.ps || a.price_sensitive) && (!AF.today || D(a.date).toLocaleDateString("en-AU", { timeZone: "Australia/Brisbane" }) === latestDay) && (!q || a.code.includes(q) || (a.name || "").toUpperCase().includes(q) || a.headline.toUpperCase().includes(q)));
+  const rows = B.announcements.filter(a => (AF.routine || !ROUTINE.test(a.type || "")) && (!AF.ps || a.price_sensitive) && (!AF.today || D(a.date).toLocaleDateString("en-AU", { timeZone: "Australia/Brisbane" }) === latestDay) && (!q || a.code.includes(q) || (a.name || "").toUpperCase().includes(q) || a.headline.toUpperCase().includes(q)));
   sel("alist").innerHTML = rows.length ? rows.map(a => annRow(a, false)).join("") : `<div class="empty">No announcements match.</div>`;
   const nps = B.announcements.filter(a => a.price_sensitive).length;
-  sel("afilters").innerHTML = `<button type="button" data-f="ps" aria-pressed="${AF.ps}">Price sensitive only (${nps})</button><button type="button" data-f="today" aria-pressed="${AF.today}">Latest day only</button><input id="aq" type="search" placeholder="Filter by code, company or words" value="${esc(AF.q)}"><span class="muted" style="font-size:12.5px">${rows.length} of ${B.announcements.length}</span>`;
+  sel("afilters").innerHTML = `<button type="button" data-f="ps" aria-pressed="${AF.ps}">Price sensitive only (${nps})</button><button type="button" data-f="today" aria-pressed="${AF.today}">Latest day only</button><button type="button" data-f="routine" aria-pressed="${AF.routine}" title="Fund distributions, issued capital and buy-back notices, substantial holder notices">Show routine notices (${B.announcements.filter(a => ROUTINE.test(a.type || "")).length})</button><input id="aq" type="search" placeholder="Filter by code, company or words" value="${esc(AF.q)}"><span class="muted" style="font-size:12.5px">${rows.length} of ${B.announcements.length}</span>`;
   sel("afilters").querySelectorAll("button[data-f]").forEach(b => b.onclick = () => { AF[b.dataset.f] = !AF[b.dataset.f]; renderAnns(); });
   const aq = sel("aq"); aq.oninput = () => { AF.q = aq.value; const pos = aq.selectionStart; renderAnns(); const n = sel("aq"); n.focus(); n.setSelectionRange(pos, pos); }; }
 renderAnns();
@@ -199,11 +200,11 @@ function renderMkt(){ const all = B.market_price_sensitive || []; if (!all.lengt
 renderMkt();
 
 // ---- regulatory
-const RF = { src: "", relevant: false };
+const RF = { src: "", relevant: true, all: false };
 function renderReg(){ const all = B.regulatory || []; const srcs = [...new Set(all.map(r => r.source))];
-  const rows = all.filter(r => (!RF.src || r.source === RF.src) && (!RF.relevant || r.relevant));
-  sel("rfilters").innerHTML = `<button type="button" data-s="" aria-pressed="${RF.src === ""}">All (${all.length})</button>` + srcs.map(s => `<button type="button" data-s="${esc(s)}" aria-pressed="${RF.src === s}">${esc(s)} (${all.filter(r => r.source === s).length})</button>`).join("") + `<button type="button" id="rrel" aria-pressed="${RF.relevant}">Advice-related only</button>`;
-  sel("rfilters").querySelectorAll("button[data-s]").forEach(b => b.onclick = () => { RF.src = b.dataset.s; renderReg(); }); sel("rrel").onclick = () => { RF.relevant = !RF.relevant; renderReg(); };
+  const match = all.filter(r => (!RF.src || r.source === RF.src) && (!RF.relevant || r.relevant)); const rows = RF.all ? match : match.slice(0, 40);
+  sel("rfilters").innerHTML = `<button type="button" data-s="" aria-pressed="${RF.src === ""}">All (${all.length})</button>` + srcs.map(s => `<button type="button" data-s="${esc(s)}" aria-pressed="${RF.src === s}">${esc(s)} (${all.filter(r => r.source === s).length})</button>`).join("") + `<button type="button" id="rrel" aria-pressed="${RF.relevant}">Advice-related only</button>` + (match.length > rows.length || RF.all ? `<button type="button" id="rall" aria-pressed="${RF.all}">${RF.all ? "Show the latest 40" : "Show all " + match.length}</button>` : "");
+  sel("rfilters").querySelectorAll("button[data-s]").forEach(b => b.onclick = () => { RF.src = b.dataset.s; renderReg(); }); sel("rrel").onclick = () => { RF.relevant = !RF.relevant; renderReg(); }; if (sel("rall")) sel("rall").onclick = () => { RF.all = !RF.all; renderReg(); };
   sel("rlist").innerHTML = rows.length ? rows.map(r => `<div class="rrow"><span class="when">${r.date ? fmtWhen(r.date.slice(0, 10)) : ""}</span><span><span class="t">${isRecent(r.date, 2) ? '<span class="newdot" title="Last two days"></span>' : ""}<span class="src">${esc(r.source)}</span>${r.tag ? `<span class="src" style="font-weight:500">${esc(r.tag)}</span>` : ""}<a href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.title)}</a></span>${r.summary ? `<div class="sum">${esc(r.summary)}</div>` : ""}</span></div>`).join("") : `<div class="empty">Nothing matches.</div>`; }
 renderReg();
 
