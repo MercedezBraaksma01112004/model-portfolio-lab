@@ -27,7 +27,7 @@ __CSS__
 .coming b { color:var(--text); font-weight:600; }
 .fchips { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 10px; align-items:center; }
 .fchips button { border:1.5px solid var(--line); background:var(--surface); color:var(--text); padding:6px 12px; border-radius:999px; font-size:13px; min-height:34px; }
-.fchips button[aria-pressed="true"] { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.fchips button[aria-pressed="true"] { background:var(--accent-soft); color:var(--text); border-color:var(--accent-line); }
 .fchips input { font:inherit; font-size:14px; padding:7px 10px; border:1.5px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); min-width:200px; }
 .alist { display:grid; gap:0; border-top:1px solid var(--line); }
 .arow { display:grid; grid-template-columns:118px 76px 1fr auto; gap:6px 14px; padding:9px 2px; border-bottom:1px solid var(--line); align-items:baseline; font-size:14px; }
@@ -242,5 +242,6 @@ def _css() -> str:
 def write_brief(path: Path, data: dict) -> Path:
     page = TEMPLATE.replace("__CSS__", _css()).replace("__DATA__", json.dumps(data, default=str).replace("</", "<\\/"))
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(page, encoding="utf-8")
+    from .motion import inject
+    path.write_text(inject(page), encoding="utf-8")
     return path

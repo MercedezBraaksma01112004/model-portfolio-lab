@@ -17,8 +17,8 @@ from ..market_data import MarketData
 from ..signals import TacticalView
 
 # Categorical palette in fixed order per asset class (validated reference palette, light and dark steps).
-PALETTE_LIGHT = ["#b9842a", "#3f6f9f", "#9a5638", "#6b5b8c", "#8fb0a2", "#a3bcd3", "#c9c0ad"]
-PALETTE_DARK = ["#d9a54a", "#7ea6d1", "#c98463", "#a495c9", "#8fb8a8", "#9fb9d3", "#a9a191"]
+PALETTE_LIGHT = ["#d99a2b", "#4a78a8", "#d1708a", "#7c6db0", "#a7c5e4", "#f0d27e", "#d3cec4"]
+PALETTE_DARK = ["#e5ad4a", "#7fa8d6", "#e0899f", "#a497d6", "#8fb2d4", "#d9bd6a", "#8f8b84"]
 
 TEMPLATE = r"""<!doctype html>
 <html lang="en-AU">
@@ -30,28 +30,31 @@ TEMPLATE = r"""<!doctype html>
 <style>
 :root {
   color-scheme: light;
-  --bg:#ffffff; --surface:#ffffff; --surface-2:#f4f6f5; --panel:#f4f6f5; --line:#e1e6e3; --line-strong:#c9d1cd; --text:#15211d; --muted:#53605b; --faint:#88928e;
-  --accent:#2e5e4e; --accent-ink:#ffffff; --accent-soft:#e7efec; --accent-hover:#244b3e;
-  --warn-bg:#fdf3dc; --warn-text:#6a4a05; --good:#1d7a47; --neutral:#5f6b67; --serious:#a35b06; --critical:#b42318;
-  --good-bg:#e5f3ea; --neutral-bg:#eef1f0; --serious-bg:#fcefdc; --critical-bg:#fce9e7;
+  --bg:#faf9f6; --surface:#ffffff; --surface-2:#f3f1ec; --panel:#f2f0eb; --line:#e6e2da; --line-strong:#d2cdc3; --text:#1f2226; --muted:#5b5f66; --faint:#8a8d93;
+  --accent:#3a6896; --accent-ink:#ffffff; --accent-soft:#e3edf8; --accent-hover:#2f5880; --accent-line:#9cbde0;
+  --primary:#24282d; --primary-ink:#ffffff; --primary-hover:#3a3f46; --you-bg:#fcf4dc; --you-line:#e8c96a;
+  --warn-bg:#fcf3dc; --warn-text:#6a4a05; --good:#2c7a5c; --neutral:#5f646b; --serious:#a35b06; --critical:#b4233f;
+  --good-bg:#e6f2ec; --neutral-bg:#efede8; --serious-bg:#fcefdc; --critical-bg:#fbe8ee;
   __LIGHT_VARS__
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --bg:#111614; --surface:#111614; --surface-2:#19201d; --panel:#19201d; --line:#26302c; --line-strong:#34403b; --text:#eef2f0; --muted:#aab5b0; --faint:#7d8883;
-    --accent:#7fb8a3; --accent-ink:#0d1a15; --accent-soft:#1c2b26; --accent-hover:#95c8b5;
-    --warn-bg:#33290e; --warn-text:#f3d58a; --good:#5cc98a; --neutral:#a3aca8; --serious:#f0b45a; --critical:#f28b82;
-    --good-bg:#14261c; --neutral-bg:#1f2623; --serious-bg:#2e2410; --critical-bg:#331a17;
+    --bg:#17191c; --surface:#17191c; --surface-2:#1f2226; --panel:#1f2226; --line:#2c3035; --line-strong:#3b4046; --text:#ecebe7; --muted:#b0b3b8; --faint:#84888e;
+    --accent:#93b8de; --accent-ink:#101820; --accent-soft:#1f2a36; --accent-hover:#adc9e8; --accent-line:#4f6f91;
+    --primary:#ecebe7; --primary-ink:#17191c; --primary-hover:#ffffff; --you-bg:#2b2615; --you-line:#8d7634;
+    --warn-bg:#33290e; --warn-text:#f3d58a; --good:#6cc39c; --neutral:#a7abb0; --serious:#f0b45a; --critical:#f08aa0;
+    --good-bg:#16261f; --neutral-bg:#24272b; --serious-bg:#2e2410; --critical-bg:#33181f;
     __DARK_VARS__
   }
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg:#111614; --surface:#111614; --surface-2:#19201d; --panel:#19201d; --line:#26302c; --line-strong:#34403b; --text:#eef2f0; --muted:#aab5b0; --faint:#7d8883;
-  --accent:#7fb8a3; --accent-ink:#0d1a15; --accent-soft:#1c2b26; --accent-hover:#95c8b5;
-  --warn-bg:#33290e; --warn-text:#f3d58a; --good:#5cc98a; --neutral:#a3aca8; --serious:#f0b45a; --critical:#f28b82;
-  --good-bg:#14261c; --neutral-bg:#1f2623; --serious-bg:#2e2410; --critical-bg:#331a17;
+  --bg:#17191c; --surface:#17191c; --surface-2:#1f2226; --panel:#1f2226; --line:#2c3035; --line-strong:#3b4046; --text:#ecebe7; --muted:#b0b3b8; --faint:#84888e;
+    --accent:#93b8de; --accent-ink:#101820; --accent-soft:#1f2a36; --accent-hover:#adc9e8; --accent-line:#4f6f91;
+    --primary:#ecebe7; --primary-ink:#17191c; --primary-hover:#ffffff; --you-bg:#2b2615; --you-line:#8d7634;
+    --warn-bg:#33290e; --warn-text:#f3d58a; --good:#6cc39c; --neutral:#a7abb0; --serious:#f0b45a; --critical:#f08aa0;
+    --good-bg:#16261f; --neutral-bg:#24272b; --serious-bg:#2e2410; --critical-bg:#33181f;
   __DARK_VARS__
 }
 * { box-sizing:border-box; }
@@ -107,11 +110,11 @@ main > section:first-child, main > div:first-child > section:first-child { borde
 .seg button::before { content:none; }
 .seg button:hover { border-color:var(--accent); }
 .seg button small { display:block; color:var(--faint); font-size:12px; font-weight:400; margin-top:2px; }
-.seg button[aria-pressed="true"] { background:var(--accent-soft); color:var(--text); border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); font-weight:600; }
+.seg button[aria-pressed="true"] { background:var(--accent-soft); color:var(--text); border-color:var(--accent-line); box-shadow:inset 0 0 0 1px var(--accent-line); font-weight:600; }
 .seg button[aria-pressed="true"] small { color:var(--muted); }
 @media (max-width:700px) { .q { grid-template-columns:1fr; } .seg { grid-template-columns:1fr 1fr; } }
 @media (max-width:440px) { .seg { grid-template-columns:1fr; } }
-.readout { margin-top:20px; padding:0 0 0 16px; border-left:3px solid var(--accent); font-size:16.5px; line-height:1.6; max-width:80ch; }
+.readout { margin-top:20px; padding:0 0 0 16px; border-left:3px solid var(--accent-line); font-size:16.5px; line-height:1.6; max-width:80ch; }
 .readout b { font-weight:700; }
 
 /* figures */
@@ -119,7 +122,12 @@ main > section:first-child, main > div:first-child > section:first-child { borde
 .recs{margin:0 0 12px}.recrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 8px}.reclist{display:grid;gap:6px;font-size:13px}.reclist .chip{margin-right:4px}.recitem{white-space:nowrap}.mult{font-variant-numeric:tabular-nums;font-size:12px;color:var(--faint)}
 .corrmap td.num,.corrmap th.num{font-size:12px;padding:6px 8px;text-align:center}.corrmap th{font-size:12px;white-space:nowrap}.corrmap tbody th{text-align:left}.corrmap thead th.num{white-space:normal;width:92px;line-height:1.25;vertical-align:bottom}
 .pairstack{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}.corrmap{width:auto;min-width:min(100%,760px)}.betalist{display:grid;gap:5px 48px;margin-top:6px;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr))}.betarow{display:grid;grid-template-columns:minmax(0,1fr) 120px 48px;gap:10px;align-items:center;font-size:12.5px}.betarow .n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.betarow .bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}.betarow .bar i{display:block;height:100%}.betarow .v{text-align:right}
-.tiles { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:22px 26px; margin-top:18px; }
+.tiles { display:grid; grid-template-columns:repeat(6, minmax(0, 1fr)); gap:24px 26px; margin-top:18px; }
+@media (max-width:1100px) { .tiles { grid-template-columns:repeat(3, minmax(0, 1fr)); } }
+@media (max-width:620px) { .tiles { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:20px 18px; } }
+:is(.tiles, .numtiles, .summary) > .tile:has(> .k + .v + .s:last-child) { display:grid; grid-row:span 3; grid-template-rows:subgrid; row-gap:3px; align-content:start; }
+:is(.tiles, .numtiles, .summary) > .tile:has(> .k + .v:last-child) { display:grid; grid-row:span 2; grid-template-rows:subgrid; row-gap:3px; }
+.tile .k { align-self:end; }
 .tile { padding:0; border:0; border-radius:0; background:none; }
 .tile .k { font-size:13px; color:var(--muted); font-weight:500; }
 .tile .v { font-size:27px; font-weight:700; margin-top:2px; letter-spacing:-0.02em; font-variant-numeric:tabular-nums; line-height:1.15; }
@@ -130,15 +138,16 @@ main > section:first-child, main > div:first-child > section:first-child { borde
 .stack span { display:block; height:100%; min-width:2px; }
 .dstack { display:flex; height:16px; border-radius:4px; overflow:hidden; gap:2px; background:var(--bg); margin-top:8px; }
 .dstack span { display:block; height:100%; min-width:2px; }
-.legend { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:12px; font-size:13px; }
-.dlegend { display:flex; flex-wrap:wrap; gap:4px 14px; margin-top:8px; font-size:12.5px; color:var(--muted); }
+.legend { display:grid; grid-template-columns:repeat(auto-fill, minmax(210px, 1fr)); gap:7px 28px; margin-top:14px; font-size:13px; }
+.legend > span, .dlegend > span { display:flex; align-items:baseline; gap:0; } .legend > span > .mono, .dlegend > span > .mono { margin-left:auto; padding-left:10px; font-variant-numeric:tabular-nums; }
+.dlegend { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:5px 24px; margin-top:10px; font-size:12.5px; color:var(--muted); }
 .legend i, .dot, .dlegend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
 .flag { display:inline-block; background:var(--serious-bg); color:var(--serious); padding:3px 9px; border-radius:6px; font-size:12.5px; margin:4px 6px 0 0; }
 
 /* tables */
 table { width:100%; border-collapse:collapse; font-size:13.5px; }
 th, td { text-align:left; padding:10px 10px; border-bottom:1px solid var(--line); vertical-align:middle; }
-th { color:var(--muted); font-weight:600; font-size:12.5px; position:sticky; top:0; background:var(--bg); z-index:1; border-bottom:1px solid var(--line-strong); }
+th { vertical-align:bottom; color:var(--muted); font-weight:600; font-size:12.5px; position:sticky; top:0; background:var(--bg); z-index:1; border-bottom:1px solid var(--line-strong); }
 td.num, th.num { text-align:right; }
 .tscroll { overflow-x:auto; max-width:100%; -webkit-overflow-scrolling:touch; }
 table.htable { min-width:1060px; }
@@ -186,8 +195,8 @@ details p, details li { color:var(--muted); font-size:14px; max-width:78ch; }
 .toolbar { display:flex; gap:8px 10px; flex-wrap:wrap; align-items:center; margin-top:16px; }
 .btn { border:1px solid var(--line-strong); background:var(--bg); color:var(--text); padding:8px 14px; border-radius:8px; font-weight:600; font-size:14px; min-height:40px; display:inline-flex; align-items:center; gap:6px; transition:background .12s, border-color .12s; }
 .btn:hover { border-color:var(--text); }
-.btn.primary { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
-.btn.primary:hover { background:var(--accent-hover); border-color:var(--accent-hover); }
+.btn.primary { background:var(--primary); color:var(--primary-ink); border-color:var(--primary); }
+.btn.primary:hover { background:var(--primary-hover); border-color:var(--primary-hover); }
 .btn[disabled] { opacity:.45; cursor:not-allowed; }
 a.btn { text-decoration:none; }
 .btn.small { padding:5px 10px; font-size:13px; min-height:32px; border-radius:7px; }
@@ -206,6 +215,18 @@ a.btn { text-decoration:none; }
 .preview-tag { display:inline-block; background:var(--warn-bg); color:var(--warn-text); font-size:11px; padding:1px 6px; border-radius:4px; margin-left:6px; }
 
 /* print: the holdings page */
+
+/* motion: one reveal per element, never repeated */
+.rv { opacity:0; transform:translateY(16px); transition:opacity .65s ease var(--d,0ms), transform .65s cubic-bezier(.2,.7,.2,1) var(--d,0ms); }
+.rv.in { opacity:1; transform:none; }
+.stack.rv, .dstack.rv { opacity:1; transform:none; clip-path:inset(0 100% 0 0); transition:clip-path 1.1s cubic-bezier(.3,.7,.2,1) var(--d,0ms); }
+.stack.rv.in, .dstack.rv.in { clip-path:inset(0 0 0 0); }
+.btn { transition:background .15s, border-color .15s, transform .1s; } .btn:active { transform:translateY(1px); }
+.card2 { transition:transform .2s ease, box-shadow .2s ease; } .card2:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(30,34,40,.07); }
+.seg button { transition:background .15s, border-color .15s, box-shadow .15s; }
+@media (prefers-reduced-motion: reduce) { .rv, .stack.rv, .dstack.rv { opacity:1 !important; transform:none !important; clip-path:none !important; transition:none !important; } .card2:hover { transform:none; } }
+@media print { .rv, .stack.rv, .dstack.rv { opacity:1 !important; transform:none !important; clip-path:none !important; } }
+
 @media print {
   @page { size:A4; margin:14mm; }
   body { background:#fff; color:#000; font-size:11px; }
@@ -805,7 +826,7 @@ function renderBacktest(pf){
     ["On stand-ins", fmtP(bt.standShare,0), bt.standShare > 0 ? "share of the result that came from index ETFs standing in for younger holdings" : "every holding has its own full history"],
   ].map(([k,v,s]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
   const asx = seriesGrowth("VAS.AX", bal), cash = seriesGrowth(H.class_proxy && H.class_proxy.cash, bal), world = seriesGrowth("VGS.AX", bal);
-  const lines = [["This portfolio", bt.values, "var(--accent)", 2.4], ["Australian shares (VAS)", asx, cssColor("aus_equity"), 1.3], ["World shares (VGS)", world, cssColor("intl_equity"), 1.3], ["Cash ETF", cash, cssColor("cash"), 1.3]].filter(x => x[1]);
+  const lines = [["This portfolio", bt.values, "var(--primary)", 2.4], ["Australian shares (VAS)", asx, cssColor("aus_equity"), 1.3], ["World shares (VGS)", world, cssColor("intl_equity"), 1.3], ["Cash ETF", cash, cssColor("cash"), 1.3]].filter(x => x[1]);
   const W = 900, Hh = 300, padL = 64, padR = 16, padT = 12, padB = 28, n = H.months.length;
   const all = lines.flatMap(x => x[1]); const lo = Math.min(bal, ...all) * 0.95, hi = Math.max(...all) * 1.03;
   const X = i => padL + i/(n-1)*(W-padL-padR), Y = v => padT + (1 - (v-lo)/(hi-lo))*(Hh-padT-padB);
@@ -819,7 +840,7 @@ function renderBacktest(pf){
     (pf.implementation === "sma" ? "For a managed portfolio the line is its listed twin ETF where one exists, otherwise the risk profile's strategic mix held in asset class ETFs; the manager's own track record is shorter and is shown on the fact sheet. " : "") +
     "The comparison lines put the same balance into a single ETF with no rebalancing.";
 }
-const SECTOR_COLORS = ["#2e5e4e","#3f6f9f","#b9842a","#9a5638","#6b5b8c","#8fb0a2","#a3bcd3","#c9c0ad","#5e8c6a","#2f4858","#c47a5a","#8c8a3e","#6c97b8","#7d5a50","#a3b18a","#5c5470"];
+const SECTOR_COLORS = ["#4a78a8","#d99a2b","#d1708a","#7c6db0","#a7c5e4","#f0d27e","#d3cec4","#6aa59b","#2f4a66","#ecb3c1","#9c8a5a","#b7aade","#8aa1b1","#c98a5e","#5d6470","#c3d39e"];
 function diversification(pf){
   const lines = pf.lines.filter(l => l.vehicle !== "sma");
   const sec = {}, reg = {}; let direct = 0, dsum = 0; const dsec = {};
@@ -1137,7 +1158,8 @@ def write_dashboard(path: Path, portfolios: list[Portfolio], profiles: Profiles,
     html = (TEMPLATE.replace("__LIGHT_VARS__", light_vars).replace("__DARK_VARS__", dark_vars)
             .replace("__DATA__", json.dumps(_clean(data), default=str)))
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(html, encoding="utf-8")
+    from .motion import inject
+    path.write_text(inject(html), encoding="utf-8")
     return path
 
 

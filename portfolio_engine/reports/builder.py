@@ -44,7 +44,7 @@ __CSS__
 .chips { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
 .chips button { border:1.5px solid var(--line); background:var(--surface); color:var(--text); padding:7px 13px; border-radius:999px; font-size:13px; min-height:36px; }
 .chips button:hover { border-color:var(--accent); }
-.chips button[aria-pressed="true"] { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.chips button[aria-pressed="true"] { background:var(--accent-soft); color:var(--text); border-color:var(--accent-line); }
 .result { grid-template-columns: 1fr auto; }
 .result .d { font-size:12px; color:var(--faint); }
 .toast { position:fixed; bottom:18px; left:50%; transform:translateX(-50%); background:var(--text); color:var(--bg); padding:10px 16px; border-radius:10px; font-size:13.5px; display:none; z-index:20; max-width:90vw; }
@@ -473,7 +473,7 @@ function computeBacktest(pf){
   const standIns = rows.filter(x => x.standIn).map(x => ({ name: x.name, proxy: x.standIn, months: x.whole ? n : x.standMonths }));
   return { values, end: v, cagr, mdd, best: tw.length ? Math.max(...tw) : null, worst: tw.length ? Math.min(...tw) : null, years: yrs, standShare, standIns };
 }
-const SECTOR_COLORS = ["#2e5e4e","#3f6f9f","#b9842a","#9a5638","#6b5b8c","#8fb0a2","#a3bcd3","#c9c0ad","#5e8c6a","#2f4858","#c47a5a","#8c8a3e","#6c97b8","#7d5a50","#a3b18a","#5c5470"];
+const SECTOR_COLORS = ["#4a78a8","#d99a2b","#d1708a","#7c6db0","#a7c5e4","#f0d27e","#d3cec4","#6aa59b","#2f4a66","#ecb3c1","#9c8a5a","#b7aade","#8aa1b1","#c98a5e","#5d6470","#c3d39e"];
 function diversification(pf){
   const lines = pf.lines.filter(l => l.weight_pct > 0); const tot = lines.reduce((s,l) => s + l.weight_pct, 0) || 1;
   const sec = {}, reg = {}; let direct = 0, dsum = 0; const dsec = {};
@@ -706,7 +706,7 @@ function renderBacktest(pf){
     ["Worst fall", fmtP(bt.mdd*100,0), "largest peak-to-trough drop along the way"], ["Best 12 months", fmtS((bt.best||0)*100), "and worst: " + fmtS((bt.worst||0)*100)],
     ["On stand-ins", fmtP(bt.standShare,0), bt.standShare > 0 ? "share of the result from index ETFs standing in for younger holdings" : "every holding has its own full history"]].map(([k,v,s]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
   const asx = seriesGrowth("VAS.AX", bal), cash = seriesGrowth(H.class_proxy && H.class_proxy.cash, bal), world = seriesGrowth("VGS.AX", bal);
-  const lines = [["This portfolio", bt.values, "var(--accent)", 2.4], ["Australian shares (VAS)", asx, cssColor("aus_equity"), 1.3], ["World shares (VGS)", world, cssColor("intl_equity"), 1.3], ["Cash ETF", cash, cssColor("cash"), 1.3]].filter(x => x[1]);
+  const lines = [["This portfolio", bt.values, "var(--primary)", 2.4], ["Australian shares (VAS)", asx, cssColor("aus_equity"), 1.3], ["World shares (VGS)", world, cssColor("intl_equity"), 1.3], ["Cash ETF", cash, cssColor("cash"), 1.3]].filter(x => x[1]);
   const W = 900, Hh = 300, padL = 64, padR = 16, padT = 12, padB = 28, n = H.months.length;
   const all = lines.flatMap(x => x[1]); const lo = Math.min(bal, ...all) * 0.95, hi = Math.max(...all) * 1.03;
   const X = i => padL + i/(n-1)*(W-padL-padR), Y = v => padT + (1 - (v-lo)/(hi-lo))*(Hh-padT-padB);
@@ -1221,5 +1221,6 @@ def write_builder(path: Path, portfolios: list[Portfolio], profiles: Profiles, m
     html = (TEMPLATE.replace("__CSS__", _css().replace("__LIGHT_VARS__", light_vars).replace("__DARK_VARS__", dark_vars))
             .replace("__DATA__", json.dumps(dash._clean(data), default=str)))
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(html, encoding="utf-8")
+    from .motion import inject
+    path.write_text(inject(html), encoding="utf-8")
     return path

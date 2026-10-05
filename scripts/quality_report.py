@@ -37,7 +37,7 @@ h2{font-family:"IBM Plex Serif",Georgia,serif;font-weight:600;font-size:20px;mar
 .verdicts{margin:14px 0 0;color:var(--muted);max-width:75ch}.verdicts b{color:var(--text)}
 .essay{max-width:72ch;color:var(--text)}.essay p{margin:0 0 12px}
 /* site-wide look: plain top bar, one sans family, flat sections */
-:root{--bg:#ffffff;--surface:#ffffff;--line:#e1e6e3;--text:#15211d;--muted:#53605b;--faint:#88928e;--accent:#2e5e4e;--accent-soft:#e7efec}
+:root{--bg:#faf9f6;--surface:#ffffff;--line:#e6e2da;--text:#1f2226;--muted:#5b5f66;--faint:#8a8d93;--accent:#3a6896;--accent-soft:#e3edf8}
 body{font-family:"Hanken Grotesk",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-feature-settings:"tnum" 1;background:var(--bg)}
 .wrap{max-width:1200px;padding:0 28px 60px}
 .hero{background:none;color:var(--text);margin:0 0 20px;padding:0 0 22px;border-bottom:1px solid var(--line)}.hero h1{color:var(--text)}.hero .lede,.hero .meta{color:var(--muted)}
@@ -69,7 +69,7 @@ def main() -> int:
     counts = {v: 0 for v in ORDER}
     for t, r in q.items():
         counts[r["verdict"]] = counts.get(r["verdict"], 0) + 1
-    out = [f"<title>Holdings Quality Review</title>",
+    out = [f"<title>Quality review | Model Portfolio Lab</title>",
            '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap">',
            f"<style>{CSS}</style>", '<div class="wrap">',
            '<div class="hero"><nav class="nav"><a href="/">Model portfolios</a><a href="/builder.html">Builder</a><a href="/compare.html">Compare</a><a href="/brief.html">Daily brief</a><a href="/quality.html" aria-current="page">Quality review</a></nav>',
@@ -113,6 +113,9 @@ def main() -> int:
                        f'<dt>Forward PE</dt><dd>{f(r.get("pe_forward"), 1, "x") if r.get("pe_forward") else "–"}</dd>'
                        f'<dt>Consensus</dt><dd>{html.escape(r.get("consensus_label") or "–")}{(" (" + str(r.get("analysts")) + ")") if r.get("analysts") else ""}</dd></dl></div>')
     out.append('<p class="meta" style="margin-top:20px">† index stand-in because the holding is younger than the period. Figures from the price feed on the date above; verdicts are opinion.</p></div>')
+    sys.path.insert(0, str(ROOT))
+    from portfolio_engine.reports import motion
+    out.append(f"<style>{motion.CSS}</style><script>{motion.JS}</script>")
     path = ROOT / "output" / "quality_review.html"
     path.parent.mkdir(exist_ok=True)
     path.write_text("\n".join(out), encoding="utf-8")

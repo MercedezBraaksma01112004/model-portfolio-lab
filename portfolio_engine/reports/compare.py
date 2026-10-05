@@ -21,14 +21,14 @@ TEMPLATE = r"""<!doctype html>
 __CSS__
 .tabs { display:flex; gap:6px; margin:0 0 4px; flex-wrap:wrap; }
 .tabs button { border:1.5px solid var(--line); background:var(--surface); color:var(--text); padding:10px 18px; border-radius:999px; font-weight:600; font-size:14.5px; min-height:44px; }
-.tabs button[aria-selected="true"] { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.tabs button[aria-selected="true"] { background:var(--primary); color:var(--primary-ink); border-color:var(--primary); }
 .form { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-top:10px; }
 .form label { display:block; font-size:12.5px; color:var(--muted); margin-bottom:4px; }
 .form input, .form select { width:100%; font:inherit; font-size:15px; padding:10px 12px; border:1.5px solid var(--line); border-radius:10px; background:var(--bg); color:var(--text); min-height:44px; }
 .form input:focus, .form select:focus { outline:2px solid var(--accent); outline-offset:1px; border-color:transparent; }
 .fchips { display:flex; flex-wrap:wrap; gap:6px; margin:10px 0; align-items:center; }
 .fchips button { border:1.5px solid var(--line); background:var(--surface); color:var(--text); padding:6px 12px; border-radius:999px; font-size:13px; min-height:34px; }
-.fchips button[aria-pressed="true"] { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.fchips button[aria-pressed="true"] { background:var(--accent-soft); color:var(--text); border-color:var(--accent-line); }
 table.cmp td, table.cmp th { font-size:13px; vertical-align:top; }
 table.cmp tr.best td { background:var(--good-bg); }
 table.cmp tr.sel td { background:var(--accent-soft); }
@@ -43,7 +43,16 @@ table.cmp tr.sel td { background:var(--accent-soft); }
 .card2 dl { display:grid; grid-template-columns:1fr auto; gap:3px 10px; margin:0; font-size:13px; }
 .card2 dt { color:var(--muted); } .card2 dd { margin:0; font-variant-numeric:tabular-nums; text-align:right; }
 .card2 dd.win { color:var(--good); font-weight:600; }
-.card2.mine { border-color:var(--accent); box-shadow:inset 0 3px 0 var(--accent); }
+.cmpgrid { table-layout:fixed; margin-top:6px; }
+.cmpgrid thead th { position:static; vertical-align:top; font-weight:400; color:var(--text); font-size:13px; padding:12px 12px 10px; border-bottom:1px solid var(--line-strong); }
+.cmpgrid .ch { display:flex; gap:6px; align-items:flex-start; justify-content:space-between; } .cmpgrid .ch b { font-size:14.5px; line-height:1.3; }
+.cmpgrid .sub2 { color:var(--muted); font-size:12.5px; margin-top:3px; }
+.cmpgrid th.lbl { position:sticky; left:0; z-index:2; background:var(--bg); color:var(--muted); font-weight:500; font-size:13px; text-align:left; vertical-align:middle; }
+.cmpgrid td.num { text-align:right; padding:9px 12px; }
+.cmpgrid .mine { background:var(--you-bg); } .cmpgrid thead th.mine { box-shadow:inset 0 3px 0 var(--you-line); }
+.cmpgrid td.win { color:var(--good); font-weight:600; }
+.cmpgrid .x { border:0; background:transparent; color:var(--faint); font-size:18px; line-height:1; padding:0 4px; border-radius:6px; } .cmpgrid .x:hover { color:var(--text); background:var(--surface-2); }
+.card2.mine { background:var(--you-bg); border-color:var(--you-line); }
 .card2 .x { position:absolute; top:8px; right:8px; border:0; background:transparent; color:var(--faint); font-size:18px; padding:2px 6px; border-radius:6px; }
 .pt-pass { color:var(--good); font-weight:500; } .pt-fail { color:var(--critical); font-weight:600; }
 .more { margin-top:10px; }
@@ -126,7 +135,7 @@ const fmtP = (x, d = 2) => (x == null || isNaN(x)) ? "–" : x.toFixed(d) + "%";
 const pct = (x, d = 2) => (x == null || isNaN(x)) ? "–" : (x * 100).toFixed(d) + "%";
 const money = v => { const n = parseFloat(String(v).replace(/[^0-9.]/g, "")); return isFinite(n) ? n : null; };
 let toastT; function toast(m){ const t = sel("toast"); t.textContent = m; t.style.display = "block"; clearTimeout(toastT); toastT = setTimeout(() => t.style.display = "none", 3200); }
-const COLORS = ["#2e5e4e","#3f6f9f","#b9842a","#9a5638","#6b5b8c","#5e8c6a","#c47a5a","#2f4858","#8c8a3e"];
+const COLORS = ["#24282d","#4a78a8","#d99a2b","#d1708a","#7c6db0","#6aa59b","#c98a5e","#2f4a66","#9c8a5a"];
 
 // ---------------- tabs
 document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", String(x === b)));
@@ -238,7 +247,10 @@ function renderCompare(){ const box = sel("s-compare"); const me = mine(); const
     : (cols.length ? `<div class="fchips"><button type="button" id="c-dl">Download this comparison</button><button type="button" id="c-clear">Clear</button><span class="muted" style="font-size:12.5px">To compare your own portfolio, build it on the builder page first; it appears here automatically.</span></div>` : "");
   if (!cols.length) { box.innerHTML = intro; wireCompare(); return; }
   const rows = CMP_ROWS(); const best = (k, hi) => { const vs = cols.map(c => c.v[k]).filter(v => v != null); return vs.length > 1 ? (hi ? Math.max(...vs) : Math.min(...vs)) : null; };
-  box.innerHTML = intro + `<div class="cards">` + cols.map(c => `<div class="card2 ${c.id === "me" ? "mine" : ""}">${c.id === "me" ? "" : `<button type="button" class="x" data-x="${c.id}" aria-label="Remove">×</button>`}<h4>${esc(c.title)}</h4><div class="sub2">${esc(c.sub)}${c.id === "me" ? "" : `<br>Performance test: ${ptCell(c.row)}`}</div><dl>${rows.map(([k, lbl, fmt, hi]) => { const v = c.v[k]; const b = hi == null ? null : best(k, hi); return `<dt>${lbl}</dt><dd class="${b != null && v === b ? "win" : ""}">${fmt(v)}</dd>`; }).join("")}</dl></div>`).join("") + `</div>` +
+  // one table: every line of figures sits on the same row for every option, with the label written once
+  box.innerHTML = intro + `<div class="tscroll"><table class="cmpgrid" style="min-width:${230 + cols.length * 175}px"><colgroup><col style="width:230px">${cols.map(() => "<col>").join("")}</colgroup>` +
+    `<thead><tr><th class="lbl"></th>${cols.map(c => `<th class="${c.id === "me" ? "mine" : ""}"><div class="ch"><b>${esc(c.title)}</b>${c.id === "me" ? "" : `<button type="button" class="x" data-x="${c.id}" aria-label="Remove ${esc(c.title)}">×</button>`}</div><div class="sub2">${esc(c.sub)}</div><div class="sub2">${c.id === "me" ? "Your portfolio" : `Performance test: ${ptCell(c.row)}`}</div></th>`).join("")}</tr></thead>` +
+    `<tbody>${rows.map(([k, lbl, fmt, hi]) => { const b = hi == null ? null : best(k, hi); return `<tr><th class="lbl">${lbl}</th>${cols.map(c => { const v = c.v[k]; return `<td class="num ${c.id === "me" ? "mine" : ""} ${b != null && v === b ? "win" : ""}">${fmt(v)}</td>`; }).join("")}</tr>`; }).join("")}</tbody></table></div>` +
     `<p class="muted" style="font-size:12.5px;margin:8px 0 14px">Green marks the best on each line. ${cols[0].id === "me" ? "Your portfolio's returns are the weighted returns of its holdings after their own fund fees, before platform fees and tax; the funds' returns are after investment fees and tax, before administration fees. Super tax of up to 15% on earnings would lower the portfolio's figures for a super account, so treat the return lines as a rough guide and the fee lines as the firmer comparison." : "Past returns are history, not a forecast; a higher growth allocation explains much of a higher return."}</p>`;
   wireCompare(); }
 function wireCompare(){ const box = sel("s-compare");
@@ -277,5 +289,6 @@ def _css() -> str:
 def write_compare(path: Path, platforms: dict) -> Path:
     page = TEMPLATE.replace("__CSS__", _css()).replace("__PLATFORMS__", json.dumps((platforms or {}).get("platforms", {})).replace("</", "<\\/"))
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(page, encoding="utf-8")
+    from .motion import inject
+    path.write_text(inject(page), encoding="utf-8")
     return path
