@@ -54,7 +54,7 @@ __CSS__
 </head>
 <body>
 <header><div class="wrap">
-  <nav class="nav no-print"><a href="/">Model portfolios</a><a href="/builder.html">Build your own portfolio</a><a href="/brief.html" aria-current="page">Daily brief</a><a href="/quality.html">Holdings quality review</a></nav>
+  <nav class="nav no-print"><a href="/">Model portfolios</a><a href="/builder.html">Build your own portfolio</a><a href="/compare.html">Compare</a><a href="/brief.html" aria-current="page">Daily brief</a><a href="/quality.html">Holdings quality review</a></nav>
   <h1 id="h1">Daily brief</h1>
   <p class="lede">The numbers that move client conversations, what the companies in the model portfolios told the market, and what regulators,
   courts and government changed for financial advice. Rebuilt each weekday evening after the ASX close.</p>

@@ -243,6 +243,26 @@ falls back to the browser if the account cannot be reached.
 
 The base portfolios use three stages of life: Early accumulator, Accumulator and Retirement.
 
+### Compare page
+
+`/compare.html` has two tabs. Platforms: the cost of every platform and menu in `config/platforms.yaml` at any balance,
+number of listed holdings, international share and trading activity, a chart of cost against balance, and each menu's
+features. Super funds: every MySuper product and choice investment option from APRA's Comprehensive Product
+Performance Package (`python scripts/super_funds.py`, refreshed weekly by the build into `data/super_funds.json` and
+published as `/data/super.json`): fees at five balances, 3, 5, 7 and 10 year returns, the performance test result, growth
+allocation, size and members, with filters, side-by-side comparison of up to five and Excel download. APRA does not
+publish insurance, member services or other benefits, so they are not shown.
+
+### Importing models, the portfolio check and the AI review
+
+The builder imports a model from any Excel or CSV sheet with a column of codes (ASX codes, tickers or HUB24 codes) and
+a column of weights, dollar values or units; section headings set the asset class and unmatched codes are listed. The
+portfolio check applies fixed rules (allocation against the target, concentration, analyst and quality warnings, cost,
+platform savings, overlap, cash, volatility, correlation, income, small holdings, unfinished basis of advice) with a
+reason for each and buttons that make the change. The AI review sends the portfolio's figures and the check's findings to
+Claude through the `review-background` function (signed-in accounts only, 25 reviews per account a day, results read
+back through `review-status`); it needs the `ANTHROPIC_API_KEY` environment variable on the Netlify site.
+
 ### Daily brief
 
 `python scripts/daily_brief.py` fetches the key market and economic numbers (Yahoo Finance, the RBA's statistical

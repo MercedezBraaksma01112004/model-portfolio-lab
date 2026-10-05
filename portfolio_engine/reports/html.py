@@ -215,7 +215,7 @@ a.btn { text-decoration:none; }
 </head>
 <body>
 <header><div class="wrap">
-  <nav class="nav no-print"><a href="/" aria-current="page">Model portfolios</a><a href="/builder.html">Build your own portfolio</a><a href="/brief.html">Daily brief</a><a href="/quality.html">Holdings quality review</a></nav>
+  <nav class="nav no-print"><a href="/" aria-current="page">Model portfolios</a><a href="/builder.html">Build your own portfolio</a><a href="/compare.html">Compare</a><a href="/brief.html">Daily brief</a><a href="/quality.html">Holdings quality review</a></nav>
   <h1>Model Portfolio Lab</h1>
   <p class="lede">Pick a risk appetite, a stage of life and an account size. A rules engine turns that into a model portfolio built from
   live ASX and US prices, shows you every holding, and explains why each weight is what it is.</p>

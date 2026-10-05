@@ -121,6 +121,7 @@ jobs:
           mkdir -p site
           cp output/dashboard.html site/index.html
           cp output/builder.html site/builder.html
+          cp output/compare.html site/compare.html
           cp output/model_portfolios_latest.xlsx site/model_portfolios_latest.xlsx
           python scripts/generate_quality_verdicts.py
           python scripts/quality_report.py > /dev/null && cp output/quality_review.html site/quality.html
@@ -128,6 +129,9 @@ jobs:
           # Screen every listing; apply additions and watchlist moves on Mondays only, so the models do not churn daily.
           if [ "$(date -u +%u)" = "1" ]; then python scripts/universe_scorecard.py --apply; else python scripts/universe_scorecard.py; fi
           cp config/universe_scorecard.csv site/data/universe_scorecard.csv
+          # Super fund comparison data from APRA (refreshed weekly; the last good copy is kept in the repository).
+          python scripts/super_funds.py || echo "super fund data not refreshed"
+          [ -f data/super_funds.json ] && cp data/super_funds.json site/data/super.json
           # The daily brief: market numbers, announcements, regulatory and legal updates. Never fails the build.
           mkdir -p site/data
           python scripts/daily_brief.py || echo "daily brief failed; publishing the rest"
@@ -150,7 +154,7 @@ jobs:
         run: |
           git config user.name "portfolio-engine bot"
           git config user.email "actions@users.noreply.github.com"
-          for f in config/universe.csv config/quality_review.csv config/universe_scorecard.csv data/my_holdings.csv data/cache/state.json data/applied_changes.json; do [ -f "$f" ] && git add "$f"; done
+          for f in config/universe.csv config/quality_review.csv config/universe_scorecard.csv data/my_holdings.csv data/cache/state.json data/applied_changes.json data/super_funds.json; do [ -f "$f" ] && git add "$f"; done
           git diff --cached --quiet || git commit -m "Daily build: holdings and tactical state as of $(date -u +%Y-%m-%d)"
           git push
 

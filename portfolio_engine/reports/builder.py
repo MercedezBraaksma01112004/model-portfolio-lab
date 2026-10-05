@@ -91,11 +91,19 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
 .setup select:disabled { opacity:.6; }
 .subhead { font-size:12.5px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin:18px 0 8px; }
 .undo-group { display:inline-flex; gap:6px; padding-right:10px; margin-right:4px; border-right:1px solid var(--line); }
+.find { display:grid; grid-template-columns:auto 1fr; gap:4px 12px; padding:12px 2px; border-bottom:1px solid var(--line); }
+.find .sev { font-size:11.5px; font-weight:600; padding:3px 9px; border-radius:999px; height:fit-content; white-space:nowrap; }
+.sev.high { background:var(--critical-bg); color:var(--critical); } .sev.medium { background:var(--serious-bg); color:var(--serious); } .sev.low { background:var(--neutral-bg); color:var(--neutral); } .sev.good { background:var(--good-bg); color:var(--good); }
+.find b { font-size:14.5px; } .find .why { color:var(--muted); font-size:13.5px; margin-top:2px; } .find .acts { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+.ai { border:1px solid var(--line); border-radius:12px; padding:14px 16px; background:var(--surface); margin-top:12px; }
+.ai h3 { margin:0 0 6px; font-size:16px; } .ai ul { margin:6px 0 0 18px; padding:0; } .ai li { margin:3px 0; }
+.ai .sg { border-top:1px solid var(--line); padding:10px 0; } .ai .sg:first-of-type { border-top:0; }
+.ai .lbl { font-size:12px; color:var(--faint); text-transform:uppercase; letter-spacing:.04em; margin-right:6px; }
 </style>
 </head>
 <body>
 <header><div class="wrap">
-  <nav class="nav no-print"><a href="/">Model portfolios</a><a href="/builder.html" aria-current="page">Build your own portfolio</a><a href="/brief.html">Daily brief</a><a href="/quality.html">Holdings quality review</a></nav>
+  <nav class="nav no-print"><a href="/">Model portfolios</a><a href="/builder.html" aria-current="page">Build your own portfolio</a><a href="/compare.html">Compare</a><a href="/brief.html">Daily brief</a><a href="/quality.html">Holdings quality review</a></nav>
   <h1>Build your own portfolio</h1>
   <p class="lede">Choose any listed share, ETF or fund, set the weights, and watch the cost, income, risk, diversification and a ten-year backtest
   recalculate as you go. Start blank, or from one of the engine's model portfolios and change what you disagree with.</p>
@@ -128,6 +136,13 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
     <div style="display:flex;align-items:flex-end"><button class="btn" id="btn-load" type="button" style="min-height:46px;width:100%;justify-content:center">Load base portfolio</button></div>
   </div>
   <p class="muted" id="bnote" style="font-size:12.5px;margin:6px 0 0"></p>
+  <div class="subhead">Or import a model you already have</div>
+  <div class="setup">
+    <div><label for="impfile">Excel workbook or CSV</label><input id="impfile" type="file" accept=".xlsx,.xls,.xlsm,.csv" style="padding:9px 10px"></div>
+    <div><label for="impsheet">Sheet</label><select id="impsheet" disabled><option>Choose a file first</option></select></div>
+    <div style="display:flex;align-items:flex-end"><button class="btn" id="btn-import" type="button" style="min-height:46px;width:100%;justify-content:center" disabled>Import this sheet</button></div>
+  </div>
+  <p class="muted" id="impnote" style="font-size:12.5px;margin:6px 0 0">Any sheet with a column of codes (ASX codes, tickers or HUB24 codes) and a column of weights, dollar values or units. Section headings such as "Australian equities" set the asset class. Everything is priced at today's prices; the file never leaves your browser.</p>
   <div class="subhead">Platform</div>
   <div class="setup">
     <div><label for="plat">Platform</label><select id="plat"></select></div>
@@ -174,7 +189,7 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
 <section id="boa-section" hidden>
   <div class="eyebrow">Basis of advice</div>
   <h2>Why each holding is here</h2>
-  <p class="sub">Every holding gets a draft written from its own figures the moment it is added: its role, cost, income, track record and analyst view. The draft keeps up with the weights until you edit it; from then on your words are kept. Both are saved with the portfolio and go into the Excel download. A draft is a starting point, not a basis of advice: for a client it has to say why the holding suits that client's objectives, circumstances and existing investments.</p>
+  <p class="sub">Every holding gets a draft written from its own figures the moment it is added: its role, purpose, cost, income and analyst view (never past returns). The draft keeps up with the weights until you edit it; from then on your words are kept. Both are saved with the portfolio and go into the Excel download. A draft is a starting point, not a basis of advice: for a client it has to say why the holding suits that client's objectives, circumstances and existing investments.</p>
   <label for="pnotes" class="subhead" style="display:block">Portfolio rationale</label>
   <textarea id="pnotes" placeholder="The strategy in your words: the objective, why this mix, what it is measured against and when it will be reviewed."></textarea>
   <div class="subhead">By holding</div>
@@ -191,6 +206,15 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
   <div class="subhead">Platform cost at this balance</div>
   <div class="tscroll"><table class="platcmp"><thead><tr><th>Platform</th><th>Menu</th><th class="num">Administration</th><th class="num">Other platform fees</th><th class="num">Total a year</th><th class="num">% a year</th><th>Rate card</th></tr></thead><tbody id="platcmp"></tbody></table></div>
   <p class="muted" id="platnote" style="font-size:12.5px;margin:6px 0 0"></p>
+</section>
+
+<section id="check" hidden>
+  <div class="eyebrow">Review</div>
+  <h2>Check this portfolio</h2>
+  <p class="sub">The page's own rules look for gaps against the target allocation, concentration, cost, overlap, analyst warnings and platform savings, and say why each matters. Buttons make the change for you, and Undo takes it back. The AI review reads everything here and writes its own suggestions with reasons.</p>
+  <div id="checklist"></div>
+  <div class="toolbar"><button class="btn primary" id="btn-ai" type="button">Ask AI for a review</button><span class="muted" id="ainote" style="font-size:12.5px"></span></div>
+  <div id="airesult"></div>
 </section>
 
 <div class="two">
@@ -236,6 +260,7 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
   <h2>How the figures are worked out</h2>
   <details><summary>Where the data comes from</summary><p>Holdings in the engine's universe use the daily build's prices, dividend-adjusted returns and Yahoo Finance analyst consensus. Anything you add from outside it is fetched from the same price feed when you add it, converted to Australian dollars at today's rate for the price and at each month's rate for the history. Unlisted managed funds and term deposits are not in the feed and cannot be added here.</p></details>
   <details><summary>Fees</summary><p>The cost per year is the weighted management cost of the funds plus the platform's fees for the account type and menu chosen: the tiered administration fee (with its minimum and cap), fixed account fees, expense recovery and other percentage levies, and any fee per listed holding. "Cheapest menu that fits" picks the lowest-cost menu that can hold every investment in the portfolio. Each platform's rate card is dated and linked in the comparison table; rates change, so check the current fee document before quoting a client. Brokerage is a one-off cost and is not in the running cost.</p></details>
+  <details><summary>Importing, the portfolio check and the AI review</summary><p>Import reads any sheet with a column of codes (ASX codes, tickers or HUB24 codes) and a column of weights, dollar values or units; section headings such as "Australian equities" set the asset class. It is read in your browser. Codes it cannot price (unlisted funds, term deposits) are listed so you can replace them. The portfolio check applies fixed rules and explains each finding; its buttons make the change and Undo reverses it. The AI review sends the portfolio's figures (not your name or account details) to Anthropic's Claude model and returns suggestions with reasons. It is limited per account each day, it can be wrong, and it is general information for checking your own thinking, not advice.</p></details>
   <details><summary>Undo, saving and drafts</summary><p>Undo and redo step back and forward through every change on the page: weights, holdings added or removed, base portfolios loaded, balance, platform and the basis of advice text (Ctrl or Cmd + Z, and Ctrl or Cmd + Shift + Z). Signed in, Save stores the portfolio in your account. Signed out, or if your account cannot be reached, Save keeps it in this browser instead, listed under Your account, and you can move it to your account later.</p></details>
   <details><summary>Diversification</summary><p>"Effective holdings" is one divided by the sum of squared weights: ten equal holdings score 10, while one 90% holding and nine 1% holdings score about 1.2. Sector and region look through to what each holding actually is; a world index fund is one line but hundreds of companies, so it is shown as a diversified fund rather than a sector.</p></details>
   <details><summary>Saving and sharing</summary><p>Saved portfolios live in your account only. A share link shows a read-only copy to anyone who has it; turn sharing off from the same button and the link stops working.</p></details>
@@ -325,20 +350,23 @@ async function addSymbol(symbol, cls, meta){
   if (state.lines.some(l => l.ticker === symbol)) { toast(symbol + " is already in the portfolio"); return; }
   if (UMAP[symbol]) { const l = lineFromUniverse(UMAP[symbol]); if (cls) l.asset_class = cls; pushLine(l); return; }
   toast("Fetching " + symbol + "…");
+  try { pushLine(await fetchLiveLine(symbol, cls, meta)); } catch (e) { toast(e.message); }
+}
+// A holding from outside the universe: the daily build's pre-computed listing file, or the live price feed.
+async function fetchLiveLine(symbol, cls, meta){
   let h = null;
-  // Pre-computed by the daily build for every listing in the search index; the live function is the fallback.
   try { const r = await fetch("/data/listings/" + encodeURIComponent(symbol) + ".json", { cache: "no-cache" }); if (r.ok) h = await r.json(); } catch(e) {}
-  if (!h) { try { h = await api("/history?symbol=" + encodeURIComponent(symbol)); } catch(e) { toast("No data for " + symbol + ": " + e.message + ". Only listings in the search index are available offline."); return; } }
+  if (!h) { try { h = await api("/history?symbol=" + encodeURIComponent(symbol)); } catch(e) { throw new Error("No data for " + symbol + ": " + e.message + ". Only listings in the search index are available offline."); } }
   const fx = DATA.fx_aud_per || {}; const rate = h.currency === "AUD" ? 1 : (fx[h.currency] || null);
-  if (rate == null) { toast("No exchange rate for " + h.currency + "; cannot price " + symbol); return; }
+  if (rate == null) throw new Error("No exchange rate for " + h.currency + "; cannot price " + symbol);
   const vehicle = (h.type === "ETF" || (meta && meta.type === "ETF")) ? "etf" : "direct";
   const sector = vehicle === "etf" ? "Diversified fund" : (h.sector_group || sectorFromIndex((meta && meta.sector) || h.sector, h.type));
   R[symbol] = { ticker: symbol, name: h.name, sparkline: h.spark || [], return_1y_pct: h.return_1y_pct, return_3y_pct_pa: h.return_3y_pct_pa, return_5y_pct_pa: h.return_5y_pct_pa, return_10y_pct_pa: h.return_10y_pct_pa,
     history_years: h.history_years, dividend_yield_pct: h.yield_pct, price: h.price, price_currency: h.currency, volatility_1y_pct: h.volatility_1y_pct, max_drawdown_1y_pct: h.max_drawdown_1y_pct,
     source: h.built ? "price feed (daily build)" : "price feed (live)", consensus_label: "no coverage", return_proxy: {}, sector: (meta && meta.sector) || h.sector || "", fetched: h.built || new Date().toISOString().slice(0,10) };
   EXTRA[symbol] = { daily: h.daily, monthly: h.monthly };
-  pushLine({ ticker: symbol, name: h.name, asset_class: cls || guessClass(symbol, h.name, meta && meta.sector), vehicle, role: "satellite", currency: h.currency, mer_pct: vehicle === "etf" ? 0.2 : 0,
-    yield_pct: h.yield_pct || 0, yield_source: "live", franking_pct: 0, sector, region: guessRegion(symbol, h.name), price_aud: h.price * rate, priced_from: "live", weight_pct: 0, source: "live", boa: "", boa_custom: false });
+  return { ticker: symbol, name: h.name, asset_class: cls || guessClass(symbol, h.name, meta && meta.sector), vehicle, role: "satellite", currency: h.currency, mer_pct: vehicle === "etf" ? 0.2 : 0,
+    yield_pct: h.yield_pct || 0, yield_source: "live", franking_pct: 0, sector, region: guessRegion(symbol, h.name), price_aud: h.price * rate, priced_from: "live", weight_pct: 0, source: "live", boa: "", boa_custom: false };
 }
 function pushLine(l){ state.lines.push(l); state.ticker = l.ticker; state.dirty = true; sel("q").value = ""; sel("results").innerHTML = ""; render(); toast(l.name + " added at 0%: set its weight in the table"); }
 function removeLine(t){ state.lines = state.lines.filter(l => l.ticker !== t); if (state.ticker === t) state.ticker = null; state.dirty = true; render(); }
@@ -529,7 +557,7 @@ function render(){
   const refG = CLASSES.filter(c => c.kind==="growth").reduce((s,c) => s + (ref[c.key]||0), 0);
   sel("allocnote").textContent = `The ${label(DATA.profiles, state.ref)} long-run target is ${refG.toFixed(0)}% growth assets; yours is ${fmtP(m.growth_pct,0)}. Differences over 5 points are marked.`;
   renderDiversification(pf); renderBacktest(pf); renderRisk(pf);
-  renderPlatformControls(pf); renderPlatCompare(pf); renderBoa(pf); updateBaseNote();
+  renderPlatformControls(pf); renderPlatCompare(pf); renderBoa(pf); updateBaseNote(); renderCheck(pf);
   updateSaveNote(); saveDraft(); track();
 }
 function updateSaveNote(){ const local = state.id && String(state.id).startsWith("local-");
@@ -613,11 +641,7 @@ function draftBoa(l){
   const facts = [];
   if ((l.mer_pct || 0) > 0) facts.push(`management cost ${fmtP(l.mer_pct, 2)} a year`);
   if ((l.yield_pct || 0) > 0) facts.push(`trailing yield ${fmtP(l.yield_pct, 1)}${(l.franking_pct || 0) > 0 ? ", about " + fmtP(l.franking_pct, 0) + " franked" : ""}`);
-  const rets = [];
-  if (r.return_1y_pct != null) rets.push(`${fmtS(r.return_1y_pct)} over one year`);
-  if (r.return_5y_pct_pa != null) rets.push(`${fmtS(r.return_5y_pct_pa)} a year over five years${r.return_proxy && r.return_proxy["5y"] ? " (index stand-in)" : ""}`);
-  if (r.return_10y_pct_pa != null) rets.push(`${fmtS(r.return_10y_pct_pa)} a year over ten years${r.return_proxy && r.return_proxy["10y"] ? " (index stand-in)" : ""}`);
-  if (rets.length) facts.push("total return " + rets.join(", "));
+  // No past returns: past performance is not a reason to recommend a holding, so the draft never cites it.
   if (r.volatility_1y_pct != null) facts.push(`one-year volatility ${fmtP(r.volatility_1y_pct, 0)}`);
   if (facts.length) out.push("Key figures: " + facts.join("; ") + ".");
   if (r.consensus_label && !/coverage/.test(r.consensus_label)) out.push(`Analyst consensus: ${r.consensus_label} across ${r.analysts} analysts (Yahoo Finance aggregate${r.fetched ? ", " + r.fetched : ""}).`);
@@ -782,17 +806,180 @@ sel("btn-xlsx").onclick = () => { if (typeof XLSX === "undefined") { toast("The 
     .concat(pf.lines.map(l => [l.ticker, l.name, label(CLASSES, l.asset_class), (l.weight_pct||0)/100, l.dollars, l.boa_custom ? "Written" : "Automatic draft: complete before use", boaText(l)]));
   const ws3 = XLSX.utils.aoa_to_sheet(boa); ws3["!cols"] = [{wch:10},{wch:34},{wch:22},{wch:8},{wch:12},{wch:30},{wch:120}]; XLSX.utils.book_append_sheet(wb, ws3, "Basis of advice");
   const plat = [["Platform", "Product", "Account type", "Menu", "Administration p.a.", "Other platform fees p.a.", "Total p.a.", "% of balance", "Rate card", "Confirmed", "Fee document"]].concat(platformRows(pf).map(r => r.unpriced ? [r.label, r.product, r.accountLabel || "", r.menuLabel, null, null, null, null, r.as_of || "", "rate not published", r.source_url || ""] : [r.label, r.product, r.accountLabel || "", r.menuLabel, r.admin, r.other, r.total, r.total / pf.balance, r.as_of || "", r.verified ? "yes" : "to confirm", r.source_url || r.source || ""]));
+  const chk = [["Severity", "Finding", "Why it matters"]].concat(checkPortfolio(pf).map(f => [f.sev, f.title, f.why]));
+  const ws5 = XLSX.utils.aoa_to_sheet(chk); ws5["!cols"] = [{wch:10},{wch:60},{wch:110}]; XLSX.utils.book_append_sheet(wb, ws5, "Portfolio check");
+  if (AI.result && AI.result.result) { const x = AI.result.result; const air = [["AI review", AI.at || ""], ["Model", AI.result.model || ""], ["General information, not advice", ""], [], ["Summary", x.summary || ""]].concat((x.strengths || []).map(s => ["Strength", s])).concat([[], ["Priority", "Suggestion", "Change", "Why", "Trade-off"]]).concat((x.suggestions || []).map(s => [s.priority, s.title, s.change, s.why, s.tradeoff])).concat([[]]).concat((x.questions || []).map(q => ["Ask the client", q]));
+    const ws6 = XLSX.utils.aoa_to_sheet(air); ws6["!cols"] = [{wch:14},{wch:40},{wch:60},{wch:70},{wch:50}]; XLSX.utils.book_append_sheet(wb, ws6, "AI review"); }
   const ws4 = XLSX.utils.aoa_to_sheet(plat); ws4["!cols"] = [{wch:18},{wch:30},{wch:20},{wch:22},{wch:16},{wch:18},{wch:12},{wch:11},{wch:20},{wch:11},{wch:60}]; XLSX.utils.book_append_sheet(wb, ws4, "Platform comparison");
   XLSX.writeFile(wb, `my_portfolio_${(state.name||"portfolio").replace(/[^a-z0-9]+/gi, "_").toLowerCase()}.xlsx`); toast("Downloaded, with the basis of advice for every holding"); };
 
+// ------------------------------------------------------------ import a model from Excel or CSV
+const IMP = { wb: null, file: "" };
+const CLASS_WORDS = [[/australian\s*(equit|share)|aus(tralian)?\s+equit|domestic equit|australian direct|australian funds|australian listed/i, "aus_equity"], [/international|global|overseas|world|emerging/i, "intl_equity"],
+  [/infrastructure|property|reit|real asset/i, "infrastructure"], [/alternative|gold|commodit|private/i, "alternatives"], [/fixed (income|interest)|\bbonds?\b/i, "fixed_income"], [/credit|hybrid/i, "credit"], [/\bcash\b|term deposit/i, "cash"]];
+const classFromText = t => { for (const [re, k] of CLASS_WORDS) if (re.test(String(t || ""))) return k; return null; };
+const cellNum = v => { if (v == null || v === "") return null; if (typeof v === "number") return v; const s = String(v).replace(/[$,\s]/g, ""); const n = parseFloat(s.replace(/%$/, "")); return isFinite(n) ? n : null; };
+const looksCode = v => /^(ASX:)?[A-Z0-9]{2,6}(\.(AX|XA|ASX))?$/i.test(String(v || "").trim()) || /^[A-Z]{3}\d{4}AU$/i.test(String(v || "").trim());
+function findColumns(rows){
+  const H = { code: /^(asx\s*)?(code|ticker|symbol|security code|stock code|asx code|apir( code)?|investment code|holding code|hub24 code)$/i,
+    name: /^(name|description|security( name)?|investment( name)?|holding( name)?|fund( name)?|company)$/i, w: /(alloc|weight|target|proportion|model\s*%|% of (portfolio|total)|portfolio %|^%$|^% ?alloc)/i,
+    v: /(market value|^value|amount|balance|\$ ?value)/i, u: /^(units|quantity|qty|no\.? of (units|shares)|shares held|holding units)$/i, cls: /(asset class|^class$|^sector$|category|^type$)/i };
+  for (let i = 0; i < Math.min(rows.length, 40); i++) { const r = (rows[i] || []).map(c => String(c ?? "").trim()); const code = r.findIndex(h => H.code.test(h)); if (code < 0) continue;
+    const f = re => r.findIndex((h, j) => j !== code && re.test(h)); return { header: i, code, name: f(H.name), w: f(H.w), v: f(H.v), u: f(H.u), cls: f(H.cls) }; }
+  // No header row: the code column is the one with most code-like cells; the weight column is the numeric one summing nearest 100 or 1.
+  const width = Math.max(0, ...rows.slice(0, 200).map(r => (r || []).length)); let code = -1, best = 0;
+  for (let j = 0; j < width; j++) { const n = rows.filter(r => r && looksCode(r[j])).length; if (n > best) { best = n; code = j; } }
+  if (code < 0 || best < 2) return null; let w = -1, gap = Infinity;
+  for (let j = 0; j < width; j++) { if (j === code) continue; const vals = rows.filter(r => r && looksCode(r[code])).map(r => cellNum(r[j])).filter(v => v != null); if (vals.length < best * 0.6) continue; const sum = vals.reduce((a, b) => a + b, 0); const g = Math.min(Math.abs(sum - 100), Math.abs(sum - 1) * 100); if (g < gap) { gap = g; w = j; } }
+  return { header: -1, code, name: -1, w, v: -1, u: -1, cls: -1 }; }
+function parseSheet(rows){
+  const c = findColumns(rows); if (!c) return { error: "No column of codes found. The sheet needs a column headed Code, Ticker or ASX code, or a column of codes." };
+  const items = []; let section = null;
+  for (let i = c.header + 1; i < rows.length; i++) { const r = rows[i] || []; const raw = String(r[c.code] ?? "").trim();
+    const noNumbers = [c.w, c.v, c.u].every(j => j < 0 || cellNum(r[j]) == null);
+    if (!raw || !looksCode(raw) || (noNumbers && classFromText(raw))) {   // a section heading such as "Australian equities" or "Cash" (which also looks like a code)
+      const text = r.map(x => String(x ?? "").trim()).filter(Boolean); const k = text.length && text.length <= 3 ? classFromText(text.join(" ")) : null; if (k) section = k; continue; }
+    if (/^total/i.test(raw)) continue;
+    items.push({ raw, code: raw.toUpperCase().replace(/^ASX:/, "").replace(/\.ASX$/, ".AX"), name: c.name >= 0 ? String(r[c.name] ?? "").trim() : "", w: c.w >= 0 ? cellNum(r[c.w]) : null, v: c.v >= 0 ? cellNum(r[c.v]) : null, u: c.u >= 0 ? cellNum(r[c.u]) : null, cls: (c.cls >= 0 ? classFromText(r[c.cls]) : null) || section }); }
+  return { items, cols: c }; }
+function matchCode(code){
+  for (const t of [code, code + ".AX", code + ".XA"]) if (UMAP[t]) return { ticker: t, src: "universe" };
+  const h = U.find(u => (u.hub24_code || "").toUpperCase() === code); if (h) return { ticker: h.ticker, src: "universe" };
+  const idx = (DATA.search_index || []).find(i => i.s.toUpperCase() === code || i.s.toUpperCase() === code + ".AX"); if (idx) return { ticker: idx.s, src: "index", meta: { type: idx.t, sector: idx.c } };
+  return null; }
+sel("impfile").onchange = async () => { const f = sel("impfile").files[0]; if (!f) return; if (typeof XLSX === "undefined") { toast("The spreadsheet library did not load"); return; }
+  try { IMP.wb = XLSX.read(await f.arrayBuffer(), { type: "array" }); IMP.file = f.name.replace(/\.[^.]+$/, ""); } catch (e) { toast("Could not read that file: " + e.message); return; }
+  const scored = IMP.wb.SheetNames.map(n => { const rows = XLSX.utils.sheet_to_json(IMP.wb.Sheets[n], { header: 1, raw: true, blankrows: false }); const p = parseSheet(rows); return [n, p.items ? p.items.filter(it => matchCode(it.code)).length : 0]; });
+  scored.sort((a, b) => b[1] - a[1]); sel("impsheet").innerHTML = IMP.wb.SheetNames.map(n => `<option value="${esc(n)}">${esc(n)}${(scored.find(x => x[0] === n) || [])[1] ? " (" + scored.find(x => x[0] === n)[1] + " recognised codes)" : ""}</option>`).join("");
+  sel("impsheet").value = scored[0][0]; sel("impsheet").disabled = false; sel("btn-import").disabled = false;
+  sel("impnote").textContent = `${f.name}: ${IMP.wb.SheetNames.length} sheet${IMP.wb.SheetNames.length === 1 ? "" : "s"}. The sheet with the most recognised codes is selected; press Import.`; };
+sel("btn-import").onclick = async () => { if (!IMP.wb) return; const name = sel("impsheet").value; const rows = XLSX.utils.sheet_to_json(IMP.wb.Sheets[name], { header: 1, raw: true, blankrows: false });
+  const p = parseSheet(rows); if (p.error) { sel("impnote").textContent = p.error; return; } if (!p.items.length) { sel("impnote").textContent = "No holdings found on that sheet."; return; }
+  if (state.lines.length && !confirm(`Replace the current ${state.lines.length} holdings with the ${p.items.length} rows from "${name}"? Undo will bring them back.`)) return;
+  sel("btn-import").disabled = true; sel("impnote").textContent = "Importing…";
+  const lines = [], missing = [], live = []; const seen = new Set();
+  for (const it of p.items) { const m = matchCode(it.code); if (!m) { missing.push(it); continue; } if (seen.has(m.ticker)) continue; seen.add(m.ticker);
+    let l = null; if (m.src === "universe") l = lineFromUniverse(UMAP[m.ticker]); else { try { l = await fetchLiveLine(m.ticker, it.cls, m.meta); live.push(m.ticker); } catch (e) { missing.push(it); continue; } }
+    if (it.cls && CLASSES.some(c => c.key === it.cls) && l.vehicle !== "cash") l.asset_class = it.cls; l._w = it.w; l._v = it.v; l._u = it.u; lines.push(l); }
+  // Weights: the weight column if there is one (fractions become percentages), otherwise dollar values, otherwise units at today's prices.
+  const has = k => lines.filter(l => l[k] != null).length >= Math.max(1, lines.length * 0.6); let basis = "";
+  if (has("_w")) { const sum = lines.reduce((s, l) => s + (l._w || 0), 0); const k = sum > 0 && sum <= 1.5 ? 100 : 1; lines.forEach(l => l.weight_pct = +((l._w || 0) * k).toFixed(2)); basis = "the sheet's weights"; }
+  else { const val = l => l._v != null ? l._v : (l._u != null && l.price_aud ? l._u * l.price_aud : 0); const sum = lines.reduce((s, l) => s + val(l), 0) + missing.reduce((s, it) => s + (it.v || 0), 0);
+    lines.forEach(l => l.weight_pct = sum ? +(val(l) / sum * 100).toFixed(2) : 0); basis = has("_v") ? "the sheet's dollar values" : "units at today's prices";
+    if (sum > 1000) { state.balance = Math.round(sum); sel("pbal").value = state.balance.toLocaleString("en-AU"); } }
+  lines.forEach(l => { delete l._w; delete l._v; delete l._u; });
+  state.lines = lines; state.ticker = null; state.dirty = true; if (!state.name || confirm(`Name the portfolio "${IMP.file}"?`)) { state.name = IMP.file; sel("pname").value = state.name; }
+  render(); sel("btn-import").disabled = false;
+  const mw = missing.reduce((s, it) => s + (it.w || 0), 0);
+  sel("impnote").innerHTML = `Imported ${lines.length} holding${lines.length === 1 ? "" : "s"} from "${esc(name)}", weighted by ${basis}${live.length ? `; ${live.length} fetched live from outside the universe (${esc(live.join(", "))})` : ""}. ` +
+    (missing.length ? `<b>Not matched: ${missing.map(it => esc(it.raw)).join(", ")}</b>${mw ? ` (${fmtP(mw > 1.5 ? mw : mw * 100, 1)} of the weights)` : ""}. Unlisted funds and term deposits have no price feed: add a listed equivalent, or use "Fill the gap with cash". ` : "Every row was matched. ") + `Prices are today's.`;
+  toast(`Imported ${lines.length} holdings. Undo goes back.`); };
+
+// ------------------------------------------------------------ portfolio check (rules)
+const SEV_ORDER = { high: 0, medium: 1, low: 2 };
+function bestCandidate(cls, opts = {}){ const held = new Set(state.lines.map(l => l.ticker)); const q = t => (DATA.quality[t] || {}).verdict || "";
+  const rank = u => (q(u.ticker) === "core" ? 0 : q(u.ticker) === "satellite" ? 1 : 2) * 10 + (u.vehicle === "etf" ? 0 : 1) * 3 + (+u.mer || 0);
+  return U.filter(u => u.asset_class === cls && u.status !== "watchlist" && !held.has(u.ticker) && u.price_aud != null && !["speculative", "not recommended"].includes(q(u.ticker)) && (!opts.region || u.region === opts.region) && (!opts.maxMer || +u.mer < opts.maxMer) && (!opts.vehicle || u.vehicle === opts.vehicle)
+    && !(R[u.ticker] && /Sell|Underperform/.test(R[u.ticker].consensus_label || ""))).sort((a, b) => rank(a) - rank(b))[0] || null; }
+function swapLine(oldT, newT){ const i = state.lines.findIndex(l => l.ticker === oldT); if (i < 0 || !UMAP[newT]) return; const w = state.lines[i].weight_pct; const l = lineFromUniverse(UMAP[newT]); l.weight_pct = w; state.lines.splice(i, 1, l); state.dirty = true; render(); toast(`Swapped ${oldT} for ${newT}. Undo goes back.`); }
+function addAt(t, w){ if (!UMAP[t] || state.lines.some(l => l.ticker === t)) return; const l = lineFromUniverse(UMAP[t]); l.weight_pct = +w.toFixed(2); state.lines.push(l); state.dirty = true; render(); toast(`Added ${t} at ${w.toFixed(1)}%. Use "Scale to 100%" to rebalance; Undo goes back.`); }
+function setWeight(t, w){ const l = state.lines.find(x => x.ticker === t); if (!l) return; l.weight_pct = +w.toFixed(2); state.dirty = true; render(); }
+function checkPortfolio(pf){
+  const F = []; const m = pf.metrics; const bal = pf.balance; const lines = pf.lines.filter(l => (l.weight_pct || 0) > 0); if (!lines.length) return F;
+  const add = (sev, title, why, actions = []) => F.push({ sev, title, why, actions });
+  if (Math.abs(pf.total - 100) > 0.05) add("high", `Weights add up to ${fmtP(pf.total, 1)}`, "Every other figure assumes the weights as entered, so costs, income and risk are overstated or understated until they add to 100%.", [["Scale to 100%", () => sel("btn-norm").click()], ["Fill the gap with cash", () => sel("btn-cash").click()]]);
+  // allocation against the target
+  const ref = DATA.saa[state.ref] || {}; const refLabel = label(DATA.profiles, state.ref);
+  const refG = CLASSES.filter(c => c.kind === "growth").reduce((s, c) => s + (ref[c.key] || 0), 0);
+  if (Math.abs(m.growth_pct - refG) > 10) add("high", `${fmtP(m.growth_pct, 0)} growth assets against the ${refLabel} target of ${fmtP(refG, 0)}`, `A gap this size changes the risk the portfolio carries: in a bad year for shares it would fall roughly ${m.growth_pct > refG ? "more" : "less"} than a ${refLabel.toLowerCase()} investor has agreed to. Either the target profile is wrong for this client or the mix needs moving.`);
+  for (const c of CLASSES) { const d = (pf.class_weights[c.key] || 0) - (ref[c.key] || 0); if (Math.abs(d) <= 5) continue;
+    if (d < 0) { const cand = bestCandidate(c.key); add("medium", `${label(CLASSES, c.key)} is ${fmtP(-d, 1)} under the target`, `The ${refLabel} target holds ${fmtP(ref[c.key] || 0, 0)} here; this portfolio holds ${fmtP(pf.class_weights[c.key] || 0, 1)}. Under-weighting a whole asset class is a large active bet and gives up the diversification that class brings.`,
+      cand ? [[`Add ${cand.ticker.replace(/\.AX$/, "")} at ${(-d).toFixed(1)}%`, () => addAt(cand.ticker, -d)]] : []); }
+    else { const big = lines.filter(l => l.asset_class === c.key).sort((a, b) => b.weight_pct - a.weight_pct)[0]; add("medium", `${label(CLASSES, c.key)} is ${fmtP(d, 1)} over the target`, `The ${refLabel} target holds ${fmtP(ref[c.key] || 0, 0)}; this portfolio holds ${fmtP(pf.class_weights[c.key] || 0, 1)}. Trim the largest holdings in the class, or record why the overweight is intended.`,
+      big ? [[`Trim ${big.ticker.replace(/\.AX$/, "")} by ${Math.min(d, big.weight_pct).toFixed(1)}%`, () => setWeight(big.ticker, big.weight_pct - Math.min(d, big.weight_pct))]] : []); } }
+  // concentration
+  const d = diversification(pf);
+  lines.filter(l => l.vehicle === "direct" && l.weight_pct > (DATA.diversification.max_single_holding_pct || 10)).forEach(l => add("high", `${l.name} is ${fmtP(l.weight_pct, 1)} of the portfolio`, `One company's bad news (a profit warning, a regulator, a takeover that fails) would move the whole portfolio. The engine caps a single company at ${DATA.diversification.max_single_holding_pct || 10}%.`, [[`Cut to ${DATA.diversification.max_single_holding_pct || 10}%`, () => setWeight(l.ticker, DATA.diversification.max_single_holding_pct || 10)]]));
+  if (d.effective != null && d.effective < 8 && lines.length >= 3) add("medium", `Effectively ${d.effective.toFixed(1)} holdings`, "A few large lines dominate, so the portfolio behaves like a handful of bets rather than a spread. Diversified funds count as one line here, so this matters most when the large lines are single companies.");
+  d.flags.filter(f => !/fewer than five/.test(f)).forEach(f => add("medium", f.charAt(0).toUpperCase() + f.slice(1), "Concentration in one sector or country ties the result to one set of risks (commodity prices, interest rates, one economy)."));
+  // analyst and quality warnings
+  lines.forEach(l => { const r = R[l.ticker] || {}; const q = (DATA.quality[l.ticker] || {}).verdict;
+    if (/Sell|Underperform/.test(r.consensus_label || "")) { const c = bestCandidate(l.asset_class, { region: l.region }); add("high", `${l.name}: analyst consensus ${r.consensus_label}`, `${r.analysts} covering analysts lean negative. That is a prompt to re-check the reason for holding it against current research (Morgans or FNArena), not an automatic sell.`, c ? [[`Swap for ${c.ticker.replace(/\.AX$/, "")}`, () => swapLine(l.ticker, c.ticker)]] : []); }
+    if (q === "not recommended") add("high", `${l.name}: quality review says not recommended`, (DATA.quality[l.ticker] || {}).note || "");
+    if (q === "speculative" && l.weight_pct > 3) add("medium", `${l.name} is speculative at ${fmtP(l.weight_pct, 1)}`, "Speculative holdings belong in small positions so a total loss is survivable. Above 3% one failure is felt across the portfolio.", [["Cut to 3%", () => setWeight(l.ticker, 3)]]); });
+  // cost
+  lines.filter(l => ["etf", "fund", "lic", "lit"].includes(l.vehicle) && (l.mer_pct || 0) >= 0.35).forEach(l => { const c = bestCandidate(l.asset_class, { region: l.region, maxMer: (l.mer_pct || 0) * 0.6, vehicle: "etf" }); if (!c) return;
+    const save = ((l.mer_pct || 0) - (+c.mer || 0)) / 100 * (l.dollars || 0); if (save < 50) return;
+    add("low", `${l.name} costs ${fmtP(l.mer_pct, 2)} a year; ${c.name} costs ${fmtP(+c.mer, 2)}`, `Same asset class and region for ${fmtM(save)} a year less. Worth it if the cheaper fund gives the exposure you want; active funds can earn their fee, but only some do, and the fee is certain while the outperformance is not.`, [[`Swap for ${c.ticker.replace(/\.AX$/, "")}`, () => swapLine(l.ticker, c.ticker)]]); });
+  const rows = platformRows(pf).filter(r => !r.unpriced); const cur = rows.find(r => r.key === state.platform.key); const cheap = rows[0];
+  if (cur && cheap && cheap.key !== cur.key && cur.total - cheap.total > 250) add("low", `${cheap.label} would cost ${fmtM(cur.total - cheap.total)} a year less than ${cur.label}`, "At this balance and with these holdings. Platform choice also depends on the investment menu, reporting, the licensee's approved product list and family group discounts, so treat this as a question to ask, not an answer.", [[`Try ${cheap.label}`, () => { state.platform = { ...state.platform, key: cheap.key, menu: "auto" }; state.dirty = true; render(); }]]);
+  // overlap between index funds
+  const groups = {}; lines.filter(l => l.vehicle === "etf" && l.role === "core").forEach(l => { const k = l.asset_class + "|" + l.region; (groups[k] = groups[k] || []).push(l); });
+  Object.values(groups).filter(g => g.length >= 2).forEach(g => add("low", `${g.map(l => l.ticker.replace(/\.AX$/, "")).join(" and ")} overlap`, `Core index funds in the same asset class and region hold largely the same companies. Two or more add cost and complexity without adding diversification; one is usually enough.`));
+  // cash, income, risk
+  const cash = pf.class_weights.cash || 0; if (cash > 12 && !["conservative"].includes(state.ref)) add("low", `${fmtP(cash, 0)} in cash`, "Cash above what is needed for fees, pension payments and rebalancing is a drag on long-run growth. Keep it if it is a deliberate buffer for known spending.");
+  const volHint = 2 + 0.13 * refG; if (m.realised_volatility_pct != null && m.realised_volatility_pct > volHint * 1.35) add("medium", `Moves more than a typical ${refLabel.toLowerCase()} portfolio`, `Realised volatility of ±${fmtP(m.realised_volatility_pct, 0)} against roughly ±${fmtP(volHint, 0)} for a ${refLabel.toLowerCase()} mix. Concentrated or high-beta holdings usually explain it.`);
+  if (m.avg_pairwise_correlation != null && m.avg_pairwise_correlation > 0.6 && lines.length >= 5) add("low", "The holdings rise and fall together", `Average correlation of ${m.avg_pairwise_correlation.toFixed(2)} between holdings: they are mostly the same bet, so the diversification on paper is less real than it looks.`);
+  if (["conservative", "moderate"].includes(state.ref) && m.grossed_up_yield_pct < 3) add("low", `Grossed-up yield of ${fmtP(m.grossed_up_yield_pct, 1)}`, "For a cautious or income-focused investor, a low yield means drawing on capital to fund spending. Fully franked Australian income lifts the grossed-up yield for low-tax and pension accounts.");
+  const tier = DATA.tiers.find(t => t.key === pf.tier) || {}; const tiny = lines.filter(l => l.vehicle !== "cash" && (l.dollars || 0) < (tier.min_holding || 0));
+  if (tiny.length) add("medium", `${tiny.length} holding${tiny.length === 1 ? "" : "s"} under ${fmtM(tier.min_holding)}`, `${tiny.map(l => l.ticker.replace(/\.AX$/, "")).join(", ")}: at this size brokerage and admin effort outweigh the diversification each adds. Combine them or raise their weight.`);
+  const drafts = pf.lines.filter(l => !l.boa_custom).length; if (drafts) add("low", `${drafts} basis of advice draft${drafts === 1 ? "" : "s"} not yet written`, "The automatic drafts describe the holding, not why it suits the client. Complete them before the portfolio is used for advice.", [["Go to the basis of advice", () => sel("boa-section").scrollIntoView({ behavior: "smooth" })]]);
+  return F.sort((a, b) => SEV_ORDER[a.sev] - SEV_ORDER[b.sev]); }
+let CHECK = [];
+function renderCheck(pf){ sel("check").hidden = !pf.lines.length; if (!pf.lines.length) return; CHECK = checkPortfolio(pf);
+  const words = { high: "Fix", medium: "Review", low: "Consider" };
+  sel("checklist").innerHTML = CHECK.length ? CHECK.map((f, i) => `<div class="find"><span class="sev ${f.sev}">${words[f.sev]}</span><div><b>${esc(f.title)}</b><div class="why">${esc(f.why)}</div>${f.actions.length && !state.readOnly ? `<div class="acts">${f.actions.map((a, j) => `<button type="button" class="btn small" data-f="${i}" data-a="${j}">${esc(a[0])}</button>`).join("")}</div>` : ""}</div></div>`).join("")
+    : `<div class="find"><span class="sev good">Clear</span><div><b>No issues found by the rules</b><div class="why">Allocation is within 5 points of the target in every class, nothing is concentrated, costs are reasonable and there are no analyst or quality warnings.</div></div></div>`;
+  sel("checklist").querySelectorAll("button[data-f]").forEach(b => b.onclick = () => CHECK[+b.dataset.f].actions[+b.dataset.a][1]());
+  sel("ainote").textContent = !SB ? "" : user.session ? "Uses the site's AI credit; limited per account each day." : "Sign in to use the AI review."; }
+
+// ------------------------------------------------------------ AI review
+const AI = { result: null, at: null, running: false };
+function aiPayload(){ const pf = compute(); const m = pf.metrics; const d = diversification(pf); const ref = DATA.saa[state.ref] || {};
+  const q = t => (DATA.quality[t] || {}).verdict || "";
+  return { portfolio: { name: state.name || "Untitled", balance: pf.balance, compare_against: label(DATA.profiles, state.ref) + " long-run target", target_allocation_pct: ref,
+      actual_allocation_pct: Object.fromEntries(CLASSES.map(c => [c.key, +(pf.class_weights[c.key] || 0).toFixed(2)])), asset_class_names: Object.fromEntries(CLASSES.map(c => [c.key, c.label])),
+      platform: { name: m.platform.label, menu: m.platform.menuLabel, cost_per_year: Math.round(m.platform.total) },
+      metrics: { growth_pct: +m.growth_pct.toFixed(1), defensive_pct: +m.defensive_pct.toFixed(1), weighted_fund_fee_pct: +m.weighted_mer_pct.toFixed(3), total_cost_pct: +m.total_ongoing_cost_pct.toFixed(3), cash_yield_pct: +m.weighted_yield_pct.toFixed(2), grossed_up_yield_pct: +m.grossed_up_yield_pct.toFixed(2),
+        realised_volatility_pct: m.realised_volatility_pct == null ? null : +m.realised_volatility_pct.toFixed(1), beta_asx200: m.beta_asx200 == null ? null : +m.beta_asx200.toFixed(2), average_correlation: m.avg_pairwise_correlation == null ? null : +m.avg_pairwise_correlation.toFixed(2),
+        effective_holdings: d.effective == null ? null : +d.effective.toFixed(1), top_five_pct: +d.top5.toFixed(1), single_companies: d.direct, sectors: d.sector.slice(0, 8), regions: d.region.slice(0, 6) },
+      holdings: pf.lines.map(l => { const r = R[l.ticker] || {}; return { code: l.ticker, name: l.name, asset_class: l.asset_class, vehicle: l.vehicle, role: l.role, weight_pct: +(l.weight_pct || 0).toFixed(2), dollars: Math.round(l.dollars || 0), fee_pct: l.mer_pct, yield_pct: l.yield_pct, franking_pct: l.franking_pct, sector: l.sector, region: l.region,
+        analyst_consensus: r.consensus_label || "no coverage", analysts: r.analysts || 0, quality_verdict: q(l.ticker), volatility_1y_pct: r.volatility_1y_pct ?? null }; }),
+      rule_check: CHECK.map(f => ({ severity: f.sev, finding: f.title, detail: f.why })) },
+    universe_candidates: U.filter(u => u.status !== "watchlist" && u.price_aud != null && ["core", "satellite"].includes(q(u.ticker)) && !state.lines.some(l => l.ticker === u.ticker))
+      .sort((a, b) => a.asset_class.localeCompare(b.asset_class) || (+a.mer - +b.mer)).slice(0, 160)
+      .map(u => [u.ticker, u.name, u.asset_class, u.vehicle, +(+u.mer).toFixed(2), +(((R[u.ticker] || {}).dividend_yield_pct ?? +u.yield) || 0).toFixed(2), q(u.ticker), (R[u.ticker] || {}).consensus_label || ""]),
+    universe_candidate_columns: ["code", "name", "asset_class", "vehicle", "fee_pct", "yield_pct", "quality_verdict", "analyst_consensus"] }; }
+function renderAI(){ const box = sel("airesult"); if (!AI.result) { box.innerHTML = ""; return; } const r = AI.result;
+  if (r.error) { box.innerHTML = `<div class="ai"><b>The AI review did not run.</b> ${esc(r.error)}</div>`; return; }
+  const x = r.result; const pr = { high: "high", medium: "medium", low: "low" };
+  box.innerHTML = `<div class="ai"><h3>AI review</h3><div class="muted" style="font-size:12px;margin-bottom:8px">${esc(r.model || "")} · ${AI.at ? new Date(AI.at).toLocaleString("en-AU") : ""}${r.remaining_today != null ? ` · ${r.remaining_today} reviews left today` : ""}. General information for checking and learning, not advice; check every suggestion before acting on it.</div>` +
+    (x ? `<p>${esc(x.summary || "")}</p>${(x.strengths || []).length ? `<div class="lbl">Strengths</div><ul>${x.strengths.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : ""}<div class="lbl" style="display:block;margin-top:10px">Suggestions</div>` +
+      (x.suggestions || []).map(s => `<div class="sg"><span class="sev ${pr[s.priority] || "low"}" style="font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px">${esc(s.priority || "")}</span> <b>${esc(s.title || "")}</b><div style="margin-top:4px"><span class="lbl">Change</span>${esc(s.change || "")}</div><div><span class="lbl">Why</span>${esc(s.why || "")}</div>${s.tradeoff ? `<div class="muted"><span class="lbl">Trade-off</span>${esc(s.tradeoff)}</div>` : ""}</div>`).join("") +
+      ((x.questions || []).length ? `<div class="lbl" style="display:block;margin-top:10px">Ask the client first</div><ul>${x.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ul>` : "")
+     : `<pre style="white-space:pre-wrap;font:inherit">${esc(r.text || "")}</pre>`) + `</div>`; }
+sel("btn-ai").onclick = async () => { if (AI.running) return; if (!SB) { toast("The AI review needs accounts, which are not set up on this copy of the page"); return; }
+  if (!user.session) { toast("Sign in to use the AI review"); openAuth("signin"); return; } if (!state.lines.length) { toast("Add some holdings first"); return; }
+  if (!FN) { toast("The AI review runs on the published site"); return; }
+  const job = (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(16) + Math.random().toString(16).slice(2)).toLowerCase();
+  AI.running = true; sel("btn-ai").disabled = true; sel("ainote").textContent = "Reviewing… this usually takes 20 to 60 seconds.";
+  try { const { data } = await SB.auth.getSession(); const token = data.session && data.session.access_token;
+    await fetch(FN + "/review-background", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ job, token, payload: aiPayload() }) });
+    let res = null; for (let i = 0; i < 60; i++) { await new Promise(r => setTimeout(r, 2500)); const r = await fetch(FN + "/review-status?job=" + job, { cache: "no-store" }); const j = await r.json().catch(() => ({}));
+      if (j.status === "done" || j.status === "error") { res = j; break; } }
+    AI.result = res || { error: "No answer after two and a half minutes. Try again shortly." }; AI.at = new Date().toISOString(); renderAI();
+    if (res && res.status === "done") { toast("AI review ready"); sel("airesult").scrollIntoView({ behavior: "smooth", block: "start" }); }
+  } catch (e) { AI.result = { error: e.message }; renderAI(); }
+  finally { AI.running = false; sel("btn-ai").disabled = false; sel("ainote").textContent = "Uses the site's AI credit; limited per account each day."; } };
+
 // ------------------------------------------------------------ accounts (Supabase)
 const SB = (DATA.supabase && DATA.supabase.url && DATA.supabase.key && window.supabase) ? window.supabase.createClient(DATA.supabase.url, DATA.supabase.key) : null;
-function serialise(){ return { version: 2, name: state.name, balance: state.balance, ref: state.ref, platform: state.platform, notes: state.notes, lines: state.lines.map(l => ({ ...l, boa: boaText(l) })), extra: Object.fromEntries(state.lines.filter(l => EXTRA[l.ticker]).map(l => [l.ticker, EXTRA[l.ticker]])), research: Object.fromEntries(state.lines.filter(l => l.source === "live" && R[l.ticker]).map(l => [l.ticker, R[l.ticker]])), saved_as_of: DATA.as_of }; }
+function serialise(){ return { version: 2, ai_review: AI.result && !AI.result.error ? { ...AI.result, at: AI.at } : null, name: state.name, balance: state.balance, ref: state.ref, platform: state.platform, notes: state.notes, lines: state.lines.map(l => ({ ...l, boa: boaText(l) })), extra: Object.fromEntries(state.lines.filter(l => EXTRA[l.ticker]).map(l => [l.ticker, EXTRA[l.ticker]])), research: Object.fromEntries(state.lines.filter(l => l.source === "live" && R[l.ticker]).map(l => [l.ticker, R[l.ticker]])), saved_as_of: DATA.as_of }; }
 function hydrate(d, { readOnly=false, id=null, ownerId=null, isPublic=false } = {}){
   Object.assign(EXTRA, d.extra || {}); Object.assign(R, d.research || {});
   state.lines = (d.lines || []).map(l => { const u = UMAP[l.ticker]; if (u && l.source !== "live") { const f = lineFromUniverse(u); f.weight_pct = l.weight_pct; f.asset_class = l.asset_class || f.asset_class; f.boa = l.boa || ""; f.boa_custom = !!l.boa_custom; return f; } return { boa: "", boa_custom: false, ...l }; });
   state.name = d.name || ""; state.balance = d.balance || 250000; state.ref = d.ref || "balanced"; state.id = id; state.readOnly = readOnly; state.ownerId = ownerId; state.isPublic = isPublic; state.dirty = false; state.ticker = null;
-  state.platform = { ...DEFAULT_PLATFORM(), ...(d.platform || {}) }; state.notes = d.notes || "";
+  state.platform = { ...DEFAULT_PLATFORM(), ...(d.platform || {}) }; state.notes = d.notes || ""; AI.result = d.ai_review || null; AI.at = d.ai_review ? d.ai_review.at : null; renderAI();
   sel("pname").value = state.name; sel("pbal").value = state.balance.toLocaleString("en-AU"); sel("pref").value = state.ref; sel("pnotes").value = state.notes;
   sel("readonly").hidden = !readOnly; if (readOnly) sel("readonly").innerHTML = `This is a shared, read-only portfolio. Sign in and click <b>Save as a copy</b> to edit your own version.`;
   render();
@@ -965,7 +1152,8 @@ def write_builder(path: Path, portfolios: list[Portfolio], profiles: Profiles, m
         universe_rows.append({"ticker": r["ticker"], "name": r["name"], "asset_class": r["asset_class"], "vehicle": r["vehicle"], "role": r["role"], "currency": r["currency"],
                               "mer": float(r["mer"]), "yield": float(r["yield"]), "franking": float(r["franking"]), "sector": r["sector"], "region": r["region"],
                               "status": r.get("status", "active"), "price_aud": prices.get(r["ticker"]), "max_weight": float(r["max_weight"]), "weight_hint": float(r["weight_hint"]),
-                              "twin": r.get("twin", "") or "", "liquidity": r.get("liquidity", "") or "", "style": r.get("style", "") or ""})
+                              "twin": r.get("twin", "") or "", "liquidity": r.get("liquidity", "") or "", "style": r.get("style", "") or "",
+                              "hub24_code": str(r.get("hub24_code", "") or "").strip()})
     tiers = sorted(profiles.balance_tiers.items(), key=lambda kv: kv[1]["order"])
 
     def split(lbl: str) -> tuple[str, str]:
