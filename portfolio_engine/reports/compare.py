@@ -15,8 +15,8 @@ TEMPLATE = r"""<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Compare platforms and super funds · Model Portfolio Lab</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<title>Compare | Model Portfolio Lab</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
 <style>
 __CSS__
 .tabs { display:flex; gap:6px; margin:0 0 4px; flex-wrap:wrap; }
@@ -41,8 +41,9 @@ table.cmp tr.sel td { background:var(--accent-soft); }
 .card2 h4 { margin:0 0 2px; font-size:14.5px; }
 .card2 .sub2 { color:var(--muted); font-size:12.5px; margin-bottom:8px; }
 .card2 dl { display:grid; grid-template-columns:1fr auto; gap:3px 10px; margin:0; font-size:13px; }
-.card2 dt { color:var(--muted); } .card2 dd { margin:0; font-family:"IBM Plex Mono", ui-monospace, monospace; text-align:right; }
+.card2 dt { color:var(--muted); } .card2 dd { margin:0; font-variant-numeric:tabular-nums; text-align:right; }
 .card2 dd.win { color:var(--good); font-weight:600; }
+.card2.mine { border-color:var(--accent); box-shadow:inset 0 3px 0 var(--accent); }
 .card2 .x { position:absolute; top:8px; right:8px; border:0; background:transparent; color:var(--faint); font-size:18px; padding:2px 6px; border-radius:6px; }
 .pt-pass { color:var(--good); font-weight:500; } .pt-fail { color:var(--critical); font-weight:600; }
 .more { margin-top:10px; }
@@ -51,9 +52,9 @@ table.cmp tr.sel td { background:var(--accent-soft); }
 </head>
 <body>
 <header><div class="wrap">
-  <nav class="nav no-print"><a href="/">Model portfolios</a><a href="/builder.html">Build your own portfolio</a><a href="/compare.html" aria-current="page">Compare</a><a href="/brief.html">Daily brief</a><a href="/quality.html">Holdings quality review</a></nav>
-  <h1>Compare platforms and super funds</h1>
-  <p class="lede">What each wrap platform would cost for a given balance and portfolio, and how every Australian super fund's MySuper product and investment options compare on fees, returns and the APRA performance test.</p>
+  <nav class="nav no-print"><a href="/">Model portfolios</a><a href="/builder.html">Builder</a><a href="/compare.html" aria-current="page">Compare</a><a href="/brief.html">Daily brief</a><a href="/quality.html">Quality review</a></nav>
+  <h1>Compare</h1>
+  <p class="lede">Platform costs at any balance, and every MySuper product and investment option side by side with your own portfolio.</p>
   <div class="meta" id="meta"></div>
   <div class="meta">Personal learning project. General information only, not a recommendation of any fund or platform. Check fees and returns in the product's current disclosure documents before relying on them.</div>
 </div></header>
@@ -107,7 +108,7 @@ table.cmp tr.sel td { background:var(--accent-soft); }
   <div class="fchips" id="s-kinds"></div>
   <div class="fchips" id="s-flags"></div>
   <div id="s-compare"></div>
-  <div class="tscroll"><table class="cmp"><thead><tr><th class="no-print"></th><th>Fund · product · option</th><th>Type</th><th class="num">Growth</th><th>Performance test</th><th class="num">3 years</th><th class="num">5 years</th><th class="num">7 years</th><th class="num">10 years</th><th class="num" id="s-feehead">Total fees</th><th class="num">Assets</th></tr></thead><tbody id="s-rows"></tbody></table></div>
+  <div class="tscroll"><table class="cmp"><thead><tr><th class="no-print"></th><th>Fund, product and option</th><th>Type</th><th class="num">Growth</th><th>Performance test</th><th class="num">3 years</th><th class="num">5 years</th><th class="num">7 years</th><th class="num">10 years</th><th class="num" id="s-feehead">Total fees</th><th class="num">Assets</th></tr></thead><tbody id="s-rows"></tbody></table></div>
   <div class="more"><button class="btn" id="s-more" type="button">Show more</button> <span class="muted" id="s-count" style="font-size:12.5px"></span></div>
   <div class="toolbar no-print"><button class="btn" id="s-xlsx" type="button">Download the filtered list as Excel</button></div>
   <details style="margin-top:10px"><summary>What the figures mean</summary><p>Returns are APRA's net investment returns a year to 30 June: after investment fees, costs and tax, before administration fees. Platform options report gross investment returns net of investment fees (before tax and administration fees), so they are not directly comparable with the others. "10 year return less administration fees" subtracts the administration fees at the chosen balance as an approximation of what a member kept. Total fees are administration plus investment fees and costs as a percentage of the balance, from APRA's representative member at each balance. The performance test is APRA's annual test against a benchmark portfolio over up to ten years; "short history" means fewer years were available. Fund size is member assets in the option or product.</p><p>Not in this data: insurance cover and premiums, member services, advice offered, ESG approach and other benefits. Those are in each fund's disclosure documents. Data: APRA Comprehensive Product Performance Package, licensed under Creative Commons Attribution 3.0 Australia.</p></details>
@@ -125,12 +126,11 @@ const fmtP = (x, d = 2) => (x == null || isNaN(x)) ? "–" : x.toFixed(d) + "%";
 const pct = (x, d = 2) => (x == null || isNaN(x)) ? "–" : (x * 100).toFixed(d) + "%";
 const money = v => { const n = parseFloat(String(v).replace(/[^0-9.]/g, "")); return isFinite(n) ? n : null; };
 let toastT; function toast(m){ const t = sel("toast"); t.textContent = m; t.style.display = "block"; clearTimeout(toastT); toastT = setTimeout(() => t.style.display = "none", 3200); }
-const COLORS = ["#2a78d6","#eb6834","#1baf7a","#eda100","#e87ba4","#4a3aa7","#0e9aa7","#8a5a2b","#c2185b"];
+const COLORS = ["#2e5e4e","#3f6f9f","#b9842a","#9a5638","#6b5b8c","#5e8c6a","#c47a5a","#2f4858","#8c8a3e"];
 
 // ---------------- tabs
 document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", String(x === b)));
   sel("tab-plat").hidden = b.dataset.tab !== "plat"; sel("tab-super").hidden = b.dataset.tab !== "super"; history.replaceState(null, "", "#" + b.dataset.tab); if (b.dataset.tab === "super") loadSuper(); });
-if (location.hash === "#super") document.querySelector('.tabs button[data-tab="super"]').click();
 
 // ---------------- platforms (the same fee formula as the builder)
 function tieredFee(menu, bal){ const bands = menu.bands || []; let fee = 0, lower = 0;
@@ -181,7 +181,7 @@ sel("p-xlsx").onclick = () => { if (typeof XLSX === "undefined") { toast("The sp
 renderPlat(); renderFeatures();
 
 // ---------------- super funds
-let S = null; const SF = { q: "", kinds: new Set(["MySuper", "Choice (diversified)"]), growth: "", open: true, test: "", sort: "r10", bal: 2, shown: 60, picked: [], dedupe: true };
+let S = null; const SF = { mine: true, q: "", kinds: new Set(["MySuper", "Choice (diversified)"]), growth: "", open: true, test: "", sort: "r10", bal: 2, shown: 60, picked: [], dedupe: true };
 const KINDS = ["MySuper", "Choice (diversified)", "Platform (diversified)", "Choice (single sector)"];
 async function loadSuper(){ if (S) return; try { const r = await fetch("/data/super.json", { cache: "no-cache" }); if (!r.ok) throw new Error(r.status); S = await r.json(); } catch (e) { sel("s-sub").textContent = "The super fund data could not be loaded (" + e.message + ")."; return; }
   S.rows.forEach((r, i) => r.id = i);
@@ -212,23 +212,54 @@ function renderSuper(){ if (!S) return; const rows = filtered();
   sel("s-feehead").textContent = `Total fees at ${fmtM(S.balances[SF.bal])}`;
   const show = rows.slice(0, SF.shown);
   sel("s-rows").innerHTML = show.map(r => { const t = totalAt(r); const on = SF.picked.includes(r.id);
-    return `<tr class="${on ? "sel" : ""}"><td class="no-print"><input type="checkbox" class="pick" data-id="${r.id}" ${on ? "checked" : ""} aria-label="Compare ${esc(r.f)} ${esc(r.o)}"></td><td><b>${esc(r.f)}</b><br><span style="font-size:12.5px">${esc(r.o)}</span> <span class="muted" style="font-size:11.5px">${esc(r.p)}${r.open ? "" : " · closed"}${r.copies > 1 ? ` · offered in ${r.copies} plans or versions` : ""}</span></td><td style="font-size:12px">${esc(r.k)}${r.basis ? '<br><span class="muted">gross of tax and administration</span>' : ""}</td><td class="num">${pct(r.g, 0)}</td><td>${ptCell(r)}</td><td class="num">${pct(r.r3)}</td><td class="num">${pct(r.r5)}</td><td class="num">${pct(r.r7)}</td><td class="num"><b>${pct(r.r10)}</b></td><td class="num">${t == null ? "–" : pct(t)}<br><span class="muted" style="font-size:11.5px">${t == null ? "" : fmtM(t * S.balances[SF.bal]) + " a year"}</span></td><td class="num">${sizeTxt(r.a ?? r.parent_a)}</td></tr>`; }).join("") || `<tr><td colspan="11" class="muted">Nothing matches these filters.</td></tr>`;
+    return `<tr class="${on ? "sel" : ""}"><td class="no-print"><input type="checkbox" class="pick" data-id="${r.id}" ${on ? "checked" : ""} aria-label="Compare ${esc(r.f)} ${esc(r.o)}"></td><td><b>${esc(r.f)}</b><br><span style="font-size:12.5px">${esc(r.o)}</span> <span class="muted" style="font-size:11.5px">${esc(r.p)}${r.open ? "" : ", closed"}${r.copies > 1 ? `, offered in ${r.copies} plans or versions` : ""}</span></td><td style="font-size:12px">${esc(r.k)}${r.basis ? '<br><span class="muted">gross of tax and administration</span>' : ""}</td><td class="num">${pct(r.g, 0)}</td><td>${ptCell(r)}</td><td class="num">${pct(r.r3)}</td><td class="num">${pct(r.r5)}</td><td class="num">${pct(r.r7)}</td><td class="num"><b>${pct(r.r10)}</b></td><td class="num">${t == null ? "–" : pct(t)}<br><span class="muted" style="font-size:11.5px">${t == null ? "" : fmtM(t * S.balances[SF.bal]) + " a year"}</span></td><td class="num">${sizeTxt(r.a ?? r.parent_a)}</td></tr>`; }).join("") || `<tr><td colspan="11" class="muted">Nothing matches these filters.</td></tr>`;
   sel("s-rows").querySelectorAll("input.pick").forEach(c => c.onchange = () => { const id = +c.dataset.id; if (c.checked) { if (SF.picked.length >= 5) { c.checked = false; toast("Compare up to five at a time"); return; } SF.picked.push(id); } else SF.picked = SF.picked.filter(x => x !== id); renderSuper(); });
   sel("s-count").textContent = `Showing ${show.length} of ${rows.length}`; sel("s-more").hidden = show.length >= rows.length;
   renderCompare(); }
-function renderCompare(){ const box = sel("s-compare"); if (!SF.picked.length) { box.innerHTML = ""; return; } const rs = SF.picked.map(id => S.rows[id]); const bal = S.balances[SF.bal];
-  const best = (f, hi = true) => { const vs = rs.map(f).filter(v => v != null); return vs.length > 1 ? (hi ? Math.max(...vs) : Math.min(...vs)) : null; };
-  const metrics = [["Growth assets", r => r.g, v => pct(v, 0), null], ["3 year return", r => r.r3, v => pct(v), true], ["5 year return", r => r.r5, v => pct(v), true], ["7 year return", r => r.r7, v => pct(v), true], ["10 year return", r => r.r10, v => pct(v), true],
-    ["10 year return less admin fees", after, v => pct(v), true], [`Total fees at ${fmtM(bal)}`, totalAt, v => pct(v), false], ["Total fees a year", r => totalAt(r) == null ? null : totalAt(r) * bal, v => fmtM(v), false],
-    ["Administration fees a year", r => adminAt(r) == null ? null : adminAt(r) * bal, v => fmtM(v), false], [`${fmtM(bal)} over 10 years at that return`, r => { const a = after(r); return a == null ? null : bal * Math.pow(1 + a, 10); }, v => fmtM(v), true], ["Size", r => r.a ?? r.parent_a, sizeTxt, null], ["Members", r => r.n, v => v == null ? "–" : Math.round(v).toLocaleString("en-AU"), null]];
-  box.innerHTML = `<div class="eyebrow" style="margin:6px 0 8px">Side by side (${rs.length})</div><div class="cards">` + rs.map(r => `<div class="card2"><button type="button" class="x" data-x="${r.id}" aria-label="Remove">×</button><h4>${esc(r.f)}</h4><div class="sub2">${esc(r.o)} · ${esc(r.k)}${r.open ? "" : " · closed"}<br>Performance test: ${ptCell(r)}</div><dl>${metrics.map(([k, f, fmt, hi]) => { const v = f(r); const b = hi == null ? null : best(f, hi); return `<dt>${k}</dt><dd class="${b != null && v === b ? "win" : ""}">${fmt(v)}</dd>`; }).join("")}</dl></div>`).join("") + `</div><p class="muted" style="font-size:12.5px;margin:8px 0 14px">Green marks the best of the selected on each line. Past returns are history, not a forecast; a higher growth allocation explains much of a higher return. <button type="button" class="btn small" id="s-clear">Clear the comparison</button></p>`;
-  box.querySelectorAll("button[data-x]").forEach(b => b.onclick = () => { SF.picked = SF.picked.filter(x => x !== +b.dataset.x); renderSuper(); }); sel("s-clear").onclick = () => { SF.picked = []; renderSuper(); }; }
+// Your portfolio from the builder (saved in this browser), shown as the first card beside the funds.
+function mine(){ try { const m = JSON.parse(localStorage.getItem("mpl-portfolio-summary") || "null"); return m && m.balance ? m : null; } catch (e) { return null; } }
+function similarFunds(n = 4){ const me = mine(); if (!me || !S) return []; const best = new Map();
+  // one option per fund: the MySuper stage or diversified option whose growth mix is closest to the portfolio's
+  for (const r of S.rows) { if (!(r.open && (r.k === "MySuper" || r.k === "Choice (diversified)") && r.g != null && r.r10 != null)) continue;
+    const gap = Math.abs(r.g - me.growth); if (gap > 0.075) continue; const cur = best.get(r.f);
+    if (!cur || gap < cur.gap || (gap === cur.gap && ((r.a ?? r.parent_a) || 0) > ((cur.r.a ?? cur.r.parent_a) || 0))) best.set(r.f, { r, gap }); }
+  return [...best.values()].map(x => x.r).sort((a, b) => ((b.a ?? b.parent_a) || 0) - ((a.a ?? a.parent_a) || 0)).slice(0, n).map(r => r.id); }
+function compareColumns(){ const bal = S.balances[SF.bal]; const me = SF.mine ? mine() : null; const cols = [];
+  if (me) cols.push({ id: "me", title: me.name, sub: `Your portfolio from the builder: ${me.holdings} holdings on ${me.platform_label}`, test: "",
+    v: { g: me.growth, r3: me.r3, r5: me.r5, r7: null, r10: me.r10, after: me.r10 == null ? null : me.r10 - me.platform, fee: me.total, feeyr: me.total * bal, admin: me.platform * bal, grow: me.r10 == null ? null : bal * Math.pow(1 + me.r10 - me.platform, 10), size: null, members: null } });
+  for (const id of SF.picked) { const r = S.rows[id]; const a = after(r); cols.push({ id: r.id, title: r.f, sub: `${r.o}, ${r.k}${r.open ? "" : ", closed"}`, test: r.pt, row: r,
+    v: { g: r.g, r3: r.r3, r5: r.r5, r7: r.r7, r10: r.r10, after: a, fee: totalAt(r), feeyr: totalAt(r) == null ? null : totalAt(r) * bal, admin: adminAt(r) == null ? null : adminAt(r) * bal, grow: a == null ? null : bal * Math.pow(1 + a, 10), size: r.a ?? r.parent_a, members: r.n } }); }
+  return cols; }
+const CMP_ROWS = () => { const bal = S.balances[SF.bal]; return [["g", "Growth assets", v => pct(v, 0), null], ["r3", "3 year return", v => pct(v), true], ["r5", "5 year return", v => pct(v), true], ["r7", "7 year return", v => pct(v), true], ["r10", "10 year return", v => pct(v), true],
+  ["after", "10 year return less administration fees", v => pct(v), true], ["fee", `Total fees (${fmtM(bal)} for funds)`, v => pct(v), false], ["feeyr", `Total fees a year on ${fmtM(bal)}`, v => fmtM(v), false],
+  ["admin", `Administration or platform fees on ${fmtM(bal)}`, v => fmtM(v), false], ["grow", `${fmtM(bal)} after 10 years at that return`, v => fmtM(v), true], ["size", "Size", sizeTxt, null], ["members", "Members", v => v == null ? "–" : Math.round(v).toLocaleString("en-AU"), null]]; };
+function renderCompare(){ const box = sel("s-compare"); const me = mine(); const cols = compareColumns();
+  const intro = me ? `<div class="fchips"><button type="button" id="c-mine" aria-pressed="${SF.mine}" title="${esc(me.name)}">Show my portfolio</button><button type="button" id="c-similar">Suggest similar funds</button>${cols.length ? '<button type="button" id="c-dl">Download this comparison</button><button type="button" id="c-clear">Clear</button>' : ""}</div>`
+    : (cols.length ? `<div class="fchips"><button type="button" id="c-dl">Download this comparison</button><button type="button" id="c-clear">Clear</button><span class="muted" style="font-size:12.5px">To compare your own portfolio, build it on the builder page first; it appears here automatically.</span></div>` : "");
+  if (!cols.length) { box.innerHTML = intro; wireCompare(); return; }
+  const rows = CMP_ROWS(); const best = (k, hi) => { const vs = cols.map(c => c.v[k]).filter(v => v != null); return vs.length > 1 ? (hi ? Math.max(...vs) : Math.min(...vs)) : null; };
+  box.innerHTML = intro + `<div class="cards">` + cols.map(c => `<div class="card2 ${c.id === "me" ? "mine" : ""}">${c.id === "me" ? "" : `<button type="button" class="x" data-x="${c.id}" aria-label="Remove">×</button>`}<h4>${esc(c.title)}</h4><div class="sub2">${esc(c.sub)}${c.id === "me" ? "" : `<br>Performance test: ${ptCell(c.row)}`}</div><dl>${rows.map(([k, lbl, fmt, hi]) => { const v = c.v[k]; const b = hi == null ? null : best(k, hi); return `<dt>${lbl}</dt><dd class="${b != null && v === b ? "win" : ""}">${fmt(v)}</dd>`; }).join("")}</dl></div>`).join("") + `</div>` +
+    `<p class="muted" style="font-size:12.5px;margin:8px 0 14px">Green marks the best on each line. ${cols[0].id === "me" ? "Your portfolio's returns are the weighted returns of its holdings after their own fund fees, before platform fees and tax; the funds' returns are after investment fees and tax, before administration fees. Super tax of up to 15% on earnings would lower the portfolio's figures for a super account, so treat the return lines as a rough guide and the fee lines as the firmer comparison." : "Past returns are history, not a forecast; a higher growth allocation explains much of a higher return."}</p>`;
+  wireCompare(); }
+function wireCompare(){ const box = sel("s-compare");
+  box.querySelectorAll("button[data-x]").forEach(b => b.onclick = () => { SF.picked = SF.picked.filter(x => x !== +b.dataset.x); renderSuper(); });
+  const on = (id, f) => { const e = sel(id); if (e) e.onclick = f; };
+  on("c-mine", () => { SF.mine = !SF.mine; renderCompare(); }); on("c-clear", () => { SF.picked = []; renderSuper(); });
+  on("c-similar", () => { const ids = similarFunds(); if (!ids.length) { toast("No open options within 7.5 points of your growth mix"); return; } SF.picked = ids; SF.mine = true; renderSuper(); toast("The four largest open options with a similar growth mix"); });
+  on("c-dl", downloadCompare); }
+function downloadCompare(){ if (typeof XLSX === "undefined") { toast("The spreadsheet library did not load"); return; } const cols = compareColumns(); const rows = CMP_ROWS();
+  const aoa = [["Comparison", `as at ${S.as_of}`], [], ["", ...cols.map(c => c.title)], ["Option or portfolio", ...cols.map(c => c.sub)], ["Performance test", ...cols.map(c => c.id === "me" ? "not applicable" : c.test || "not tested")]]
+    .concat(rows.map(([k, lbl, , ]) => [lbl, ...cols.map(c => { const v = c.v[k]; return v == null ? null : v; })]))
+    .concat([[], ["Notes", "Fund returns: APRA net investment returns (after investment fees and tax, before administration fees). Portfolio returns: weighted returns of the holdings after their fund fees, before platform fees and tax. Percentages are decimals. Past returns are not a forecast."], ["Source", `${S.source}, ${S.source_page}. Licence: ${S.licence}.`]]);
+  const ws = XLSX.utils.aoa_to_sheet(aoa); ws["!cols"] = [{ wch: 44 }, ...cols.map(() => ({ wch: 34 }))]; const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Comparison");
+  XLSX.writeFile(wb, `super_comparison_${new Date().toISOString().slice(0, 10)}.xlsx`); toast("Downloaded"); }
 sel("s-xlsx").onclick = () => { if (!S || typeof XLSX === "undefined") { toast("Not ready yet"); return; } const rows = filtered();
   const head = ["Fund", "Product", "Menu", "Option", "Type", "Open", "Growth assets", "Performance test", "3 year return", "5 year return", "7 year return", "10 year return", "Return basis"].concat(S.balances.map(b => `Admin fees at ${fmtM(b)}`)).concat(S.balances.map(b => `Total fees at ${fmtM(b)}`)).concat(["Assets", "Members"]);
   const data = rows.map(r => [r.f, r.p, r.m, r.o, r.k, r.open ? "yes" : "no", r.g, r.pt, r.r3, r.r5, r.r7, r.r10, r.basis || "net of investment fees and tax"].concat(r.fa || []).concat(r.ft || []).concat([r.a ?? r.parent_a, r.n]));
   const wb = XLSX.utils.book_new(); const ws = XLSX.utils.aoa_to_sheet([[`Super funds: ${S.source} (as at ${S.as_of})`], [`Source: ${S.source_page}. Licence: ${S.licence}.`], [], head].concat(data));
   ws["!cols"] = [36, 36, 30, 36, 20, 6, 10, 16, 9, 9, 9, 9, 28].concat(Array(10).fill(12)).concat([14, 10]).map(w => ({ wch: w })); XLSX.utils.book_append_sheet(wb, ws, "Super funds"); XLSX.writeFile(wb, `super_funds_${S.as_of.replace(/\s+/g, "_")}.xlsx`); };
-sel("meta").textContent = `Platform rate cards: ${[...new Set(Object.values(P).flatMap(p => Object.values(p.accounts || {}).map(a => a.as_of)))].filter(Boolean).length} documents dated in config/platforms.yaml. Super fund data loads when you open the Super funds tab.`;
+sel("meta").textContent = `Platform fees from each platform's current disclosure document; the date of each is shown in the cost table. Super fund data loads when you open the Super funds tab.`;
+if (location.hash === "#super") document.querySelector('.tabs button[data-tab="super"]').click();   // opened from the builder's "Compare with super funds"
 </script>
 </body>
 </html>

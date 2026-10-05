@@ -14,14 +14,14 @@ TEMPLATE = r"""<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Daily brief · Model Portfolio Lab</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<title>Daily brief | Model Portfolio Lab</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
 <style>
 __CSS__
 .groups { display:grid; gap:18px; }
 .numtiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(190px, 1fr)); gap:12px; }
 .numtiles .tile .v { font-size:24px; }
-.chg { font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:13px; }
+.chg { font-variant-numeric:tabular-nums; font-size:13px; }
 .chg.up { color:var(--good); } .chg.down { color:var(--critical); }
 .coming { display:flex; flex-wrap:wrap; gap:8px 18px; font-size:13.5px; margin-top:10px; color:var(--muted); }
 .coming b { color:var(--text); font-weight:600; }
@@ -31,13 +31,13 @@ __CSS__
 .fchips input { font:inherit; font-size:14px; padding:7px 10px; border:1.5px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); min-width:200px; }
 .alist { display:grid; gap:0; border-top:1px solid var(--line); }
 .arow { display:grid; grid-template-columns:118px 76px 1fr auto; gap:6px 14px; padding:9px 2px; border-bottom:1px solid var(--line); align-items:baseline; font-size:14px; }
-.arow .when { color:var(--faint); font-size:12.5px; font-family:"IBM Plex Mono", ui-monospace, monospace; }
-.arow .code { font-family:"IBM Plex Mono", ui-monospace, monospace; font-weight:500; }
+.arow .when { color:var(--faint); font-size:12.5px; font-variant-numeric:tabular-nums; }
+.arow .code { font-variant-numeric:tabular-nums; font-weight:500; }
 .arow .co { color:var(--muted); font-size:12.5px; }
 .arow a { color:var(--text); text-decoration:none; } .arow a:hover { text-decoration:underline; color:var(--accent); }
 .arow.held { background:var(--accent-soft); }
 .rrow { display:grid; grid-template-columns:118px 1fr; gap:4px 14px; padding:10px 2px; border-bottom:1px solid var(--line); font-size:14px; }
-.rrow .when { color:var(--faint); font-size:12.5px; font-family:"IBM Plex Mono", ui-monospace, monospace; }
+.rrow .when { color:var(--faint); font-size:12.5px; font-variant-numeric:tabular-nums; }
 .rrow .t a { color:var(--text); font-weight:500; text-decoration:none; } .rrow .t a:hover { text-decoration:underline; color:var(--accent); }
 .rrow .sum { color:var(--muted); font-size:13px; margin-top:2px; }
 .src { display:inline-block; font-size:11.5px; font-weight:600; letter-spacing:.02em; padding:2px 8px; border-radius:6px; background:var(--surface-2); color:var(--muted); margin-right:6px; }
@@ -54,10 +54,9 @@ __CSS__
 </head>
 <body>
 <header><div class="wrap">
-  <nav class="nav no-print"><a href="/">Model portfolios</a><a href="/builder.html">Build your own portfolio</a><a href="/compare.html">Compare</a><a href="/brief.html" aria-current="page">Daily brief</a><a href="/quality.html">Holdings quality review</a></nav>
+  <nav class="nav no-print"><a href="/">Model portfolios</a><a href="/builder.html">Builder</a><a href="/compare.html">Compare</a><a href="/brief.html" aria-current="page">Daily brief</a><a href="/quality.html">Quality review</a></nav>
   <h1 id="h1">Daily brief</h1>
-  <p class="lede">The numbers that move client conversations, what the companies in the model portfolios told the market, and what regulators,
-  courts and government changed for financial advice. Rebuilt each weekday evening after the ASX close.</p>
+  <p class="lede">Today's key numbers, what the holdings told the market, and what changed for financial advice.</p>
   <div class="meta" id="meta"></div>
   <div class="meta">Personal learning project. Headlines link to their publishers; nothing here is financial advice. Check anything you rely on at its source.</div>
 </div></header>
@@ -172,7 +171,7 @@ if (M.up && M.up.length) { sel("moves-title").textContent = `Biggest moves on ${
 // ---- announcements
 const ROUTINE = /^(Distribution Announcement|Issued Capital|Security Holder Details|Dividend Announcement)$/i;   // distributions, buy-back tallies, substantial holder notices
 const AF = { ps: false, today: false, q: "", routine: false };
-function annRow(a, heldShade){ return `<div class="arow ${heldShade && a.held ? "held" : ""}"><span class="when">${fmtWhen(a.date)}</span><span class="code">${esc(a.code)}</span><span><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.headline)}</a> <span class="co">${esc(a.name)}${a.type ? " · " + esc(a.type) : ""}</span></span><span>${a.price_sensitive ? '<span class="chip serious">price sensitive</span>' : ""}</span></div>`; }
+function annRow(a, heldShade){ return `<div class="arow ${heldShade && a.held ? "held" : ""}"><span class="when">${fmtWhen(a.date)}</span><span class="code">${esc(a.code)}</span><span><a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.headline)}</a> <span class="co">${esc(a.name)}${a.type ? ", " + esc(a.type) : ""}</span></span><span>${a.price_sensitive ? '<span class="chip serious">price sensitive</span>' : ""}</span></div>`; }
 function renderAnns(){ const latestDay = (B.announcements[0] || {}).date ? D(B.announcements[0].date).toLocaleDateString("en-AU", { timeZone: "Australia/Brisbane" }) : "";
   const q = AF.q.trim().toUpperCase();
   const rows = B.announcements.filter(a => (AF.routine || !ROUTINE.test(a.type || "")) && (!AF.ps || a.price_sensitive) && (!AF.today || D(a.date).toLocaleDateString("en-AU", { timeZone: "Australia/Brisbane" }) === latestDay) && (!q || a.code.includes(q) || (a.name || "").toUpperCase().includes(q) || a.headline.toUpperCase().includes(q)));
@@ -185,7 +184,7 @@ renderAnns();
 sel("btn-look").onclick = async () => { const code = sel("lcode").value.trim().toUpperCase().replace(/\.AX$/, ""); if (!/^[A-Z0-9]{2,6}$/.test(code)) { toast("Enter an ASX code such as CBA"); return; }
   if (!FN) { toast("Live lookups work on the published site"); return; } sel("lout").innerHTML = `<div class="muted">Fetching ${code}…</div>`;
   try { const r = await fetch(FN + "/asx?code=" + encodeURIComponent(code)); const j = await r.json(); if (!r.ok) throw new Error(j.error || r.statusText);
-    const h = j.header || {}; sel("lout").innerHTML = `<div style="margin-bottom:6px"><b>${esc(j.name || code)}</b>${h.priceLast != null ? ` · last $${num(h.priceLast, 3)} ${h.priceChangePercent != null ? `<span class="chg ${h.priceChangePercent > 0 ? "up" : h.priceChangePercent < 0 ? "down" : ""}">${h.priceChangePercent > 0 ? "+" : ""}${num(h.priceChangePercent, 2)}%</span>` : ""}` : ""}</div><div class="alist">${(j.items || []).map(a => annRow(a, false)).join("") || '<div class="empty">No recent announcements.</div>'}</div>`;
+    const h = j.header || {}; sel("lout").innerHTML = `<div style="margin-bottom:6px"><b>${esc(j.name || code)}</b>${h.priceLast != null ? `, last $${num(h.priceLast, 3)} ${h.priceChangePercent != null ? `<span class="chg ${h.priceChangePercent > 0 ? "up" : h.priceChangePercent < 0 ? "down" : ""}">${h.priceChangePercent > 0 ? "+" : ""}${num(h.priceChangePercent, 2)}%</span>` : ""}` : ""}</div><div class="alist">${(j.items || []).map(a => annRow(a, false)).join("") || '<div class="empty">No recent announcements.</div>'}</div>`;
   } catch (e) { sel("lout").innerHTML = `<div class="empty">Could not fetch ${esc(code)}: ${esc(e.message)}</div>`; } };
 sel("lcode").onkeydown = e => { if (e.key === "Enter") sel("btn-look").click(); };
 
@@ -212,7 +211,7 @@ renderReg();
 sel("wlist").innerHTML = (B.wrap || []).map(w => `<div class="rrow"><span class="when">${fmtWhen(w.date)}</span><span class="t"><span class="src">${esc(w.source)}</span><a href="${esc(w.link)}" target="_blank" rel="noopener">${esc(w.title)}</a></span></div>`).join("") || `<div class="empty">No market wrap headlines today.</div>`;
 
 // ---- sources
-sel("srcs").innerHTML = B.sources.map(s => `<div class="${s.ok ? "" : "bad"}">${s.ok ? "✓" : "✗"} ${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>` : esc(s.name)}${s.ok ? ` · ${s.items} item${s.items === 1 ? "" : "s"}` : ""}${s.note ? " · " + esc(s.note) : ""}</div>`).join("");
+sel("srcs").innerHTML = B.sources.map(s => `<div class="${s.ok ? "" : "bad"}">${s.ok ? "✓" : "✗"} ${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>` : esc(s.name)}${s.ok ? `, ${s.items} item${s.items === 1 ? "" : "s"}` : ""}${s.note ? ", " + esc(s.note) : ""}</div>`).join("");
 
 // ---- downloads
 sel("btn-print").onclick = () => window.print();

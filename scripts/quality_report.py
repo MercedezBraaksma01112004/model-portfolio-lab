@@ -36,6 +36,20 @@ h2{font-family:"IBM Plex Serif",Georgia,serif;font-weight:600;font-size:20px;mar
 .note{color:var(--text);margin:0}.kv{display:grid;grid-template-columns:1fr auto;gap:3px 12px;font-size:12.5px;margin:0;align-content:start}.kv dt{color:var(--muted);margin:0}.kv dd{margin:0;text-align:right;font-family:"IBM Plex Mono",ui-monospace,monospace}
 .verdicts{margin:14px 0 0;color:var(--muted);max-width:75ch}.verdicts b{color:var(--text)}
 .essay{max-width:72ch;color:var(--text)}.essay p{margin:0 0 12px}
+/* site-wide look: plain top bar, one sans family, flat sections */
+:root{--bg:#ffffff;--surface:#ffffff;--line:#e1e6e3;--text:#15211d;--muted:#53605b;--faint:#88928e;--accent:#2e5e4e;--accent-soft:#e7efec}
+body{font-family:"Hanken Grotesk",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-feature-settings:"tnum" 1;background:var(--bg)}
+.wrap{max-width:1200px;padding:0 28px 60px}
+.hero{background:none;color:var(--text);margin:0 0 20px;padding:0 0 22px;border-bottom:1px solid var(--line)}.hero h1{color:var(--text)}.hero .lede,.hero .meta{color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;align-items:center;gap:2px 22px;margin:0 0 28px;padding:16px 0 15px;border-bottom:1px solid var(--line);font-size:14.5px}
+.nav::before{content:"Model Portfolio Lab";font-weight:700;font-size:15.5px;color:var(--text);margin-right:auto}
+.nav a{color:var(--muted);text-decoration:none;padding:6px 0;border:0;border-bottom:2px solid transparent;border-radius:0;background:none;min-height:0}
+.nav a[aria-current="page"]{color:var(--text);font-weight:600;background:none;border-bottom-color:var(--accent)}
+h1,h2{font-family:inherit;font-weight:700;letter-spacing:-0.02em}
+.tile{border:0;border-top:0;padding:0;background:none}.tile .v{font-family:inherit;font-weight:700}
+.card{box-shadow:none;border-radius:12px}
+.card .mono,.kv dd{font-family:inherit;font-variant-numeric:tabular-nums}
+.chip{border-radius:5px;font-weight:600}
 @media print{body{background:#fff;color:#000}.card{break-inside:avoid;border-color:#bbb}}
 """
 
@@ -56,10 +70,10 @@ def main() -> int:
     for t, r in q.items():
         counts[r["verdict"]] = counts.get(r["verdict"], 0) + 1
     out = [f"<title>Holdings Quality Review</title>",
-           '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&family=IBM+Plex+Mono&display=swap">',
+           '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap">',
            f"<style>{CSS}</style>", '<div class="wrap">',
-           '<div class="hero"><nav class="nav"><a href="/">Model portfolios</a><a href="/builder.html">Build your own portfolio</a><a href="/compare.html">Compare</a><a href="/brief.html">Daily brief</a><a href="/quality.html" aria-current="page">Holdings quality review</a></nav>',
-           "<h1>Holdings Quality Review</h1>",
+           '<div class="hero"><nav class="nav"><a href="/">Model portfolios</a><a href="/builder.html">Builder</a><a href="/compare.html">Compare</a><a href="/brief.html">Daily brief</a><a href="/quality.html" aria-current="page">Quality review</a></nav>',
+           "<h1>Quality review</h1>",
            "<p class=\"lede\">Every holding in the model universe, judged on what the business is and what the data says: ten years of returns, volatility, "
            "worst falls, valuation, yield, franking and the analyst consensus. One verdict each, with the reason written out.</p>",
            f"<div class=\"meta\">Research as of {as_of or 'latest build'}; verdicts dated on each note. Personal learning project; opinion, not financial advice. "
@@ -90,14 +104,14 @@ def main() -> int:
             r = research.get(t, {})
             name = html.escape(r.get("name") or uni.get(t, {}).get("name") or t)
             status = uni.get(t, {}).get("status", "")
-            out.append(f'<div class="card"><div><h3>{name} <span class="mono">{t}{" · watchlist" if status == "watchlist" else ""}</span>'
+            out.append(f'<div class="card"><div><h3>{name} <span class="mono">{t}{", watchlist" if status == "watchlist" else ""}</span>'
                        f'<span class="chip {CHIP.get(v["verdict"], "neutral")}">{v["verdict"]}</span></h3><p class="note">{html.escape(v["note"])}</p></div>'
                        f'<dl class="kv"><dt>10 year p.a.</dt><dd>{f(r.get("return_10y_pct_pa"))}{"†" if (r.get("return_proxy") or {}).get("10y") else ""}</dd>'
                        f'<dt>5 year p.a.</dt><dd>{f(r.get("return_5y_pct_pa"))}{"†" if (r.get("return_proxy") or {}).get("5y") else ""}</dd>'
                        f'<dt>1 year</dt><dd>{f(r.get("return_1y_pct"))}</dd><dt>Volatility</dt><dd>{f(r.get("volatility_1y_pct"), 0, "%") if r.get("volatility_1y_pct") is not None else "–"}</dd>'
                        f'<dt>Worst fall (1y)</dt><dd>{f(r.get("max_drawdown_1y_pct"), 0)}</dd><dt>Yield</dt><dd>{f(r.get("dividend_yield_pct"), 1, "%") if r.get("dividend_yield_pct") is not None else "–"}</dd>'
                        f'<dt>Forward PE</dt><dd>{f(r.get("pe_forward"), 1, "x") if r.get("pe_forward") else "–"}</dd>'
-                       f'<dt>Consensus</dt><dd>{html.escape(r.get("consensus_label") or "–")}{(" · " + str(r.get("analysts"))) if r.get("analysts") else ""}</dd></dl></div>')
+                       f'<dt>Consensus</dt><dd>{html.escape(r.get("consensus_label") or "–")}{(" (" + str(r.get("analysts")) + ")") if r.get("analysts") else ""}</dd></dl></div>')
     out.append('<p class="meta" style="margin-top:20px">† index stand-in because the holding is younger than the period. Figures from the price feed on the date above; verdicts are opinion.</p></div>')
     path = ROOT / "output" / "quality_review.html"
     path.parent.mkdir(exist_ok=True)

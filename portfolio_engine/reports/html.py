@@ -17,8 +17,8 @@ from ..market_data import MarketData
 from ..signals import TacticalView
 
 # Categorical palette in fixed order per asset class (validated reference palette, light and dark steps).
-PALETTE_LIGHT = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#4a3aa7"]
-PALETTE_DARK = ["#3987e5", "#d95926", "#199e70", "#c98500", "#d55181", "#008300", "#9085e9"]
+PALETTE_LIGHT = ["#b9842a", "#3f6f9f", "#9a5638", "#6b5b8c", "#8fb0a2", "#a3bcd3", "#c9c0ad"]
+PALETTE_DARK = ["#d9a54a", "#7ea6d1", "#c98463", "#a495c9", "#8fb8a8", "#9fb9d3", "#a9a191"]
 
 TEMPLATE = r"""<!doctype html>
 <html lang="en-AU">
@@ -26,170 +26,182 @@ TEMPLATE = r"""<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Model Portfolio Lab</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
 <style>
 :root {
   color-scheme: light;
-  --bg:#f4f5f3; --surface:#fdfdfc; --surface-2:#eef0ee; --line:#dfe2de; --text:#101311; --muted:#4f5652; --faint:#858c88;
-  --accent:#1f3a5f; --accent-ink:#ffffff; --accent-soft:#e3eaf4;
-  --warn-bg:#fff3cc; --warn-text:#5c4300; --good:#1a7f37; --neutral:#6b7280; --serious:#b45309; --critical:#b42318;
-  --good-bg:#e6f4ea; --neutral-bg:#eceef1; --serious-bg:#fdf0e0; --critical-bg:#fde8e6;
+  --bg:#ffffff; --surface:#ffffff; --surface-2:#f4f6f5; --panel:#f4f6f5; --line:#e1e6e3; --line-strong:#c9d1cd; --text:#15211d; --muted:#53605b; --faint:#88928e;
+  --accent:#2e5e4e; --accent-ink:#ffffff; --accent-soft:#e7efec; --accent-hover:#244b3e;
+  --warn-bg:#fdf3dc; --warn-text:#6a4a05; --good:#1d7a47; --neutral:#5f6b67; --serious:#a35b06; --critical:#b42318;
+  --good-bg:#e5f3ea; --neutral-bg:#eef1f0; --serious-bg:#fcefdc; --critical-bg:#fce9e7;
   __LIGHT_VARS__
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --bg:#121413; --surface:#1b1e1c; --surface-2:#242826; --line:#303532; --text:#f3f4f2; --muted:#b9bfba; --faint:#828985;
-    --accent:#8fb3e6; --accent-ink:#0f1a2a; --accent-soft:#1f2c3d;
-    --warn-bg:#3a3010; --warn-text:#ffe08a; --good:#4ade80; --neutral:#a1a1aa; --serious:#fbbf24; --critical:#f87171;
-    --good-bg:#12291a; --neutral-bg:#26292e; --serious-bg:#33260c; --critical-bg:#3a1512;
+    --bg:#111614; --surface:#111614; --surface-2:#19201d; --panel:#19201d; --line:#26302c; --line-strong:#34403b; --text:#eef2f0; --muted:#aab5b0; --faint:#7d8883;
+    --accent:#7fb8a3; --accent-ink:#0d1a15; --accent-soft:#1c2b26; --accent-hover:#95c8b5;
+    --warn-bg:#33290e; --warn-text:#f3d58a; --good:#5cc98a; --neutral:#a3aca8; --serious:#f0b45a; --critical:#f28b82;
+    --good-bg:#14261c; --neutral-bg:#1f2623; --serious-bg:#2e2410; --critical-bg:#331a17;
     __DARK_VARS__
   }
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg:#121413; --surface:#1b1e1c; --surface-2:#242826; --line:#303532; --text:#f3f4f2; --muted:#b9bfba; --faint:#828985;
-  --accent:#8fb3e6; --accent-ink:#0f1a2a; --accent-soft:#1f2c3d;
-  --warn-bg:#3a3010; --warn-text:#ffe08a; --good:#4ade80; --neutral:#a1a1aa; --serious:#fbbf24; --critical:#f87171;
-  --good-bg:#12291a; --neutral-bg:#26292e; --serious-bg:#33260c; --critical-bg:#3a1512;
+  --bg:#111614; --surface:#111614; --surface-2:#19201d; --panel:#19201d; --line:#26302c; --line-strong:#34403b; --text:#eef2f0; --muted:#aab5b0; --faint:#7d8883;
+  --accent:#7fb8a3; --accent-ink:#0d1a15; --accent-soft:#1c2b26; --accent-hover:#95c8b5;
+  --warn-bg:#33290e; --warn-text:#f3d58a; --good:#5cc98a; --neutral:#a3aca8; --serious:#f0b45a; --critical:#f28b82;
+  --good-bg:#14261c; --neutral-bg:#1f2623; --serious-bg:#2e2410; --critical-bg:#331a17;
   __DARK_VARS__
 }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } * { transition:none !important; } }
-body { margin:0; background:var(--bg); color:var(--text); font:15px/1.5 "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-.num, td.num, th.num, .mono { font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric:tabular-nums; }
-a { color:var(--accent); }
+body { margin:0; background:var(--bg); color:var(--text); font:15px/1.55 "Hanken Grotesk", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-feature-settings:"tnum" 1; -webkit-font-smoothing:antialiased; }
+.num, td.num, th.num, .mono { font-variant-numeric:tabular-nums; }
+a { color:var(--accent); text-underline-offset:2px; }
 button { font:inherit; cursor:pointer; }
-button:focus-visible, tr[tabindex]:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
-.wrap { max-width:1240px; margin:0 auto; padding:0 24px; }
-.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; font-size:14px; }
-.nav a { color:rgba(255,255,255,.85); text-decoration:none; padding:9px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.22); min-height:40px; display:inline-flex; align-items:center; transition:background .12s; }
-.nav a[aria-current="page"] { background:#fff; color:#1f3a5f; border-color:#fff; font-weight:600; }
-.nav a:hover { background:rgba(255,255,255,.14); }
-.nav a[aria-current="page"]:hover { background:#fff; }
-.dstack { display:flex; height:18px; border-radius:5px; overflow:hidden; gap:2px; background:var(--line); margin-top:8px; }
-.dstack span { display:block; height:100%; min-width:2px; }
-.dlegend { display:flex; flex-wrap:wrap; gap:4px 14px; margin-top:8px; font-size:12.5px; color:var(--muted); }
-.dlegend i { display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:5px; vertical-align:-1px; }
-.flag { display:inline-block; background:var(--serious-bg); color:var(--serious); padding:3px 9px; border-radius:999px; font-size:12.5px; margin:4px 6px 0 0; }
-header { padding:26px 0 26px; border-bottom:1px solid var(--line); background:linear-gradient(135deg, #16304f 0%, #1f3a5f 55%, #2a4d7a 100%); color:#fff; }
-header .meta, header .lede { color:rgba(255,255,255,.78); }
-header a { color:#fff; }
-h1 { margin:0; font-family:"IBM Plex Serif", Georgia, serif; font-weight:600; font-size:34px; letter-spacing:-0.01em; text-wrap:balance; }
-.lede { margin:10px 0 0; max-width:68ch; font-size:16px; }
-.meta { margin-top:10px; font-size:12.5px; color:var(--faint); }
+:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.wrap { max-width:1200px; margin:0 auto; padding:0 28px; }
+@media (max-width:700px) { .wrap { padding:0 16px; } }
+
+/* top bar and page title */
+header { background:var(--bg); color:var(--text); padding:0 0 26px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; align-items:center; gap:2px 22px; margin:0 0 30px; padding:16px 0 15px; border-bottom:1px solid var(--line); font-size:14.5px; }
+.nav::before { content:"Model Portfolio Lab"; font-weight:700; font-size:15.5px; letter-spacing:-0.01em; color:var(--text); margin-right:auto; }
+.nav a { color:var(--muted); text-decoration:none; padding:6px 0; border-bottom:2px solid transparent; }
+.nav a:hover { color:var(--text); }
+.nav a[aria-current="page"] { color:var(--text); font-weight:600; border-bottom-color:var(--accent); }
+@media (max-width:700px) { .nav { gap:2px 16px; } .nav::before { flex-basis:100%; margin-bottom:6px; } }
+header a { color:var(--accent); }
+h1 { margin:0; font-weight:700; font-size:32px; line-height:1.15; letter-spacing:-0.02em; text-wrap:balance; }
+.lede { margin:10px 0 0; max-width:64ch; font-size:16.5px; color:var(--muted); }
+header .lede, header .meta { color:var(--muted); }
+.meta { margin-top:8px; font-size:12.5px; color:var(--faint); max-width:90ch; }
 .banner { background:var(--warn-bg); color:var(--warn-text); padding:10px 0; font-weight:500; }
-h2 { margin:0 0 6px; font-family:"IBM Plex Serif", Georgia, serif; font-weight:600; font-size:19px; letter-spacing:-0.005em; text-wrap:balance; }
-.eyebrow { font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-bottom:6px; }
-.sub { color:var(--muted); max-width:70ch; }
+h2 { margin:0 0 6px; font-weight:700; font-size:20px; line-height:1.25; letter-spacing:-0.01em; text-wrap:balance; }
+h3 { letter-spacing:-0.005em; }
+.eyebrow { font-size:13px; color:var(--muted); font-weight:600; margin-bottom:6px; }
+section > .eyebrow:first-child, section > div > .eyebrow:first-child:not(.keep) { display:none; }
+.sub { color:var(--muted); max-width:72ch; font-size:14.5px; }
 .sub p { margin:0 0 10px; }
-main { padding:28px 0 70px; display:grid; grid-template-columns:minmax(0,1fr); gap:24px; }
+
+/* page structure: sections are separated by space and a hairline, not boxed */
+main { padding:8px 0 80px; display:grid; grid-template-columns:minmax(0,1fr); gap:0; }
 main > *, .two > * { min-width:0; }
-section { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px 26px; box-shadow:0 1px 2px rgba(16,19,17,.04), 0 8px 24px -18px rgba(16,19,17,.25); }
-@media (max-width: 700px) { section { padding:18px 16px; border-radius:12px; } }
-.two { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
-@media (max-width: 960px) { .two { grid-template-columns:1fr; } }
+section { background:transparent; border:0; border-top:1px solid var(--line); border-radius:0; padding:34px 0 30px; box-shadow:none; }
+main > section:first-child, main > div:first-child > section:first-child { border-top:0; }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:0 48px; border-top:1px solid var(--line); }
+.two > section { border-top:0; }
+@media (max-width:960px) { .two { grid-template-columns:1fr; } .two > section + section { border-top:1px solid var(--line); } }
 
-/* selector */
-.q { display:grid; grid-template-columns:220px minmax(0,1fr); gap:10px 22px; align-items:start; padding:16px 0; border-top:1px solid var(--line); }
-.q.first { border-top:0; }
-.q .label { font-weight:600; font-size:15.5px; }
+/* the choices panel */
+#selector, #setup { background:var(--panel); border:0; border-radius:14px; padding:26px 28px 24px; margin-top:26px; }
+@media (max-width:700px) { #selector, #setup { padding:18px 16px; } }
+.q { display:grid; grid-template-columns:200px minmax(0,1fr); gap:10px 22px; align-items:start; padding:14px 0; border-top:1px solid var(--line); }
+.q.first { border-top:0; padding-top:0; }
+.q .label { font-weight:600; font-size:15px; }
 .q .hint { display:block; font-weight:400; font-size:12.5px; color:var(--faint); margin-top:2px; }
-.seg { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:10px; min-width:0; }
-.two > * { min-width:0; }
-.seg button { position:relative; border:1.5px solid var(--line); background:var(--surface); color:var(--text); padding:12px 14px 12px 38px; border-radius:12px; font-size:14.5px; font-weight:500; line-height:1.25; text-align:left; min-height:52px; transition:background .12s, border-color .12s, transform .08s, box-shadow .12s; }
-.seg button::before { content:""; position:absolute; left:13px; top:50%; width:16px; height:16px; margin-top:-8px; border-radius:50%; border:1.5px solid var(--faint); background:var(--surface); }
-.seg button:hover { border-color:var(--accent); box-shadow:0 2px 10px -4px rgba(31,58,95,.35); }
-.seg button:active { transform:scale(.985); }
+.seg { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:8px; min-width:0; }
+.seg button { position:relative; border:1px solid var(--line-strong); background:var(--bg); color:var(--text); padding:10px 12px; border-radius:9px; font-size:14.5px; font-weight:500; line-height:1.25; text-align:left; min-height:48px; }
+.seg button::before { content:none; }
+.seg button:hover { border-color:var(--accent); }
 .seg button small { display:block; color:var(--faint); font-size:12px; font-weight:400; margin-top:2px; }
-.seg button[aria-pressed="true"] { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); box-shadow:0 6px 18px -8px rgba(31,58,95,.6); }
-.seg button[aria-pressed="true"]::before { background:#fff; border-color:#fff; box-shadow:inset 0 0 0 4px var(--accent); }
-.seg button[aria-pressed="true"] small { color:var(--accent-ink); opacity:.85; }
-@media (max-width: 700px) { .q { grid-template-columns:1fr; } .seg { grid-template-columns:1fr 1fr; } }
-@media (max-width: 440px) { .seg { grid-template-columns:1fr; } }
-.readout { margin-top:18px; padding:18px 20px; background:var(--accent-soft); border-left:4px solid var(--accent); border-radius:12px; font-size:16.5px; line-height:1.55; }
-.readout b { font-weight:600; }
+.seg button[aria-pressed="true"] { background:var(--accent-soft); color:var(--text); border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); font-weight:600; }
+.seg button[aria-pressed="true"] small { color:var(--muted); }
+@media (max-width:700px) { .q { grid-template-columns:1fr; } .seg { grid-template-columns:1fr 1fr; } }
+@media (max-width:440px) { .seg { grid-template-columns:1fr; } }
+.readout { margin-top:20px; padding:0 0 0 16px; border-left:3px solid var(--accent); font-size:16.5px; line-height:1.6; max-width:80ch; }
+.readout b { font-weight:700; }
 
-/* tiles */
-.btchart{margin-top:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px}.btchart svg{display:block}td.actions{white-space:nowrap}
-.recs{margin:0 0 12px}.recrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 8px}.reclist{display:grid;gap:6px;font-size:13px}.reclist .chip{margin-right:4px}.recitem{white-space:nowrap}.mult{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;margin-left:4px;color:var(--faint)}.mult.pos{color:var(--good)}.mult.neg{color:var(--serious)}
-.corrmap td.num,.corrmap th.num{font-size:12px;padding:6px 8px;text-align:center}.corrmap th{font-size:12px;white-space:nowrap}.corrmap tbody th{text-align:left}
-.betalist{display:grid;gap:5px;margin-top:6px}.betarow{display:grid;grid-template-columns:minmax(0,1fr) 120px 48px;gap:10px;align-items:center;font-size:12.5px}.betarow .n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.betarow .bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;display:block}.betarow .bar i{display:block;height:100%}.betarow .v{text-align:right}
-.tiles { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; margin-top:12px; }
-.tile { padding:14px 16px; border:1px solid var(--line); border-top:3px solid var(--accent); border-radius:12px; background:var(--surface); }
-.tile .k { font-size:12.5px; color:var(--muted); }
-.tile .v { font-size:26px; font-weight:500; margin-top:4px; font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums; letter-spacing:-.01em; }
-.tile .s { font-size:12.5px; color:var(--faint); margin-top:2px; }
+/* figures */
+.btchart { margin-top:14px; } .btchart svg { display:block; } td.actions { white-space:nowrap; }
+.recs{margin:0 0 12px}.recrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 8px}.reclist{display:grid;gap:6px;font-size:13px}.reclist .chip{margin-right:4px}.recitem{white-space:nowrap}.mult{font-variant-numeric:tabular-nums;font-size:12px;color:var(--faint)}
+.corrmap td.num,.corrmap th.num{font-size:12px;padding:6px 8px;text-align:center}.corrmap th{font-size:12px;white-space:nowrap}.corrmap tbody th{text-align:left}.corrmap thead th.num{white-space:normal;width:92px;line-height:1.25;vertical-align:bottom}
+.pairstack{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}.corrmap{width:auto;min-width:min(100%,760px)}.betalist{display:grid;gap:5px 48px;margin-top:6px;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr))}.betarow{display:grid;grid-template-columns:minmax(0,1fr) 120px 48px;gap:10px;align-items:center;font-size:12.5px}.betarow .n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.betarow .bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}.betarow .bar i{display:block;height:100%}.betarow .v{text-align:right}
+.tiles { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:22px 26px; margin-top:18px; }
+.tile { padding:0; border:0; border-radius:0; background:none; }
+.tile .k { font-size:13px; color:var(--muted); font-weight:500; }
+.tile .v { font-size:27px; font-weight:700; margin-top:2px; letter-spacing:-0.02em; font-variant-numeric:tabular-nums; line-height:1.15; }
+.tile .s { font-size:12.5px; color:var(--faint); margin-top:3px; line-height:1.4; }
 
-/* allocation */
-.stack { display:flex; height:26px; border-radius:6px; overflow:hidden; gap:2px; background:var(--line); margin-top:10px; }
+/* allocation: the one bold element */
+.stack { display:flex; height:34px; border-radius:6px; overflow:hidden; gap:2px; background:var(--bg); margin-top:12px; }
 .stack span { display:block; height:100%; min-width:2px; }
-.legend { display:flex; flex-wrap:wrap; gap:8px 16px; margin-top:10px; font-size:13px; }
-.legend i, .dot { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+.dstack { display:flex; height:16px; border-radius:4px; overflow:hidden; gap:2px; background:var(--bg); margin-top:8px; }
+.dstack span { display:block; height:100%; min-width:2px; }
+.legend { display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:12px; font-size:13px; }
+.dlegend { display:flex; flex-wrap:wrap; gap:4px 14px; margin-top:8px; font-size:12.5px; color:var(--muted); }
+.legend i, .dot, .dlegend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:6px; vertical-align:-1px; }
+.flag { display:inline-block; background:var(--serious-bg); color:var(--serious); padding:3px 9px; border-radius:6px; font-size:12.5px; margin:4px 6px 0 0; }
+
+/* tables */
 table { width:100%; border-collapse:collapse; font-size:13.5px; }
-th, td { text-align:left; padding:9px 9px; border-bottom:1px solid var(--line); vertical-align:middle; }
-th { color:var(--muted); font-weight:600; font-size:12px; letter-spacing:.02em; position:sticky; top:0; background:var(--surface); z-index:1; }
+th, td { text-align:left; padding:10px 10px; border-bottom:1px solid var(--line); vertical-align:middle; }
+th { color:var(--muted); font-weight:600; font-size:12.5px; position:sticky; top:0; background:var(--bg); z-index:1; border-bottom:1px solid var(--line-strong); }
 td.num, th.num { text-align:right; }
 .tscroll { overflow-x:auto; max-width:100%; -webkit-overflow-scrolling:touch; }
-table.htable { min-width:1180px; }
+table.htable { min-width:1060px; }
 table.htable td:first-child, table.htable th:first-child { white-space:nowrap; min-width:230px; max-width:320px; overflow:hidden; text-overflow:ellipsis; }
 table.htable td:nth-child(2) { white-space:nowrap; }
+/* the holding name stays in view while the wide table scrolls sideways */
+:where(table.htable, #htable) td:first-child, :where(table.htable, #htable) th:first-child { position:sticky; left:0; background:var(--bg); z-index:2; box-shadow:1px 0 0 var(--line); }
+:where(table.htable, #htable) th:first-child { z-index:3; }
 .two { align-items:start; }
 .why { margin:12px 0 0; padding-left:18px; font-size:14px; color:var(--muted); }
 .why li { margin:4px 0; }
-
-/* holdings */
 tr.row { cursor:pointer; }
 tr.row:hover td { background:var(--surface-2); }
 tr.row.active td { background:var(--accent-soft); }
-.chip { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:500; white-space:nowrap; }
+.chip { display:inline-block; padding:2px 8px; border-radius:5px; font-size:12px; font-weight:600; white-space:nowrap; }
 .chip.good { background:var(--good-bg); color:var(--good); }
 .chip.neutral { background:var(--neutral-bg); color:var(--neutral); }
 .chip.serious { background:var(--serious-bg); color:var(--serious); }
 .chip.critical { background:var(--critical-bg); color:var(--critical); }
-.chip.none { background:transparent; color:var(--faint); border:1px dashed var(--line); }
-.bar { position:relative; height:12px; background:var(--line); border-radius:3px; overflow:hidden; min-width:90px; }
+.chip.none { background:transparent; color:var(--faint); font-weight:500; padding-left:0; }
+.bar { position:relative; height:10px; background:var(--line); border-radius:3px; overflow:hidden; min-width:64px; }
 .bar span { position:absolute; left:0; top:0; bottom:0; border-radius:0 3px 3px 0; }
 svg.spark { display:block; width:110px; height:28px; }
 .pos { color:var(--good); } .neg { color:var(--critical); }
 
 /* fact sheet */
-.sheet { border-top:1px solid var(--line); margin-top:16px; padding-top:16px; }
+.sheet { background:var(--panel); border-radius:12px; margin-top:18px; padding:20px 22px; }
 .sheet-head { display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; align-items:baseline; }
-.sheet-head h3 { margin:0; font-size:18px; font-weight:600; }
-.sheet-grid { display:grid; grid-template-columns:2fr 1fr; gap:20px; margin-top:12px; }
-@media (max-width: 900px) { .sheet-grid { grid-template-columns:1fr; } }
+.sheet-head h3 { margin:0; font-size:19px; font-weight:700; }
+.sheet-grid { display:grid; grid-template-columns:2fr 1fr; gap:24px; margin-top:12px; }
+@media (max-width:900px) { .sheet-grid { grid-template-columns:1fr; } }
 .kv { display:grid; grid-template-columns:1fr auto; gap:6px 14px; font-size:13.5px; margin:0; }
-.kv dt { color:var(--muted); margin:0; } .kv dd { margin:0; text-align:right; font-family:"IBM Plex Mono", ui-monospace, monospace; font-variant-numeric:tabular-nums; }
-.range { position:relative; height:8px; background:var(--line); border-radius:4px; margin:8px 0 4px; }
-.range i { position:absolute; top:-3px; width:14px; height:14px; border-radius:50%; background:var(--accent); transform:translateX(-50%); }
+.kv dt { color:var(--muted); margin:0; } .kv dd { margin:0; text-align:right; font-variant-numeric:tabular-nums; font-weight:500; }
+.range { position:relative; height:6px; background:var(--line); border-radius:3px; margin:8px 0 4px; }
+.range i { position:absolute; top:-4px; width:14px; height:14px; border-radius:50%; background:var(--accent); transform:translateX(-50%); }
 .range-l { display:flex; justify-content:space-between; font-size:12px; color:var(--faint); }
 svg.spark-big { width:100%; height:120px; display:block; }
-.summary { font-size:14px; color:var(--muted); max-width:72ch; margin:6px 0 10px; }
-.note { background:var(--warn-bg); color:var(--warn-text); padding:8px 12px; border-radius:8px; margin:6px 0; font-size:13.5px; }
-details { border-top:1px solid var(--line); padding:10px 0; }
+.summary { font-size:14.5px; color:var(--muted); max-width:72ch; margin:6px 0 10px; }
+.note { background:var(--warn-bg); color:var(--warn-text); padding:9px 12px; border-radius:8px; margin:6px 0; font-size:13.5px; }
+details { border-top:1px solid var(--line); padding:12px 0; }
 details summary { cursor:pointer; font-weight:600; }
-details p, details li { color:var(--muted); font-size:14px; }
-.toolbar { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:12px; }
-.btn { border:1.5px solid var(--line); background:var(--surface); color:var(--text); padding:10px 16px; border-radius:10px; font-weight:500; min-height:44px; display:inline-flex; align-items:center; gap:6px; transition:background .12s, border-color .12s, transform .08s, box-shadow .12s; }
-.btn:hover { border-color:var(--accent); box-shadow:0 2px 10px -4px rgba(31,58,95,.35); }
-.btn:active { transform:scale(.985); }
-.btn.primary { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); box-shadow:0 6px 18px -8px rgba(31,58,95,.6); }
-.btn.primary:hover { filter:brightness(1.08); }
+details p, details li { color:var(--muted); font-size:14px; max-width:78ch; }
+
+/* controls */
+.toolbar { display:flex; gap:8px 10px; flex-wrap:wrap; align-items:center; margin-top:16px; }
+.btn { border:1px solid var(--line-strong); background:var(--bg); color:var(--text); padding:8px 14px; border-radius:8px; font-weight:600; font-size:14px; min-height:40px; display:inline-flex; align-items:center; gap:6px; transition:background .12s, border-color .12s; }
+.btn:hover { border-color:var(--text); }
+.btn.primary { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.btn.primary:hover { background:var(--accent-hover); border-color:var(--accent-hover); }
+.btn[disabled] { opacity:.45; cursor:not-allowed; }
 a.btn { text-decoration:none; }
+.btn.small { padding:5px 10px; font-size:13px; min-height:32px; border-radius:7px; }
+.btn.danger { color:var(--critical); }
 .tip { position:fixed; pointer-events:none; background:var(--text); color:var(--bg); padding:6px 9px; border-radius:6px; font-size:12px; display:none; z-index:10; }
 .print-only { display:none; }
 .editrow { display:flex; gap:10px; flex-wrap:wrap; }
-.editrow input { font:inherit; font-size:15px; padding:12px 14px; border:1.5px solid var(--line); border-radius:10px; background:var(--bg); color:var(--text); flex:1; min-width:220px; min-height:46px; }
-.editrow input:focus { outline:2px solid var(--accent); outline-offset:1px; border-color:transparent; }
-.results { border:1px solid var(--line); border-radius:8px; margin-top:8px; overflow:hidden; }
+.editrow input { font:inherit; font-size:15px; padding:11px 13px; border:1px solid var(--line-strong); border-radius:9px; background:var(--bg); color:var(--text); flex:1; min-width:220px; min-height:44px; }
+.editrow input:focus { outline:2px solid var(--accent); outline-offset:0; border-color:transparent; }
+.results { border:1px solid var(--line); border-radius:9px; margin-top:8px; overflow:hidden; }
 .result { display:grid; grid-template-columns: 1fr auto auto; gap:10px; align-items:center; padding:11px 14px; border-top:1px solid var(--line); font-size:13.5px; }
 .result:hover { background:var(--surface-2); }
 .result:first-child { border-top:0; }
 .result select { font:inherit; font-size:13px; padding:5px 8px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--text); }
-.btn.small { padding:6px 12px; font-size:13px; min-height:34px; border-radius:8px; }
-.btn.danger { color:var(--critical); }
 .pend { display:flex; gap:10px; align-items:center; padding:6px 0; font-size:13.5px; border-top:1px solid var(--line); }
 .preview-tag { display:inline-block; background:var(--warn-bg); color:var(--warn-text); font-size:11px; padding:1px 6px; border-radius:4px; margin-left:6px; }
 
@@ -198,16 +210,14 @@ a.btn { text-decoration:none; }
   @page { size:A4; margin:14mm; }
   body { background:#fff; color:#000; font-size:11px; }
   header, .banner, #selector, #signals, #review, #glossary, .toolbar, .tip, .no-print, .nav { display:none !important; }
-  section { box-shadow:none; }
   .print-only { display:block; }
   main { padding:0; gap:10px; }
-  section { border:0; padding:0 0 8px; border-radius:0; break-inside:avoid; }
-  .two { grid-template-columns:1fr; }
+  section { border:0; padding:0 0 8px; break-inside:avoid; }
+  .two { grid-template-columns:1fr; border:0; }
   .tiles { grid-template-columns:repeat(3, 1fr); }
-  .tile { border:1px solid #bbb; }
   .stack, .bar span, .legend i, .dot, .chip, .range i { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   table { font-size:10.5px; } th, td { padding:4px 5px; }
-  .sheet { break-inside:avoid; page-break-inside:avoid; }
+  .sheet { break-inside:avoid; page-break-inside:avoid; background:none; padding:0; }
   #sheets .sheet:nth-child(3n+1) { break-before:page; }
   svg.spark { width:80px; height:20px; }
 }
@@ -215,10 +225,9 @@ a.btn { text-decoration:none; }
 </head>
 <body>
 <header><div class="wrap">
-  <nav class="nav no-print"><a href="/" aria-current="page">Model portfolios</a><a href="/builder.html">Build your own portfolio</a><a href="/compare.html">Compare</a><a href="/brief.html">Daily brief</a><a href="/quality.html">Holdings quality review</a></nav>
-  <h1>Model Portfolio Lab</h1>
-  <p class="lede">Pick a risk appetite, a stage of life and an account size. A rules engine turns that into a model portfolio built from
-  live ASX and US prices, shows you every holding, and explains why each weight is what it is.</p>
+  <nav class="nav no-print"><a href="/" aria-current="page">Model portfolios</a><a href="/builder.html">Builder</a><a href="/compare.html">Compare</a><a href="/brief.html">Daily brief</a><a href="/quality.html">Quality review</a></nav>
+  <h1>Model portfolios</h1>
+  <p class="lede">Choose a risk profile, a stage of life and a balance. The engine builds the portfolio from listed holdings and today's prices, and explains every choice.</p>
   <div class="meta" id="meta"></div>
   <div class="meta no-print" id="qlink"></div>
   <div class="meta">Personal learning project. Illustrative portfolios only: not financial advice, not a recommendation to buy or sell anything,
@@ -254,7 +263,7 @@ a.btn { text-decoration:none; }
     <span class="muted" id="balance-note" style="font-size:12.5px"></span>
   </div>
   <div class="toolbar no-print">
-    <button class="btn primary" id="print" type="button">Print holdings page</button>
+    <button class="btn" id="print" type="button">Print holdings page</button>
     <label style="font-size:13.5px;color:var(--muted)"><input type="checkbox" id="print-sheets" checked> include a fact sheet for every holding</label>
     <button class="btn" id="xlsx" type="button">Download this portfolio as Excel</button>
     <a class="btn" id="xlsx-all" href="/model_portfolios_latest.xlsx" download style="text-decoration:none">Download the full workbook (every tier)</a>
@@ -299,7 +308,7 @@ a.btn { text-decoration:none; }
   <p class="sub">Beta says how far the portfolio tends to move for a 1% move in the share market; a beta of 0.6 to the ASX 200 means a 10% fall there has historically meant about a 6% fall here. Correlation says how closely it tracks (1 is lock-step, 0 is unrelated). All figures are from the last year of daily prices, and every holding is measured in its own currency.</p>
   <div class="tiles" id="risktiles"></div>
   <p class="muted" id="risknote" style="font-size:12.5px;margin:8px 0 0" hidden>Recalculated on this page from the embedded year of daily returns for the holdings and weights shown (a holding added here that has no price history yet stands in with its asset class index ETF until the next rebuild).</p>
-  <div class="two" style="margin-top:14px">
+  <div class="pairstack">
     <div>
       <div class="eyebrow">How the asset classes moved together over the last year</div>
       <div class="tscroll"><table id="corrmap" class="corrmap"></table></div>
@@ -403,6 +412,9 @@ a.btn { text-decoration:none; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 const DATA = __DATA__;
+const STAGE_NOUN = { early_accumulation: "early accumulator", accumulation: "accumulator", retirement: "retiree" };
+const VEHICLE = { etf: "ETF", lic: "listed investment company", direct: "share", fund: "managed fund", cash: "cash", sma: "managed portfolio", hybrid: "hybrid", note: "listed note" };
+const WHO = { early_accumulation: "An <b>early accumulator</b>", accumulation: "An <b>accumulator</b>", retirement: "A <b>retiree</b>" };
 const CLASSES = DATA.classes, COLORS = DATA.colors, R = DATA.research;
 const fmtP = (x, d=1) => (x==null||isNaN(x)) ? "–" : x.toFixed(d) + "%";
 const fmtS = (x, d=1) => (x==null||isNaN(x)) ? "–" : (x>0?"+":"") + x.toFixed(d) + "%";
@@ -511,7 +523,7 @@ function consensusChip(r){
   if (!r || !r.consensus_label || r.consensus_label==="no coverage") return `<span class="chip none">no coverage</span>`;
   if (r.consensus_label==="thin coverage") return `<span class="chip none">thin coverage</span>`;
   const cls = r.consensus_label.includes("Buy") ? "good" : r.consensus_label==="Hold" ? "neutral" : r.consensus_label==="Underperform" ? "serious" : "critical";
-  return `<span class="chip ${cls}" title="${r.analysts} analysts, mean ${r.consensus_mean.toFixed(1)} on a 1 to 5 scale">${r.consensus_label} · ${r.analysts}</span>`;
+  return `<span class="chip ${cls}" title="${r.analysts} analysts, mean ${r.consensus_mean.toFixed(1)} on a 1 to 5 scale">${r.consensus_label} (${r.analysts})</span>`;
 }
 function spark(arr, color, w=110, h=28, big=false){
   if (!arr || arr.length < 2) return "";
@@ -548,15 +560,15 @@ function render(){
   const isSma = pf.implementation === "sma";
   const smaC = isSma ? pf.sma.chosen : null;
   sel("readout").innerHTML = isSma
-    ? `Someone in <b>${S.toLowerCase()}</b> with a <b>${P}</b> appetite for risk and about <b>${fmtM(pf.balance)}</b> invested holds ${pf.lines.filter(x=>x.vehicle==="sma").length > 1 ? "two diversified managed portfolios split evenly, " : "one diversified managed portfolio, "}
+    ? `${WHO[pf.life_stage] || `Someone in <b>${S.toLowerCase()}</b>`} with a <b>${P}</b> appetite for risk and about <b>${fmtM(pf.balance)}</b> invested holds ${pf.lines.filter(x=>x.vehicle==="sma").length > 1 ? "two diversified managed portfolios split evenly, " : "one diversified managed portfolio, "}
     ${pf.lines.filter(x=>x.vehicle==="sma").map(x => `<b>${x.name}</b>`).join(" and ")}, targeting about <b>${fmtP(m.growth_pct,0)} growth assets</b>, plus a cash buffer.
     It would cost about <b>${fmtM(m.investment_fees_per_year + m.platform_admin_fee_per_year)} a year</b> (${fmtP(m.total_ongoing_cost_pct,2)} of the balance) with no brokerage on the way in.`
-    : `Someone in <b>${S.toLowerCase()}</b> with a <b>${P}</b> appetite for risk and about <b>${fmtM(pf.balance)}</b> invested gets
+    : `${WHO[pf.life_stage] || `Someone in <b>${S.toLowerCase()}</b>`} with a <b>${P}</b> appetite for risk and about <b>${fmtM(pf.balance)}</b> invested gets
     <b>${fmtP(m.growth_pct,0)} growth assets</b> across <b>${m.holdings} holdings</b>. It would cost about <b>${fmtM(m.investment_fees_per_year + m.platform_admin_fee_per_year)} a year</b>
     (${fmtP(m.total_ongoing_cost_pct,2)} of the balance) and pay roughly <b>${fmtM(m.income_per_year)} a year</b> in income.`;
   sel("readout").innerHTML +=
-    capped ? `<br><b>Note:</b> ${label(DATA.profiles, state.profile)} was asked for, but the rules cap ${S.toLowerCase()} at ${P}, so that is what was built.` : "";
-  sel("title").textContent = `${P} · ${S} · ${T.label}` + (isSma ? " · managed portfolio" : "") + (pf.esg && pf.esg.screened ? " · ESG screened" : "");
+    capped ? `<br><b>Note:</b> ${label(DATA.profiles, state.profile)} was asked for, but the rules cap the ${S.toLowerCase()} stage at ${P}, so that is what was built.` : "";
+  sel("title").textContent = `${P} ${STAGE_NOUN[pf.life_stage] || S.toLowerCase()}, ${T.label.toLowerCase()} tier` + (isSma ? ", managed portfolio" : "") + (pf.esg && pf.esg.screened ? ", ESG screened" : "");
   sel("print-meta").textContent = `Model Portfolio Lab. Balance ${fmtM(pf.balance)}. Prices as of ${pf.as_of}. Illustrative only, not advice.`;
   sel("tiles").innerHTML = [
     ["Growth / defensive", `${fmtP(m.growth_pct,0)} / ${fmtP(m.defensive_pct,0)}`, "shares and property versus bonds and cash"],
@@ -621,7 +633,7 @@ function render(){
   const classLabel = k => k === "__sma__" ? "Diversified (managed)" : label(CLASSES, k);
   const classColor = k => k === "__sma__" ? "var(--accent)" : cssColor(k);
   sel("holdings").innerHTML = pf.lines.map(l => { const r = R[l.ticker] || {}; const col = classColor(l.asset_class);
-    return `<tr class="row ${state.ticker===l.ticker?"active":""}" tabindex="0" data-t="${l.ticker}"><td><b>${l.name}</b><br><span class="mono" style="font-size:11.5px;color:var(--faint)">${l.ticker} · ${l.vehicle}</span> ${qualityChip(l.ticker)}</td>
+    return `<tr class="row ${state.ticker===l.ticker?"active":""}" tabindex="0" data-t="${l.ticker}"><td><b>${l.name}</b><br><span class="mono" style="font-size:11.5px;color:var(--faint)">${l.ticker}, ${VEHICLE[l.vehicle] || l.vehicle}</span> ${qualityChip(l.ticker)}</td>
       <td><span class="dot" style="background:${col}"></span>${classLabel(l.asset_class)}</td><td class="num">${fmtP(l.weight_pct,1)}</td>
       <td><div class="bar"><span style="width:${l.weight_pct/maxW*100}%;background:${col}"></span></div></td>
       <td>${consensusChip(r)}${l.consensus_multiplier && Math.abs(l.consensus_multiplier-1) >= 0.01 ? `<span class="mult ${l.consensus_multiplier>1?"pos":"neg"}" title="weight scaled within its asset class by the analyst consensus">${l.consensus_multiplier>1?"+":""}${Math.round((l.consensus_multiplier-1)*100)}% weight</span>` : ""}</td>
@@ -646,7 +658,7 @@ function render(){
   const cls = a => a==="remove candidate" ? "critical" : a==="add candidate" ? "good" : "neutral";
   const shown = cands.length ? cands : DATA.review.filter(x => x.reasons.length || x.positives.length).sort((a,b) => b.reasons.length - a.reasons.length).slice(0, 6);
   sel("reviewlist").innerHTML = `<div class="tscroll"><table><thead><tr><th>Verdict</th><th>Holding</th><th>Asset class</th><th>Strikes</th><th>Merits</th><th class="no-print"></th></tr></thead><tbody>` +
-    shown.map(x => `<tr><td><span class="chip ${cls(x.action)}">${x.action}</span></td><td><b>${x.name}</b><br><span class="mono" style="font-size:11.5px;color:var(--faint)">${x.ticker} · ${x.status}</span></td>
+    shown.map(x => `<tr><td><span class="chip ${cls(x.action)}">${x.action}</span></td><td><b>${x.name}</b><br><span class="mono" style="font-size:11.5px;color:var(--faint)">${x.ticker}, ${x.status}</span></td>
       <td>${label(CLASSES, x.asset_class)}</td><td style="color:var(--critical)">${x.reasons.map(r=>"· "+r).join("<br>")||"–"}</td><td style="color:var(--good)">${x.positives.map(r=>"· "+r).join("<br>")||"–"}</td>
       <td class="no-print">${FN ? (x.action==="remove candidate" ? `<button type="button" class="btn small danger" data-rv-remove="${x.ticker}">Remove from portfolios</button>` : x.action==="add candidate" ? `<button type="button" class="btn small primary" data-rv-add="${x.ticker}" data-cls="${x.asset_class}" data-name="${x.name}">Add to portfolios</button>` : "") : ""}</td></tr>`).join("") + `</tbody></table></div>` +
     (cands.length ? "" : `<p class="muted" style="font-size:12.5px">Showing the holdings with the most strikes so you can see what the screen is watching.</p>`);
@@ -668,10 +680,10 @@ function smaSheetHtml(l, pf){
       <td class="no-print">${a.code===c.code ? '<span class="chip neutral">in use</span>' : inUse.has(a.code) ? '<span class="chip neutral">other slot</span>' : `<button type="button" class="btn" style="padding:3px 9px;font-size:12px" data-swap="${a.code}" data-from="${l.ticker}">use this</button>`}</td></tr>`).join("");
   return `<div class="sheet">
     <div class="sheet-head"><h3>${c.name} <span class="mono" style="font-weight:400;color:var(--faint);font-size:14px">${c.code}</span></h3>
-      <div><span class="dot" style="background:var(--accent)"></span>Diversified managed portfolio · ${fmtP(l.weight_pct,1)} of the account (${fmtM(l.dollars)})</div></div>
+      <div><span class="dot" style="background:var(--accent)"></span>Diversified managed portfolio, ${fmtP(l.weight_pct,1)} of the account (${fmtM(l.dollars)})</div></div>
     <div class="sheet-grid">
       <div>
-        <div class="eyebrow" style="margin-top:6px">${c.category} · ${c.manager.replace(/ \(MF\)$/, "")}</div>
+        <div class="eyebrow" style="margin-top:6px">${c.category}, ${c.manager.replace(/ \(MF\)$/, "")}</div>
         <p class="summary">A managed portfolio (separately managed account) is a model run by a professional manager. The platform buys the underlying holdings
         in your name and rebalances them whenever the manager changes the model, so one line on the account gives a whole diversified mix.
         Benchmark: ${c.benchmark || "not stated"}. Running since ${c.inception ? c.inception.slice(0,10) : "n/a"}.</p>
@@ -692,7 +704,7 @@ function smaSheetHtml(l, pf){
         <dt>1 year</dt><dd class="${u.return_1y_pct>0?"pos":u.return_1y_pct<0?"neg":""}">${fmtS(u.return_1y_pct)}</dd>
         <dt>3 years, per year</dt><dd>${fmtS(u.return_3y_pct_pa)}</dd><dt>5 years, per year</dt><dd>${fmtS(u.return_5y_pct_pa)}</dd><dt>10 years, per year</dt><dd>${fmtS(u.return_10y_pct_pa)}</dd>`; })()}
         <dt>Amount held</dt><dd>${fmtM(l.dollars)}</dd>
-        <dt>Data</dt><dd style="font-family:inherit;color:var(--faint)">HUB24 menu · ${pf.sma.as_of}${(pf.sma.underlying||{})[c.code] ? "; live figures to " + pf.as_of : ""}</dd>
+        <dt>Data</dt><dd style="font-family:inherit;color:var(--faint)">HUB24 menu, ${pf.sma.as_of}${(pf.sma.underlying||{})[c.code] ? "; live figures to " + pf.as_of : ""}</dd>
       </dl>
     </div></div>`;
 }
@@ -706,10 +718,10 @@ function sheetHtml(l, pf){
   const blurb = sentences.length ? sentences.slice(0,4).join(". ") + (sentences.length>4 ? "." : "") : (l.priced_from==="manual" ? "Unlisted holding: no public data feed. Price and description are entered by hand." : "No description available from the data feed.");
   return `<div class="sheet">
     <div class="sheet-head"><h3>${l.name} <span class="mono" style="font-weight:400;color:var(--faint);font-size:14px">${l.ticker}</span></h3>
-      <div>${classChip(l.asset_class)}${label(CLASSES, l.asset_class)} · ${role} · ${fmtP(l.weight_pct,1)} of the portfolio (${fmtM(l.dollars)})</div></div>
+      <div>${classChip(l.asset_class)}${label(CLASSES, l.asset_class)}, ${role}, ${fmtP(l.weight_pct,1)} of the portfolio (${fmtM(l.dollars)})</div></div>
     <div class="sheet-grid">
       <div>
-        ${r.sector ? `<div class="eyebrow" style="margin-top:6px">${r.sector}${r.industry?" · "+r.industry:""}</div>` : ""}
+        ${r.sector ? `<div class="eyebrow" style="margin-top:6px">${r.sector}${r.industry?", "+r.industry:""}</div>` : ""}
         ${DATA.quality[l.ticker] ? `<div class="note" style="background:var(--accent-soft);color:var(--text)"><b>Reviewed verdict: ${DATA.quality[l.ticker].verdict}.</b> ${DATA.quality[l.ticker].note} <span class="muted">(${DATA.quality[l.ticker].reviewed}; opinion, not advice)</span></div>` : ""}
         <p class="summary">${blurb}</p>
         ${r.sparkline && r.sparkline.length ? `<div class="eyebrow">Last 12 months, dividends reinvested, rebased to 100</div>${spark(r.sparkline, col, 600, 120, true)}` : ""}
@@ -737,7 +749,7 @@ function sheetHtml(l, pf){
         ${DATA.esg.review[l.ticker] ? `<dt></dt><dd style="font-family:inherit;text-align:right;color:var(--muted);font-size:12.5px">${DATA.esg.review[l.ticker].note} <span class="muted">(reviewed ${DATA.esg.review[l.ticker].reviewed}; written opinion, not a data feed)</span></dd>` : ""}
         <dt>Documents</dt><dd style="font-family:inherit">${docLink(l, true)}</dd>
         <dt>Units held</dt><dd>${fmtN(l.units)} @ $${(l.price_aud||0).toFixed(2)}</dd>
-        <dt>Data</dt><dd style="font-family:inherit;color:var(--faint)">${r.source||l.priced_from}${r.fetched?" · "+r.fetched:""}</dd>
+        <dt>Data</dt><dd style="font-family:inherit;color:var(--faint)">${r.source||l.priced_from}${r.fetched?", "+r.fetched:""}</dd>
       </dl>
     </div></div>`;
 }
@@ -759,7 +771,7 @@ function renderRecs(pf){
   if (!covered) { el.innerHTML = `<div class="muted" style="font-size:12.5px">No analyst coverage on these holdings: index ETFs and listed investment companies are not rated by brokers.</div>`; return; }
   const extra = pf.lines.filter(l => (l.consensus_multiplier||1) > 1.005).length, trimmed = pf.lines.filter(l => (l.consensus_multiplier||1) < 0.995).length;
   el.innerHTML = `<div class="eyebrow">Analyst recommendations (Yahoo Finance consensus of covering brokers)</div>
-    <div class="recrow">${order.filter(k => groups[k]).map(k => `<span class="chip ${cls[k]}">${k} · ${groups[k].length}</span>`).join("")}
+    <div class="recrow">${order.filter(k => groups[k]).map(k => `<span class="chip ${cls[k]}">${k} (${groups[k].length})</span>`).join("")}
       <span class="muted" style="font-size:12.5px">${covered} of ${pf.lines.length} holdings (${fmtP(wCovered,0)} of the portfolio) are rated; ${extra} carry extra weight because the average rating leans toward Buy, ${trimmed} are trimmed because it leans toward Sell (a Hold sits either side of the midpoint). The scaling is capped at a quarter either way and never removes a holding.</span></div>
     <div class="reclist">${order.filter(k => groups[k]).map(k => `<div><span class="chip ${cls[k]}">${k}</span> ${groups[k].map(l => { const r = R[l.ticker]; const mlt = l.consensus_multiplier||1; return `<span class="recitem" title="${r.analysts} analysts, mean ${r.consensus_mean.toFixed(1)}${r.target_upside_pct!=null ? "; mean target " + fmtS(r.target_upside_pct) + " from here" : ""}">${l.name}${Math.abs(mlt-1) >= 0.01 ? ` <span class="mult ${mlt>1?"pos":"neg"}">${mlt>1?"+":""}${Math.round((mlt-1)*100)}%</span>` : ""}</span>`; }).join(", ")}</div>`).join("")}</div>`;
 }
@@ -807,7 +819,7 @@ function renderBacktest(pf){
     (pf.implementation === "sma" ? "For a managed portfolio the line is its listed twin ETF where one exists, otherwise the risk profile's strategic mix held in asset class ETFs; the manager's own track record is shorter and is shown on the fact sheet. " : "") +
     "The comparison lines put the same balance into a single ETF with no rebalancing.";
 }
-const SECTOR_COLORS = ["#2a78d6","#eb6834","#1baf7a","#eda100","#e87ba4","#008300","#4a3aa7","#0e9aa7","#8a5a2b","#c2185b","#5c6bc0","#7cb342","#f4511e","#00897b","#6d4c41","#9e9d24"];
+const SECTOR_COLORS = ["#2e5e4e","#3f6f9f","#b9842a","#9a5638","#6b5b8c","#8fb0a2","#a3bcd3","#c9c0ad","#5e8c6a","#2f4858","#c47a5a","#8c8a3e","#6c97b8","#7d5a50","#a3b18a","#5c5470"];
 function diversification(pf){
   const lines = pf.lines.filter(l => l.vehicle !== "sma");
   const sec = {}, reg = {}; let direct = 0, dsum = 0; const dsec = {};
@@ -848,7 +860,7 @@ function renderRisk(pf){
     ["Beta to the ASX 200", m.beta_asx200 == null ? "–" : m.beta_asx200.toFixed(2), m.beta_asx200 == null ? "not enough price history" : `a 10% fall in Australian shares has meant about ${fmtP(Math.abs(m.beta_asx200)*10,0)} here`],
     ["Beta to world shares", m.beta_world == null ? "–" : m.beta_world.toFixed(2), "against the developed-world index ETF (VGS), unhedged"],
     ["Correlation to the ASX 200", m.correlation_asx200 == null ? "–" : m.correlation_asx200.toFixed(2), m.correlation_asx200 > 0.85 ? "moves almost in lock-step with the local market" : m.correlation_asx200 > 0.6 ? "tracks the local market fairly closely" : "only loosely tied to the local market"],
-    ["Correlation between holdings", apc == null ? "–" : apc.toFixed(2), apc == null ? "" : apc > 0.5 ? "the holdings tend to rise and fall together" : apc > 0.25 ? "moderately related; some genuine diversification" : "largely independent of each other"],
+    ["Correlation of holdings", apc == null ? "–" : apc.toFixed(2), apc == null ? "" : apc > 0.5 ? "the holdings tend to rise and fall together" : apc > 0.25 ? "moderately related; some genuine diversification" : "largely independent of each other"],
     ["Diversification ratio", dr == null ? "–" : dr.toFixed(2), dr == null ? "" : `the holdings' average volatility (${fmtP(m.weighted_avg_holding_vol_pct,0)}) divided by the portfolio's (${fmtP(m.realised_volatility_pct,0)}); above 1 is the benefit of mixing`],
     ["Realised volatility", "±" + fmtP(m.realised_volatility_pct,0), isSma ? "proxy: this risk profile held in ETFs" : "one standard deviation of yearly moves, from daily prices"],
   ].map(([k,v,s]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
@@ -907,7 +919,7 @@ function dashPayload(pf){ const m = pf.metrics; const R0 = DATA.research || {}; 
 function renderDashAI(){ const box = sel("ai-box"); const r = DAI.result; if (!r) { box.innerHTML = ""; return; }
   if (r.error) { box.innerHTML = `<div class="note">The AI review did not run. ${esc(r.error)}</div>`; return; } const x = r.result;
   const chip = p => `<span class="chip ${p === "high" ? "critical" : p === "medium" ? "serious" : "neutral"}">${esc(p || "")}</span>`;
-  box.innerHTML = `<div style="border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--surface);margin-top:10px"><h3 style="margin:0 0 6px;font-size:16px">AI review of this model</h3><div class="muted" style="font-size:12px;margin-bottom:8px">${esc(r.model || "")} · ${DAI.at ? new Date(DAI.at).toLocaleString("en-AU") : ""}${r.remaining_today != null ? ` · ${r.remaining_today} reviews left today` : ""}. General information, not advice; check every suggestion before acting on it.</div>` +
+  box.innerHTML = `<div style="border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--surface);margin-top:10px"><h3 style="margin:0 0 6px;font-size:16px">AI review of this model</h3><div class="muted" style="font-size:12px;margin-bottom:8px">${esc(r.model || "")}, ${DAI.at ? new Date(DAI.at).toLocaleString("en-AU") : ""}${r.remaining_today != null ? `, ${r.remaining_today} reviews left today` : ""}. General information, not advice; check every suggestion before acting on it.</div>` +
     (x ? `<p>${esc(x.summary || "")}</p>${(x.strengths || []).length ? `<div class="eyebrow">Strengths</div><ul>${x.strengths.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : ""}<div class="eyebrow" style="margin-top:10px">Suggestions</div>` +
       (x.suggestions || []).map(s => `<div style="border-top:1px solid var(--line);padding:9px 0">${chip(s.priority)} <b>${esc(s.title || "")}</b><div style="margin-top:3px"><span class="muted">Change:</span> ${esc(s.change || "")}</div><div><span class="muted">Why:</span> ${esc(s.why || "")}</div>${s.tradeoff ? `<div class="muted">Trade-off: ${esc(s.tradeoff)}</div>` : ""}</div>`).join("") +
       ((x.questions || []).length ? `<div class="eyebrow" style="margin-top:10px">Ask the client first</div><ul>${x.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ul>` : "") : `<pre style="white-space:pre-wrap;font:inherit">${esc(r.text || "")}</pre>`) + `</div>`; }
@@ -959,7 +971,7 @@ function wireEdit(){
 function renderResults(rs){
   const pf = find(); const held = new Set(pf.lines.map(l => l.ticker));
   const opts = CLASSES.map(c => `<option value="${c.key}">${c.label}</option>`).join("");
-  sel("results").innerHTML = rs.length ? `<div class="results">` + rs.map((r,i) => `<div class="result"><div><b>${r.name}</b> <span class="mono" style="color:var(--faint);font-size:12px">${r.symbol} · ${r.exchange} · ${r.type}</span></div>
+  sel("results").innerHTML = rs.length ? `<div class="results">` + rs.map((r,i) => `<div class="result"><div><b>${r.name}</b> <span class="mono" style="color:var(--faint);font-size:12px">${r.symbol}, ${r.exchange}, ${r.type}</span></div>
     <select id="cls${i}">${opts}</select>${held.has(r.symbol) ? '<span class="chip neutral">already held</span>' : `<button type="button" class="btn small primary" data-add="${i}">Add</button>`}</div>`).join("") + `</div>` : `<div class="muted">No listed matches.</div>`;
   rs.forEach((r,i) => { const cls = sel("cls"+i); if (cls) cls.value = guessClass(r.symbol, r.name, r.sector); });
   sel("results").querySelectorAll("button[data-add]").forEach(b => b.onclick = () => addHolding(rs[+b.dataset.add], sel("cls"+b.dataset.add).value));
@@ -991,7 +1003,7 @@ async function cancelChange(id){ const pin = pinValue(); try { pendingChanges = 
 async function refreshPending(){ try { pendingChanges = (await api("/changes")).pending || []; } catch(e) { pendingChanges = []; } renderPending(); }
 function renderPending(){
   const el = sel("pending"); if (!el) return;
-  el.innerHTML = pendingChanges.length ? `<div class="eyebrow">Queued for the next rebuild</div>` + pendingChanges.map(c => `<div class="pend"><span class="chip ${c.action==="add"?"good":"critical"}">${c.action}</span><b>${c.name||c.ticker}</b><span class="mono" style="color:var(--faint);font-size:12px">${c.ticker}${c.asset_class?" · "+label(CLASSES,c.asset_class):""}</span><span style="flex:1"></span><button type="button" class="btn small" data-cancel="${c.id}">cancel</button></div>`).join("") : "";
+  el.innerHTML = pendingChanges.length ? `<div class="eyebrow">Queued for the next rebuild</div>` + pendingChanges.map(c => `<div class="pend"><span class="chip ${c.action==="add"?"good":"critical"}">${c.action}</span><b>${c.name||c.ticker}</b><span class="mono" style="color:var(--faint);font-size:12px">${c.ticker}${c.asset_class?", "+label(CLASSES,c.asset_class):""}</span><span style="flex:1"></span><button type="button" class="btn small" data-cancel="${c.id}">cancel</button></div>`).join("") : "";
   el.querySelectorAll("button[data-cancel]").forEach(b => b.onclick = () => cancelChange(b.dataset.cancel));
 }
 function applyPreview(pf){
@@ -1046,14 +1058,14 @@ sel("xlsx").onclick = () => {
   // Every tier for the same profile and stage, so the balance bands stay in the file.
   for (const t of DATA.tiers) { const req = x => x.profile_requested===state.profile || (x.requested_aliases||[]).includes(state.profile); const esgOf = x => !!(x.esg && x.esg.screened);
     const tp = DATA.portfolios.find(x => req(x) && x.life_stage===state.stage && x.tier===t.key && (x.implementation||"direct")===state.impl && esgOf(x)===state.esg) || DATA.portfolios.find(x => req(x) && x.life_stage===state.stage && x.tier===t.key && !esgOf(x));
-    if (!tp) continue; const rows = [[`${label(DATA.tiers,t.key)} · model balance`, tp.balance], ["Ticker", "Holding", "Asset class", "Weight", "Dollars", "Units", "Yield"]].concat(tp.lines.map(l => [l.ticker, l.name, l.asset_class==="__sma__" ? "Diversified (managed)" : label(CLASSES, l.asset_class), l.weight_pct/100, l.dollars, l.units, l.yield_pct/100]));
+    if (!tp) continue; const rows = [[`${label(DATA.tiers,t.key)}, model balance`, tp.balance], ["Ticker", "Holding", "Asset class", "Weight", "Dollars", "Units", "Yield"]].concat(tp.lines.map(l => [l.ticker, l.name, l.asset_class==="__sma__" ? "Diversified (managed)" : label(CLASSES, l.asset_class), l.weight_pct/100, l.dollars, l.units, l.yield_pct/100]));
     XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(rows), `Tier ${t.key}`.slice(0,31)); }
   XLSX.writeFile(wb, `portfolio_${pf.profile_used}_${pf.life_stage}_${Math.round(pf.balance)}.xlsx`);
 };
 sel("print").onclick = () => { sel("sheets").style.display = sel("print-sheets").checked ? "" : "none"; window.print(); };
 window.addEventListener("afterprint", () => { sel("sheets").style.display = ""; });
 sel("meta").textContent = DATA.meta;
-if (Object.keys(DATA.quality||{}).length) sel("qlink").innerHTML = `Every holding has a written quality verdict (core, satellite, speculative, not recommended): shown on each fact sheet, and collected on the <a href="${FN ? "/quality.html" : (DATA.site_url ? DATA.site_url + "/quality.html" : "#")}">Holdings Quality Review</a> page.`;
+if (Object.keys(DATA.quality||{}).length) sel("qlink").innerHTML = `Every holding has a written quality verdict (core, satellite, speculative, not recommended): shown on each fact sheet, and collected on the <a href="${FN ? "/quality.html" : (DATA.site_url ? DATA.site_url + "/quality.html" : "#")}">Quality review</a> page.`;
 if (DATA.banner) { sel("banner").querySelector(".wrap").textContent = DATA.banner; sel("banner").hidden = false; }
 render();
 wireEdit();

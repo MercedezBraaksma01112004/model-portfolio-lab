@@ -22,21 +22,24 @@ TEMPLATE = r"""<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Build your own portfolio · Model Portfolio Lab</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<title>Build your own portfolio, Model Portfolio Lab</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
 <style>
 __CSS__
+#account { padding:22px 0 0; border-top:0; }
+.mine:empty { display:none; }
+#htable { min-width:1240px; }
 .acct { display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; font-size:13.5px; }
 .acct input { font:inherit; padding:7px 10px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); min-width:180px; }
 .acct select { font:inherit; padding:7px 10px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); max-width:260px; }
-.wrow input.w { width:84px; font:inherit; font-size:15px; padding:9px 9px; border:1.5px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); text-align:right; font-family:"IBM Plex Mono", ui-monospace, monospace; min-height:40px; }
+.wrow input.w { width:84px; font:inherit; font-size:15px; padding:9px 9px; border:1.5px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); text-align:right; font-variant-numeric:tabular-nums; min-height:40px; }
 .wrow input.w:focus { outline:2px solid var(--accent); outline-offset:1px; border-color:transparent; }
 .wrow input.w.bad { border-color:var(--critical); }
 .setup { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; }
 .setup label { display:block; font-size:12.5px; color:var(--muted); margin-bottom:4px; }
 .setup input, .setup select { width:100%; font:inherit; font-size:15px; padding:11px 12px; border:1.5px solid var(--line); border-radius:10px; background:var(--bg); color:var(--text); min-height:46px; }
 .setup input:focus, .setup select:focus { outline:2px solid var(--accent); outline-offset:1px; border-color:transparent; }
-.total { font-family:"IBM Plex Mono", ui-monospace, monospace; font-weight:500; }
+.total { font-variant-numeric:tabular-nums; font-weight:500; }
 .total.bad { color:var(--critical); }
 .chips { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
 .chips button { border:1.5px solid var(--line); background:var(--surface); color:var(--text); padding:7px 13px; border-radius:999px; font-size:13px; min-height:36px; }
@@ -51,7 +54,7 @@ __CSS__
 dialog.auth { border:1px solid var(--line); border-radius:14px; padding:0; width:min(440px, 92vw); background:var(--surface); color:var(--text); box-shadow:0 20px 60px rgba(0,0,0,.25); }
 dialog.auth::backdrop { background:rgba(10,12,11,.45); }
 .auth-head { display:flex; justify-content:space-between; align-items:center; padding:16px 20px 0; }
-.auth-head h3 { margin:0; font-family:"IBM Plex Serif", Georgia, serif; font-size:19px; font-weight:600; }
+.auth-head h3 { margin:0;  font-size:19px; font-weight:600; }
 .auth-close { border:0; background:transparent; font-size:22px; line-height:1; color:var(--faint); padding:4px 8px; border-radius:6px; }
 .auth-close:hover { background:var(--surface-2); color:var(--text); }
 .auth-tabs { display:flex; gap:4px; margin:14px 20px 0; border-bottom:1px solid var(--line); }
@@ -89,7 +92,7 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
 .custom-fee { display:none; }
 .custom-fee.show { display:block; }
 .setup select:disabled { opacity:.6; }
-.subhead { font-size:12.5px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin:18px 0 8px; }
+.subhead { font-size:14px; font-weight:700; color:var(--text); margin:20px 0 8px; }
 .undo-group { display:inline-flex; gap:6px; padding-right:10px; margin-right:4px; border-right:1px solid var(--line); }
 .find { display:grid; grid-template-columns:auto 1fr; gap:4px 12px; padding:12px 2px; border-bottom:1px solid var(--line); }
 .find .sev { font-size:11.5px; font-weight:600; padding:3px 9px; border-radius:999px; height:fit-content; white-space:nowrap; }
@@ -98,15 +101,14 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
 .ai { border:1px solid var(--line); border-radius:12px; padding:14px 16px; background:var(--surface); margin-top:12px; }
 .ai h3 { margin:0 0 6px; font-size:16px; } .ai ul { margin:6px 0 0 18px; padding:0; } .ai li { margin:3px 0; }
 .ai .sg { border-top:1px solid var(--line); padding:10px 0; } .ai .sg:first-of-type { border-top:0; }
-.ai .lbl { font-size:12px; color:var(--faint); text-transform:uppercase; letter-spacing:.04em; margin-right:6px; }
+.ai .lbl { font-size:13px; color:var(--muted); font-weight:600; margin-right:6px; }
 </style>
 </head>
 <body>
 <header><div class="wrap">
-  <nav class="nav no-print"><a href="/">Model portfolios</a><a href="/builder.html" aria-current="page">Build your own portfolio</a><a href="/compare.html">Compare</a><a href="/brief.html">Daily brief</a><a href="/quality.html">Holdings quality review</a></nav>
-  <h1>Build your own portfolio</h1>
-  <p class="lede">Choose any listed share, ETF or fund, set the weights, and watch the cost, income, risk, diversification and a ten-year backtest
-  recalculate as you go. Start blank, or from one of the engine's model portfolios and change what you disagree with.</p>
+  <nav class="nav no-print"><a href="/">Model portfolios</a><a href="/builder.html" aria-current="page">Builder</a><a href="/compare.html">Compare</a><a href="/brief.html">Daily brief</a><a href="/quality.html">Quality review</a></nav>
+  <h1>Portfolio builder</h1>
+  <p class="lede">Start from a base portfolio, an Excel model or a blank page. Costs, income, risk and the check update as you change it.</p>
   <div class="meta" id="meta"></div>
   <div class="meta">Personal learning project. Illustrative only: not financial advice and not a recommendation to buy or sell anything. Past returns are history, not forecasts.</div>
 </div></header>
@@ -160,6 +162,7 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
     <button class="btn" id="btn-new" type="button">New blank portfolio</button>
     <button class="btn" id="btn-xlsx" type="button">Download as Excel</button>
     <button class="btn" id="btn-print" type="button">Print</button>
+    <a class="btn" id="btn-super" href="/compare.html#super" style="text-decoration:none">Compare with super funds</a>
     <span class="muted" id="savenote" style="font-size:12.5px"></span>
   </div>
 </section>
@@ -175,7 +178,7 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
     <button class="btn small" id="btn-rules" type="button" title="Weights the way the engine would: by the holdings' weight hints, held to the diversification caps">Weight like the engine</button>
   </div>
   <div id="holdings-empty" class="empty">Nothing here yet. Add holdings below, or start from a model portfolio above.</div>
-  <div class="tscroll"><table id="htable" hidden><thead><tr><th>Holding</th><th>Asset class</th><th>Sector · region</th><th class="num">Weight %</th><th class="num">Dollars</th><th class="num">Units</th><th class="num">Price (AUD)</th><th>Last 12 months</th><th class="num">1y</th><th class="num">3y pa</th><th class="num">5y pa</th><th class="num">10y pa</th><th class="num">Yield</th><th class="num">Cost</th><th>Analyst view</th><th class="no-print"></th></tr></thead><tbody id="holdings"></tbody></table></div>
+  <div class="tscroll"><table id="htable" class="htable" hidden><thead><tr><th>Holding</th><th>Asset class</th><th>Sector, region</th><th class="num">Weight %</th><th class="num">Dollars</th><th class="num">Units</th><th class="num">Price (AUD)</th><th>Last 12 months</th><th class="num">1y</th><th class="num">3y pa</th><th class="num">5y pa</th><th class="num">10y pa</th><th class="num">Yield</th><th class="num">Cost</th><th>Analyst view</th><th class="no-print"></th></tr></thead><tbody id="holdings"></tbody></table></div>
   <div id="sheet" class="sheet no-print" hidden></div>
   <div class="edit no-print" style="margin-top:18px">
     <div class="eyebrow">Add a holding</div>
@@ -292,6 +295,7 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 const DATA = __DATA__;
+const VEHICLE = { etf: "ETF", lic: "listed investment company", direct: "share", fund: "managed fund", cash: "cash", sma: "managed portfolio", hybrid: "hybrid", note: "listed note" };
 const CLASSES = DATA.classes, COLORS = DATA.colors, R = DATA.research, U = DATA.universe;
 const UMAP = Object.fromEntries(U.map(u => [u.ticker, u]));
 const fmtP = (x, d=1) => (x==null||isNaN(x)) ? "–" : x.toFixed(d) + "%";
@@ -469,7 +473,7 @@ function computeBacktest(pf){
   const standIns = rows.filter(x => x.standIn).map(x => ({ name: x.name, proxy: x.standIn, months: x.whole ? n : x.standMonths }));
   return { values, end: v, cagr, mdd, best: tw.length ? Math.max(...tw) : null, worst: tw.length ? Math.min(...tw) : null, years: yrs, standShare, standIns };
 }
-const SECTOR_COLORS = ["#2a78d6","#eb6834","#1baf7a","#eda100","#e87ba4","#008300","#4a3aa7","#0e9aa7","#8a5a2b","#c2185b","#5c6bc0","#7cb342","#f4511e","#00897b","#6d4c41","#9e9d24"];
+const SECTOR_COLORS = ["#2e5e4e","#3f6f9f","#b9842a","#9a5638","#6b5b8c","#8fb0a2","#a3bcd3","#c9c0ad","#5e8c6a","#2f4858","#c47a5a","#8c8a3e","#6c97b8","#7d5a50","#a3b18a","#5c5470"];
 function diversification(pf){
   const lines = pf.lines.filter(l => l.weight_pct > 0); const tot = lines.reduce((s,l) => s + l.weight_pct, 0) || 1;
   const sec = {}, reg = {}; let direct = 0, dsum = 0; const dsec = {};
@@ -500,7 +504,7 @@ const QCLS = {core:"good", satellite:"neutral", speculative:"serious", "not reco
 function qualityChip(t){ const q = DATA.quality[t]; return q ? `<span class="chip ${QCLS[q.verdict]||"neutral"}" title="${esc(q.note)}">${q.verdict}</span>` : ""; }
 function consensusChip(r){ if (!r || !r.consensus_label || r.consensus_label==="no coverage") return `<span class="chip none">no coverage</span>`; if (r.consensus_label==="thin coverage") return `<span class="chip none">thin coverage</span>`;
   const cls = r.consensus_label.includes("Buy") ? "good" : r.consensus_label==="Hold" ? "neutral" : r.consensus_label==="Underperform" ? "serious" : "critical";
-  return `<span class="chip ${cls}" title="${r.analysts} analysts, mean ${(r.consensus_mean||0).toFixed(1)} on a 1 to 5 scale">${r.consensus_label} · ${r.analysts}</span>`; }
+  return `<span class="chip ${cls}" title="${r.analysts} analysts, mean ${(r.consensus_mean||0).toFixed(1)} on a 1 to 5 scale">${r.consensus_label} (${r.analysts})</span>`; }
 function retCell(r, key, period){ if (!r || r[key]==null) return "–"; const px = r.return_proxy && r.return_proxy[period]; return `<span title="${px ? "index stand-in: " + px : ""}">${fmtS(r[key])}${px ? "†" : ""}</span>`; }
 function docLink(t){ const d = DATA.pds[t]; return d ? `<a href="${d.url}" target="_blank" rel="noopener">${esc(d.label)}</a>` : '<span class="muted">no link on file</span>'; }
 function parseBalance(v){ const n = parseFloat(String(v).replace(/[^0-9.]/g, "")); return isFinite(n) && n >= 1000 ? n : null; }
@@ -509,11 +513,11 @@ function render(){
   const pf = compute(); const m = pf.metrics; const bal = pf.balance; const bad = Math.abs(pf.total - 100) > 0.05;
   sel("ptitle").textContent = state.name || (state.id ? "Untitled portfolio" : "A new portfolio");
   sel("total").textContent = fmtP(pf.total, 1); sel("total").classList.toggle("bad", bad);
-  sel("title").textContent = (state.name || "Your portfolio") + ` · ${fmtM(bal)}`;
+  sel("title").textContent = (state.name || "Your portfolio") + ` at ${fmtM(bal)}`;
   sel("htable").hidden = !pf.lines.length; sel("holdings-empty").hidden = !!pf.lines.length;
   const maxW = Math.max(1, ...pf.lines.map(l => l.weight_pct || 0));
   sel("holdings").innerHTML = pf.lines.map(l => { const r = R[l.ticker] || {}; const col = cssColor(l.asset_class) || "var(--accent)";
-    return `<tr class="row wrow ${state.ticker===l.ticker?"active":""}" data-t="${esc(l.ticker)}"><td><b>${esc(l.name)}</b><br><span class="mono" style="font-size:11.5px;color:var(--faint)">${esc(l.ticker)} · ${l.vehicle}${l.source==="live" ? " · live" : ""}${l.priced_from==="manual" ? " · unlisted" : ""}</span> ${qualityChip(l.ticker)}${l.liquidity ? `<span class="chip neutral" title="Unlisted fund: priced by the manager; ${esc(l.liquidity)}">${esc(l.liquidity.split(" (")[0])}</span>` : ""}</td>
+    return `<tr class="row wrow ${state.ticker===l.ticker?"active":""}" data-t="${esc(l.ticker)}"><td><b>${esc(l.name)}</b><br><span class="mono" style="font-size:11.5px;color:var(--faint)">${esc(l.ticker)}, ${VEHICLE[l.vehicle] || esc(l.vehicle || "")}${l.source==="live" ? ", live" : ""}${l.priced_from==="manual" ? ", unlisted" : ""}</span> ${qualityChip(l.ticker)}${l.liquidity ? `<span class="chip neutral" title="Unlisted fund: priced by the manager; ${esc(l.liquidity)}">${esc(l.liquidity.split(" (")[0])}</span>` : ""}</td>
       <td><select class="cls" data-t="${esc(l.ticker)}" style="font:inherit;font-size:12.5px;padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--text)">${CLASSES.map(c => `<option value="${c.key}" ${c.key===l.asset_class?"selected":""}>${c.label}</option>`).join("")}</select></td>
       <td style="font-size:12.5px;color:var(--muted)">${esc(l.sector||"–")}<br>${esc(l.region||"–")}</td>
       <td class="num"><input class="w ${state.readOnly?"":""}" data-t="${esc(l.ticker)}" type="text" inputmode="decimal" value="${(l.weight_pct||0).toFixed(1)}" ${state.readOnly?"disabled":""}></td>
@@ -558,8 +562,14 @@ function render(){
   sel("allocnote").textContent = `The ${label(DATA.profiles, state.ref)} long-run target is ${refG.toFixed(0)}% growth assets; yours is ${fmtP(m.growth_pct,0)}. Differences over 5 points are marked.`;
   renderDiversification(pf); renderBacktest(pf); renderRisk(pf);
   renderPlatformControls(pf); renderPlatCompare(pf); renderBoa(pf); updateBaseNote(); renderCheck(pf);
-  updateSaveNote(); saveDraft(); track();
+  updateSaveNote(); saveDraft(); track(); saveSummary(pf);
 }
+// A summary of this portfolio for the Compare page, which sets it beside super fund options.
+function saveSummary(pf){ try { const m = pf.metrics; const bal = pf.balance || 1; if (!pf.lines.length) { localStorage.removeItem("mpl-portfolio-summary"); return; }
+  localStorage.setItem("mpl-portfolio-summary", JSON.stringify({ name: state.name || "Your portfolio", balance: bal, growth: m.growth_pct / 100,
+    r3: m.weighted_return_3y_pct / 100, r5: m.weighted_return_5y_pct / 100, r10: m.weighted_return_10y_pct / 100, fund_fee: m.weighted_mer_pct / 100,
+    platform: m.platform_admin_fee_per_year / bal, total: m.total_ongoing_cost_pct / 100, platform_label: m.platform.label + (m.platform.key === "custom" ? "" : ", " + m.platform.menuLabel),
+    holdings: pf.lines.length, at: new Date().toISOString() })); } catch (e) {} }
 function updateSaveNote(){ const local = state.id && String(state.id).startsWith("local-");
   sel("savenote").textContent = state.readOnly ? "Read-only shared portfolio. Sign in and use \"Save as a copy\" to make it yours." : state.id ? (state.dirty ? "Unsaved changes" : (local ? "Saved in this browser" : "Saved to your account")) : (state.lines.length ? "Not saved yet" : ""); }
 function saveDraft(){ try { if (!state.readOnly) localStorage.setItem("mpl-builder-draft", JSON.stringify({ name: state.name, balance: state.balance, ref: state.ref, platform: state.platform, notes: state.notes, lines: state.lines, id: state.id, extra: EXTRA, research: Object.fromEntries(state.lines.filter(l => l.source === "live").map(l => [l.ticker, R[l.ticker]])) })); } catch(e) {} }
@@ -653,7 +663,7 @@ function renderBoa(pf){
   sel("boa-section").hidden = !pf.lines.length;
   if (document.activeElement !== sel("pnotes")) sel("pnotes").value = state.notes || ""; sel("pnotes").readOnly = state.readOnly;
   const a = document.activeElement; if (a && a.closest && a.closest("#boa")) return;   // never rebuild the list under someone's cursor
-  sel("boa").innerHTML = pf.lines.map(l => `<div class="boa-item"><div class="boa-head"><b>${esc(l.name)} <span class="mono" style="font-weight:400;color:var(--faint);font-size:12px">${esc(l.ticker)} · ${fmtP(l.weight_pct, 1)}</span></b><span><span class="boa-state ${l.boa_custom ? "custom" : ""}">${l.boa_custom ? "Your words: kept and saved" : "Automatic draft: updates with the figures until you edit it"}</span>${l.boa_custom && !state.readOnly ? ` <button type="button" class="btn small" data-redraft="${esc(l.ticker)}">Back to the draft</button>` : ""}</span></div><textarea data-t="${esc(l.ticker)}" ${state.readOnly ? "readonly" : ""} aria-label="Basis of advice for ${esc(l.name)}">${esc(boaText(l))}</textarea></div>`).join("");
+  sel("boa").innerHTML = pf.lines.map(l => `<div class="boa-item"><div class="boa-head"><b>${esc(l.name)} <span class="mono" style="font-weight:400;color:var(--faint);font-size:12px">${esc(l.ticker)}, ${fmtP(l.weight_pct, 1)}</span></b><span><span class="boa-state ${l.boa_custom ? "custom" : ""}">${l.boa_custom ? "Your words: kept and saved" : "Automatic draft: updates with the figures until you edit it"}</span>${l.boa_custom && !state.readOnly ? ` <button type="button" class="btn small" data-redraft="${esc(l.ticker)}">Back to the draft</button>` : ""}</span></div><textarea data-t="${esc(l.ticker)}" ${state.readOnly ? "readonly" : ""} aria-label="Basis of advice for ${esc(l.name)}">${esc(boaText(l))}</textarea></div>`).join("");
   sel("boa").querySelectorAll("textarea").forEach(ta => ta.oninput = () => { const l = state.lines.find(x => x.ticker === ta.dataset.t); if (!l) return; l.boa = ta.value; if (!l.boa_custom) { l.boa_custom = true; const st = ta.parentElement.querySelector(".boa-state"); st.textContent = "Your words: kept and saved"; st.classList.add("custom"); }
     state.dirty = true; updateSaveNote(); saveDraft(); trackSoon(); });
   sel("boa").querySelectorAll("button[data-redraft]").forEach(b => b.onclick = () => { const l = state.lines.find(x => x.ticker === b.dataset.redraft); if (!l) return; l.boa_custom = false; l.boa = ""; state.dirty = true; render(); toast("Back to the automatic draft. Undo restores your words."); }); }
@@ -665,7 +675,7 @@ function renderSheet(pf){
   const sentences = r.summary ? r.summary.split(". ") : []; const blurb = sentences.length ? sentences.slice(0,4).join(". ") + (sentences.length>4 ? "." : "") : (l.source === "live" ? "Added live from the price feed: no written description or analyst view until the daily build researches it." : "No description available from the data feed.");
   const ccy = r.price_currency && r.price_currency!=="AUD" ? ` (${r.price_currency})` : "";
   box.hidden = false; box.innerHTML = `<div class="sheet-head"><h3>${esc(l.name)} <span class="mono" style="font-weight:400;color:var(--faint);font-size:14px">${esc(l.ticker)}</span></h3>
-      <div><span class="dot" style="background:${col}"></span>${label(CLASSES, l.asset_class)} · ${esc(l.sector||"")} · ${esc(l.region||"")} · ${fmtP(l.weight_pct,1)} (${fmtM(l.dollars)})</div></div>
+      <div><span class="dot" style="background:${col}"></span>${label(CLASSES, l.asset_class)}, ${esc(l.sector||"")}, ${esc(l.region||"")}, ${fmtP(l.weight_pct,1)} (${fmtM(l.dollars)})</div></div>
     <div class="sheet-grid"><div>${DATA.quality[l.ticker] ? `<div class="note" style="background:var(--accent-soft);color:var(--text)"><b>Reviewed verdict: ${DATA.quality[l.ticker].verdict}.</b> ${esc(DATA.quality[l.ticker].note)} <span class="muted">(${DATA.quality[l.ticker].reviewed}; opinion, not advice)</span></div>` : ""}
       <p class="summary">${esc(blurb)}</p>${r.sparkline && r.sparkline.length ? `<div class="eyebrow">Last 12 months, dividends reinvested, rebased to 100</div>${spark(r.sparkline, col, 600, 120, true)}` : ""}</div>
       <dl class="kv"><dt>Analyst view</dt><dd>${consensusChip(r)}</dd><dt>1 year return</dt><dd>${fmtS(r.return_1y_pct)}</dd><dt>3 years, per year</dt><dd>${fmtS(r.return_3y_pct_pa)}</dd><dt>5 years, per year</dt><dd>${fmtS(r.return_5y_pct_pa)}</dd><dt>10 years, per year</dt><dd>${fmtS(r.return_10y_pct_pa)}</dd>
@@ -673,7 +683,7 @@ function renderSheet(pf){
       <dt>Dividend yield</dt><dd>${fmtP(l.yield_pct,2)}</dd><dt>Franking (estimate)</dt><dd>${fmtP(l.franking_pct,0)}</dd><dt>Management cost</dt><dd>${fmtP(l.mer_pct,2)}</dd>
       ${r.market_cap!=null ? `<dt>${r.quote_type==="ETF"?"Fund size":"Market cap"}${ccy}</dt><dd>${r.market_cap >= 1e9 ? "$" + (r.market_cap/1e9).toFixed(1) + " bn" : fmtM(r.market_cap)}</dd>` : ""}
       <dt>Beta to ASX 200 (1y)</dt><dd>${(pf.metrics.holding_beta_asx200||{})[l.ticker] != null ? pf.metrics.holding_beta_asx200[l.ticker].toFixed(2) : "–"}</dd>
-      <dt>Documents</dt><dd style="font-family:inherit">${docLink(l.ticker)}</dd><dt>Data</dt><dd style="font-family:inherit;color:var(--faint)">${esc(r.source||l.priced_from)}${r.fetched?" · "+r.fetched:""}</dd></dl></div>`;
+      <dt>Documents</dt><dd style="font-family:inherit">${docLink(l.ticker)}</dd><dt>Data</dt><dd style="font-family:inherit;color:var(--faint)">${esc(r.source||l.priced_from)}${r.fetched?", "+r.fetched:""}</dd></dl></div>`;
 }
 function renderDiversification(pf){
   if (!pf.lines.length) { sel("divtiles").innerHTML = ""; ["secstack","regstack","seclegend","reglegend","divflags"].forEach(id => sel(id).innerHTML = ""); return; }
@@ -714,7 +724,7 @@ function renderRisk(pf){
     ["Beta to the ASX 200", m.beta_asx200 == null ? "–" : m.beta_asx200.toFixed(2), m.beta_asx200 == null ? "add holdings with price history" : `a 10% fall in Australian shares has meant about ${fmtP(Math.abs(m.beta_asx200)*10,0)} here`],
     ["Beta to world shares", m.beta_world == null ? "–" : m.beta_world.toFixed(2), "against the developed-world index ETF (VGS), unhedged"],
     ["Correlation to the ASX 200", m.correlation_asx200 == null ? "–" : m.correlation_asx200.toFixed(2), m.correlation_asx200 > 0.85 ? "moves almost in lock-step with the local market" : m.correlation_asx200 > 0.6 ? "tracks the local market fairly closely" : "only loosely tied to the local market"],
-    ["Correlation between holdings", apc == null ? "–" : apc.toFixed(2), apc == null ? "" : apc > 0.5 ? "the holdings tend to rise and fall together" : apc > 0.25 ? "moderately related; some genuine diversification" : "largely independent of each other"],
+    ["Correlation of holdings", apc == null ? "–" : apc.toFixed(2), apc == null ? "" : apc > 0.5 ? "the holdings tend to rise and fall together" : apc > 0.25 ? "moderately related; some genuine diversification" : "largely independent of each other"],
     ["Diversification ratio", dr == null ? "–" : dr.toFixed(2), dr == null ? "" : `average holding volatility ${fmtP(m.weighted_avg_holding_vol_pct,0)} divided by the portfolio's ${fmtP(m.realised_volatility_pct,0)}`],
     ["Realised volatility", m.realised_volatility_pct == null ? "–" : "±" + fmtP(m.realised_volatility_pct,0), "one standard deviation of yearly moves, from daily prices"],
   ].map(([k,v,s]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
@@ -738,13 +748,13 @@ let qTimer;
 function renderResults(q){
   const held = new Set(state.lines.map(l => l.ticker)); const uni = searchUniverse(q).slice(0, q ? 12 : 40); const ext = q.length >= 2 ? searchIndex(q) : [];
   const row = (sym, name, d, cls, extra) => `<div class="result"><div><b>${esc(name)}</b> <span class="mono" style="color:var(--faint);font-size:12px">${esc(sym)}</span><div class="d">${d}</div></div><div>${held.has(sym) ? '<span class="chip neutral">in portfolio</span>' : `<button type="button" class="btn small primary" data-add="${esc(sym)}" data-cls="${cls}" ${extra?`data-type="${esc(extra.type||"")}" data-sector="${esc(extra.sector||"")}"`:""}>Add</button>`}</div></div>`;
-  let html = uni.map(u => { const r = R[u.ticker] || {}; return row(u.ticker, u.name, `${label(CLASSES, u.asset_class)} · ${esc(u.sector)} · ${esc(u.region)} · ${u.vehicle}${u.twin ? " · unlisted, " + esc((u.liquidity||"").toLowerCase()) : ""}${u.status === "watchlist" ? " · watchlist" : ""} · yield ${fmtP(r.dividend_yield_pct != null ? r.dividend_yield_pct : u.yield,1)} · cost ${fmtP(u.mer,2)} · 1y ${fmtS(r.return_1y_pct)} · 5y ${fmtS(r.return_5y_pct_pa)} ${qualityChip(u.ticker)} ${consensusChip(r)}`, u.asset_class); }).join("");
-  if (ext.length) html += `<div class="result" style="background:var(--surface-2)"><div class="d">Outside the engine's universe: fetched live when added</div></div>` + ext.map(x => row(x.symbol, x.name, `${esc(x.exchange)} · ${esc(x.type)}${x.sector ? " · " + esc(x.sector) : ""}`, guessClass(x.symbol, x.name, x.sector), x)).join("");
+  let html = uni.map(u => { const r = R[u.ticker] || {}; return row(u.ticker, u.name, `${label(CLASSES, u.asset_class)}, ${esc(u.sector)}, ${esc(u.region)}, ${u.vehicle}${u.twin ? ", unlisted, " + esc((u.liquidity||"").toLowerCase()) : ""}${u.status === "watchlist" ? ", watchlist" : ""}, yield ${fmtP(r.dividend_yield_pct != null ? r.dividend_yield_pct : u.yield,1)}, cost ${fmtP(u.mer,2)}, 1y ${fmtS(r.return_1y_pct)}, 5y ${fmtS(r.return_5y_pct_pa)} ${qualityChip(u.ticker)} ${consensusChip(r)}`, u.asset_class); }).join("");
+  if (ext.length) html += `<div class="result" style="background:var(--surface-2)"><div class="d">Outside the engine's universe: fetched live when added</div></div>` + ext.map(x => row(x.symbol, x.name, `${esc(x.exchange)}, ${esc(x.type)}${x.sector ? ", " + esc(x.sector) : ""}`, guessClass(x.symbol, x.name, x.sector), x)).join("");
   if (!uni.length && !ext.length && q.length >= 2) html += `<div class="result"><div class="d">No match in the index. <button type="button" class="btn small" id="btn-yahoo">Search the price feed for "${esc(q)}"</button></div></div>`;
   sel("results").innerHTML = html ? `<div class="results">${html}</div>` : "";
   sel("results").querySelectorAll("button[data-add]").forEach(b => b.onclick = () => addSymbol(b.dataset.add, b.dataset.cls, { type: b.dataset.type, sector: b.dataset.sector }));
   const y = sel("btn-yahoo"); if (y) y.onclick = async () => { try { const d = await api("/search?q=" + encodeURIComponent(q)); const rs = d.results || []; if (!rs.length) { toast("Nothing found on the price feed"); return; }
-      sel("results").innerHTML = `<div class="results">` + rs.map(x => row(x.symbol, x.name, `${esc(x.exchange)} · ${esc(x.type)}`, guessClass(x.symbol, x.name, ""), x)).join("") + `</div>`;
+      sel("results").innerHTML = `<div class="results">` + rs.map(x => row(x.symbol, x.name, `${esc(x.exchange)}, ${esc(x.type)}`, guessClass(x.symbol, x.name, ""), x)).join("") + `</div>`;
       sel("results").querySelectorAll("button[data-add]").forEach(b => b.onclick = () => addSymbol(b.dataset.add, b.dataset.cls, { type: b.dataset.type })); } catch(e) { toast(e.message); } };
 }
 function renderFilters(){
@@ -953,7 +963,7 @@ function aiPayload(){ const pf = compute(); const m = pf.metrics; const d = dive
 function renderAI(){ const box = sel("airesult"); if (!AI.result) { box.innerHTML = ""; return; } const r = AI.result;
   if (r.error) { box.innerHTML = `<div class="ai"><b>The AI review did not run.</b> ${esc(r.error)}</div>`; return; }
   const x = r.result; const pr = { high: "high", medium: "medium", low: "low" };
-  box.innerHTML = `<div class="ai"><h3>AI review</h3><div class="muted" style="font-size:12px;margin-bottom:8px">${esc(r.model || "")} · ${AI.at ? new Date(AI.at).toLocaleString("en-AU") : ""}${r.remaining_today != null ? ` · ${r.remaining_today} reviews left today` : ""}. General information for checking and learning, not advice; check every suggestion before acting on it.</div>` +
+  box.innerHTML = `<div class="ai"><h3>AI review</h3><div class="muted" style="font-size:12px;margin-bottom:8px">${esc(r.model || "")}, ${AI.at ? new Date(AI.at).toLocaleString("en-AU") : ""}${r.remaining_today != null ? `, ${r.remaining_today} reviews left today` : ""}. General information for checking and learning, not advice; check every suggestion before acting on it.</div>` +
     (x ? `<p>${esc(x.summary || "")}</p>${(x.strengths || []).length ? `<div class="lbl">Strengths</div><ul>${x.strengths.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : ""}<div class="lbl" style="display:block;margin-top:10px">Suggestions</div>` +
       (x.suggestions || []).map(s => `<div class="sg"><span class="sev ${pr[s.priority] || "low"}" style="font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px">${esc(s.priority || "")}</span> <b>${esc(s.title || "")}</b><div style="margin-top:4px"><span class="lbl">Change</span>${esc(s.change || "")}</div><div><span class="lbl">Why</span>${esc(s.why || "")}</div>${s.tradeoff ? `<div class="muted"><span class="lbl">Trade-off</span>${esc(s.tradeoff)}</div>` : ""}</div>`).join("") +
       ((x.questions || []).length ? `<div class="lbl" style="display:block;margin-top:10px">Ask the client first</div><ul>${x.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ul>` : "")
@@ -994,7 +1004,7 @@ function renderAuthDialog(){
   sel("auth-tabs").querySelectorAll("button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.mode === m)));
   sel("au-pw-wrap").hidden = (m === "link" || m === "forgot"); sel("au-pw").autocomplete = m === "signup" ? "new-password" : "current-password";
   sel("au-submit").textContent = { signin: "Sign in", signup: "Create account", link: "Send me a link", forgot: "Send reset email" }[m];
-  sel("au-foot").innerHTML = m === "signin" ? `<button type="button" data-go="forgot">Forgotten your password?</button> · No account yet? <button type="button" data-go="signup">Create one</button>`
+  sel("au-foot").innerHTML = m === "signin" ? `<button type="button" data-go="forgot">Forgotten your password?</button>, No account yet? <button type="button" data-go="signup">Create one</button>`
     : m === "signup" ? `Your portfolios are saved to this account only. We email you a confirmation link first. Already have an account? <button type="button" data-go="signin">Sign in</button>`
     : m === "link" ? `No password needed: we email you a link that signs you in on this device. <button type="button" data-go="signin">Use a password instead</button>`
     : `Enter your email and we will send a link to choose a new password. <button type="button" data-go="signin">Back to sign in</button>`;
@@ -1037,7 +1047,7 @@ async function listMine(){
   if (!SB || !user.session) return; const { data, error } = await SB.from("portfolios").select("id,name,is_public,updated_at,data").eq("user_id", user.session.user.id).order("updated_at", { ascending: false });
   if (error) { sel("mine").innerHTML = `<div class="note">Could not load your portfolios: ${esc(error.message)}. If this is a new project, the database table may not be set up yet.</div>`; return; }
   sel("minecount").textContent = data.length ? `${data.length} saved portfolio${data.length === 1 ? "" : "s"}` : "No saved portfolios yet";
-  sel("mine").innerHTML = data.map(p => `<div class="pend"><span><b>${esc(p.name || "Untitled")}</b> <span class="mono" style="color:var(--faint);font-size:12px">${(p.data && p.data.lines ? p.data.lines.length : 0)} holdings · ${fmtM(p.data && p.data.balance)} · ${new Date(p.updated_at).toLocaleDateString("en-AU")}${p.is_public ? " · shared" : ""}</span></span><button class="btn small" data-open="${p.id}" type="button">Open</button><button class="btn small" data-dup="${p.id}" type="button">Duplicate</button><button class="btn small danger" data-del="${p.id}" type="button">Delete</button></div>`).join("");
+  sel("mine").innerHTML = data.map(p => `<div class="pend"><span><b>${esc(p.name || "Untitled")}</b> <span class="mono" style="color:var(--faint);font-size:12px">${(p.data && p.data.lines ? p.data.lines.length : 0)} holdings, ${fmtM(p.data && p.data.balance)}, ${new Date(p.updated_at).toLocaleDateString("en-AU")}${p.is_public ? ", shared" : ""}</span></span><button class="btn small" data-open="${p.id}" type="button">Open</button><button class="btn small" data-dup="${p.id}" type="button">Duplicate</button><button class="btn small danger" data-del="${p.id}" type="button">Delete</button></div>`).join("");
   sel("mine").querySelectorAll("button[data-open]").forEach(b => b.onclick = () => { const p = data.find(x => x.id === b.dataset.open); if (state.dirty && state.lines.length && !confirm("Discard unsaved changes?")) return; hydrate(p.data, { id: p.id, ownerId: user.session.user.id, isPublic: p.is_public }); history.replaceState(null, "", "?p=" + p.id); toast("Opened " + (p.name || "portfolio")); });
   sel("mine").querySelectorAll("button[data-dup]").forEach(b => b.onclick = async () => { const p = data.find(x => x.id === b.dataset.dup); const { error } = await SB.from("portfolios").insert({ user_id: user.session.user.id, name: (p.name || "Untitled") + " (copy)", data: p.data, is_public: false }); toast(error ? error.message : "Duplicated"); listMine(); });
   sel("mine").querySelectorAll("button[data-del]").forEach(b => b.onclick = async () => { if (!confirm("Delete this portfolio? This cannot be undone.")) return; const { error } = await SB.from("portfolios").delete().eq("id", b.dataset.del); if (error) { toast(error.message); return; } if (state.id === b.dataset.del) { state.id = null; history.replaceState(null, "", location.pathname); } toast("Deleted"); listMine(); render(); });
@@ -1053,7 +1063,7 @@ function saveLocal(asCopy){ const list = localList(); const id = (!asCopy && isL
   if (!localWrite(list)) return false; state.id = id; state.ownerId = "local"; state.readOnly = false; state.dirty = false; sel("readonly").hidden = true; history.replaceState(null, "", location.pathname); return true; }
 function renderLocal(){ const list = localList(); const box = sel("localmine"); if (!list.length) { box.innerHTML = ""; return; }
   const signed = SB && user.session;
-  box.innerHTML = `<div class="eyebrow" style="margin-top:6px">Saved in this browser (${list.length})</div>` + list.map(p => `<div class="pend"><span><b>${esc(p.name || "Untitled")}</b> <span class="mono" style="color:var(--faint);font-size:12px">${(p.data && p.data.lines ? p.data.lines.length : 0)} holdings · ${fmtM(p.data && p.data.balance)} · ${new Date(p.updated_at).toLocaleDateString("en-AU")}</span></span><button class="btn small" data-lopen="${p.id}" type="button">Open</button>${signed ? `<button class="btn small" data-lmove="${p.id}" type="button">Move to my account</button>` : `<span></span>`}<button class="btn small danger" data-ldel="${p.id}" type="button">Delete</button></div>`).join("");
+  box.innerHTML = `<div class="eyebrow" style="margin-top:6px">Saved in this browser (${list.length})</div>` + list.map(p => `<div class="pend"><span><b>${esc(p.name || "Untitled")}</b> <span class="mono" style="color:var(--faint);font-size:12px">${(p.data && p.data.lines ? p.data.lines.length : 0)} holdings, ${fmtM(p.data && p.data.balance)}, ${new Date(p.updated_at).toLocaleDateString("en-AU")}</span></span><button class="btn small" data-lopen="${p.id}" type="button">Open</button>${signed ? `<button class="btn small" data-lmove="${p.id}" type="button">Move to my account</button>` : `<span></span>`}<button class="btn small danger" data-ldel="${p.id}" type="button">Delete</button></div>`).join("");
   box.querySelectorAll("button[data-lopen]").forEach(b => b.onclick = () => { const p = localList().find(x => x.id === b.dataset.lopen); if (!p) return; hydrate(p.data, { id: p.id, ownerId: "local" }); history.replaceState(null, "", location.pathname); toast("Opened " + (p.name || "portfolio") + " from this browser"); });
   box.querySelectorAll("button[data-ldel]").forEach(b => b.onclick = () => { if (!confirm("Delete this portfolio from this browser?")) return; localWrite(localList().filter(x => x.id !== b.dataset.ldel)); if (state.id === b.dataset.ldel) state.id = null; renderLocal(); render(); toast("Deleted from this browser"); });
   box.querySelectorAll("button[data-lmove]").forEach(b => b.onclick = async () => { const p = localList().find(x => x.id === b.dataset.lmove); if (!p || !user.session) return;
@@ -1146,6 +1156,9 @@ def _css() -> str:
     return m.group(1) if m else ""
 
 
+STAGE_NOUN = {"early_accumulation": "early accumulator", "accumulation": "accumulator", "retirement": "retiree"}
+
+
 def write_builder(path: Path, portfolios: list[Portfolio], profiles: Profiles, md: MarketData, universe: pd.DataFrame,
                   research: dict | None, prices: dict[str, float], *, settings_site_url: str = "", quality: dict | None = None,
                   platform_cfg: dict | None = None, pds: dict | None = None, history: dict | None = None, esg: dict | None = None,
@@ -1182,7 +1195,7 @@ def write_builder(path: Path, portfolios: list[Portfolio], profiles: Profiles, m
                 req.append(pf.profile_requested)
             continue
         by_id[pf.id] = {"id": pf.id, "profile": pf.profile_used, "stage": pf.life_stage, "tier": pf.tier, "balance": pf.balance, "requested": [pf.profile_requested],
-                        "label": f"{profiles.risk_profiles[pf.profile_used]['label']} · {stage_label[pf.life_stage]} · {tier_label[pf.tier]}",
+                        "label": f"{profiles.risk_profiles[pf.profile_used]['label']} {STAGE_NOUN.get(pf.life_stage, stage_label[pf.life_stage].lower())}, {tier_label[pf.tier].lower()} tier",
                         "lines": [{"ticker": l.ticker, "weight_pct": round(l.weight_pct, 3)} for l in pf.lines]}
         models.append(by_id[pf.id])
     growth = profiles.growth_classes
