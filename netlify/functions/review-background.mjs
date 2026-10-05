@@ -56,8 +56,11 @@ export default async (req) => {
     if (used >= DAILY_LIMIT) return fail(`You have used today's ${DAILY_LIMIT} AI reviews. The limit resets at 10 am Brisbane time.`);
     await usage.set(key, String(used + 1));
     // 3. the request itself
-    // Tolerate the usual pasting accidents: surrounding spaces, line breaks and quotation marks.
-    const apiKey = String((globalThis.Netlify && Netlify.env.get("ANTHROPIC_API_KEY")) || process.env.ANTHROPIC_API_KEY || "").trim().replace(/^["'\s]+|["'\s]+$/g, "");
+    // The key may be in ANTHROPIC_API_KEY or in the ModelPortfolio variable; use the first that looks like an Anthropic key.
+    // Surrounding spaces, line breaks and quotation marks from pasting are ignored.
+    const read = name => String((globalThis.Netlify && Netlify.env.get(name)) || process.env[name] || "").trim().replace(/^["'\s]+|["'\s]+$/g, "");
+    const names = ["ANTHROPIC_API_KEY", "ModelPortfolio", "MODEL_PORTFOLIO_KEY"];
+    const apiKey = names.map(read).find(v => v.startsWith("sk-ant-")) || names.map(read).find(Boolean) || "";
     if (!apiKey) return fail("The AI review is not set up: the site has no ANTHROPIC_API_KEY.");
     if (!apiKey.startsWith("sk-ant-")) return fail("The ANTHROPIC_API_KEY on the site does not look like an Anthropic API key (they start with sk-ant-). Replace it in Netlify's environment variables.");
     const payload = JSON.stringify(body.payload || {});
