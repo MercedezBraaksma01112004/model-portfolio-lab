@@ -189,7 +189,7 @@ def write_workbook(path: Path, portfolios: list[Portfolio], profiles: Profiles, 
         ws["A1"].font = Font(bold=True, size=13)
         ws["A2"] = f"Balance ${pf.balance:,.0f}. Prices as of {pf.as_of}." + ("  SYNTHETIC DATA." if pf.synthetic else "")
         if pf.profile_requested != pf.profile_used:
-            ws["A3"] = f"Requested {pf.profile_requested}; capped to {pf.profile_used} by life stage rule."
+            ws["A3"] = f"{profiles.risk_profiles[pf.profile_requested]['label']} was requested, but the life stage rule caps this stage at {profiles.risk_profiles[pf.profile_used]['label']}."
             ws["A3"].fill = WARN_FILL
         m = {k: (float("nan") if v is None else v) for k, v in pf.metrics.items()}
         metric_rows = ([("Managed portfolio", f"{pf.sma['chosen']['code']} {pf.sma['chosen']['name']} ({pf.sma['chosen']['manager']})"),

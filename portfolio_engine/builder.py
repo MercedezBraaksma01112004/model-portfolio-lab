@@ -100,6 +100,30 @@ class Portfolio:
 
 # ---------------------------------------------------------------- allocation steps
 
+
+def plain_warnings(warnings: list[str], profiles: Profiles) -> list[str]:
+    """Replace the «key» markers in engine notes with the names a reader knows (asset class, life stage, tier, risk profile)."""
+    import re as _re
+    names = {}
+    for k, v in profiles.asset_classes.items():
+        names[k] = v["label"]
+    for k, v in profiles.life_stages.items():
+        names[k] = v["label"].split(" (")[0].lower()
+    for k, v in profiles.balance_tiers.items():
+        names[k] = v["label"].split(" (")[0].lower()
+    for k, v in profiles.risk_profiles.items():
+        names[k] = v["label"]
+    def one(w: str) -> str:
+        def sub(m):
+            key = m.group(1); lab = names.get(key, key.replace("_", " "))
+            start = m.start() == 0
+            if key in profiles.asset_classes and not start and not lab.startswith("Australian"):
+                lab = lab[0].lower() + lab[1:]
+            return lab
+        return _re.sub(r"«([^»]+)»", sub, w)
+    return [one(w) for w in warnings]
+
+
 def strategic_plus_tactical(profiles: Profiles, profile: str, view: TacticalView | None) -> tuple[dict, dict, dict]:
     saa = {c: float(v) for c, v in profiles.risk_profiles[profile]["saa"].items()}
     tilts = view.tilts_for(saa, profiles) if view is not None else {c: 0.0 for c in saa}
@@ -123,7 +147,7 @@ def apply_life_stage(profiles: Profiles, target: dict[str, float], life_stage: s
         need = floor - t["cash"]
         growth_total = sum(t[c] for c in profiles.growth_classes)
         if growth_total <= 0:
-            warnings.append("Cash floor could not be funded: no growth allocation")
+            warnings.append("The minimum cash buffer could not be funded because there is no growth allocation to take it from.")
         else:
             for c in profiles.growth_classes:
                 t[c] -= need * t[c] / growth_total
@@ -335,7 +359,7 @@ def _pick_diverse(elig: pd.DataFrame, n: int, tier: str, cfg: dict, warnings: li
         if len(picked) < n:
             picked = attempt(99, 1.0)
         else:
-            warnings.append(f"{asset_class}: country spread rule relaxed to fill {n} holdings")
+            warnings.append(f"«{asset_class}»: the limit on holdings from one country was relaxed to fill {n} holdings.")
     return elig.loc[picked].copy()
 
 
@@ -358,7 +382,7 @@ def select_holdings(universe: pd.DataFrame, profiles: Profiles, target: dict[str
     for c in active:
         elig = _eligible(universe, profiles, c, tier, priced, ls)
         if elig.empty:
-            warnings.append(f"No eligible holding for {c} at tier {tier}; weight moved to fallback class")
+            warnings.append(f"No eligible holding for «{c}» at the «{tier}» tier, so its weight was moved to a related asset class.")
             continue
         n = caps[c]
         chosen = _pick_diverse(elig, n, tier, dcfg, warnings, c)
@@ -412,7 +436,7 @@ def weight_within_class(sel: pd.DataFrame, class_weight: float, ls: dict, warnin
     if len(sel) == 1:
         return w
     if cap.sum() < class_weight:
-        warnings.append(f"{sel['asset_class'].iloc[0]}: max_weight caps total {cap.sum():.0f}pp but class needs {class_weight:.1f}pp; caps scaled up")
+        warnings.append(f"«{sel['asset_class'].iloc[0]}»: the maximum weights of its holdings add to {cap.sum():.0f} percentage points but the class needs {class_weight:.1f}, so each maximum was raised in proportion.")
         cap = cap * class_weight / cap.sum()
     for _ in range(20):
         over = w > cap
@@ -422,7 +446,7 @@ def weight_within_class(sel: pd.DataFrame, class_weight: float, ls: dict, warnin
         w[over] = cap[over]
         room = ~over
         if not room.any():
-            warnings.append(f"All holdings in {sel['asset_class'].iloc[0]} at max_weight; {excess:.2f}pp unallocated")
+            warnings.append(f"Every holding in «{sel['asset_class'].iloc[0]}» is at its maximum weight; {excess:.2f} percentage points could not be placed.")
             break
         w[room] += excess * w[room] / w[room].sum()
     return _apply_sector_cap(sel, w, cap, class_weight, dcfg, warnings)
@@ -450,7 +474,7 @@ def _apply_sector_cap(sel: pd.DataFrame, w: pd.Series, cap: pd.Series, class_wei
             capped |= rows
         room = (~capped) & (w < cap - 1e-9)
         if not room.any():
-            warnings.append(f"{sel['asset_class'].iloc[0]}: sector cap could not be fully applied; {excess:.2f}pp stays in the capped sectors")
+            warnings.append(f"«{sel['asset_class'].iloc[0]}»: the sector limit could not be fully applied; {excess:.2f} percentage points stay in the limited sectors.")
             w[capped] += excess * w[capped] / w[capped].sum()
             break
         w[room] += excess * w[room] / w[room].sum()
@@ -580,7 +604,7 @@ def build_portfolio(settings: Settings, profiles: Profiles, universe: pd.DataFra
                         f"{sum(c['action'] == 'substituted' for c in changes)} unscreened funds swapped for screened equivalents")
     profile_used = profiles.cap_profile(profile, life_stage)
     if profile_used != profile:
-        warnings.append(f"Requested {profile} capped to {profile_used} for life stage {life_stage}")
+        warnings.append(f"Requested «{profile}» was capped to «{profile_used}» for the «{life_stage}» stage.")
     tier = profiles.tier_for_balance(balance)
     tcfg = profiles.balance_tiers[tier]
     ls = profiles.life_stages[life_stage]
@@ -619,7 +643,7 @@ def build_portfolio(settings: Settings, profiles: Profiles, universe: pd.DataFra
         if working[c] > 0 and working[c] / 100 * balance < min_hold:
             fb = GROWTH_FALLBACK_CLASS if c in profiles.growth_classes else DEFENSIVE_FALLBACK_CLASS
             if fb != c:
-                warnings.append(f"{c} ({working[c]:.1f}% = ${working[c] / 100 * balance:,.0f}) below minimum holding; merged into {fb}")
+                warnings.append(f"«{c}» ({working[c]:.1f}%, ${working[c] / 100 * balance:,.0f}) is below the minimum holding size, so it was added to «{fb}».")
                 working[fb] = working.get(fb, 0.0) + working[c]
                 working[c] = 0.0
 
@@ -696,7 +720,7 @@ def build_portfolio(settings: Settings, profiles: Profiles, universe: pd.DataFra
         df.loc[i, "dollars"] += residual
         df.loc[i, "units"] = df.loc[i, "dollars"] / df.loc[i, "price_aud"]
     else:
-        warnings.append(f"No cash line to absorb rounding residual of ${residual:,.2f}")
+        warnings.append(f"There is no cash holding to absorb a rounding difference of ${residual:,.2f}.")
     df["weight_pct"] = df["dollars"] / balance * 100
     df = df.sort_values(["asset_class", "weight_pct"], ascending=[True, False])
 
@@ -707,7 +731,7 @@ def build_portfolio(settings: Settings, profiles: Profiles, universe: pd.DataFra
     pid = f"{profile_used}__{life_stage}__{tier}" + ("__esg" if esg_info else "")
     return Portfolio(id=pid, profile_requested=profile, profile_used=profile_used, life_stage=life_stage, tier=tier,
                      balance=balance, saa=saa, tilts=tilts, target_class_weights=target, lines=lines,
-                     metrics=metrics, warnings=warnings, as_of=str(md.as_of.date()), synthetic=md.synthetic, esg=esg_info)
+                     metrics=metrics, warnings=plain_warnings(warnings, profiles), as_of=str(md.as_of.date()), synthetic=md.synthetic, esg=esg_info)
 
 
 # ---------------------------------------------------------------- metrics
@@ -1038,7 +1062,7 @@ def build_sma_portfolio(settings: Settings, profiles: Profiles, universe: pd.Dat
         warnings.append("ESG screen on: only ethical, sustainable or ESG-labelled managed portfolios are eligible; the manager applies the screens inside the portfolio")
     profile_used = profiles.cap_profile(profile, life_stage)
     if profile_used != profile:
-        warnings.append(f"Requested {profile} capped to {profile_used} for life stage {life_stage}")
+        warnings.append(f"Requested «{profile}» was capped to «{profile_used}» for the «{life_stage}» stage.")
     tier = profiles.tier_for_balance(balance)
     ls = profiles.life_stages[life_stage]
     platform_menu = choose_menu(settings, balance, "sma", False)
@@ -1049,7 +1073,7 @@ def build_sma_portfolio(settings: Settings, profiles: Profiles, universe: pd.Dat
             warnings.append("Discover menu: no administration or account keeping fee; underlying fees and transaction costs from the Discover investment booklet; "
                             "the manager fee is the Core menu figure because the booklet discloses it only as tiered")
         else:
-            warnings.append("Discover menu applies at this balance but config/discover_menu.csv is missing; Core menu figures shown")
+            warnings.append("The Discover menu applies at this balance, but its fee schedule is missing, so Core menu figures are shown.")
     short = sma_shortlist(profiles, menu, profile_used)
     if short.empty:
         return None
@@ -1153,4 +1177,4 @@ def build_sma_portfolio(settings: Settings, profiles: Profiles, universe: pd.Dat
     warnings.append("Managed portfolio performance and fees are from the HUB24 menu dated " + sma_info["as_of"] + "; risk figures use the profile's ETF proxies")
     return Portfolio(id=f"{profile_used}__{life_stage}__{tier}__sma" + ("__esg" if esg_info else ""), profile_requested=profile, profile_used=profile_used, life_stage=life_stage,
                      tier=tier, balance=balance, saa=saa, tilts={c: 0.0 for c in saa}, target_class_weights=target, lines=lines,
-                     metrics=metrics, warnings=warnings, as_of=str(md.as_of.date()), synthetic=md.synthetic, implementation="sma", sma=sma_info, esg=esg_info)
+                     metrics=metrics, warnings=plain_warnings(warnings, profiles), as_of=str(md.as_of.date()), synthetic=md.synthetic, implementation="sma", sma=sma_info, esg=esg_info)
