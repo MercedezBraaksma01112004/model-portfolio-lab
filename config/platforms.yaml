@@ -1,0 +1,209 @@
+# Platform fee schedules for the "Build your own portfolio" page.
+#
+# Each platform has account types (only super or pension so far) and, within each, its investment menus.
+# Per menu:
+#   tiering: marginal         each rate applies only to the slice of the balance in its band (all platforms below)
+#   bands                     up_to is the top of the band in dollars (null = no upper limit), rate is a decimal a year
+#   min_admin_fee / max_admin_fee   floor and cap on the tiered percentage fee
+#   min_includes_fixed: true  the minimum applies to the tiered fee plus the fixed fees together (Netwealth)
+#   fixed_fees                dollar fees a year per account
+#   percent_fees              percentage fees on the whole balance with a dollar cap (expense recovery, ORFR levy)
+#   intl_listed_rate          extra fee a year on the value of international listed securities held
+#   allows_listed: false      the menu cannot hold listed shares or ETFs (managed portfolios and funds only)
+#   brokerage                 Australian listed securities brokerage: rate of trade value, minimum and maximum a trade
+#   verified: false           not yet checked line by line against the fee document; the page marks it "to confirm"
+#
+# Not modelled anywhere: the cash fee or interest retained on the cash account (it reduces the interest paid rather
+# than being deducted), family group discounts, negotiated licensee rates, insurance, adviser fees, and the fees of
+# the investments themselves (those are in each holding's management cost). Update a platform when its PDS changes
+# and change as_of and source_url with it.
+
+default: hub24
+
+platforms:
+  hub24:
+    label: "HUB24"
+    accounts:
+      super:
+        label: "Super or pension"
+        product: "HUB24 Super"
+        as_of: "PDS Part II, 18 May 2026"
+        source_url: "https://my.hub24.com.au/Hub24/public/documents/documents?id=Hub24+Super+PDS"
+        menus:
+          discover:
+            label: "Discover menu"
+            tiering: marginal
+            bands: [{up_to: null, rate: 0.0}]
+            fixed_fees: []
+            percent_fees: [{label: "Expense recovery", rate: 0.00025, cap: 350}]
+            allows_listed: false
+            notes: "Discover menu managed portfolios and cash only; no administration or account keeping fee. Minimum account $10,000."
+          core:
+            label: "Core menu"
+            tiering: marginal
+            bands: [{up_to: 250000, rate: 0.0036}, {up_to: 500000, rate: 0.0026}, {up_to: 1000000, rate: 0.0016}, {up_to: null, rate: 0.0006}]
+            min_admin_fee: 150
+            max_admin_fee: 3250
+            fixed_fees: [{label: "Account keeping fee", amount: 180}]
+            percent_fees: [{label: "Expense recovery", rate: 0.00025, cap: 350}]
+            allows_listed: false
+            notes: "Core menu managed portfolios, term deposits and cash; no direct listed securities."
+          choice:
+            label: "Choice menu"
+            tiering: marginal
+            bands: [{up_to: 250000, rate: 0.0036}, {up_to: 500000, rate: 0.0026}, {up_to: 1000000, rate: 0.0016}, {up_to: null, rate: 0.0006}]
+            min_admin_fee: 350
+            max_admin_fee: 3250
+            fixed_fees: [{label: "Account keeping fee", amount: 360}]
+            percent_fees: [{label: "Expense recovery", rate: 0.00025, cap: 350}]
+            intl_listed_rate: 0.001
+            allows_listed: true
+            brokerage: {rate: 0.0011, min: 22}
+            notes: "Full menu including Australian and international listed securities; 0.10% a year on international listed securities held. Brokerage 0.11% (minimum $11 aggregated, $22 direct market)."
+
+  netwealth:
+    label: "Netwealth"
+    accounts:
+      super:
+        label: "Super or pension"
+        product: "Netwealth Super Accelerator"
+        as_of: "PDS, 1 October 2025"
+        source_url: "https://www.netwealth.com.au/librarymanager/libs/41/Super-Accelerator-PDS.pdf"
+        menus:
+          core:
+            label: "Accelerator Core"
+            tiering: marginal
+            bands: [{up_to: 750000, rate: 0.0015}, {up_to: null, rate: 0.0}]
+            min_admin_fee: 225
+            min_includes_fixed: true
+            fixed_fees: [{label: "Account fee (fixed part)", amount: 60}]
+            percent_fees: [{label: "ORFR levy", rate: 0.00023, cap: 300}]
+            allows_listed: false
+            notes: "Core holds managed funds, managed models, term deposits and annuities; no listed securities. Minimum total account fee $225 a year."
+          plus:
+            label: "Accelerator Plus"
+            tiering: marginal
+            bands: [{up_to: 250000, rate: 0.0037}, {up_to: 500000, rate: 0.0027}, {up_to: 1000000, rate: 0.0017}, {up_to: 2500000, rate: 0.0006}, {up_to: null, rate: 0.0}]
+            min_admin_fee: 550
+            min_includes_fixed: true
+            fixed_fees: [{label: "Account fee (fixed part)", amount: 240}]
+            percent_fees: [{label: "ORFR levy", rate: 0.00023, cap: 300}]
+            allows_listed: true
+            brokerage: {rate: 0.00125, min: 18.5}
+            notes: "Plus holds Australian and international listed securities. Minimum total account fee $550 a year; a family fee rebate may apply."
+
+  bt_panorama:
+    label: "BT Panorama"
+    accounts:
+      super:
+        label: "Super or pension"
+        product: "BT Panorama Super"
+        as_of: "PDS, 20 September 2026"
+        source_url: "https://www.btpanorama.com.au/content/dam/public/btfg-bt/documents/legacy/download/panorama/documents/Panorama-Super-PDS.pdf"
+        menus:
+          focus:
+            label: "Focus menu"
+            tiering: marginal
+            bands: [{up_to: 1000000, rate: 0.0015}, {up_to: null, rate: 0.0}]
+            min_admin_fee: 50
+            fixed_fees: [{label: "Administration fee (account based)", amount: 60}]
+            percent_fees: [{label: "Expense recovery (ORFR)", rate: 0.0001293, cap: 300}]
+            allows_listed: false
+            notes: "Focus holds managed funds and managed portfolios only. The asset-based fee is charged on the balance outside the transaction account."
+          compact:
+            label: "Compact menu"
+            tiering: marginal
+            bands: [{up_to: 1000000, rate: 0.0015}, {up_to: null, rate: 0.0}]
+            min_admin_fee: 150
+            fixed_fees: [{label: "Administration fee (account based)", amount: 240}]
+            percent_fees: [{label: "Expense recovery (ORFR)", rate: 0.0001293, cap: 300}]
+            allows_listed: false
+            notes: "Compact adds term deposits; no listed securities."
+          full:
+            label: "Full menu"
+            tiering: marginal
+            bands: [{up_to: 1000000, rate: 0.0015}, {up_to: null, rate: 0.0}]
+            fixed_fees: [{label: "Administration fee (account based)", amount: 540}]
+            percent_fees: [{label: "Expense recovery (ORFR)", rate: 0.0001293, cap: 300}]
+            allows_listed: true
+            notes: "Full menu adds Australian listed securities (the PDS lists no direct international shares). $400 account fee and lower asset-based rates when grouped with other Panorama accounts."
+
+  praemium:
+    label: "Praemium"
+    accounts:
+      super:
+        label: "Super or pension"
+        product: "Praemium Super"
+        as_of: "PDS, 1 October 2024"
+        source_url: "https://www.praemium.com/ResourcesByName/2466/praemium-super-product-disclosure-statementpdf"
+        menus:
+          full:
+            label: "Investment menu"
+            tiering: marginal
+            bands: [{up_to: 250000, rate: 0.0037}, {up_to: 500000, rate: 0.0030}, {up_to: 1000000, rate: 0.0020}, {up_to: 2500000, rate: 0.0005}, {up_to: null, rate: 0.0}]
+            min_admin_fee: 180
+            fixed_fees: [{label: "Account keeping fee", amount: 192}, {label: "Expense recovery (up to)", amount: 150}]
+            percent_fees: [{label: "Operational risk reserve levy", rate: 0.0003, cap: 300}]
+            intl_listed_rate: 0.0015
+            allows_listed: true
+            notes: "0.15% a year on directly held international securities. The newest Praemium Super PDS found is dated 1 October 2024; check for a later one."
+
+  macquarie_wrap:
+    label: "Macquarie Wrap"
+    verified: false
+    accounts:
+      super:
+        label: "Super or pension"
+        product: "Macquarie Super and Pension Consolidator II (Elevate)"
+        as_of: "PDS, 1 September 2026"
+        source_url: "https://www.macquarie.com.au/assets/bfs/documents/adviser/macquarie-wrap/macquarie-super-and-pension-consolidator-pds.pdf"
+        menus:
+          elevate:
+            label: "Elevate menu"
+            tiering: marginal
+            bands: [{up_to: 300000, rate: 0.0030}, {up_to: 500000, rate: 0.0020}, {up_to: 1000000, rate: 0.0010}, {up_to: 2500000, rate: 0.0003}, {up_to: null, rate: 0.0}]
+            fixed_fees: [{label: "Account keeping fee", amount: 300}]
+            percent_fees: [{label: "ORFR levy (up to)", rate: 0.0003, cap: 300}]
+            allows_listed: true
+            brokerage: {rate: 0.0012, min: 30, max: 100}
+            notes: "Engage menu not modelled. Account keeping fee $100 lower when grouped. Read from the PDS through a summary; check against the document before quoting."
+
+  cfs_edge:
+    label: "CFS Edge"
+    verified: false
+    accounts:
+      super:
+        label: "Super or pension"
+        product: "CFS Edge Super and Pension"
+        as_of: "PDS, 22 August 2026"
+        source_url: "https://www.cfs.com.au/content/dam/prospects/fs/7/8/fs7860.pdf"
+        menus:
+          full:
+            label: "Investment list"
+            tiering: marginal
+            bands: [{up_to: 500000, rate: 0.0028}, {up_to: 1000000, rate: 0.0013}, {up_to: 3000000, rate: 0.0005}, {up_to: null, rate: 0.0}]
+            fixed_fees: [{label: "Account keeping fee", amount: 300}]
+            percent_fees: []
+            intl_listed_rate: 0.001
+            allows_listed: true
+            brokerage: {rate: 0.0012, min: 20}
+            notes: "Accelerate 100 managed portfolios carry a full administration fee discount (not modelled). Read from the PDS through a summary; check against the document before quoting."
+
+  wealth_plus:
+    label: "Morgans Wealth+"
+    manual_rate: true
+    accounts:
+      direct:
+        label: "SMSF, company, trust or individual (your own HIN)"
+        product: "Morgans Wealth+ portfolio administration"
+        as_of: "No published rate card"
+        source_url: "https://morgans.com.au/portfolio-administration"
+        menus:
+          service:
+            label: "Wealth+ service"
+            tiering: marginal
+            bands: [{up_to: null, rate: 0.0}]
+            fixed_fees: []
+            percent_fees: []
+            allows_listed: true
+            notes: "Morgans does not publish the Wealth+ fee. Enter the client's Wealth+ service fee above (as a percentage and any fixed amount). Wealth+ is portfolio administration on the client's own HIN, not a super fund; SMSF administration and accounting, brokerage and advice fees are separate costs."

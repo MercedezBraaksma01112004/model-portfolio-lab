@@ -215,7 +215,7 @@ a.btn { text-decoration:none; }
 </head>
 <body>
 <header><div class="wrap">
-  <nav class="nav no-print"><a href="/" aria-current="page">Model portfolios</a><a href="/builder.html">Build your own portfolio</a><a href="/quality.html">Holdings quality review</a></nav>
+  <nav class="nav no-print"><a href="/" aria-current="page">Model portfolios</a><a href="/builder.html">Build your own portfolio</a><a href="/brief.html">Daily brief</a><a href="/quality.html">Holdings quality review</a></nav>
   <h1>Model Portfolio Lab</h1>
   <p class="lede">Pick a risk appetite, a stage of life and an account size. A rules engine turns that into a model portfolio built from
   live ASX and US prices, shows you every holding, and explains why each weight is what it is.</p>
@@ -473,7 +473,7 @@ const tip = sel("tip");
 function showTip(e, html){ tip.innerHTML = html; tip.style.display="block"; moveTip(e); }
 function moveTip(e){ tip.style.left = (e.clientX+12)+"px"; tip.style.top = (e.clientY+12)+"px"; }
 function hideTip(){ tip.style.display="none"; }
-try { const saved = JSON.parse(localStorage.getItem("mpl-state")||"null"); if (saved) Object.assign(state, saved, {ticker:null}); } catch(e){}
+try { const saved = JSON.parse(localStorage.getItem("mpl-state")||"null"); if (saved) { Object.assign(state, saved, {ticker:null}); if (!DATA.stages.some(x => x.key === state.stage)) state.stage = DATA.defaults.stage; if (!DATA.profiles.some(x => x.key === state.profile)) state.profile = DATA.defaults.profile; if (!DATA.tiers.some(x => x.key === state.tier)) state.tier = DATA.defaults.tier; } } catch(e){}
 
 function seg(id, items, key){
   const el = sel(id); el.innerHTML = "";
@@ -1019,8 +1019,7 @@ wireEdit();
 
 STAGE_BLURBS = {
     "early_accumulation": "With decades before the money is needed, short-term falls are an opportunity to keep buying, so the rules allow the most aggressive mix.",
-    "mid_accumulation": "There is still a long runway, but the balance is large enough that a bad year hurts, so the default steps down one notch and a small income tilt begins.",
-    "pre_retirement": "Sequencing risk bites hardest in the years either side of retirement: a big fall just before drawdowns start cannot be recovered by future contributions, so the cap tightens and the cash buffer grows.",
+    "accumulation": "There is still a long runway, but the balance is large enough that a bad year hurts, so the default steps down one notch, the cash buffer grows a little and a small income tilt begins. In the last few years before retirement, a big fall just before drawdowns start cannot be recovered by future contributions, so choose a lower risk profile then.",
     "retirement": "Income and stability matter more than growth now. The rules cap the profile at Balanced, hold a spending buffer in cash, and build the equity sleeves for franked income: Australian shares over international, grossed-up yield over price growth, and no holdings that pay nothing.",
 }
 
@@ -1058,7 +1057,7 @@ def write_dashboard(path: Path, portfolios: list[Portfolio], profiles: Profiles,
         "tiers": [{"key": k, "label": split(v["label"])[0], "sub": split(v["label"])[1], "balance": v["representative_balance"], "min_balance": v["min_balance"],
                    "max_holdings": v["max_holdings"], "min_holding": v["min_holding_dollars"], "brokerage": v["brokerage_dollars"]} for k, v in tiers],
         "platform": platform_cfg or {}, "class_corr": class_corr or {}, "pds": pds or {},
-        "defaults": {"profile": "balanced", "stage": "mid_accumulation", "tier": tiers[1][0] if len(tiers) > 1 else tiers[0][0]},
+        "defaults": {"profile": "balanced", "stage": "accumulation", "tier": tiers[1][0] if len(tiers) > 1 else tiers[0][0]},
         "saa": saa, "stage_rules": stage_rules,
         "tactical": tactical, "research": research_json,
         "review": [r.__dict__ for r in (review or [])],

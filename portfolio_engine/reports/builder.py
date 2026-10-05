@@ -75,11 +75,27 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
 .avatar { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:50%; background:var(--accent); color:var(--accent-ink); font-weight:600; font-size:13px; }
 .mine .pend { display:grid; grid-template-columns:1fr auto auto auto; gap:10px; }
 @media (max-width:700px) { .mine .pend { grid-template-columns:1fr; } }
+.boa { display:grid; gap:12px; }
+.boa-item { border:1px solid var(--line); border-radius:10px; padding:12px 14px; background:var(--surface); }
+.boa-head { display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 12px; align-items:center; margin-bottom:8px; }
+.boa-head b { font-size:14.5px; }
+.boa-item textarea, #pnotes { width:100%; min-height:104px; font:inherit; font-size:14px; line-height:1.55; padding:10px 12px; border:1.5px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); resize:vertical; }
+.boa-item textarea:focus, #pnotes:focus { outline:2px solid var(--accent); outline-offset:1px; border-color:transparent; }
+.boa-state { font-size:12px; color:var(--faint); }
+.boa-state.custom { color:var(--good); font-weight:500; }
+.platcmp td, .platcmp th { font-size:13px; }
+.platcmp tr.on td { background:var(--accent-soft); font-weight:600; }
+.btn[disabled] { opacity:.45; cursor:not-allowed; box-shadow:none; }
+.custom-fee { display:none; }
+.custom-fee.show { display:block; }
+.setup select:disabled { opacity:.6; }
+.subhead { font-size:12.5px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin:18px 0 8px; }
+.undo-group { display:inline-flex; gap:6px; padding-right:10px; margin-right:4px; border-right:1px solid var(--line); }
 </style>
 </head>
 <body>
 <header><div class="wrap">
-  <nav class="nav no-print"><a href="/">Model portfolios</a><a href="/builder.html" aria-current="page">Build your own portfolio</a><a href="/quality.html">Holdings quality review</a></nav>
+  <nav class="nav no-print"><a href="/">Model portfolios</a><a href="/builder.html" aria-current="page">Build your own portfolio</a><a href="/brief.html">Daily brief</a><a href="/quality.html">Holdings quality review</a></nav>
   <h1>Build your own portfolio</h1>
   <p class="lede">Choose any listed share, ETF or fund, set the weights, and watch the cost, income, risk, diversification and a ten-year backtest
   recalculate as you go. Start blank, or from one of the engine's model portfolios and change what you disagree with.</p>
@@ -93,6 +109,7 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
   <div class="eyebrow">Your account</div>
   <div class="acct" id="acct"></div>
   <div class="mine" id="mine"></div>
+  <div class="mine" id="localmine"></div>
 </section>
 
 <section id="setup">
@@ -100,12 +117,28 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
   <h2 id="ptitle">A new portfolio</h2>
   <div id="readonly" class="readonly" hidden></div>
   <div class="setup" style="margin-top:12px">
-    <div><label for="pname">Portfolio name</label><input id="pname" type="text" placeholder="e.g. Growth with a franked income tilt" maxlength="80"></div>
+    <div><label for="pname">Portfolio name</label><input id="pname" type="text" placeholder="for example Growth with a franked income tilt" maxlength="80"></div>
     <div><label for="pbal">Balance invested ($)</label><input id="pbal" type="text" inputmode="numeric" value="250,000"></div>
     <div><label for="pref">Compare against the long-run target for</label><select id="pref"></select></div>
-    <div><label for="pstart">Start from a model portfolio</label><select id="pstart"><option value="">Blank</option></select></div>
   </div>
+  <div class="subhead">Start from a base portfolio</div>
+  <div class="setup">
+    <div><label for="bstage">Stage of life</label><select id="bstage"></select></div>
+    <div><label for="bprof">Risk profile</label><select id="bprof"></select></div>
+    <div style="display:flex;align-items:flex-end"><button class="btn" id="btn-load" type="button" style="min-height:46px;width:100%;justify-content:center">Load base portfolio</button></div>
+  </div>
+  <p class="muted" id="bnote" style="font-size:12.5px;margin:6px 0 0"></p>
+  <div class="subhead">Platform</div>
+  <div class="setup">
+    <div><label for="plat">Platform</label><select id="plat"></select></div>
+    <div><label for="pacct">Account type</label><select id="pacct"></select></div>
+    <div><label for="pmenu">Investment menu</label><select id="pmenu"></select></div>
+    <div class="custom-fee" id="pcustom-a"><label for="pcpct">Administration fee (% a year)</label><input id="pcpct" type="text" inputmode="decimal" placeholder="for example 0.25"></div>
+    <div class="custom-fee" id="pcustom-b"><label for="pcfix">Fixed fees ($ a year)</label><input id="pcfix" type="text" inputmode="numeric" placeholder="for example 300"></div>
+  </div>
+  <p class="muted" id="pnote" style="font-size:12.5px;margin:6px 0 0"></p>
   <div class="toolbar">
+    <span class="undo-group"><button class="btn" id="btn-undo" type="button" title="Undo the last change (Ctrl or Cmd + Z)" disabled>&#8630; Undo</button><button class="btn" id="btn-redo" type="button" title="Redo (Ctrl or Cmd + Shift + Z)" disabled>&#8631; Redo</button></span>
     <button class="btn primary" id="btn-save" type="button">Save</button>
     <button class="btn" id="btn-saveas" type="button">Save as a copy</button>
     <button class="btn" id="btn-share" type="button">Share link</button>
@@ -138,13 +171,26 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
   </div>
 </section>
 
+<section id="boa-section" hidden>
+  <div class="eyebrow">Basis of advice</div>
+  <h2>Why each holding is here</h2>
+  <p class="sub">Every holding gets a draft written from its own figures the moment it is added: its role, cost, income, track record and analyst view. The draft keeps up with the weights until you edit it; from then on your words are kept. Both are saved with the portfolio and go into the Excel download. A draft is a starting point, not a basis of advice: for a client it has to say why the holding suits that client's objectives, circumstances and existing investments.</p>
+  <label for="pnotes" class="subhead" style="display:block">Portfolio rationale</label>
+  <textarea id="pnotes" placeholder="The strategy in your words: the objective, why this mix, what it is measured against and when it will be reviewed."></textarea>
+  <div class="subhead">By holding</div>
+  <div class="boa" id="boa"></div>
+</section>
+
 <section id="summary">
   <div class="eyebrow">At a glance</div>
   <h2 id="title">Summary</h2>
   <div class="tiles" id="tiles"></div>
   <div class="tiles" id="rtiles" style="margin-top:12px"></div>
-  <p class="muted" style="font-size:12.5px;margin:8px 0 0">Weighted returns are the weight-times-return average of the holdings, the way a model spreadsheet does it. A holding younger than the period uses its asset class index ETF as a stand-in (marked †). Fees use the HUB24 rate card for the menu this mix would sit on.</p>
+  <p class="muted" style="font-size:12.5px;margin:8px 0 0">Weighted returns are the weight-times-return average of the holdings, the way a model spreadsheet does it. A holding younger than the period uses its asset class index ETF as a stand-in (marked †). Platform fees use the rate card of the platform, account type and menu chosen above.</p>
   <div id="warnings" style="margin-top:10px"></div>
+  <div class="subhead">Platform cost at this balance</div>
+  <div class="tscroll"><table class="platcmp"><thead><tr><th>Platform</th><th>Menu</th><th class="num">Administration</th><th class="num">Other platform fees</th><th class="num">Total a year</th><th class="num">% a year</th><th>Rate card</th></tr></thead><tbody id="platcmp"></tbody></table></div>
+  <p class="muted" id="platnote" style="font-size:12.5px;margin:6px 0 0"></p>
 </section>
 
 <div class="two">
@@ -189,7 +235,8 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
   <div class="eyebrow">Reading the page</div>
   <h2>How the figures are worked out</h2>
   <details><summary>Where the data comes from</summary><p>Holdings in the engine's universe use the daily build's prices, dividend-adjusted returns and Yahoo Finance analyst consensus. Anything you add from outside it is fetched from the same price feed when you add it, converted to Australian dollars at today's rate for the price and at each month's rate for the history. Unlisted managed funds and term deposits are not in the feed and cannot be added here.</p></details>
-  <details><summary>Fees</summary><p>The cost per year is the weighted management cost of the funds plus the HUB24 administration fee from the rate card: Choice menu for anything holding shares or ETFs. Brokerage is not included in the running cost.</p></details>
+  <details><summary>Fees</summary><p>The cost per year is the weighted management cost of the funds plus the platform's fees for the account type and menu chosen: the tiered administration fee (with its minimum and cap), fixed account fees, expense recovery and other percentage levies, and any fee per listed holding. "Cheapest menu that fits" picks the lowest-cost menu that can hold every investment in the portfolio. Each platform's rate card is dated and linked in the comparison table; rates change, so check the current fee document before quoting a client. Brokerage is a one-off cost and is not in the running cost.</p></details>
+  <details><summary>Undo, saving and drafts</summary><p>Undo and redo step back and forward through every change on the page: weights, holdings added or removed, base portfolios loaded, balance, platform and the basis of advice text (Ctrl or Cmd + Z, and Ctrl or Cmd + Shift + Z). Signed in, Save stores the portfolio in your account. Signed out, or if your account cannot be reached, Save keeps it in this browser instead, listed under Your account, and you can move it to your account later.</p></details>
   <details><summary>Diversification</summary><p>"Effective holdings" is one divided by the sum of squared weights: ten equal holdings score 10, while one 90% holding and nine 1% holdings score about 1.2. Sector and region look through to what each holding actually is; a world index fund is one line but hundreds of companies, so it is shown as a diversified fund rather than a sector.</p></details>
   <details><summary>Saving and sharing</summary><p>Saved portfolios live in your account only. A share link shows a read-only copy to anyone who has it; turn sharing off from the same button and the link stops working.</p></details>
 </section>
@@ -238,7 +285,8 @@ function hideTip(){ tip.style.display="none"; }
 let toastT; function toast(msg){ const t = sel("toast"); t.textContent = msg; t.style.display = "block"; clearTimeout(toastT); toastT = setTimeout(() => t.style.display = "none", 3200); }
 
 // ------------------------------------------------------------ state
-const state = { id: null, name: "", balance: 250000, ref: "balanced", lines: [], isPublic: false, readOnly: false, ownerId: null, ticker: null, dirty: false };
+const DEFAULT_PLATFORM = () => ({ key: DATA.default_platform || Object.keys(DATA.platforms || {})[0] || "custom", account: "super", menu: "auto", custom_pct: null, custom_fixed: null });
+const state = { id: null, name: "", balance: 250000, ref: "balanced", lines: [], isPublic: false, readOnly: false, ownerId: null, ticker: null, dirty: false, platform: DEFAULT_PLATFORM(), notes: "" };
 const user = { session: null };
 const EXTRA = {};   // ticker -> {daily:{dates,returns}, monthly:{months,returns}} fetched live for holdings outside the universe
 
@@ -247,7 +295,7 @@ function lineFromUniverse(u){
   return { ticker: u.ticker, name: u.name, asset_class: u.asset_class, vehicle: u.vehicle, role: u.role, currency: u.currency, mer_pct: +u.mer || 0,
     yield_pct: r.dividend_yield_pct != null ? r.dividend_yield_pct : (+u.yield || 0), yield_source: r.dividend_yield_pct != null ? "live" : "config",
     franking_pct: +u.franking || 0, sector: u.sector || "", region: u.region || "", price_aud: u.price_aud, priced_from: u.twin ? "manual" : (u.price_aud == null ? "unpriced" : "feed"),
-    weight_pct: 0, source: "universe", liquidity: u.liquidity || "" };
+    weight_pct: 0, source: "universe", liquidity: u.liquidity || "", boa: "", boa_custom: false };
 }
 function guessClass(sym, name, sector){
   if (sector && CLASSES.some(c => c.key === sector)) return sector;
@@ -290,18 +338,49 @@ async function addSymbol(symbol, cls, meta){
     source: h.built ? "price feed (daily build)" : "price feed (live)", consensus_label: "no coverage", return_proxy: {}, sector: (meta && meta.sector) || h.sector || "", fetched: h.built || new Date().toISOString().slice(0,10) };
   EXTRA[symbol] = { daily: h.daily, monthly: h.monthly };
   pushLine({ ticker: symbol, name: h.name, asset_class: cls || guessClass(symbol, h.name, meta && meta.sector), vehicle, role: "satellite", currency: h.currency, mer_pct: vehicle === "etf" ? 0.2 : 0,
-    yield_pct: h.yield_pct || 0, yield_source: "live", franking_pct: 0, sector, region: guessRegion(symbol, h.name), price_aud: h.price * rate, priced_from: "live", weight_pct: 0, source: "live" });
+    yield_pct: h.yield_pct || 0, yield_source: "live", franking_pct: 0, sector, region: guessRegion(symbol, h.name), price_aud: h.price * rate, priced_from: "live", weight_pct: 0, source: "live", boa: "", boa_custom: false });
 }
 function pushLine(l){ state.lines.push(l); state.ticker = l.ticker; state.dirty = true; sel("q").value = ""; sel("results").innerHTML = ""; render(); toast(l.name + " added at 0%: set its weight in the table"); }
 function removeLine(t){ state.lines = state.lines.filter(l => l.ticker !== t); if (state.ticker === t) state.ticker = null; state.dirty = true; render(); }
 
 // ------------------------------------------------------------ calculations
 function tierFor(bal){ let t = DATA.tiers[0].key; for (const x of DATA.tiers) if (bal >= x.min_balance) t = x.key; return t; }
-function menuFor(bal, hasListed){ const c = DATA.platform; if (!c || !c.menus) return "choice"; if (!hasListed) return (c.menus.discover && bal < (c.discover_max_balance||0)) ? "discover" : "core"; return "choice"; }
-function menuLabel(key){ const c = DATA.platform; return (c && c.menus && c.menus[key] && c.menus[key].label) || key; }
-function platformFee(bal, menu){ let c = DATA.platform; if (!c) return 0; if (c.menus) c = c.menus[menu] || c.menus.choice; if (!c || !c.bands) return 0; let fee = 0, lower = 0;
-  for (const b of c.bands) { const upper = b.up_to == null ? Infinity : b.up_to; fee += Math.max(0, Math.min(bal, upper) - lower) * b.rate; lower = upper; if (bal <= upper) break; }
-  fee = Math.min(Math.max(fee, c.min_admin_fee||0), c.max_admin_fee||Infinity); fee += c.account_keeping_fee||0; fee += Math.min(bal*(c.expense_recovery_rate||0), c.expense_recovery_cap||0); return fee; }
+// ------------------------------------------------------------ platforms
+// Every platform in config/platforms.yaml: per account type (super, investment) a set of investment menus, each with a
+// tiered administration fee (marginal bands, or one rate for the whole balance), a minimum and a cap, fixed dollar fees,
+// percentage fees with caps (expense recovery, levies) and an optional fee per listed holding.
+const PLAT = DATA.platforms || {};
+const isListed = l => l.vehicle !== "cash" && l.vehicle !== "td" && l.priced_from !== "manual";
+function tieredFee(menu, bal){ const bands = menu.bands || []; let fee = 0;
+  if (menu.tiering === "whole_balance") { const b = bands.find(x => x.up_to == null || bal <= x.up_to) || bands[bands.length - 1]; fee = b ? bal * b.rate : 0; }
+  else { let lower = 0; for (const b of bands) { const upper = b.up_to == null ? Infinity : b.up_to; fee += Math.max(0, Math.min(bal, upper) - lower) * b.rate; lower = upper; if (bal <= upper) break; } }
+  if (menu.min_admin_fee && !menu.min_includes_fixed) fee = Math.max(fee, +menu.min_admin_fee); if (menu.max_admin_fee != null) fee = Math.min(fee, +menu.max_admin_fee); return fee; }
+function menuCost(menu, bal, nListed, intlValue){ let admin = tieredFee(menu, bal);
+  const fixed = (menu.fixed_fees || []).reduce((s, f) => s + (+f.amount || 0), 0);
+  if (menu.min_includes_fixed && menu.min_admin_fee) admin += Math.max(0, +menu.min_admin_fee - (admin + fixed));   // the minimum covers the tiered and fixed parts together
+  const pct = (menu.percent_fees || []).reduce((s, f) => s + Math.min(bal * (+f.rate || 0), f.cap == null ? Infinity : +f.cap), 0);
+  const per = (+menu.per_listed_holding_fee || 0) * nListed + (+menu.intl_listed_rate || 0) * (intlValue || 0);
+  return { admin, other: fixed + pct + per, total: admin + fixed + pct + per }; }
+function accountOf(p, acctKey){ return p.accounts[acctKey] ? [acctKey, p.accounts[acctKey]] : Object.entries(p.accounts)[0]; }
+function chooseMenu(acct, bal, hasListed, nListed, wanted, intlValue){ const all = acct.menus || {};
+  if (wanted && wanted !== "auto" && all[wanted]) return wanted;
+  const ok = Object.entries(all).filter(([k, m]) => (!hasListed || m.allows_listed !== false) && (m.max_balance == null || bal <= m.max_balance));
+  const pool = ok.length ? ok : Object.entries(all);
+  pool.sort((a, b) => menuCost(a[1], bal, nListed, intlValue).total - menuCost(b[1], bal, nListed, intlValue).total); return pool.length ? pool[0][0] : null; }
+const isManual = key => key === "custom" || !PLAT[key] || !!PLAT[key].manual_rate;
+function platformCost(bal, lines, choice){ const c = choice || state.platform; const nListed = lines.filter(isListed).length, hasListed = nListed > 0;
+  const intlValue = lines.filter(l => isListed(l) && l.currency && l.currency !== "AUD").reduce((s, l) => s + (l.dollars || 0), 0);
+  if (isManual(c.key)) { const p = PLAT[c.key] || null; const entered = c.custom_pct != null || c.custom_fixed != null; const rate = (parseFloat(c.custom_pct) || 0) / 100, fixed = parseFloat(c.custom_fixed) || 0;
+    const [ak, acct] = p ? accountOf(p, c.account) : ["", {}]; const m = p ? Object.values(acct.menus || {})[0] || {} : {};
+    return { key: p ? c.key : "custom", label: p ? p.label : "Your own rate", product: p ? (acct.product || p.label) : "Entered rate", account: ak, accountLabel: p ? (acct.label || ak) : "", menu: "manual", menuLabel: p ? (m.label || "Entered rate") : "Entered rate",
+      admin: bal * rate, other: fixed, total: bal * rate + fixed, verified: true, manual: true, entered, brokerage: null, notes: p ? (m.notes || "") : "", source: p ? (acct.source || "") : "", source_url: p ? (acct.source_url || "") : "", as_of: p ? (acct.as_of || "") : "", auto: false, listedBlocked: false }; }
+  const p = PLAT[c.key]; const [ak, acct] = accountOf(p, c.account); const mk = chooseMenu(acct, bal, hasListed, nListed, c.menu, intlValue); const m = acct.menus[mk]; const cost = menuCost(m, bal, nListed, intlValue);
+  return { key: c.key, label: p.label, product: acct.product || p.label, account: ak, accountLabel: acct.label || ak, menu: mk, menuLabel: m.label || mk, auto: !c.menu || c.menu === "auto", ...cost,
+    verified: m.verified !== false && acct.verified !== false && p.verified !== false, brokerage: m.brokerage || acct.brokerage || p.brokerage || null, notes: m.notes || "",
+    source: acct.source || p.source || "", source_url: acct.source_url || p.source_url || "", as_of: acct.as_of || p.as_of || "", listedBlocked: hasListed && m.allows_listed === false }; }
+function brokerageFor(lines, pc, T){ const listed = lines.filter(l => isListed(l) && (l.weight_pct || 0) > 0);
+  if (pc && pc.brokerage && pc.brokerage.rate != null) return listed.reduce((s, l) => s + Math.min(pc.brokerage.max == null ? Infinity : +pc.brokerage.max, Math.max(+pc.brokerage.min || 0, (l.dollars || 0) * pc.brokerage.rate)), 0);
+  return listed.length * (T.brokerage || 0); }
 function dailySeries(l){
   const R0 = DATA.returns || {}; if (l.vehicle === "cash") return null;
   if (R0.series && R0.series[l.ticker]) return R0.series[l.ticker];
@@ -330,9 +409,9 @@ function compute(){
   m.weighted_yield_pct = lines.reduce((s, l) => s + W(l) * (l.yield_pct||0), 0);
   const credits = lines.reduce((s, l) => s + W(l) * (l.yield_pct||0) * (l.franking_pct||0) / 100 * (30/70), 0);
   m.grossed_up_yield_pct = m.weighted_yield_pct + credits; m.franking_credits_per_year = credits / 100 * bal; m.income_per_year = m.weighted_yield_pct / 100 * bal;
-  const hasListed = lines.some(l => l.vehicle !== "cash"); m.platform_menu = menuFor(bal, hasListed);
-  m.investment_fees_per_year = m.weighted_mer_pct / 100 * bal; m.platform_admin_fee_per_year = platformFee(bal, m.platform_menu);
-  m.total_ongoing_cost_pct = m.weighted_mer_pct + m.platform_admin_fee_per_year / bal * 100; m.initial_brokerage = lines.filter(l => l.vehicle !== "cash").length * (T.brokerage||0);
+  const pc = platformCost(bal, lines); m.platform = pc; m.platform_menu = pc.menu;
+  m.investment_fees_per_year = m.weighted_mer_pct / 100 * bal; m.platform_admin_fee_per_year = pc.total;
+  m.total_ongoing_cost_pct = m.weighted_mer_pct + m.platform_admin_fee_per_year / bal * 100; m.initial_brokerage = brokerageFor(lines, pc, T);
   for (const [period, key] of [["3y","return_3y_pct_pa"],["5y","return_5y_pct_pa"],["10y","return_10y_pct_pa"]]) { let v = 0, px = 0;
     for (const l of lines) { const r = R[l.ticker]; let x = r && r[key] != null ? r[key] : null; if (x == null) { x = l.yield_pct || 0; } else if (r.return_proxy && r.return_proxy[period]) px += W(l);
       v += W(l) * x; } m["weighted_return_" + period + "_pct"] = v; m["weighted_return_" + period + "_proxy_share_pct"] = px * 100; }
@@ -424,7 +503,7 @@ function render(){
   const tiles = [
     ["Growth / defensive", `${fmtP(m.growth_pct,0)} / ${fmtP(m.defensive_pct,0)}`, "shares and property versus bonds and cash"],
     ["Holdings", m.holdings, `${pf.lines.filter(l=>l.vehicle==="direct").length} single companies, ${pf.lines.filter(l=>l.vehicle!=="direct").length} funds, ETFs or cash`],
-    ["Cost per year", fmtM(m.investment_fees_per_year + m.platform_admin_fee_per_year), `${fmtP(m.weighted_mer_pct,2)} in funds + ${fmtM(m.platform_admin_fee_per_year)} platform (${menuLabel(m.platform_menu)}); ${fmtP(m.total_ongoing_cost_pct,2)} all-in`],
+    ["Cost per year", fmtM(m.investment_fees_per_year + m.platform_admin_fee_per_year), `${fmtP(m.weighted_mer_pct,2)} in funds + ${fmtM(m.platform_admin_fee_per_year)} platform (${esc(m.platform.label)}${m.platform.key === "custom" ? "" : ", " + esc(m.platform.menuLabel)}); ${fmtP(m.total_ongoing_cost_pct,2)} all-in`],
     ["Income per year", fmtM(m.income_per_year), `${fmtP(m.weighted_yield_pct,2)} cash yield` + (m.franking_credits_per_year > 0.5 ? ` + ${fmtM(m.franking_credits_per_year)} franking credits (${fmtP(m.grossed_up_yield_pct,2)} grossed up)` : "")],
     ["A typical year moved", m.realised_volatility_pct == null ? "–" : "±" + fmtP(m.realised_volatility_pct,0), "realised volatility over the last year"],
     ["Last 12 months", fmtS(m.trailing_1y_return_pct), "what this mix returned; history, not a forecast"],
@@ -432,12 +511,14 @@ function render(){
   sel("tiles").innerHTML = tiles.map(([k,v,s]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
   sel("rtiles").innerHTML = [["3y","Weighted 3 year return p.a."],["5y","Weighted 5 year return p.a."],["10y","Weighted 10 year return p.a."]].map(([p,k]) => { const px = m["weighted_return_"+p+"_proxy_share_pct"]||0;
     return `<div class="tile"><div class="k">${k}</div><div class="v">${fmtS(m["weighted_return_"+p+"_pct"])}</div><div class="s">${px > 0.5 ? px.toFixed(0) + "% of the weight rests on index stand-ins" : "average of the holdings' own returns"}</div></div>`; }).join("") +
-    `<div class="tile"><div class="k">Brokerage to buy it all</div><div class="v">${fmtM(m.initial_brokerage)}</div><div class="s">one-off, at the tier's per-trade rate</div></div>`;
+    `<div class="tile"><div class="k">Brokerage to buy it all</div><div class="v">${fmtM(m.initial_brokerage)}</div><div class="s">one-off, ${m.platform.brokerage && m.platform.brokerage.rate != null ? "at " + esc(m.platform.label) + "'s rate (" + fmtP(m.platform.brokerage.rate*100,2) + ", minimum " + fmtM(m.platform.brokerage.min) + " a trade)" : "at the tier's per-trade rate"}</div></div>`;
   const warn = [];
   if (pf.lines.length && bad) warn.push(`Weights add up to ${fmtP(pf.total,1)}, not 100%. Use "Scale to 100%" or "Fill the gap with cash" above; the dollar figures assume the weights as entered.`);
   const unpriced = pf.lines.filter(l => l.price_aud == null); if (unpriced.length) warn.push("No price for " + unpriced.map(l => l.ticker).join(", ") + "; shown without units.");
   const T = DATA.tiers.find(t => t.key === pf.tier) || {}; const small = pf.lines.filter(l => l.weight_pct > 0 && l.dollars < (T.min_holding||0) && l.vehicle !== "cash");
   if (small.length) warn.push(`${small.length} holding(s) are under the ${fmtM(T.min_holding)} minimum the engine uses at this balance (${small.map(l => l.ticker).join(", ")}): brokerage will eat into them.`);
+  if (m.platform.listedBlocked) warn.push(`The ${esc(m.platform.menuLabel)} on ${esc(m.platform.label)} cannot hold listed shares or ETFs. Choose another menu, or "Cheapest menu that fits".`);
+  if (!m.platform.verified) warn.push(`${esc(m.platform.label)}'s fees here are not yet confirmed against a current fee document. Treat the platform cost as indicative.`);
   sel("warnings").innerHTML = warn.map(w => `<div class="note">${w}</div>`).join("");
   // allocation
   const cw = pf.class_weights; const ref = DATA.saa[state.ref] || {};
@@ -448,9 +529,111 @@ function render(){
   const refG = CLASSES.filter(c => c.kind==="growth").reduce((s,c) => s + (ref[c.key]||0), 0);
   sel("allocnote").textContent = `The ${label(DATA.profiles, state.ref)} long-run target is ${refG.toFixed(0)}% growth assets; yours is ${fmtP(m.growth_pct,0)}. Differences over 5 points are marked.`;
   renderDiversification(pf); renderBacktest(pf); renderRisk(pf);
-  sel("savenote").textContent = state.readOnly ? "Read-only shared portfolio. Sign in and use \"Save as a copy\" to make it yours." : state.id ? (state.dirty ? "Unsaved changes" : "Saved") : (state.lines.length ? "Not saved yet" : "");
-  try { if (!state.readOnly) localStorage.setItem("mpl-builder-draft", JSON.stringify({ name: state.name, balance: state.balance, ref: state.ref, lines: state.lines, id: state.id, extra: EXTRA, research: Object.fromEntries(state.lines.filter(l => l.source === "live").map(l => [l.ticker, R[l.ticker]])) })); } catch(e) {}
+  renderPlatformControls(pf); renderPlatCompare(pf); renderBoa(pf); updateBaseNote();
+  updateSaveNote(); saveDraft(); track();
 }
+function updateSaveNote(){ const local = state.id && String(state.id).startsWith("local-");
+  sel("savenote").textContent = state.readOnly ? "Read-only shared portfolio. Sign in and use \"Save as a copy\" to make it yours." : state.id ? (state.dirty ? "Unsaved changes" : (local ? "Saved in this browser" : "Saved to your account")) : (state.lines.length ? "Not saved yet" : ""); }
+function saveDraft(){ try { if (!state.readOnly) localStorage.setItem("mpl-builder-draft", JSON.stringify({ name: state.name, balance: state.balance, ref: state.ref, platform: state.platform, notes: state.notes, lines: state.lines, id: state.id, extra: EXTRA, research: Object.fromEntries(state.lines.filter(l => l.source === "live").map(l => [l.ticker, R[l.ticker]])) })); } catch(e) {} }
+
+// ------------------------------------------------------------ undo and redo
+// Every change made through the page lands in a snapshot; Undo steps back through them and Redo forward again.
+// Typing (names, notes, basis of advice) is grouped so one pause in typing is one step.
+const HIST = { undo: [], redo: [], last: null, max: 150 };
+function snap(){ return JSON.stringify({ name: state.name, balance: state.balance, ref: state.ref, platform: state.platform, notes: state.notes, lines: state.lines.map(({ units, dollars, ...rest }) => rest) }); }
+function track(){ if (state.readOnly) { updateUndoButtons(); return; } const s = snap(); if (HIST.last === null) { HIST.last = s; updateUndoButtons(); return; }
+  if (s === HIST.last) { updateUndoButtons(); return; } HIST.undo.push(HIST.last); if (HIST.undo.length > HIST.max) HIST.undo.shift(); HIST.redo.length = 0; HIST.last = s; updateUndoButtons(); }
+let trackT; function trackSoon(){ clearTimeout(trackT); trackT = setTimeout(track, 700); }
+function resetHistory(){ HIST.undo.length = 0; HIST.redo.length = 0; HIST.last = snap(); updateUndoButtons(); }
+function restoreSnap(s){ const d = JSON.parse(s); state.name = d.name; state.balance = d.balance; state.ref = d.ref; state.platform = d.platform; state.notes = d.notes || ""; state.lines = d.lines; state.dirty = true;
+  if (state.ticker && !state.lines.some(l => l.ticker === state.ticker)) state.ticker = null;
+  sel("pname").value = state.name; sel("pbal").value = state.balance.toLocaleString("en-AU"); sel("pref").value = state.ref; sel("pnotes").value = state.notes; HIST.last = s; render(); }
+function undo(){ if (state.readOnly) return; clearTimeout(trackT); track(); if (!HIST.undo.length) { toast("Nothing to undo"); return; } HIST.redo.push(snap()); restoreSnap(HIST.undo.pop()); updateUndoButtons(); toast("Undone. Redo puts it back."); }
+function redo(){ if (state.readOnly) return; if (!HIST.redo.length) { toast("Nothing to redo"); return; } HIST.undo.push(snap()); restoreSnap(HIST.redo.pop()); updateUndoButtons(); toast("Redone"); }
+function updateUndoButtons(){ sel("btn-undo").disabled = !HIST.undo.length || state.readOnly; sel("btn-redo").disabled = !HIST.redo.length || state.readOnly;
+  sel("btn-undo").title = HIST.undo.length ? `Undo the last change (${HIST.undo.length} step${HIST.undo.length === 1 ? "" : "s"} back available). Ctrl or Cmd + Z` : "Nothing to undo yet"; }
+sel("btn-undo").onclick = undo; sel("btn-redo").onclick = redo;
+document.addEventListener("keydown", e => { if (!(e.metaKey || e.ctrlKey)) return; const k = e.key.toLowerCase(); if (k !== "z" && k !== "y") return;
+  const a = document.activeElement; if (a && (a.tagName === "TEXTAREA" || (a.tagName === "INPUT" && a.type !== "button"))) return;   // let text boxes undo their own typing
+  e.preventDefault(); if (k === "y" || e.shiftKey) redo(); else undo(); });
+
+// ------------------------------------------------------------ platform controls and comparison
+function renderPlatformControls(pf){
+  const keys = Object.keys(PLAT); const c = state.platform;
+  sel("plat").innerHTML = keys.map(k => `<option value="${k}">${esc(PLAT[k].label)}${PLAT[k].verified === false ? " (rates to confirm)" : ""}</option>`).join("") + `<option value="custom">Other platform or a negotiated rate</option>`;
+  sel("plat").value = (c.key === "custom" || PLAT[c.key]) ? c.key : "custom";
+  const manual = isManual(sel("plat").value), custom = sel("plat").value === "custom"; ["pcustom-a", "pcustom-b"].forEach(id => sel(id).classList.toggle("show", manual));
+  sel("plat").disabled = state.readOnly; sel("pacct").disabled = sel("pmenu").disabled = manual || state.readOnly; sel("pcpct").disabled = sel("pcfix").disabled = state.readOnly;
+  const pc = pf.metrics.platform;
+  if (manual) { const p = PLAT[c.key]; const accts = p ? Object.values(p.accounts) : []; sel("pacct").innerHTML = accts.length ? accts.map(a => `<option>${esc(a.label || "")}</option>`).join("") : `<option>Not applicable</option>`; sel("pmenu").innerHTML = `<option>${p ? esc(pc.menuLabel) : "Not applicable"}</option>`;
+    if (document.activeElement !== sel("pcpct")) sel("pcpct").value = c.custom_pct ?? ""; if (document.activeElement !== sel("pcfix")) sel("pcfix").value = c.custom_fixed ?? "";
+    sel("pnote").innerHTML = custom ? "Enter the platform's administration fee as a percentage of the balance and any fixed dollar fees a year. Use this for a platform not listed, or a negotiated or family group rate."
+      : esc(pc.notes) + (pc.entered ? ` Entered rate: ${fmtM(pc.total)} a year (${fmtP(pc.total / state.balance * 100, 2)}).` : " No rate entered yet, so the platform cost shows as nil.") + (pc.source_url ? ` <a href="${esc(pc.source_url)}" target="_blank" rel="noopener">About the service</a>` : "");
+    return; }
+  const p = PLAT[c.key]; const [ak, acct] = accountOf(p, c.account);
+  sel("pacct").innerHTML = Object.entries(p.accounts).map(([k, a]) => `<option value="${k}">${esc(a.label || k)}</option>`).join(""); sel("pacct").value = ak;
+  if (c.menu !== "auto" && !acct.menus[c.menu]) c.menu = "auto";
+  sel("pmenu").innerHTML = `<option value="auto">Cheapest menu that fits${pc && pc.auto ? " (" + esc(pc.menuLabel) + ")" : ""}</option>` + Object.entries(acct.menus).map(([k, m]) => `<option value="${k}">${esc(m.label || k)}</option>`).join(""); sel("pmenu").value = c.menu || "auto";
+  const bits = [`${esc(pc.product)}, ${esc(pc.menuLabel)}: ${fmtM(pc.admin)} administration${pc.other > 0.5 ? " + " + fmtM(pc.other) + " other platform fees" : ""} = ${fmtM(pc.total)} a year (${fmtP(pc.total / state.balance * 100, 2)}).`];
+  if (pc.notes) bits.push(esc(pc.notes)); if (pc.as_of) bits.push(`Rate card: ${esc(pc.as_of)}.`); if (!pc.verified) bits.push("Not yet confirmed against a current fee document.");
+  sel("pnote").innerHTML = bits.join(" ") + (pc.source_url ? ` <a href="${esc(pc.source_url)}" target="_blank" rel="noopener">Fee document</a>` : "");
+}
+function platformRows(pf){ const bal = pf.balance; const rows = [];
+  for (const [k, p] of Object.entries(PLAT)) { const ak = p.accounts[state.platform.account] ? state.platform.account : Object.keys(p.accounts)[0];
+    if (p.manual_rate) { const pc = platformCost(bal, pf.lines, k === state.platform.key ? state.platform : { key: k, account: ak }); if (k === state.platform.key && pc.entered) rows.push(pc); else rows.push({ ...pc, unpriced: true }); continue; }
+    const pc = platformCost(bal, pf.lines, { key: k, account: ak, menu: k === state.platform.key ? state.platform.menu : "auto" }); rows.push(pc); }
+  if (state.platform.key === "custom") rows.push(platformCost(bal, pf.lines, state.platform));
+  return rows.sort((a, b) => (a.unpriced ? 1 : 0) - (b.unpriced ? 1 : 0) || a.total - b.total); }
+function renderPlatCompare(pf){ const rows = platformRows(pf); const bal = pf.balance;
+  sel("platcmp").innerHTML = rows.map(r => r.unpriced ? `<tr><td>${esc(r.label)}</td><td>${esc(r.menuLabel)}</td><td class="num" colspan="4" style="color:var(--faint)">Rate not published: choose it above and enter the client's rate</td><td style="font-size:12px">${r.source_url ? `<a href="${esc(r.source_url)}" target="_blank" rel="noopener">About the service</a>` : ""}</td></tr>` : `<tr class="${r.key === state.platform.key ? "on" : ""}"><td>${esc(r.label)}${r.verified ? "" : ' <span class="chip neutral" title="Read from the fee document through a summary; check before quoting">to confirm</span>'}</td><td>${esc(r.menuLabel)}${r.accountLabel ? '<br><span class="muted" style="font-size:11.5px">' + esc(r.accountLabel) + "</span>" : ""}</td><td class="num">${fmtM(r.admin)}</td><td class="num">${fmtM(r.other)}</td><td class="num"><b>${fmtM(r.total)}</b></td><td class="num">${fmtP(r.total / bal * 100, 2)}</td><td style="font-size:12px">${r.source_url ? `<a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.as_of || "fee document")}</a>` : esc(r.as_of || "")}</td></tr>`).join("");
+  const priced = rows.filter(r => !r.unpriced); const cheapest = priced[0], mine = priced.find(r => r.key === state.platform.key);
+  sel("platnote").textContent = rows.length > 1 && mine && cheapest && mine.key !== cheapest.key ? `At ${fmtM(bal)} with these holdings, ${cheapest.label} would cost ${fmtM(mine.total - cheapest.total)} a year less than ${mine.label}. Platform choice also turns on the investment menu, reporting, the adviser's licensee approved product list and family group discounts, none of which is in this table.` : `Same account type on each platform, cheapest menu that fits these holdings. Family group discounts, negotiated rates and adviser fees are not included.`; }
+sel("plat").onchange = () => { const v = sel("plat").value; const p = PLAT[v]; state.platform = { ...state.platform, key: v, menu: "auto", account: p && !p.accounts[state.platform.account] && state.platform.account !== "super" ? Object.keys(p.accounts)[0] : (state.platform.account || "super") }; state.dirty = true; render(); };
+sel("pacct").onchange = () => { state.platform = { ...state.platform, account: sel("pacct").value, menu: "auto" }; state.dirty = true; render(); };
+sel("pmenu").onchange = () => { state.platform = { ...state.platform, menu: sel("pmenu").value }; state.dirty = true; render(); };
+sel("pcpct").onchange = () => { const v = parseFloat(sel("pcpct").value.replace(/[^0-9.]/g, "")); state.platform = { ...state.platform, custom_pct: isFinite(v) ? v : null }; state.dirty = true; render(); };
+sel("pcfix").onchange = () => { const v = parseFloat(sel("pcfix").value.replace(/[^0-9.]/g, "")); state.platform = { ...state.platform, custom_fixed: isFinite(v) ? v : null }; state.dirty = true; render(); };
+
+// ------------------------------------------------------------ basis of advice
+const VEHICLE_WORDS = { direct: "a single company", etf: "an exchange traded fund", lic: "a listed investment company", lit: "a listed investment trust", fund: "a managed fund", hybrid: "a listed hybrid security", cash: "cash", td: "a term deposit", sma: "a managed portfolio" };
+const CLASS_PURPOSE = {
+  aus_equity: l => `It provides Australian share exposure for long-term growth${(l.franking_pct || 0) > 0 ? " and franked income" : ""}`,
+  intl_equity: () => "It provides international share exposure, spreading the portfolio beyond the concentrated Australian market and adding currency diversification",
+  infrastructure: () => "It provides real asset exposure, with income tied to long-term contracts and often to inflation",
+  alternatives: () => "It provides a source of return that has not moved closely with shares or bonds",
+  fixed_income: () => "It provides defensive income and has tended to cushion the portfolio when shares fall",
+  credit: () => "It provides income above cash with less volatility than shares",
+  cash: () => "It provides liquidity for fees, pension payments and rebalancing without forced selling" };
+function draftBoa(l){
+  const r = R[l.ticker] || {}; const q = DATA.quality[l.ticker]; const cls = label(CLASSES, l.asset_class).toLowerCase();
+  const role = l.role === "core" ? "a core holding" : l.role === "satellite" ? "a satellite holding" : "a holding";
+  const where = [l.vehicle === "direct" && l.sector ? l.sector.toLowerCase() : "", l.region && l.vehicle !== "cash" ? l.region + " exposure" : ""].filter(Boolean).join(", ");
+  const out = [`${l.name} (${l.ticker}) is ${role} in the ${cls} sleeve at ${fmtP(l.weight_pct, 1)} of the portfolio (${fmtM(l.dollars)}), held as ${VEHICLE_WORDS[l.vehicle] || l.vehicle}${where ? " (" + where + ")" : ""}.`];
+  const purpose = CLASS_PURPOSE[l.asset_class]; if (purpose) out.push(purpose(l) + ".");
+  const facts = [];
+  if ((l.mer_pct || 0) > 0) facts.push(`management cost ${fmtP(l.mer_pct, 2)} a year`);
+  if ((l.yield_pct || 0) > 0) facts.push(`trailing yield ${fmtP(l.yield_pct, 1)}${(l.franking_pct || 0) > 0 ? ", about " + fmtP(l.franking_pct, 0) + " franked" : ""}`);
+  const rets = [];
+  if (r.return_1y_pct != null) rets.push(`${fmtS(r.return_1y_pct)} over one year`);
+  if (r.return_5y_pct_pa != null) rets.push(`${fmtS(r.return_5y_pct_pa)} a year over five years${r.return_proxy && r.return_proxy["5y"] ? " (index stand-in)" : ""}`);
+  if (r.return_10y_pct_pa != null) rets.push(`${fmtS(r.return_10y_pct_pa)} a year over ten years${r.return_proxy && r.return_proxy["10y"] ? " (index stand-in)" : ""}`);
+  if (rets.length) facts.push("total return " + rets.join(", "));
+  if (r.volatility_1y_pct != null) facts.push(`one-year volatility ${fmtP(r.volatility_1y_pct, 0)}`);
+  if (facts.length) out.push("Key figures: " + facts.join("; ") + ".");
+  if (r.consensus_label && !/coverage/.test(r.consensus_label)) out.push(`Analyst consensus: ${r.consensus_label} across ${r.analysts} analysts (Yahoo Finance aggregate${r.fetched ? ", " + r.fetched : ""}).`);
+  if (q) out.push(`Quality review verdict: ${q.verdict}.`);
+  out.push("To complete: why this holding suits this client's objectives, risk profile and timeframe, how it fits with their existing investments, and the alternatives considered.");
+  return out.join(" "); }
+const boaText = l => l.boa_custom ? (l.boa || "") : draftBoa(l);
+function renderBoa(pf){
+  sel("boa-section").hidden = !pf.lines.length;
+  if (document.activeElement !== sel("pnotes")) sel("pnotes").value = state.notes || ""; sel("pnotes").readOnly = state.readOnly;
+  const a = document.activeElement; if (a && a.closest && a.closest("#boa")) return;   // never rebuild the list under someone's cursor
+  sel("boa").innerHTML = pf.lines.map(l => `<div class="boa-item"><div class="boa-head"><b>${esc(l.name)} <span class="mono" style="font-weight:400;color:var(--faint);font-size:12px">${esc(l.ticker)} · ${fmtP(l.weight_pct, 1)}</span></b><span><span class="boa-state ${l.boa_custom ? "custom" : ""}">${l.boa_custom ? "Your words: kept and saved" : "Automatic draft: updates with the figures until you edit it"}</span>${l.boa_custom && !state.readOnly ? ` <button type="button" class="btn small" data-redraft="${esc(l.ticker)}">Back to the draft</button>` : ""}</span></div><textarea data-t="${esc(l.ticker)}" ${state.readOnly ? "readonly" : ""} aria-label="Basis of advice for ${esc(l.name)}">${esc(boaText(l))}</textarea></div>`).join("");
+  sel("boa").querySelectorAll("textarea").forEach(ta => ta.oninput = () => { const l = state.lines.find(x => x.ticker === ta.dataset.t); if (!l) return; l.boa = ta.value; if (!l.boa_custom) { l.boa_custom = true; const st = ta.parentElement.querySelector(".boa-state"); st.textContent = "Your words: kept and saved"; st.classList.add("custom"); }
+    state.dirty = true; updateSaveNote(); saveDraft(); trackSoon(); });
+  sel("boa").querySelectorAll("button[data-redraft]").forEach(b => b.onclick = () => { const l = state.lines.find(x => x.ticker === b.dataset.redraft); if (!l) return; l.boa_custom = false; l.boa = ""; state.dirty = true; render(); toast("Back to the automatic draft. Undo restores your words."); }); }
+sel("pnotes").oninput = () => { state.notes = sel("pnotes").value; state.dirty = true; updateSaveNote(); saveDraft(); trackSoon(); };
 function renderSheet(pf){
   const box = sel("sheet"); sel("holdings").querySelectorAll("tr.row").forEach(tr => tr.classList.toggle("active", tr.dataset.t===state.ticker));
   const l = pf.lines.find(x => x.ticker===state.ticker); if (!l) { box.hidden = true; box.innerHTML = ""; return; }
@@ -565,33 +748,52 @@ sel("btn-rules").onclick = () => {
     for (let k = 0; k < 10; k++) { let ex = 0; const room = []; w.forEach((x, i) => { if (x > cap[i]) { ex += x - cap[i]; w[i] = cap[i]; } else room.push(i); }); if (ex < 1e-6 || !room.length) break; const rs = room.reduce((s,i) => s + w[i], 0) || 1; room.forEach(i => w[i] += ex * w[i] / rs); }
     ls.forEach((l, i) => l.weight_pct = +w[i].toFixed(2)); }
   const t = state.lines.reduce((s,l) => s + l.weight_pct, 0); if (t > 0) state.lines.forEach(l => l.weight_pct = +(l.weight_pct / t * 100).toFixed(2)); state.dirty = true; render(); toast("Weighted the way the engine would for the " + label(DATA.profiles, state.ref).toLowerCase() + " target"); };
-sel("pname").oninput = () => { state.name = sel("pname").value; state.dirty = true; sel("ptitle").textContent = state.name || "A new portfolio"; };
+sel("pname").oninput = () => { state.name = sel("pname").value; state.dirty = true; sel("ptitle").textContent = state.name || "A new portfolio"; updateSaveNote(); saveDraft(); trackSoon(); };
 sel("pbal").onchange = () => { const b = parseBalance(sel("pbal").value); if (!b) { toast("Enter a balance of at least $1,000"); return; } state.balance = b; sel("pbal").value = b.toLocaleString("en-AU"); state.dirty = true; render(); };
 sel("pref").innerHTML = DATA.profiles.map(p => `<option value="${p.key}">${p.label} (${p.sub})</option>`).join(""); sel("pref").value = state.ref;
 sel("pref").onchange = () => { state.ref = sel("pref").value; render(); };
-sel("pstart").innerHTML += DATA.models.map(mo => `<option value="${mo.id}">${mo.label}</option>`).join("");
-sel("pstart").onchange = () => { const mo = DATA.models.find(x => x.id === sel("pstart").value); if (!mo) return;
-  if (state.lines.length && !confirm("Replace the current holdings with this model portfolio?")) { sel("pstart").value = ""; return; }
+// Base portfolios: the engine's model for a stage of life and a risk profile, at the balance tier the balance above falls in.
+sel("bstage").innerHTML = (DATA.stages || []).map(x => `<option value="${x.key}">${esc(x.label)}${x.sub ? " (" + esc(x.sub) + ")" : ""}</option>`).join("");
+sel("bprof").innerHTML = DATA.profiles.map(p => `<option value="${p.key}">${p.label} (${p.sub})</option>`).join("");
+sel("bstage").value = (DATA.stages || []).some(x => x.key === "accumulation") ? "accumulation" : ((DATA.stages || [])[0] || {}).key; sel("bprof").value = "balanced";
+function findModel(stage, prof, tier){ const ms = DATA.models || []; return ms.find(m => m.stage === stage && m.tier === tier && (m.requested || []).includes(prof)) || ms.find(m => m.stage === stage && m.tier === tier && m.profile === prof) || null; }
+function updateBaseNote(){ const stage = sel("bstage").value, prof = sel("bprof").value, tier = tierFor(state.balance); const m = findModel(stage, prof, tier); const T = DATA.tiers.find(t => t.key === tier) || {};
+  if (!m) { sel("bnote").textContent = "No base portfolio for this combination."; return; }
+  let t = `Loads the ${label(DATA.profiles, m.profile)} ${label(DATA.stages, stage).toLowerCase()} portfolio for ${T.label || tier} balances (your ${fmtM(state.balance)} falls in that band): ${m.lines.length} holdings, sized to your balance.`;
+  if (m.profile !== prof) t += ` ${label(DATA.stages, stage)} caps the risk profile at ${label(DATA.profiles, m.profile)}, so that is the portfolio loaded.`;
+  sel("bnote").textContent = t; }
+sel("bstage").onchange = updateBaseNote; sel("bprof").onchange = updateBaseNote;
+sel("btn-load").onclick = () => { const stage = sel("bstage").value, prof = sel("bprof").value; const mo = findModel(stage, prof, tierFor(state.balance)); if (!mo) { toast("No base portfolio for this combination"); return; }
+  if (state.lines.length && !confirm("Replace the current holdings with this base portfolio? Undo will bring them back.")) return;
   state.lines = mo.lines.map(x => { const u = UMAP[x.ticker]; const l = u ? lineFromUniverse(u) : null; if (!l) return null; l.weight_pct = +x.weight_pct.toFixed(2); return l; }).filter(Boolean);
-  state.ref = mo.profile; sel("pref").value = mo.profile; if (!state.name) { state.name = mo.label; sel("pname").value = state.name; } state.dirty = true; state.readOnly = false; sel("pstart").value = ""; render(); toast("Loaded " + mo.label + ". Change anything you like."); };
-sel("btn-new").onclick = () => { if (state.lines.length && state.dirty && !confirm("Discard the current portfolio?")) return; Object.assign(state, { id: null, name: "", lines: [], isPublic: false, readOnly: false, ownerId: null, ticker: null, dirty: false }); sel("pname").value = ""; sel("readonly").hidden = true; history.replaceState(null, "", location.pathname); render(); };
+  state.ref = mo.profile; sel("pref").value = mo.profile; if (!state.name) { state.name = mo.label; sel("pname").value = state.name; } state.dirty = true; state.readOnly = false; render(); toast("Loaded " + mo.label + ". Change anything you like; Undo goes back."); };
+sel("btn-new").onclick = () => { Object.assign(state, { id: null, name: "", lines: [], isPublic: false, readOnly: false, ownerId: null, ticker: null, dirty: false, notes: "" }); sel("pname").value = ""; sel("readonly").hidden = true; history.replaceState(null, "", location.pathname); render(); toast("New blank portfolio. Undo brings the previous one back."); };
 sel("btn-print").onclick = () => window.print();
-sel("btn-xlsx").onclick = () => { if (typeof XLSX === "undefined") { toast("The spreadsheet library did not load"); return; } const pf = compute(); const m = pf.metrics; const wb = XLSX.utils.book_new();
-  const summary = [["Model Portfolio Lab: your portfolio", state.name||""], ["Balance", pf.balance], ["Prices as of", DATA.as_of], ["Growth %", m.growth_pct/100], ["Defensive %", m.defensive_pct/100], ["Holdings", m.holdings], ["Weighted MER", m.weighted_mer_pct/100], ["Investment fees p.a.", m.investment_fees_per_year], ["Platform menu", menuLabel(m.platform_menu)], ["Platform fee p.a.", m.platform_admin_fee_per_year], ["Total ongoing cost %", m.total_ongoing_cost_pct/100], ["Cash yield", m.weighted_yield_pct/100], ["Income p.a.", m.income_per_year], ["Franking credits p.a.", m.franking_credits_per_year], ["Grossed-up yield", m.grossed_up_yield_pct/100],
-    ["Weighted 3y return p.a.", m.weighted_return_3y_pct/100], ["Weighted 5y return p.a.", m.weighted_return_5y_pct/100], ["Weighted 10y return p.a.", m.weighted_return_10y_pct/100], ["Realised volatility (1y)", (m.realised_volatility_pct||0)/100], ["Trailing 1y return", (m.trailing_1y_return_pct||0)/100], ["Beta to ASX 200", m.beta_asx200 ?? ""], ["Beta to world shares", m.beta_world ?? ""], ["Average correlation between holdings", m.avg_pairwise_correlation ?? ""], ["Diversification ratio", m.diversification_ratio ?? ""], ["", ""], ["Illustrative only; not financial advice. Returns are history, not forecasts.", ""]];
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(summary), "Summary");
-  const hold = [["Ticker", "Holding", "Asset class", "Vehicle", "Sector", "Region", "Weight", "Dollars", "Units", "Price (AUD)", "MER", "Yield", "Franking", "Income p.a.", "1y", "3y pa", "5y pa", "10y pa", "Analyst view", "Verdict", "Source"]].concat(pf.lines.map(l => { const r = R[l.ticker]||{}; const q = DATA.quality[l.ticker]||{}; return [l.ticker, l.name, label(CLASSES, l.asset_class), l.vehicle, l.sector, l.region, (l.weight_pct||0)/100, l.dollars, l.units, l.price_aud, (l.mer_pct||0)/100, (l.yield_pct||0)/100, (l.franking_pct||0)/100, (l.dollars||0)*(l.yield_pct||0)/100, r.return_1y_pct==null?null:r.return_1y_pct/100, r.return_3y_pct_pa==null?null:r.return_3y_pct_pa/100, r.return_5y_pct_pa==null?null:r.return_5y_pct_pa/100, r.return_10y_pct_pa==null?null:r.return_10y_pct_pa/100, r.consensus_label||"", q.verdict||"", l.source]; }));
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(hold), "Holdings");
-  XLSX.writeFile(wb, `my_portfolio_${(state.name||"portfolio").replace(/[^a-z0-9]+/gi, "_").toLowerCase()}.xlsx`); };
+sel("btn-xlsx").onclick = () => { if (typeof XLSX === "undefined") { toast("The spreadsheet library did not load"); return; } clearTimeout(trackT); track(); const pf = compute(); const m = pf.metrics; const pc = m.platform; const wb = XLSX.utils.book_new();
+  const summary = [["Model Portfolio Lab: your portfolio", state.name||""], ["Balance", pf.balance], ["Prices as of", DATA.as_of], ["Compared against", label(DATA.profiles, state.ref) + " long-run target"], ["Growth %", m.growth_pct/100], ["Defensive %", m.defensive_pct/100], ["Holdings", m.holdings], ["Weighted MER", m.weighted_mer_pct/100], ["Investment fees p.a.", m.investment_fees_per_year],
+    ["Platform", pc.label], ["Product", pc.product], ["Account type", pc.accountLabel || ""], ["Investment menu", pc.menuLabel], ["Platform administration fee p.a.", pc.admin], ["Other platform fees p.a.", pc.other], ["Total platform cost p.a.", pc.total], ["Platform rate card", (pc.as_of || "") + (pc.verified ? "" : " (not yet confirmed against a current fee document)")], ["Platform fee document", pc.source_url || pc.source || ""],
+    ["Total ongoing cost %", m.total_ongoing_cost_pct/100], ["Initial brokerage", m.initial_brokerage], ["Cash yield", m.weighted_yield_pct/100], ["Income p.a.", m.income_per_year], ["Franking credits p.a.", m.franking_credits_per_year], ["Grossed-up yield", m.grossed_up_yield_pct/100],
+    ["Weighted 3y return p.a.", m.weighted_return_3y_pct/100], ["Weighted 5y return p.a.", m.weighted_return_5y_pct/100], ["Weighted 10y return p.a.", m.weighted_return_10y_pct/100], ["Realised volatility (1y)", (m.realised_volatility_pct||0)/100], ["Trailing 1y return", (m.trailing_1y_return_pct||0)/100], ["Beta to ASX 200", m.beta_asx200 ?? ""], ["Beta to world shares", m.beta_world ?? ""], ["Average correlation between holdings", m.avg_pairwise_correlation ?? ""], ["Diversification ratio", m.diversification_ratio ?? ""], ["", ""],
+    ["Portfolio rationale", state.notes || ""], ["", ""], ["Illustrative only; not financial advice. Returns are history, not forecasts. Analyst consensus is the Yahoo Finance aggregate, not licensee research.", ""]];
+  const ws1 = XLSX.utils.aoa_to_sheet(summary); ws1["!cols"] = [{ wch: 38 }, { wch: 70 }]; XLSX.utils.book_append_sheet(wb, ws1, "Summary");
+  const hold = [["Ticker", "Holding", "Asset class", "Vehicle", "Sector", "Region", "Weight", "Dollars", "Units", "Price (AUD)", "MER", "Yield", "Franking", "Income p.a.", "1y", "3y pa", "5y pa", "10y pa", "Analyst view", "Analysts", "Verdict", "Source", "Basis of advice"]].concat(pf.lines.map(l => { const r = R[l.ticker]||{}; const q = DATA.quality[l.ticker]||{}; return [l.ticker, l.name, label(CLASSES, l.asset_class), l.vehicle, l.sector, l.region, (l.weight_pct||0)/100, l.dollars, l.units, l.price_aud, (l.mer_pct||0)/100, (l.yield_pct||0)/100, (l.franking_pct||0)/100, (l.dollars||0)*(l.yield_pct||0)/100, r.return_1y_pct==null?null:r.return_1y_pct/100, r.return_3y_pct_pa==null?null:r.return_3y_pct_pa/100, r.return_5y_pct_pa==null?null:r.return_5y_pct_pa/100, r.return_10y_pct_pa==null?null:r.return_10y_pct_pa/100, r.consensus_label||"", r.analysts||"", q.verdict||"", l.source, boaText(l)]; }));
+  const ws2 = XLSX.utils.aoa_to_sheet(hold); ws2["!cols"] = [{wch:10},{wch:34},{wch:22},{wch:8},{wch:18},{wch:16},{wch:8},{wch:12},{wch:9},{wch:10},{wch:7},{wch:7},{wch:8},{wch:11},{wch:7},{wch:7},{wch:7},{wch:7},{wch:14},{wch:8},{wch:14},{wch:9},{wch:90}]; XLSX.utils.book_append_sheet(wb, ws2, "Holdings");
+  const boa = [["Basis of advice", state.name || ""], ["Portfolio rationale", state.notes || ""], ["", ""], ["Ticker", "Holding", "Asset class", "Weight", "Dollars", "Status", "Basis of advice"]]
+    .concat(pf.lines.map(l => [l.ticker, l.name, label(CLASSES, l.asset_class), (l.weight_pct||0)/100, l.dollars, l.boa_custom ? "Written" : "Automatic draft: complete before use", boaText(l)]));
+  const ws3 = XLSX.utils.aoa_to_sheet(boa); ws3["!cols"] = [{wch:10},{wch:34},{wch:22},{wch:8},{wch:12},{wch:30},{wch:120}]; XLSX.utils.book_append_sheet(wb, ws3, "Basis of advice");
+  const plat = [["Platform", "Product", "Account type", "Menu", "Administration p.a.", "Other platform fees p.a.", "Total p.a.", "% of balance", "Rate card", "Confirmed", "Fee document"]].concat(platformRows(pf).map(r => r.unpriced ? [r.label, r.product, r.accountLabel || "", r.menuLabel, null, null, null, null, r.as_of || "", "rate not published", r.source_url || ""] : [r.label, r.product, r.accountLabel || "", r.menuLabel, r.admin, r.other, r.total, r.total / pf.balance, r.as_of || "", r.verified ? "yes" : "to confirm", r.source_url || r.source || ""]));
+  const ws4 = XLSX.utils.aoa_to_sheet(plat); ws4["!cols"] = [{wch:18},{wch:30},{wch:20},{wch:22},{wch:16},{wch:18},{wch:12},{wch:11},{wch:20},{wch:11},{wch:60}]; XLSX.utils.book_append_sheet(wb, ws4, "Platform comparison");
+  XLSX.writeFile(wb, `my_portfolio_${(state.name||"portfolio").replace(/[^a-z0-9]+/gi, "_").toLowerCase()}.xlsx`); toast("Downloaded, with the basis of advice for every holding"); };
 
 // ------------------------------------------------------------ accounts (Supabase)
 const SB = (DATA.supabase && DATA.supabase.url && DATA.supabase.key && window.supabase) ? window.supabase.createClient(DATA.supabase.url, DATA.supabase.key) : null;
-function serialise(){ return { version: 1, name: state.name, balance: state.balance, ref: state.ref, lines: state.lines.map(l => ({...l})), extra: Object.fromEntries(state.lines.filter(l => EXTRA[l.ticker]).map(l => [l.ticker, EXTRA[l.ticker]])), research: Object.fromEntries(state.lines.filter(l => l.source === "live" && R[l.ticker]).map(l => [l.ticker, R[l.ticker]])), saved_as_of: DATA.as_of }; }
+function serialise(){ return { version: 2, name: state.name, balance: state.balance, ref: state.ref, platform: state.platform, notes: state.notes, lines: state.lines.map(l => ({ ...l, boa: boaText(l) })), extra: Object.fromEntries(state.lines.filter(l => EXTRA[l.ticker]).map(l => [l.ticker, EXTRA[l.ticker]])), research: Object.fromEntries(state.lines.filter(l => l.source === "live" && R[l.ticker]).map(l => [l.ticker, R[l.ticker]])), saved_as_of: DATA.as_of }; }
 function hydrate(d, { readOnly=false, id=null, ownerId=null, isPublic=false } = {}){
   Object.assign(EXTRA, d.extra || {}); Object.assign(R, d.research || {});
-  state.lines = (d.lines || []).map(l => { const u = UMAP[l.ticker]; if (u && l.source !== "live") { const f = lineFromUniverse(u); f.weight_pct = l.weight_pct; f.asset_class = l.asset_class || f.asset_class; return f; } return {...l}; });
+  state.lines = (d.lines || []).map(l => { const u = UMAP[l.ticker]; if (u && l.source !== "live") { const f = lineFromUniverse(u); f.weight_pct = l.weight_pct; f.asset_class = l.asset_class || f.asset_class; f.boa = l.boa || ""; f.boa_custom = !!l.boa_custom; return f; } return { boa: "", boa_custom: false, ...l }; });
   state.name = d.name || ""; state.balance = d.balance || 250000; state.ref = d.ref || "balanced"; state.id = id; state.readOnly = readOnly; state.ownerId = ownerId; state.isPublic = isPublic; state.dirty = false; state.ticker = null;
-  sel("pname").value = state.name; sel("pbal").value = state.balance.toLocaleString("en-AU"); sel("pref").value = state.ref;
+  state.platform = { ...DEFAULT_PLATFORM(), ...(d.platform || {}) }; state.notes = d.notes || "";
+  sel("pname").value = state.name; sel("pbal").value = state.balance.toLocaleString("en-AU"); sel("pref").value = state.ref; sel("pnotes").value = state.notes;
   sel("readonly").hidden = !readOnly; if (readOnly) sel("readonly").innerHTML = `This is a shared, read-only portfolio. Sign in and click <b>Save as a copy</b> to edit your own version.`;
   render();
 }
@@ -633,10 +835,11 @@ sel("auth-form").onsubmit = async (e) => {
 sel("reset-form").onsubmit = async (e) => { e.preventDefault(); const pw = sel("rs-pw").value; const m = sel("rs-msg"); if (pw.length < 8) { m.className = "auth-msg err"; m.textContent = "At least 8 characters."; return; }
   const { error } = await SB.auth.updateUser({ password: pw }); if (error) { m.className = "auth-msg err"; m.textContent = friendly(error); return; } resetDlg.close(); toast("Password saved. You are signed in."); };
 function renderAccount(){
+  renderLocal();
   const a = sel("acct");
-  if (!SB) { a.innerHTML = `<span class="muted">Accounts are not set up on this copy of the page, so portfolios stay in this browser only (kept as a draft until you clear your browsing data).</span>`; sel("mine").innerHTML = ""; return; }
+  if (!SB) { a.innerHTML = `<span class="muted">Accounts are not set up on this copy of the page, so Save keeps portfolios in this browser (until you clear your browsing data).</span>`; sel("mine").innerHTML = ""; return; }
   const s = user.session;
-  if (!s) { a.innerHTML = `<button class="btn primary" id="btn-open-signin" type="button">Sign in</button><button class="btn" id="btn-open-signup" type="button">Create account</button><span class="muted">Sign in to save portfolios, reopen them on any device and share them. Experimenting below needs no account.</span>`;
+  if (!s) { a.innerHTML = `<button class="btn primary" id="btn-open-signin" type="button">Sign in</button><button class="btn" id="btn-open-signup" type="button">Create account</button><span class="muted">Sign in to save portfolios to your account, reopen them on any device and share them. Without an account, Save keeps them in this browser.</span>`;
     sel("btn-open-signin").onclick = () => openAuth("signin"); sel("btn-open-signup").onclick = () => openAuth("signup"); sel("mine").innerHTML = ""; return; }
   const initial = (s.user.email || "?").slice(0, 1).toUpperCase();
   a.innerHTML = `<div class="signed"><span class="avatar">${initial}</span><span>Signed in as <b>${esc(s.user.email)}</b></span><span class="muted" id="minecount"></span><button class="btn small" id="btn-signout" type="button">Sign out</button></div>`;
@@ -652,25 +855,50 @@ async function listMine(){
   sel("mine").querySelectorAll("button[data-dup]").forEach(b => b.onclick = async () => { const p = data.find(x => x.id === b.dataset.dup); const { error } = await SB.from("portfolios").insert({ user_id: user.session.user.id, name: (p.name || "Untitled") + " (copy)", data: p.data, is_public: false }); toast(error ? error.message : "Duplicated"); listMine(); });
   sel("mine").querySelectorAll("button[data-del]").forEach(b => b.onclick = async () => { if (!confirm("Delete this portfolio? This cannot be undone.")) return; const { error } = await SB.from("portfolios").delete().eq("id", b.dataset.del); if (error) { toast(error.message); return; } if (state.id === b.dataset.del) { state.id = null; history.replaceState(null, "", location.pathname); } toast("Deleted"); listMine(); render(); });
 }
+// Portfolios saved in this browser: used when nobody is signed in, or when the account cannot be reached, so Save always works.
+const LOCAL_KEY = "mpl-builder-saved";
+function localList(){ try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || "[]"); } catch(e) { return []; } }
+function localWrite(list){ try { localStorage.setItem(LOCAL_KEY, JSON.stringify(list)); return true; } catch(e) { return false; } }
+function isLocalId(id){ return !!id && String(id).startsWith("local-"); }
+function saveLocal(asCopy){ const list = localList(); const id = (!asCopy && isLocalId(state.id)) ? state.id : "local-" + Date.now().toString(36);
+  const rec = { id, name: (asCopy && isLocalId(state.id) ? state.name + " (copy)" : state.name) || "Untitled", data: serialise(), updated_at: new Date().toISOString() };
+  const i = list.findIndex(x => x.id === id); if (i >= 0) list[i] = rec; else list.unshift(rec);
+  if (!localWrite(list)) return false; state.id = id; state.ownerId = "local"; state.readOnly = false; state.dirty = false; sel("readonly").hidden = true; history.replaceState(null, "", location.pathname); return true; }
+function renderLocal(){ const list = localList(); const box = sel("localmine"); if (!list.length) { box.innerHTML = ""; return; }
+  const signed = SB && user.session;
+  box.innerHTML = `<div class="eyebrow" style="margin-top:6px">Saved in this browser (${list.length})</div>` + list.map(p => `<div class="pend"><span><b>${esc(p.name || "Untitled")}</b> <span class="mono" style="color:var(--faint);font-size:12px">${(p.data && p.data.lines ? p.data.lines.length : 0)} holdings · ${fmtM(p.data && p.data.balance)} · ${new Date(p.updated_at).toLocaleDateString("en-AU")}</span></span><button class="btn small" data-lopen="${p.id}" type="button">Open</button>${signed ? `<button class="btn small" data-lmove="${p.id}" type="button">Move to my account</button>` : `<span></span>`}<button class="btn small danger" data-ldel="${p.id}" type="button">Delete</button></div>`).join("");
+  box.querySelectorAll("button[data-lopen]").forEach(b => b.onclick = () => { const p = localList().find(x => x.id === b.dataset.lopen); if (!p) return; hydrate(p.data, { id: p.id, ownerId: "local" }); history.replaceState(null, "", location.pathname); toast("Opened " + (p.name || "portfolio") + " from this browser"); });
+  box.querySelectorAll("button[data-ldel]").forEach(b => b.onclick = () => { if (!confirm("Delete this portfolio from this browser?")) return; localWrite(localList().filter(x => x.id !== b.dataset.ldel)); if (state.id === b.dataset.ldel) state.id = null; renderLocal(); render(); toast("Deleted from this browser"); });
+  box.querySelectorAll("button[data-lmove]").forEach(b => b.onclick = async () => { const p = localList().find(x => x.id === b.dataset.lmove); if (!p || !user.session) return;
+    const { error } = await SB.from("portfolios").insert({ user_id: user.session.user.id, name: p.name || "Untitled", data: p.data, is_public: false });
+    if (error) { toast("Your account did not accept it: " + error.message); return; } localWrite(localList().filter(x => x.id !== p.id)); if (state.id === p.id) state.id = null; toast("Moved to your account"); renderLocal(); listMine(); render(); }); }
 async function save(asCopy){
-  if (!SB) { toast("Accounts are not set up yet; your draft stays in this browser"); return; }
-  if (!user.session) { toast("Sign in or create an account to save"); openAuth("signin"); return; }
+  if (state.readOnly && !asCopy) { toast("This is someone else's shared portfolio. Use \"Save as a copy\" to keep your own version."); return; }
   if (!state.lines.length) { toast("Add some holdings first"); return; }
+  clearTimeout(trackT); track();
   if (!state.name) { state.name = prompt("Name this portfolio", "My portfolio") || ""; if (!state.name) return; sel("pname").value = state.name; }
+  if (!SB || !user.session) {
+    if (saveLocal(asCopy)) { toast(SB ? "Saved in this browser. Sign in to keep it in your account and open it on any device." : "Saved in this browser"); renderLocal(); render(); }
+    else toast("Not saved: this browser's storage is full or turned off");
+    return; }
+  const wasLocal = isLocalId(state.id) ? state.id : null;
   const payload = { user_id: user.session.user.id, name: state.name, data: serialise(), updated_at: new Date().toISOString() };
   const own = state.id && state.ownerId === user.session.user.id && !state.readOnly;
   let res;
-  if (own && !asCopy) res = await SB.from("portfolios").update(payload).eq("id", state.id).select("id,is_public").single();
-  else res = await SB.from("portfolios").insert({ ...payload, name: asCopy && own ? state.name + " (copy)" : state.name, is_public: false }).select("id,is_public").single();
-  if (res.error) { toast("Not saved: " + res.error.message); return; }
+  try {
+    if (own && !asCopy) res = await SB.from("portfolios").update(payload).eq("id", state.id).select("id,is_public").single();
+    else res = await SB.from("portfolios").insert({ ...payload, name: asCopy && own ? state.name + " (copy)" : state.name, is_public: false }).select("id,is_public").single();
+  } catch (e) { res = { error: e }; }
+  if (res.error) { const ok = saveLocal(asCopy); toast("Your account did not accept the save (" + (res.error.message || res.error) + ")." + (ok ? " A copy is saved in this browser instead." : "")); renderLocal(); render(); return; }
+  if (wasLocal) localWrite(localList().filter(x => x.id !== wasLocal));
   state.id = res.data.id; state.ownerId = user.session.user.id; state.readOnly = false; state.isPublic = res.data.is_public; state.dirty = false; sel("readonly").hidden = true;
-  history.replaceState(null, "", "?p=" + state.id); toast("Saved"); listMine(); render();
+  history.replaceState(null, "", "?p=" + state.id); toast("Saved to your account"); listMine(); renderLocal(); render();
 }
 sel("btn-save").onclick = () => save(false);
 sel("btn-saveas").onclick = () => { if (state.name && !state.name.endsWith("(copy)")) { /* keep name; insert as new */ } save(true); };
 sel("btn-share").onclick = async () => {
   if (SB && !user.session) { openAuth("signin"); return; }
-  if (!SB || !state.id || state.ownerId !== user.session.user.id) { toast("Save the portfolio to your account first"); return; }
+  if (!SB || !state.id || isLocalId(state.id) || state.ownerId !== user.session.user.id) { toast("Save the portfolio to your account first (sign in, then Save)"); return; }
   if (state.dirty) { toast("Save your changes first so the link shows them"); return; }
   const makePublic = !state.isPublic; const { error } = await SB.from("portfolios").update({ is_public: makePublic }).eq("id", state.id); if (error) { toast(error.message); return; }
   state.isPublic = makePublic; const link = location.origin + location.pathname + "?p=" + state.id;
@@ -694,14 +922,27 @@ renderFilters();
       if (event === "SIGNED_IN" && location.hash.includes("access_token")) { history.replaceState(null, "", location.pathname + location.search); toast("Email confirmed: you are signed in"); }
       if (shared && !state.id) openShared(shared); }); }
   renderAccount();
-  if (shared && await openShared(shared)) return;
-  try { const d = JSON.parse(localStorage.getItem("mpl-builder-draft") || "null"); if (d && d.lines && d.lines.length) { hydrate(d, { id: d.id || null }); state.dirty = !!d.id; toast("Restored your last draft from this browser"); return; } } catch(e) {}
-  render();
+  if (shared && await openShared(shared)) { resetHistory(); return; }
+  try { const d = JSON.parse(localStorage.getItem("mpl-builder-draft") || "null"); if (d && d.lines && d.lines.length) { hydrate(d, { id: d.id || null, ownerId: isLocalId(d.id) ? "local" : (user.session ? user.session.user.id : null) }); state.dirty = !!d.id; updateSaveNote(); resetHistory(); toast("Restored your last draft from this browser"); return; } } catch(e) {}
+  render(); resetHistory();
 })();
 </script>
 </body>
 </html>
 """
+
+
+def _platforms_from_settings(cfg: dict | None) -> dict:
+    """Fallback when config/platforms.yaml is missing: the HUB24 rate card from settings.yaml in the platforms shape."""
+    if not cfg or not cfg.get("menus"):
+        return {}
+    menus = {}
+    for k, m in cfg["menus"].items():
+        menus[k] = {"label": m.get("label", k), "tiering": "marginal", "bands": m.get("bands", []), "min_admin_fee": m.get("min_admin_fee", 0),
+                    "max_admin_fee": m.get("max_admin_fee"), "fixed_fees": [{"label": "Account keeping fee", "amount": m.get("account_keeping_fee", 0)}],
+                    "percent_fees": [{"label": "Expense recovery", "rate": m.get("expense_recovery_rate", 0), "cap": m.get("expense_recovery_cap")}],
+                    "allows_listed": k == "choice", "max_balance": cfg.get("discover_max_balance") if k == "discover" else None}
+    return {"hub24": {"label": "HUB24", "accounts": {"super": {"label": "Super or pension", "product": cfg.get("name", "HUB24 Super"), "as_of": cfg.get("rate_card_date", ""), "menus": menus}}}}
 
 
 def _css() -> str:
@@ -712,7 +953,7 @@ def _css() -> str:
 def write_builder(path: Path, portfolios: list[Portfolio], profiles: Profiles, md: MarketData, universe: pd.DataFrame,
                   research: dict | None, prices: dict[str, float], *, settings_site_url: str = "", quality: dict | None = None,
                   platform_cfg: dict | None = None, pds: dict | None = None, history: dict | None = None, esg: dict | None = None,
-                  supabase: dict | None = None, as_of: str = "") -> Path:
+                  supabase: dict | None = None, as_of: str = "", platforms: dict | None = None) -> Path:
     classes = [{"key": k, "label": v["label"], "kind": v["kind"]} for k, v in profiles.asset_classes.items()]
     colors = {c["key"]: f"--series-{i + 1}" for i, c in enumerate(classes)}
     light_vars = " ".join(f"--series-{i + 1}:{dash.PALETTE_LIGHT[i % len(dash.PALETTE_LIGHT)]};" for i in range(len(classes)))
@@ -732,14 +973,21 @@ def write_builder(path: Path, portfolios: list[Portfolio], profiles: Profiles, m
 
     stage_label = {k: split(v["label"])[0] for k, v in profiles.life_stages.items()}
     tier_label = {k: split(v["label"])[0] for k, v in profiles.balance_tiers.items()}
-    models, seen = [], set()
+    # Base portfolios: one per stage, profile and tier. A stage that caps the profile (retirement) builds the same
+    # portfolio for several requested profiles, so each model records every profile it answers for.
+    models, by_id = [], {}
     for pf in sorted(portfolios, key=lambda p: (profiles.profile_order(p.profile_used), profiles.life_stages[p.life_stage]["order"], profiles.tier_order(p.tier))):
-        if pf.implementation != "direct" or (pf.esg or {}).get("screened") or pf.id in seen:
+        if pf.implementation != "direct" or (pf.esg or {}).get("screened"):
             continue
-        seen.add(pf.id)
-        models.append({"id": pf.id, "profile": pf.profile_used, "balance": pf.balance,
-                       "label": f"{profiles.risk_profiles[pf.profile_used]['label']} · {stage_label[pf.life_stage]} · {tier_label[pf.tier]}",
-                       "lines": [{"ticker": l.ticker, "weight_pct": round(l.weight_pct, 3)} for l in pf.lines]})
+        if pf.id in by_id:
+            req = by_id[pf.id]["requested"]
+            if pf.profile_requested not in req:
+                req.append(pf.profile_requested)
+            continue
+        by_id[pf.id] = {"id": pf.id, "profile": pf.profile_used, "stage": pf.life_stage, "tier": pf.tier, "balance": pf.balance, "requested": [pf.profile_requested],
+                        "label": f"{profiles.risk_profiles[pf.profile_used]['label']} · {stage_label[pf.life_stage]} · {tier_label[pf.tier]}",
+                        "lines": [{"ticker": l.ticker, "weight_pct": round(l.weight_pct, 3)} for l in pf.lines]}
+        models.append(by_id[pf.id])
     growth = profiles.growth_classes
     data = {
         "meta": f"Built {datetime.now():%d %B %Y %H:%M}. Prices as of {md.as_of.date()}; AUD/USD {1 / md.fx_aud_per_usd:.4f}. Rebuilt automatically each weekday evening.",
@@ -747,9 +995,11 @@ def write_builder(path: Path, portfolios: list[Portfolio], profiles: Profiles, m
         "as_of": as_of or str(md.as_of.date()),
         "classes": classes, "colors": colors,
         "profiles": [{"key": k, "label": v["label"], "sub": f"{sum(v['saa'][c] for c in growth):.0f}% growth"} for k, v in sorted(profiles.risk_profiles.items(), key=lambda kv: kv[1]["order"])],
+        "stages": [{"key": k, "label": split(v["label"])[0], "sub": split(v["label"])[1]} for k, v in sorted(profiles.life_stages.items(), key=lambda kv: kv[1]["order"])],
         "saa": {k: {c: float(w) for c, w in v["saa"].items()} for k, v in profiles.risk_profiles.items()},
         "tiers": [{"key": k, "label": split(v["label"])[0], "min_balance": v["min_balance"], "max_holdings": v["max_holdings"], "min_holding": v["min_holding_dollars"], "brokerage": v["brokerage_dollars"]} for k, v in tiers],
         "platform": platform_cfg or {}, "pds": pds or {}, "quality": quality or {},
+        "platforms": (platforms or {}).get("platforms") or _platforms_from_settings(platform_cfg), "default_platform": (platforms or {}).get("default", "hub24"),
         "diversification": getattr(profiles, "diversification", {}) or {},
         "research": {t: dict(r.__dict__) for t, r in (research or {}).items()},
         "universe": universe_rows, "models": models,

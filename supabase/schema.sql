@@ -32,3 +32,10 @@ create trigger portfolios_touch before update on public.portfolios for each row 
 -- A saved portfolio is at most 400 KB of JSON (a few dozen holdings with their fetched history).
 alter table public.portfolios drop constraint if exists portfolios_data_size;
 alter table public.portfolios add constraint portfolios_data_size check (pg_column_size(data) < 400000);
+
+-- Table privileges. Newer Supabase projects no longer grant these automatically, and without them every
+-- read and save from the website fails with "permission denied for table portfolios". Row level security
+-- above still decides which rows each visitor can see or change.
+grant usage on schema public to anon, authenticated;
+grant select on public.portfolios to anon;
+grant select, insert, update, delete on public.portfolios to authenticated;

@@ -36,8 +36,7 @@ Running `build` creates, in `output/`:
    volatility-spike penalty, computed on a proxy ETF per class. Hysteresis of 1 point
    stops the tilt flickering. The Signals sheet shows every input, so any tilt can be
    traced back to the numbers that produced it.
-3. **Life stage** caps the profile (retirement cannot exceed Balanced, pre-retirement
-   cannot exceed Growth), sets a cash floor, adds a home bias toward Australian equities in
+3. **Life stage** (Early accumulator, Accumulator, Retirement) caps the profile (retirement cannot exceed Balanced), sets a cash floor, adds a home bias toward Australian equities in
    the drawdown stages, and scores holdings for income and franking.
 4. **Balance tier** decides implementation: which vehicle types are allowed, how many
    holdings, minimum holding size, brokerage. Under $50,000 the engine uses one low cost
@@ -90,14 +89,14 @@ funds, cash account) to `data/manual_prices.csv`. Then edit:
 python -m portfolio_engine build                 # everything, with live prices
 python -m portfolio_engine build --no-tactical   # strategic weights only
 python -m portfolio_engine single --profile balanced --stage retirement --balance 350000
-python -m portfolio_engine rebalance --holdings data/sample_holdings.csv --profile balanced --stage mid_accumulation
+python -m portfolio_engine rebalance --holdings data/sample_holdings.csv --profile balanced --stage accumulation
 python -m portfolio_engine signals               # print the tactical inputs
 python -m portfolio_engine refresh               # refresh the price cache only
 python -m portfolio_engine --offline build       # synthetic prices, for testing the pipeline
 ```
 
 Profiles: `conservative`, `moderate`, `balanced`, `growth`, `high_growth`.
-Stages: `early_accumulation`, `mid_accumulation`, `pre_retirement`, `retirement`.
+Stages: `early_accumulation` (Early accumulator), `accumulation` (Accumulator), `retirement`.
 
 A holdings file for `rebalance` needs a `ticker` column and either `units` or `value`.
 
@@ -117,7 +116,7 @@ underlying fees and transaction costs replace the calculator's; the manager fee 
 Core menu figure because the booklet discloses it only as "tiered". `python -m portfolio_engine single --sma ...`
 builds one directly. Tune the rules in the `sma` section of `profiles.yaml`.
 
-### Pension and pre-retirement rules
+### Pension rules
 
 The drawdown stages score holdings on grossed-up yield (cash dividend plus the franking
 credit a zero-tax pension account gets refunded), skip equity holdings under a minimum
@@ -224,6 +223,42 @@ with row level security so a signed-in visitor can read, change and delete only 
 row its owner has marked shared. Run the SQL once in the Supabase SQL editor, and set the project's
 Authentication, URL Configuration, Site URL to the published site so confirmation emails link back to it.
 Without accounts configured the page still works; drafts stay in the browser.
+
+### Platforms, undo and basis of advice in the builder
+
+`config/platforms.yaml` holds each platform's published fee schedule (HUB24, Netwealth, BT Panorama, Praemium,
+Macquarie Wrap and CFS Edge super accounts, plus Morgans Wealth+, whose fee is not published and is entered on the
+page). Each menu has its tiered administration fee, minimum and cap, fixed fees, percentage levies with caps, any fee on
+international listed securities, whether it can hold listed securities, and brokerage. The builder's Platform picker
+uses it, "Cheapest menu that fits" picks the lowest-cost menu that can hold the portfolio, and a table compares every
+platform at the current balance. Each schedule carries its document date and link; Macquarie Wrap and CFS Edge are
+marked "to confirm" because their figures were read through a summary rather than line by line. Update the file when a
+PDS changes.
+
+Undo and redo (buttons, or Ctrl or Cmd + Z and Ctrl or Cmd + Shift + Z) step through every change on the builder page.
+Each holding gets an automatic basis of advice draft from its own figures, which keeps up with the weights until it is
+edited; edited text is kept. Both are saved with the portfolio and written to the Excel download (a "Basis of advice"
+sheet and a column on the Holdings sheet). Save works without an account (the portfolio is kept in the browser) and
+falls back to the browser if the account cannot be reached.
+
+The base portfolios use three stages of life: Early accumulator, Accumulator and Retirement.
+
+### Daily brief
+
+`python scripts/daily_brief.py` fetches the key market and economic numbers (Yahoo Finance, the RBA's statistical
+tables and meeting schedule, the ABS Data API and release calendar), the last week's ASX announcements for every active
+ASX holding in the universe, the market's price-sensitive announcements, regulatory, legal and policy updates (ASIC,
+APRA, Treasury ministers and consultations, the Federal Register of Legislation, Federal Court judgments, the RBA, the
+FAAA, and ATO and AFCA news through Google News because both refuse automated requests) and market wrap headlines,
+and writes `output/brief.json` and `output/brief.html` (published as `/brief.html`). Every source fails on its own and
+is listed on the page with its status. The page filters each list and downloads the whole brief as Excel; the
+`/asx` function looks up any ASX code live.
+
+### Missed evenings
+
+GitHub does not guarantee scheduled runs; on 5 October 2026 the 18:40 run never started. Every three-hourly run now
+checks `/data/build.json` on the published site and rebuilds if it is older than the most recent weekday 18:30 in
+Brisbane, so a skipped evening is caught up within about three hours.
 
 ### Diversification rules
 

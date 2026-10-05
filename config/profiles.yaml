@@ -44,6 +44,9 @@ risk_profiles:
     tolerance_pp: 5
     min_horizon_years: 9
 
+# Three life stages: early accumulator, accumulator and retirement. Pre-retirement was folded into
+# Accumulator in October 2026; sequencing risk in the last years before retirement is now handled by
+# choosing a lower risk profile, not by the stage.
 # Life stage changes: the most aggressive profile permitted, the cash floor (a liquidity
 # bucket), how strongly holdings are scored on income and franking, and for the drawdown
 # stages a minimum grossed-up yield for equity holdings. home_bias_pp moves weight from
@@ -53,7 +56,7 @@ risk_profiles:
 # (cash yield x (1 + franking% x 30/70)) so franked income is preferred over unfranked.
 life_stages:
   early_accumulation:
-    label: "Early accumulation (under 40)"
+    label: "Early accumulator (under 40)"
     order: 1
     max_profile: high_growth
     default_profile: high_growth
@@ -61,28 +64,18 @@ life_stages:
     income_preference: 0.0
     franking_preference: 0.0
     home_bias_pp: 0
-  mid_accumulation:
-    label: "Mid accumulation (40 to 55)"
+  accumulation:
+    label: "Accumulator (40 to retirement)"
     order: 2
     max_profile: high_growth
     default_profile: growth
-    cash_floor_pp: 3
-    income_preference: 0.1
-    franking_preference: 0.1
-    home_bias_pp: 0
-  pre_retirement:
-    label: "Pre-retirement (55 to 65)"
-    order: 3
-    max_profile: growth
-    default_profile: balanced
-    cash_floor_pp: 5
-    income_preference: 0.5
-    franking_preference: 0.5
+    cash_floor_pp: 4
+    income_preference: 0.25       # a modest income tilt begins; the full income rules are for retirement
+    franking_preference: 0.25
     home_bias_pp: 0               # only retirement leans Australian
-    min_equity_yield_pct: 1.5     # grossed-up; equity holdings below this are skipped when alternatives exist
   retirement:
-    label: "Retirement / pension phase (65+)"
-    order: 4
+    label: "Retirement (pension phase)"
+    order: 3
     max_profile: balanced
     default_profile: moderate
     cash_floor_pp: 8

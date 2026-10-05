@@ -58,7 +58,7 @@ def main() -> int:
     out = [f"<title>Holdings Quality Review</title>",
            '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&family=IBM+Plex+Mono&display=swap">',
            f"<style>{CSS}</style>", '<div class="wrap">',
-           '<div class="hero"><nav class="nav"><a href="/">Model portfolios</a><a href="/builder.html">Build your own portfolio</a><a href="/quality.html" aria-current="page">Holdings quality review</a></nav>',
+           '<div class="hero"><nav class="nav"><a href="/">Model portfolios</a><a href="/builder.html">Build your own portfolio</a><a href="/brief.html">Daily brief</a><a href="/quality.html" aria-current="page">Holdings quality review</a></nav>',
            "<h1>Holdings Quality Review</h1>",
            "<p class=\"lede\">Every holding in the model universe, judged on what the business is and what the data says: ten years of returns, volatility, "
            "worst falls, valuation, yield, franking and the analyst consensus. One verdict each, with the reason written out.</p>",

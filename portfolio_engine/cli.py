@@ -139,6 +139,15 @@ class Context:
                                                        twins=self.sma_twins, mix=self.sma_mix, esg=(self.esg if esg else None)))
 
 
+def load_platforms(settings) -> dict:
+    """Platform fee schedules for the builder (config/platforms.yaml). Missing file: the builder falls back to the HUB24 card in settings."""
+    import yaml
+    path = settings.root / "config" / "platforms.yaml" if hasattr(settings, "root") else Path("config/platforms.yaml")
+    if not path.exists():
+        return {}
+    return yaml.safe_load(path.read_text()) or {}
+
+
 def cmd_build(args) -> int:
     ctx = Context(args)
     p = ctx.profiles
@@ -175,7 +184,7 @@ def cmd_build(args) -> int:
     builder = write_builder(out / f"builder{suffix}.html", portfolios, p, ctx.md, ctx.universe_all, ctx.research, prices,
                             settings_site_url=ctx.settings.raw.get("publish", {}).get("site_url", ""), quality=ctx.quality,
                             platform_cfg=ctx.settings.raw.get("platform", {}), pds=pds, history=ctx.history, esg=ctx.esg,
-                            supabase=ctx.settings.raw.get("accounts", {}).get("supabase", {}))
+                            supabase=ctx.settings.raw.get("accounts", {}).get("supabase", {}), platforms=load_platforms(ctx.settings))
     (out / f"portfolios_{stamp}{suffix}.json").write_text(json.dumps(
         {"as_of": str(ctx.md.as_of.date()), "synthetic": ctx.md.synthetic, "tactical": ctx.view.to_dict(),
          "research": research_to_records(ctx.research), "review": review_to_records(ctx.review), "quality": ctx.quality,

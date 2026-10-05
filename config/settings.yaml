@@ -62,7 +62,7 @@ review:
 
 # Holding research and analyst consensus (Yahoo Finance aggregate of covering brokers).
 research:
-  max_age_days: 7              # fundamentals refresh weekly; returns recompute every build
+  max_age_days: 0.8            # analyst consensus and fundamentals refetched by every weekday build (older than about 19 hours), so ratings flow into the next portfolios
   consensus_weighting: 0.25    # within-class weight scales by up to +/-25% between Strong Buy (1) and Sell (5)
   min_analysts: 3
   review_threshold: 3.5        # consensus mean at or above this is flagged for review

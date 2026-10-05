@@ -594,7 +594,7 @@ def build_portfolio(settings: Settings, profiles: Profiles, universe: pd.DataFra
         # (and every pension-phase portfolio), the growth list in Growth and High Growth, both in Balanced.
         if "lists" in universe.columns:
             want = set()
-            if profile_used in ("conservative", "moderate", "balanced") or life_stage in ("retirement", "pre_retirement"):
+            if profile_used in ("conservative", "moderate", "balanced") or life_stage == "retirement":
                 want.add("income")
             if profile_used in ("growth", "high_growth", "balanced") and life_stage not in ("retirement",):
                 want.add("growth")

@@ -197,8 +197,8 @@ def test_risk_and_pds(ctx):
     from portfolio_engine.builder import build_portfolio, build_sma_portfolio, load_sma_menu
     from portfolio_engine.config import load_discover_menu
     s, p, u, md, manual, view = ctx
-    pf = build_portfolio(s, p, u, md, manual, view, profile="balanced", life_stage="mid_accumulation", balance=250_000)
-    sp = build_sma_portfolio(s, p, u, md, manual, view, load_sma_menu(s), profile="balanced", life_stage="mid_accumulation", balance=30_000, discover=load_discover_menu(s))
+    pf = build_portfolio(s, p, u, md, manual, view, profile="balanced", life_stage="accumulation", balance=250_000)
+    sp = build_sma_portfolio(s, p, u, md, manual, view, load_sma_menu(s), profile="balanced", life_stage="accumulation", balance=30_000, discover=load_discover_menu(s))
     assert sp.metrics["platform_menu"] == "discover" and sp.metrics["platform_admin_fee_per_year"] == 0
     assert all(c["discover_code"] for c in sp.sma["shortlist"])
     m = pf.metrics
@@ -214,7 +214,7 @@ def test_history_and_backtest(ctx):
     s, p, u, md, manual, view = ctx
     h = monthly_history(md, s, p, u, currency_of=dict(zip(u["ticker"], u["currency"])))
     assert 100 <= len(h["months"]) <= 121 and "VAS.AX" in h["series"]
-    pf = build_portfolio(s, p, u, md, manual, view, profile="growth", life_stage="mid_accumulation", balance=100_000)
+    pf = build_portfolio(s, p, u, md, manual, view, profile="growth", life_stage="accumulation", balance=100_000)
     bt = growth_backtest(h, pf.lines, pf.balance)
     assert bt["end_value"] > 0 and len(bt["values"]) == len(h["months"]) and -100 < bt["max_drawdown_pct"] <= 0
     assert 0 <= bt["stand_in_share_pct"] <= 100
@@ -273,3 +273,22 @@ def test_multi_currency_pricing(ctx):
         aud = md.latest_aud(t, "EUR")
         assert native is not None and aud is not None
         assert aud == pytest.approx(native * md.fx_aud_per["EUR"])
+
+
+def test_platform_schedules_are_complete():
+    """Every platform menu in config/platforms.yaml has the fields the builder's fee formula reads."""
+    import yaml
+    from pathlib import Path
+    cfg = yaml.safe_load((Path(__file__).resolve().parent.parent / "config" / "platforms.yaml").read_text())
+    assert cfg["default"] in cfg["platforms"]
+    for key, p in cfg["platforms"].items():
+        assert p.get("label") and p.get("accounts"), key
+        for ak, acct in p["accounts"].items():
+            assert acct.get("as_of") and acct.get("source_url"), (key, ak)
+            for mk, m in acct["menus"].items():
+                bands = m["bands"]
+                assert bands and bands[-1]["up_to"] is None, (key, mk)      # the last band is open-ended
+                ups = [b["up_to"] for b in bands[:-1]]
+                assert ups == sorted(ups), (key, mk)
+                assert all(0 <= b["rate"] < 0.02 for b in bands), (key, mk)
+                assert all(f.get("cap") is None or f["cap"] > 0 for f in m.get("percent_fees", [])), (key, mk)

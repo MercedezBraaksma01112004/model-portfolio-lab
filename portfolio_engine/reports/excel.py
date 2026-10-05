@@ -54,7 +54,7 @@ def _write_table(ws, df: pd.DataFrame, start_row: int, formats: dict[str, str] |
 
 def _sheet_name(pf: Portfolio, profiles: Profiles) -> str:
     ab = {"conservative": "Cons", "moderate": "Mod", "balanced": "Bal", "growth": "Gro", "high_growth": "HiGro"}
-    ls = {"early_accumulation": "Early", "mid_accumulation": "Mid", "pre_retirement": "PreRet", "retirement": "Ret"}
+    ls = {"early_accumulation": "Early", "accumulation": "Accum", "retirement": "Ret"}
     tier = {"starter": "Start", "core": "Core", "established": "Estab", "high": "High"}
     return f"{ab.get(pf.profile_used, pf.profile_used[:5])}-{ls.get(pf.life_stage, pf.life_stage[:5])}-{tier.get(pf.tier, pf.tier[:5])}"[:31]
 

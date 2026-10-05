@@ -10,7 +10,8 @@ name: Daily build and publish
 on:
   schedule:
     - cron: "40 8 * * 1-5"
-    - cron: "0 */3 * * *"        # every three hours: only rebuilds if the website has queued holding changes
+    - cron: "0 */3 * * *"        # every three hours: rebuilds if the website has queued holding changes, or if the
+                                   # weekday evening build is missing (GitHub sometimes skips scheduled runs; see the gate)
   workflow_dispatch:
     inputs:
       force:
@@ -35,14 +36,37 @@ jobs:
         id: gate
         env:
           SITE_URL: ${{ vars.SITE_URL || 'https://model-portfolio-lab.netlify.app' }}
+          EVENT: ${{ github.event_name }}
         run: |
-          # The three-hourly schedule exists only to pick up holdings added or removed on the website.
-          if [ "${{ github.event.schedule }}" = "0 */3 * * *" ]; then
-            N=$(curl -s --max-time 20 "$SITE_URL/.netlify/functions/changes" | python3 -c "import sys,json; print(len(json.load(sys.stdin).get('pending',[])))" 2>/dev/null || echo 0)
-            echo "pending=$N"
-            if [ "${N:-0}" -eq 0 ]; then echo "run=false" >> "$GITHUB_OUTPUT"; exit 0; fi
-          fi
-          echo "run=true" >> "$GITHUB_OUTPUT"
+          # Manual runs always build. Scheduled runs build when the website has queued holding changes, or when the
+          # published site is older than the most recent weekday 18:30 in Brisbane. GitHub's scheduler sometimes skips
+          # or delays the evening run, so any later scheduled run catches up instead of leaving the prices stale.
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, os, sys, urllib.request
+          from datetime import datetime, timedelta
+          from zoneinfo import ZoneInfo
+          site = os.environ["SITE_URL"].rstrip("/")
+          def fetch(path):
+              try:
+                  with urllib.request.urlopen(site + path, timeout=20) as r:
+                      return json.load(r)
+              except Exception as e:
+                  print(f"note: {path}: {e}", file=sys.stderr)
+                  return None
+          if os.environ.get("EVENT") != "schedule":
+              print("run=true"); sys.exit(0)
+          now = datetime.now(ZoneInfo("Australia/Brisbane"))
+          due = now.replace(hour=18, minute=30, second=0, microsecond=0)
+          if now < due:
+              due -= timedelta(days=1)
+          while due.weekday() >= 5:
+              due -= timedelta(days=1)
+          pending = len((fetch("/.netlify/functions/changes") or {}).get("pending", []))
+          built = (fetch("/data/build.json") or {}).get("built_at")
+          stale = not built or datetime.fromisoformat(built) < due
+          print(f"pending={pending} built={built} due={due.isoformat()} stale={stale}", file=sys.stderr)
+          print("run=" + ("true" if (pending or stale) else "false"))
+          PY
 
       - uses: actions/setup-python@v5
         if: steps.gate.outputs.run == 'true'
@@ -104,6 +128,20 @@ jobs:
           # Screen every listing; apply additions and watchlist moves on Mondays only, so the models do not churn daily.
           if [ "$(date -u +%u)" = "1" ]; then python scripts/universe_scorecard.py --apply; else python scripts/universe_scorecard.py; fi
           cp config/universe_scorecard.csv site/data/universe_scorecard.csv
+          # The daily brief: market numbers, announcements, regulatory and legal updates. Never fails the build.
+          mkdir -p site/data
+          python scripts/daily_brief.py || echo "daily brief failed; publishing the rest"
+          [ -f output/brief.html ] && cp output/brief.html site/brief.html
+          [ -f output/brief.json ] && cp output/brief.json site/data/brief.json
+          # When this build ran and which prices it used: the gate above reads this to catch up on missed evenings.
+          python3 - <<'PY'
+          import glob, json, datetime, zoneinfo
+          files = sorted(glob.glob("output/portfolios_*.json"))
+          prices = json.load(open(files[-1])).get("as_of") if files else None
+          now = datetime.datetime.now(zoneinfo.ZoneInfo("Australia/Brisbane"))
+          json.dump({"built_at": now.isoformat(timespec="seconds"), "prices_as_of": prices, "run": "${{ github.run_id }}"}, open("site/data/build.json", "w"))
+          print("build.json", now.isoformat(timespec="seconds"), prices)
+          PY
           mkdir -p site/data && cp data/applied_changes.json site/data/applied_changes.json 2>/dev/null || echo '{"ids":[]}' > site/data/applied_changes.json
           ls -la site | head -20
 
