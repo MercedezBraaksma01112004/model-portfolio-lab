@@ -180,7 +180,8 @@ def cmd_build(args) -> int:
                           ctx.view, ctx.universe_all, prices, origin, ctx.research, ctx.review, ctx.quality, pds=pds, esg=ctx.esg)
     html = write_dashboard(out / f"dashboard{suffix}.html", portfolios, p, ctx.md, ctx.view, ctx.research, ctx.universe_all, ctx.review,
                            settings_site_url=ctx.settings.raw.get("publish", {}).get("site_url", ""), quality=ctx.quality,
-                           platform_cfg=ctx.settings.raw.get("platform", {}), class_corr=ctx.class_corr, pds=pds, history=ctx.history, esg=ctx.esg)
+                           platform_cfg=ctx.settings.raw.get("platform", {}), class_corr=ctx.class_corr, pds=pds, history=ctx.history, esg=ctx.esg,
+                           supabase=ctx.settings.raw.get("accounts", {}).get("supabase", {}))
     from .reports.compare import write_compare
     write_compare(out / f"compare{suffix}.html", load_platforms(ctx.settings))
     builder = write_builder(out / f"builder{suffix}.html", portfolios, p, ctx.md, ctx.universe_all, ctx.research, prices,

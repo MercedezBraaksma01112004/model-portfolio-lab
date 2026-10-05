@@ -1110,6 +1110,15 @@ renderFilters();
       if (shared && !state.id) openShared(shared); }); }
   renderAccount();
   if (shared && await openShared(shared)) { resetHistory(); return; }
+  // Opened from the Model portfolios page: load that model at the balance shown there, then go to the check.
+  const fromModel = params.get("model");
+  if (fromModel) { const mo = (DATA.models || []).find(x => x.id === fromModel);
+    if (mo) { const bal = parseBalance(params.get("balance") || "") || mo.balance; state.balance = bal; sel("pbal").value = bal.toLocaleString("en-AU");
+      state.lines = mo.lines.map(x => { const u = UMAP[x.ticker]; const l = u ? lineFromUniverse(u) : null; if (!l) return null; l.weight_pct = +x.weight_pct.toFixed(2); return l; }).filter(Boolean);
+      state.ref = mo.profile; sel("pref").value = mo.profile; state.name = mo.label; sel("pname").value = mo.label; state.id = null; state.dirty = true;
+      history.replaceState(null, "", location.pathname); render(); resetHistory(); toast("Loaded " + mo.label + " from the model portfolios");
+      setTimeout(() => sel("check").scrollIntoView({ behavior: "smooth", block: "start" }), 300); return; }
+    toast("That model is a managed portfolio or ESG version, which the builder cannot open"); }
   try { const d = JSON.parse(localStorage.getItem("mpl-builder-draft") || "null"); if (d && d.lines && d.lines.length) { hydrate(d, { id: d.id || null, ownerId: isLocalId(d.id) ? "local" : (user.session ? user.session.user.id : null) }); state.dirty = !!d.id; updateSaveNote(); resetHistory(); toast("Restored your last draft from this browser"); return; } } catch(e) {}
   render(); resetHistory();
 })();

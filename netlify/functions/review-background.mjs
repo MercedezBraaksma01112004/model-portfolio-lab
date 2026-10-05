@@ -56,8 +56,10 @@ export default async (req) => {
     if (used >= DAILY_LIMIT) return fail(`You have used today's ${DAILY_LIMIT} AI reviews. The limit resets at 10 am Brisbane time.`);
     await usage.set(key, String(used + 1));
     // 3. the request itself
-    const apiKey = (globalThis.Netlify && Netlify.env.get("ANTHROPIC_API_KEY")) || process.env.ANTHROPIC_API_KEY;
+    // Tolerate the usual pasting accidents: surrounding spaces, line breaks and quotation marks.
+    const apiKey = String((globalThis.Netlify && Netlify.env.get("ANTHROPIC_API_KEY")) || process.env.ANTHROPIC_API_KEY || "").trim().replace(/^["'\s]+|["'\s]+$/g, "");
     if (!apiKey) return fail("The AI review is not set up: the site has no ANTHROPIC_API_KEY.");
+    if (!apiKey.startsWith("sk-ant-")) return fail("The ANTHROPIC_API_KEY on the site does not look like an Anthropic API key (they start with sk-ant-). Replace it in Netlify's environment variables.");
     const payload = JSON.stringify(body.payload || {});
     if (payload.length > 120000) return fail("The portfolio is too large to review in one go.");
     await store.setJSON(job, { status: "running", at: new Date().toISOString() });
@@ -68,6 +70,7 @@ export default async (req) => {
         messages: [{ role: "user", content: `Review this portfolio. Data as JSON:\n${payload}` }] }),
     });
     const out = await r.json().catch(() => ({}));
+    if (r.status === 401) return fail("Anthropic rejected the site's API key (401). Create a new key in the Anthropic Console, paste it into ANTHROPIC_API_KEY in Netlify, and redeploy the site.");
     if (!r.ok) return fail(`The AI service returned ${r.status}${out.error && out.error.message ? ": " + out.error.message : ""}`);
     const text = (out.content || []).filter(c => c.type === "text").map(c => c.text).join("\n").trim();
     let result = null;

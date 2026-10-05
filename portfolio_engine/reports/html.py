@@ -259,6 +259,12 @@ a.btn { text-decoration:none; }
     <button class="btn" id="xlsx" type="button">Download this portfolio as Excel</button>
     <a class="btn" id="xlsx-all" href="/model_portfolios_latest.xlsx" download style="text-decoration:none">Download the full workbook (every tier)</a>
   </div>
+  <div class="toolbar no-print">
+    <button class="btn primary" id="ai-review" type="button">Ask AI to review this model</button>
+    <a class="btn" id="open-builder" href="/builder.html" style="text-decoration:none">Check and edit it in the builder</a>
+    <span class="muted" id="ai-note" style="font-size:12.5px">The AI review needs you signed in (sign in on the builder page once; this page then uses the same sign-in).</span>
+  </div>
+  <div id="ai-box"></div>
 </section>
 
 <div class="two">
@@ -522,6 +528,7 @@ function spark(arr, color, w=110, h=28, big=false){
     <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="${big?3.5:2.5}" fill="${color}" stroke="var(--surface)" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg>`;
 }
 
+function builderLink(pf){ const b = state.balance ? `&balance=${Math.round(state.balance)}` : ""; return `/builder.html?model=${encodeURIComponent(pf.id)}${b}`; }
 function render(){
   try { localStorage.setItem("mpl-state", JSON.stringify({profile:state.profile, stage:state.stage, tier:state.tier, impl:state.impl})); } catch(e){}
   const smaOk = DATA.sma.enabled && DATA.sma.tiers.includes(state.tier);
@@ -531,6 +538,7 @@ function render(){
   seg("seg-esg", DATA.esg.enabled ? ESGS : [ESGS[0]], "esg");
   sel("impl-note").textContent = smaOk ? "" : "The managed portfolio route is shown for " + DATA.sma.tiers.map(t => label(DATA.tiers, t).toLowerCase()).join(" and ") + " balances, where holding a single diversified portfolio is cheaper than buying 20 holdings.";
   const pf0 = find(); if (!pf0) return;
+  sel("open-builder").href = builderLink(pf0); sel("open-builder").hidden = pf0.implementation === "sma" || !!(pf0.esg && pf0.esg.screened);
   sel("esg-note").textContent = state.esg && !(pf0.esg && pf0.esg.screened) ? "No screened version exists for this combination (no ethical or sustainable managed portfolio in this category), so the standard version is shown." : ""; const pf = state.balance ? scaleToBalance(applyPreview(pf0), state.balance) : applyPreview(pf0);
   sel("reset-balance").hidden = !state.balance;
   sel("balance-note").textContent = state.balance ? `Exact figures for ${fmtM(state.balance)}: ${label(DATA.tiers, pf.tier)} tier weights, whole units, ${menuLabel(pf.metrics.platform_menu)} platform fee from the rate card.` : "Figures shown are for the tier's model balance. Enter your own balance for exact dollars, units and fees.";
@@ -878,6 +886,44 @@ function swapSma(pf, fromCode, toCode){
 }
 // ------------------------------------------------------------ editing (live site only)
 const FN = (() => { const h = location.hostname; if (h.endsWith("netlify.app") || (DATA.site_url && location.origin === DATA.site_url)) return "/.netlify/functions"; return null; })();
+// ---------------------------------------------------------------- AI review of the model on screen
+// Uses the sign-in from the builder page (the same browser keeps the session) and the same background function.
+const esc = v => String(v ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+const DAI = { running: false, result: null, at: null, sb: null };
+function loadSupabase(){ return new Promise((ok, no) => { if (window.supabase) return ok(); const s = document.createElement("script"); s.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"; s.onload = ok; s.onerror = () => no(new Error("the sign-in library did not load")); document.head.appendChild(s); }); }
+function dashPayload(pf){ const m = pf.metrics; const R0 = DATA.research || {}; const Q = DATA.quality || {}; const held = new Set(pf.lines.map(l => l.ticker));
+  const pool = {}; for (const x of DATA.portfolios) for (const l of (x.lines || [])) if (!held.has(l.ticker) && !pool[l.ticker]) pool[l.ticker] = l;
+  return { portfolio: { name: `${label(DATA.profiles, pf.profile_used)} model, ${label(DATA.stages, pf.life_stage)}, ${label(DATA.tiers, pf.tier)} tier`, balance: pf.balance, compare_against: label(DATA.profiles, pf.profile_used) + " long-run target",
+      target_allocation_pct: pf.saa, tactical_tilts_pp: pf.tilts, actual_allocation_pct: Object.fromEntries(CLASSES.map(c => [c.key, +((pf.class_weights||{})[c.key] || 0).toFixed(2)])), asset_class_names: Object.fromEntries(CLASSES.map(c => [c.key, c.label])),
+      implementation: pf.implementation === "sma" ? "one managed portfolio (SMA)" : "individual holdings", life_stage_rules: DATA.stage_rules[pf.life_stage],
+      platform: { name: (DATA.platform && DATA.platform.name) || "HUB24", menu: menuLabel(m.platform_menu), cost_per_year: Math.round(m.platform_admin_fee_per_year || 0) },
+      metrics: { growth_pct: m.growth_pct, defensive_pct: m.defensive_pct, weighted_fund_fee_pct: m.weighted_mer_pct, total_cost_pct: m.total_ongoing_cost_pct, cash_yield_pct: m.weighted_yield_pct, grossed_up_yield_pct: m.grossed_up_yield_pct,
+        realised_volatility_pct: m.realised_volatility_pct, beta_asx200: m.beta_asx200, average_correlation: m.avg_pairwise_correlation, holdings: m.holdings },
+      holdings: pf.lines.map(l => ({ code: l.ticker, name: l.name, asset_class: l.asset_class, vehicle: l.vehicle, role: l.role, weight_pct: +(+l.weight_pct).toFixed(2), dollars: Math.round(l.dollars || 0), fee_pct: l.mer_pct, yield_pct: l.yield_pct, franking_pct: l.franking_pct,
+        sector: l.sector, region: l.region, analyst_consensus: l.consensus_label || (R0[l.ticker] || {}).consensus_label || "no coverage", analysts: l.analysts || 0, quality_verdict: (Q[l.ticker] || {}).verdict || "" })),
+      engine_notes: (pf.warnings || []).slice(0, 25), rule_check: [] },
+    universe_candidates: Object.values(pool).filter(l => ["core", "satellite"].includes((Q[l.ticker] || {}).verdict)).slice(0, 160).map(l => [l.ticker, l.name, l.asset_class, l.vehicle, l.mer_pct, l.yield_pct, (Q[l.ticker] || {}).verdict, l.consensus_label || ""]),
+    universe_candidate_columns: ["code", "name", "asset_class", "vehicle", "fee_pct", "yield_pct", "quality_verdict", "analyst_consensus"] }; }
+function renderDashAI(){ const box = sel("ai-box"); const r = DAI.result; if (!r) { box.innerHTML = ""; return; }
+  if (r.error) { box.innerHTML = `<div class="note">The AI review did not run. ${esc(r.error)}</div>`; return; } const x = r.result;
+  const chip = p => `<span class="chip ${p === "high" ? "critical" : p === "medium" ? "serious" : "neutral"}">${esc(p || "")}</span>`;
+  box.innerHTML = `<div style="border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--surface);margin-top:10px"><h3 style="margin:0 0 6px;font-size:16px">AI review of this model</h3><div class="muted" style="font-size:12px;margin-bottom:8px">${esc(r.model || "")} · ${DAI.at ? new Date(DAI.at).toLocaleString("en-AU") : ""}${r.remaining_today != null ? ` · ${r.remaining_today} reviews left today` : ""}. General information, not advice; check every suggestion before acting on it.</div>` +
+    (x ? `<p>${esc(x.summary || "")}</p>${(x.strengths || []).length ? `<div class="eyebrow">Strengths</div><ul>${x.strengths.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : ""}<div class="eyebrow" style="margin-top:10px">Suggestions</div>` +
+      (x.suggestions || []).map(s => `<div style="border-top:1px solid var(--line);padding:9px 0">${chip(s.priority)} <b>${esc(s.title || "")}</b><div style="margin-top:3px"><span class="muted">Change:</span> ${esc(s.change || "")}</div><div><span class="muted">Why:</span> ${esc(s.why || "")}</div>${s.tradeoff ? `<div class="muted">Trade-off: ${esc(s.tradeoff)}</div>` : ""}</div>`).join("") +
+      ((x.questions || []).length ? `<div class="eyebrow" style="margin-top:10px">Ask the client first</div><ul>${x.questions.map(q => `<li>${esc(q)}</li>`).join("")}</ul>` : "") : `<pre style="white-space:pre-wrap;font:inherit">${esc(r.text || "")}</pre>`) + `</div>`; }
+sel("ai-review").onclick = async () => { if (DAI.running) return; if (!FN) { alert("The AI review runs on the published site."); return; }
+  const cfg = DATA.supabase || {}; if (!cfg.url || !cfg.key) { alert("Accounts are not set up on this copy of the page."); return; }
+  DAI.running = true; sel("ai-review").disabled = true; sel("ai-note").textContent = "Checking your sign-in…";
+  try { await loadSupabase(); DAI.sb = DAI.sb || window.supabase.createClient(cfg.url, cfg.key); const { data } = await DAI.sb.auth.getSession();
+    if (!data.session) { sel("ai-note").innerHTML = `You are not signed in on this browser. <a href="/builder.html">Sign in on the builder page</a>, then come back and press the button again.`; return; }
+    const pf0 = find(); const pf = state.balance ? scaleToBalance(applyPreview(pf0), state.balance) : applyPreview(pf0);
+    const job = (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(16) + Math.random().toString(16).slice(2)).toLowerCase();
+    sel("ai-note").textContent = "Reviewing… this usually takes 20 to 60 seconds.";
+    await fetch(FN + "/review-background", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ job, token: data.session.access_token, payload: dashPayload(pf) }) });
+    let res = null; for (let i = 0; i < 60; i++) { await new Promise(r => setTimeout(r, 2500)); const r = await fetch(FN + "/review-status?job=" + job, { cache: "no-store" }); const j = await r.json().catch(() => ({})); if (j.status === "done" || j.status === "error") { res = j; break; } }
+    DAI.result = res || { error: "No answer after two and a half minutes. Try again shortly." }; DAI.at = new Date().toISOString(); renderDashAI(); sel("ai-note").textContent = "";
+  } catch (e) { DAI.result = { error: e.message }; renderDashAI(); sel("ai-note").textContent = ""; }
+  finally { DAI.running = false; sel("ai-review").disabled = false; } };
 const previews = {};   // portfolio id -> {adds:[line], removes:Set}
 let pendingChanges = [];
 function pinValue(){ const v = sel("pin").value.trim(); try { if (v) localStorage.setItem("mpl-pin", v); } catch(e){} return v; }
@@ -1027,7 +1073,8 @@ STAGE_BLURBS = {
 def write_dashboard(path: Path, portfolios: list[Portfolio], profiles: Profiles, md: MarketData, view: TacticalView | None,
                     research: dict | None = None, universe: pd.DataFrame | None = None, review: list | None = None,
                     settings_site_url: str = "", quality: dict | None = None, platform_cfg: dict | None = None,
-                    class_corr: dict | None = None, pds: dict | None = None, history: dict | None = None, esg: dict | None = None) -> Path:
+                    class_corr: dict | None = None, pds: dict | None = None, history: dict | None = None, esg: dict | None = None,
+                    supabase: dict | None = None) -> Path:
     classes = [{"key": k, "label": v["label"], "kind": v["kind"]} for k, v in profiles.asset_classes.items()]
     colors = {c["key"]: f"--series-{i + 1}" for i, c in enumerate(classes)}
     light_vars = " ".join(f"--series-{i + 1}:{PALETTE_LIGHT[i % len(PALETTE_LIGHT)]};" for i in range(len(classes)))
@@ -1068,6 +1115,7 @@ def write_dashboard(path: Path, portfolios: list[Portfolio], profiles: Profiles,
         "sma": {"enabled": bool(profiles.sma.get("enabled")), "tiers": profiles.sma.get("tiers", []), "count_by_tier": profiles.sma.get("count_by_tier", {}),
                 "min_track_record_years": profiles.sma.get("min_track_record_years", 0)},
         "portfolios": _compact_portfolios(portfolios),
+        "supabase": {"url": (supabase or {}).get("url", ""), "key": (supabase or {}).get("anon_key", "")},
         "returns": _daily_returns(md, universe, profiles),
         "history": history or {},
         "esg": {"enabled": bool(esg), "review": (esg or {}).get("review", {}), "shared_changes": _esg_shared_changes(portfolios), "bands": (esg or {}).get("bands", {}),
