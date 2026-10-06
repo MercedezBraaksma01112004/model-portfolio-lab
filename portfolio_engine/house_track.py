@@ -44,16 +44,20 @@ def _daily_returns(tickers: list[str], md, universe: pd.DataFrame, index: pd.Dat
     u = universe.drop_duplicates("ticker").set_index("ticker")
     out, how = {}, {}
 
+    full = md.prices.index
+
     def aud_series(t: str, ccy: str) -> pd.Series | None:
+        # Returns are taken on the whole price history and then cut to the record's dates, so a record only a day old
+        # still knows which holdings have prices of their own.
         if t not in md.prices.columns:
             return None
-        p = md.prices[t].reindex(index).ffill()
+        p = md.prices[t].ffill()
         if p.notna().sum() < 2:
             return None
         fx = md.fx_series(ccy)
         if fx is not None:
-            p = p * fx.reindex(index).ffill()
-        return p.pct_change()
+            p = p * fx.reindex(full).ffill()
+        return p.pct_change().reindex(index)
 
     for t in tickers:
         r = u.loc[t] if t in u.index else None

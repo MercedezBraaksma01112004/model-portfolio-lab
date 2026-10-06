@@ -382,6 +382,13 @@ def test_house_model_record(ctx, tmp_path):
     assert second["changes"] == [str(md.prices.index[-40].date())]
     assert second["model"][:80] == acc["model"][:80], "history before the change is unchanged"
     assert len(json.loads(state.read_text())["models"]["balanced_accumulation"]["versions"]) == 2
+    # a record one close old still knows which holdings have prices of their own, and has its benchmark
+    for m in p2.house_models.values():
+        if isinstance(m, dict) and m.get("holdings"):
+            m["inception"] = str(md.prices.index[-1].date())
+    day1 = track_house_models(p2, u, md, tmp_path / "day1.json")["balanced_accumulation"]
+    assert day1["days"] == 0 and day1["bench"] is not None
+    assert "VEU.AX" not in day1["stand_ins"] and set(day1["stand_ins"]) <= {"CMA", "TD12", "BNT0101AU", "ETL1293AU", "GSF0874AU", "WHT1465AU"}
 
 
 def test_data_freshness_flags(ctx):

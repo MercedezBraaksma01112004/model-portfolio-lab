@@ -880,7 +880,7 @@ function renderTrack(pf){
   sel("tr-bot").innerHTML = moved.filter(c => c.pts < 0).slice(-5).reverse().map(row).join("") || `<tr><td class="muted">Nothing has cost the return yet.</td></tr>`;
   const si = Object.entries(T.stand_ins || {});
   sel("trnote").innerHTML = `Contribution is each holding's gain or loss in percentage points of the whole portfolio, so the figures add up to the return since inception. ` +
-    (T.days < 63 ? `<b>The record is ${T.days} trading day${T.days === 1 ? "" : "s"} old.</b> Returns over days or weeks are mostly noise; give it at least a year, and judge it against the benchmark over three to five years, before drawing conclusions about the model. ` : "") +
+    (T.days < 63 ? `<b>${T.days ? `The record is ${T.days} trading day${T.days === 1 ? "" : "s"} old.` : "The record has just started."}</b> Returns over days or weeks are mostly noise; give it at least a year, and judge it against the benchmark over three to five years, before drawing conclusions about the model. ` : "") +
     (si.length ? `Holdings without a daily price of their own: ${si.map(([t, h]) => `${t} ${h}`).join("; ")}. Unlisted funds therefore track their stand-in, not the manager's actual result.` : "");
 }
 function renderBacktest(pf){

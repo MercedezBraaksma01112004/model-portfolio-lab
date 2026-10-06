@@ -72,18 +72,27 @@ def _fetch_yfinance(tickers: list[str], days: int) -> pd.DataFrame:
     start = end - timedelta(days=days + 1)
     frames = {}
     # Batch download; yfinance handles multiple tickers in one request.
-    data = yf.download(tickers, start=start.date(), end=end.date(), progress=False,
-                       auto_adjust=True, group_by="ticker", threads=True)
-    if data.empty:
-        return pd.DataFrame()
-    for t in tickers:
+    def take(data: pd.DataFrame, wanted: list[str]) -> None:
+        if data is None or data.empty:
+            return
+        for t in wanted:
+            try:
+                s = data[t]["Close"] if isinstance(data.columns, pd.MultiIndex) else data["Close"]
+            except KeyError:
+                continue
+            s = s.dropna()
+            if len(s):
+                frames[t] = s / 100.0 if _quotes_in_pence(t) else s
+
+    take(yf.download(tickers, start=start.date(), end=end.date(), progress=False, auto_adjust=True, group_by="ticker", threads=True), tickers)
+    # Threaded downloads occasionally fail a few tickers on yfinance's own cache lock ("database is locked"): retry
+    # those once, one thread, before falling back to yesterday's cache.
+    missing = [t for t in tickers if t not in frames]
+    if frames and 0 < len(missing) <= 80:
         try:
-            s = data[t]["Close"] if isinstance(data.columns, pd.MultiIndex) else data["Close"]
-        except KeyError:
-            continue
-        s = s.dropna()
-        if len(s):
-            frames[t] = s / 100.0 if _quotes_in_pence(t) else s
+            take(yf.download(missing, start=start.date(), end=end.date(), progress=False, auto_adjust=True, group_by="ticker", threads=False), missing)
+        except Exception as e:  # noqa: BLE001
+            log.warning("yfinance retry failed: %s", e)
     return pd.DataFrame(frames)
 
 
