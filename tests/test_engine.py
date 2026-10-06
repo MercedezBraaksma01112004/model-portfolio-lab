@@ -350,3 +350,62 @@ def test_sizing_follows_house_model(ctx):
     if direct and pooled:
         assert max(pooled) > max(direct)
     assert len(pf.lines) <= p.balance_tiers[pf.tier]["max_holdings"]
+
+
+def test_house_model_record(ctx, tmp_path):
+    """The live record: contributions add up to the return, a change of weights carries the value on, and the
+    benchmark is bought on the same day."""
+    import copy
+    import json
+    from portfolio_engine.house_track import track_house_models, _hash, _weights
+    s, p, *_ = ctx
+    u = load_universe(s, p, include_watchlist=True)
+    md = get_market_data(s, sorted(set(u["ticker"]) | {"VDGR.AX", "VDBA.AX"}), offline=True)
+    p2 = copy.deepcopy(p)
+    for m in p2.house_models.values():
+        if isinstance(m, dict) and m.get("holdings"):
+            m["inception"] = str(md.prices.index[-120].date())
+    state = tmp_path / "track.json"
+    first = track_house_models(p2, u, md, state)
+    acc = first["balanced_accumulation"]
+    assert acc["days"] >= 100 and acc["model"][0] == 100 and acc["bench"] and acc["bench"][0] == 100
+    assert abs(sum(c["pts"] for c in acc["contrib"]) - (acc["model"][-1] - 100)) < 0.05
+    # a new version of the model starts a new segment on its date; the value carries on
+    m = p2.house_models["balanced_accumulation"]
+    m["holdings"][0]["weight"] += 1
+    m["holdings"][1]["weight"] -= 1
+    st = json.loads(state.read_text())
+    v = st["models"]["balanced_accumulation"]["versions"]
+    v.append({"from": str(md.prices.index[-40].date()), "hash": _hash(_weights(m)), "weights": {t: x * 100 for t, x in _weights(m).items()}})
+    state.write_text(json.dumps(st))
+    second = track_house_models(p2, u, md, state)["balanced_accumulation"]
+    assert second["changes"] == [str(md.prices.index[-40].date())]
+    assert second["model"][:80] == acc["model"][:80], "history before the change is unchanged"
+    assert len(json.loads(state.read_text())["models"]["balanced_accumulation"]["versions"]) == 2
+
+
+def test_data_freshness_flags(ctx):
+    import pandas as pd
+    from portfolio_engine.freshness import data_freshness
+    s, p, u, md, manual, _ = ctx
+    unl = pd.read_csv(s.root / "config" / "unlisted_funds.csv", dtype=str).fillna("")
+    f = data_freshness(u, md, manual, {}, unl, {}, {}, set(), set())
+    by = {r["ticker"]: r for r in f["rows"]}
+    assert by["CMA"]["status"] == "ok"
+    eq = unl[(unl["unit_price"] == "1.0") & (unl["asset_class"].isin(["aus_equity", "intl_equity"]))]["ticker"]
+    for t in eq:
+        if t in by:
+            assert by[t]["status"] == "notional", t
+    assert f["counts"]["ok"] + f["counts"]["stale"] + f["counts"]["notional"] == f["total"]
+
+
+def test_page_lines_factor_losslessly(ctx):
+    import copy
+    import json
+    from portfolio_engine.reports.html import _compact_portfolios, _factor_lines, _clean
+    s, p, u, md, manual, view = ctx
+    pfs = [build_portfolio(s, p, u, md, manual, view, profile="balanced", life_stage=st, balance=b) for st in ("accumulation", "retirement") for b in (60_000, 400_000)]
+    orig = _clean(_compact_portfolios(pfs))
+    fact, base = _factor_lines(copy.deepcopy(orig))
+    back = [{**x, "lines": [{**base[l["ticker"]], **l} for l in x["lines"]]} for x in fact]
+    assert json.dumps(orig, sort_keys=True, default=str) == json.dumps(back, sort_keys=True, default=str)

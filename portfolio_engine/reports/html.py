@@ -118,6 +118,9 @@ main > section:first-child, main > div:first-child > section:first-child { borde
 .readout b { font-weight:700; }
 
 /* figures */
+.trgrid { display:grid; grid-template-columns:1fr 1fr; gap:0 36px; margin-top:16px; } .trgrid h3 { font-size:15px; margin:0 0 6px; }
+@media (max-width:760px) { .trgrid { grid-template-columns:1fr; } }
+.trtable { width:100%; border-collapse:collapse; } .trtable td { padding:7px 0; border-bottom:1px solid var(--line); font-size:13.5px; vertical-align:top; } .trtable td.num { text-align:right; white-space:nowrap; padding-left:12px; }
 .btchart { margin-top:14px; } .btchart svg { display:block; } td.actions { white-space:nowrap; }
 .recs{margin:0 0 12px}.recrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 8px}.reclist{display:grid;gap:6px;font-size:13px}.reclist .chip{margin-right:4px}.recitem{white-space:nowrap}.mult{font-variant-numeric:tabular-nums;font-size:12px;color:var(--faint)}
 .corrmap td.num,.corrmap th.num{font-size:12px;padding:6px 8px;text-align:center}.corrmap th{font-size:12px;white-space:nowrap}.corrmap tbody th{text-align:left}.corrmap thead th.num{white-space:normal;width:92px;line-height:1.25;vertical-align:bottom}
@@ -313,6 +316,18 @@ a.btn { text-decoration:none; }
   </section>
 </div>
 
+<section id="track" hidden>
+  <div class="eyebrow">Track record</div>
+  <h2 id="tr-title">How the house model has done since it was adopted</h2>
+  <p class="sub" id="tr-sub"></p>
+  <div class="tiles" id="trtiles"></div>
+  <div class="btchart" id="trchart"></div>
+  <div class="legend" id="trlegend"></div>
+  <div class="trgrid"><div><h3>Added the most</h3><table class="trtable"><tbody id="tr-top"></tbody></table></div>
+    <div><h3>Cost the most</h3><table class="trtable"><tbody id="tr-bot"></tbody></table></div></div>
+  <p class="muted" id="trnote" style="font-size:12.5px;margin:8px 0 0"></p>
+</section>
+
 <section id="backtest">
   <div class="eyebrow">Looking back</div>
   <h2 id="bt-title">If this balance had been invested ten years ago</h2>
@@ -433,6 +448,8 @@ a.btn { text-decoration:none; }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 const DATA = __DATA__;
+if (DATA.line_base) for (const p of DATA.portfolios) p.lines = p.lines.map(l => Object.assign({}, DATA.line_base[l.ticker], l));
+__LAZY_JS__
 const STAGE_NOUN = { early_accumulation: "early accumulator", accumulation: "accumulator", retirement: "retiree" };
 const VEHICLE = { etf: "ETF", lic: "listed investment company", direct: "share", fund: "managed fund", cash: "cash", sma: "managed portfolio", hybrid: "hybrid", note: "listed note", bond: "exchange-traded bond", td: "term deposit" };
 const WHO = { early_accumulation: "An <b>early accumulator</b>", accumulation: "An <b>accumulator</b>", retirement: "A <b>retiree</b>" };
@@ -610,6 +627,7 @@ function render(){
   sel("rnote").hidden = isSma;
   renderRisk(pf);
   renderDiversification(pf);
+  renderTrack(pf);
   renderBacktest(pf);
   (() => { const ws = pf.warnings.filter(w => !w.startsWith("Requested")); const left = ws.filter(w => / left out: /.test(w)), rev = ws.filter(w => /review this holding/.test(w)), other = ws.filter(w => !left.includes(w) && !rev.includes(w));
     const notes = [...other];
@@ -828,9 +846,46 @@ function computeBacktest(pf, bal){
   return { values, end: v, cagr, mdd, best: tw.length ? Math.max(...tw) : null, worst: tw.length ? Math.min(...tw) : null, years: yrs, standShare, standIns };
 }
 function seriesGrowth(key, bal){ const sr = (DATA.history.series||{})[key]; if (!sr) return null; let v = bal; return sr.map(r => v *= 1 + (r||0)); }
+// The house model's live record (portfolio_engine/house_track.py): bought at the close on its inception date and held.
+function renderTrack(pf){
+  const box = sel("track"); const T = pf.house && pf.house.key ? (DATA.house_track || {})[pf.house.key] : null;
+  box.hidden = !T || !T.dates || !T.dates.length; if (box.hidden) return;
+  const dt = s => new Date(s + "T00:00:00").toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric" });
+  sel("tr-title").textContent = `How the ${T.label.replace(/^Balanced house model/, "house model")} has done since ${dt(T.inception)}`;
+  sel("tr-sub").textContent = `A notional $100,000 bought at the model's weights at the close on ${dt(T.start)} and held, with dividends reinvested, in Australian dollars, before fees, brokerage and tax, valued at every close since. This is what the model has actually done since it was adopted, not hindsight: unlike the ten-year look back below, nothing in it was chosen after the fact.${T.changes.length ? ` The model changed on ${T.changes.map(dt).join(", ")}; on each change the record sells at that day's values and buys the new weights, so it carries on rather than restarting.` : ""}`;
+  const pp = (x, d = 2) => x == null ? "–" : (x > 0 ? "+" : x < 0 ? "−" : "") + Math.abs(x).toFixed(d) + "%";
+  const per = T.periods.filter(p => p.model != null);
+  const vs = p => { if (p.bench == null) return "no benchmark for this period"; const d = p.model - p.bench;
+    return Math.abs(d) < 0.005 ? `level with the benchmark (${pp(p.bench)})` : `${Math.abs(d).toFixed(2)} pts ${d > 0 ? "ahead of" : "behind"} the benchmark (${pp(p.bench)})`; };
+  sel("trtiles").innerHTML = per.map(p => [p.label, pp(p.model), vs(p)])
+    .concat([["Largest fall", pp(T.max_drawdown_pct, 1), "peak to trough since inception"], ["Days in the record", String(T.days), `trading days to ${dt(T.as_of)}`]])
+    .map(([k, v, s]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
+  const n = T.dates.length; const lines = [["House model", T.model, "var(--primary)", 2.4]].concat(T.bench ? [[T.bench_label, T.bench, cssColor("intl_equity"), 1.4]] : []);
+  if (n >= 2) {
+    const W = 900, Hh = 260, padL = 56, padR = 16, padT = 12, padB = 28; const all = lines.flatMap(x => x[1]);
+    let lo = Math.min(100, ...all), hi = Math.max(100, ...all); const pad = Math.max((hi - lo) * 0.1, 0.5); lo -= pad; hi += pad;
+    const X = i => padL + i / (n - 1) * (W - padL - padR), Y = v => padT + (1 - (v - lo) / (hi - lo)) * (Hh - padT - padB);
+    const raw = (hi - lo) / 5, mag = Math.pow(10, Math.floor(Math.log10(raw))), step = [1, 2, 2.5, 5, 10].map(x => x * mag).find(x => x >= raw);
+    let grid = ""; for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) grid += `<line x1="${padL}" x2="${W - padR}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)" stroke-width="1"/><text x="${padL - 6}" y="${Y(v) + 4}" text-anchor="end" font-size="11" fill="var(--faint)">${v.toFixed(step < 1 ? 1 : 0)}</text>`;
+    const ticks = [...new Set([0, Math.floor((n - 1) / 2), n - 1])];
+    const xl = ticks.map(i => `<text x="${X(i)}" y="${Hh - 8}" text-anchor="${i === 0 ? "start" : i === n - 1 ? "end" : "middle"}" font-size="11" fill="var(--faint)">${new Date(T.dates[i] + "T00:00:00").toLocaleDateString("en-AU", { day: "numeric", month: "short" })}</text>`).join("");
+    const marks = T.changes.map(c => { const i = T.dates.findIndex(d => d >= c); return i < 0 ? "" : `<line x1="${X(i)}" x2="${X(i)}" y1="${padT}" y2="${Hh - padB}" stroke="var(--faint)" stroke-dasharray="3 3"/>`; }).join("");
+    const paths = lines.map(([name, vals, col, sw]) => `<path d="${vals.map((v, i) => (i ? "L" : "M") + X(i).toFixed(1) + " " + Y(v).toFixed(1)).join(" ")}" fill="none" stroke="${col}" stroke-width="${sw}" stroke-linejoin="round"/>`).join("");
+    sel("trchart").innerHTML = `<svg viewBox="0 0 ${W} ${Hh}" width="100%" role="img" aria-label="Value of $100 invested in the house model since ${T.start}">${grid}${marks}${xl}${paths}</svg>`;
+  } else sel("trchart").innerHTML = `<div class="muted">The record starts at the close on ${dt(T.start)}; the first day's change appears after the next close.</div>`;
+  sel("trlegend").innerHTML = lines.map(([name, vals, col]) => `<span><i style="background:${col}"></i>${name}: ${vals[vals.length - 1].toFixed(2)} (started at 100)</span>`).join("");
+  const row = c => `<tr><td><b>${c.name}</b><br><span class="mono" style="font-size:11.5px;color:var(--faint)">${c.ticker}${c.priced && !/^own/.test(c.priced) ? ", " + c.priced : ""}</span></td><td class="num ${c.pts > 0 ? "pos" : c.pts < 0 ? "neg" : ""}">${c.pts > 0 ? "+" : c.pts < 0 ? "−" : ""}${Math.abs(c.pts).toFixed(2)} pts</td></tr>`;
+  const moved = T.contrib.filter(c => Math.abs(c.pts) >= 0.005);
+  sel("tr-top").innerHTML = moved.filter(c => c.pts > 0).slice(0, 5).map(row).join("") || `<tr><td class="muted">Nothing has added to the return yet.</td></tr>`;
+  sel("tr-bot").innerHTML = moved.filter(c => c.pts < 0).slice(-5).reverse().map(row).join("") || `<tr><td class="muted">Nothing has cost the return yet.</td></tr>`;
+  const si = Object.entries(T.stand_ins || {});
+  sel("trnote").innerHTML = `Contribution is each holding's gain or loss in percentage points of the whole portfolio, so the figures add up to the return since inception. ` +
+    (T.days < 63 ? `<b>The record is ${T.days} trading day${T.days === 1 ? "" : "s"} old.</b> Returns over days or weeks are mostly noise; give it at least a year, and judge it against the benchmark over three to five years, before drawing conclusions about the model. ` : "") +
+    (si.length ? `Holdings without a daily price of their own: ${si.map(([t, h]) => `${t} ${h}`).join("; ")}. Unlisted funds therefore track their stand-in, not the manager's actual result.` : "");
+}
 function renderBacktest(pf){
   const H = DATA.history; const bal = pf.balance; const bt = computeBacktest(pf, bal);
-  if (!bt) { sel("bttiles").innerHTML = ""; sel("btchart").innerHTML = `<div class="muted">No price history embedded in this build.</div>`; return; }
+  if (!bt) { sel("bttiles").innerHTML = ""; sel("btchart").innerHTML = `<div class="muted">${DATA.lazy && DATA.lazy.history && !DATA.loaded ? "Loading the price history…" : "No price history embedded in this build."}</div>`; return; }
   sel("bt-title").textContent = `If ${fmtM(bal)} had been invested ${Math.round(bt.years)} years ago`;
   sel("bttiles").innerHTML = [
     ["Worth today", fmtM(bt.end), `from ${fmtM(bal)} in ${H.months[0]}`],
@@ -1104,6 +1159,7 @@ if (Object.keys(DATA.quality||{}).length) sel("qlink").innerHTML = `Every holdin
 if (DATA.banner) { sel("banner").querySelector(".wrap").textContent = DATA.banner; sel("banner").hidden = false; }
 render();
 wireEdit();
+DATA.ready.then(() => render());   // risk, back test and fact sheets fill in once the shared data has arrived
 </script>
 </body>
 </html>
@@ -1121,7 +1177,7 @@ def write_dashboard(path: Path, portfolios: list[Portfolio], profiles: Profiles,
                     research: dict | None = None, universe: pd.DataFrame | None = None, review: list | None = None,
                     settings_site_url: str = "", quality: dict | None = None, platform_cfg: dict | None = None,
                     class_corr: dict | None = None, pds: dict | None = None, history: dict | None = None, esg: dict | None = None,
-                    supabase: dict | None = None, asx: dict | None = None) -> Path:
+                    supabase: dict | None = None, asx: dict | None = None, house_track: dict | None = None, lazy: dict | None = None) -> Path:
     classes = [{"key": k, "label": v["label"], "kind": v["kind"]} for k, v in profiles.asset_classes.items()]
     colors = {c["key"]: f"--series-{i + 1}" for i, c in enumerate(classes)}
     light_vars = " ".join(f"--series-{i + 1}:{PALETTE_LIGHT[i % len(PALETTE_LIGHT)]};" for i in range(len(classes)))
@@ -1162,20 +1218,79 @@ def write_dashboard(path: Path, portfolios: list[Portfolio], profiles: Profiles,
         "diversification": getattr(profiles, "diversification", {}) or {},
         "sma": {"enabled": bool(profiles.sma.get("enabled")), "tiers": profiles.sma.get("tiers", []), "count_by_tier": profiles.sma.get("count_by_tier", {}),
                 "min_track_record_years": profiles.sma.get("min_track_record_years", 0)},
-        "portfolios": _compact_portfolios(portfolios),
+        "portfolios": None, "line_base": None,
         "supabase": {"url": (supabase or {}).get("url", ""), "key": (supabase or {}).get("anon_key", "")},
         "returns": _daily_returns(md, universe, profiles),
         "history": history or {},
+        "house_track": house_track or {},
         "esg": {"enabled": bool(esg), "review": (esg or {}).get("review", {}), "shared_changes": _esg_shared_changes(portfolios), "bands": (esg or {}).get("bands", {}),
                 "exclusions": {k: v.get("label", k) for k, v in (esg or {}).get("exclusions", {}).items()},
                 "substitutions": (esg or {}).get("substitutions", {})},
     }
-    html = (TEMPLATE.replace("__LIGHT_VARS__", light_vars).replace("__DARK_VARS__", dark_vars)
-            .replace("__DATA__", json.dumps(_clean(data), default=str)))
+    data["portfolios"], data["line_base"] = _factor_lines(_clean(_compact_portfolios(portfolios)))
+    if lazy:
+        apply_lazy(data, lazy)
+    html = (TEMPLATE.replace("__LAZY_JS__", LAZY_JS).replace("__LIGHT_VARS__", light_vars).replace("__DARK_VARS__", dark_vars)
+            .replace("__DATA__", json.dumps(_clean(data), default=str, separators=(",", ":"))))
     path.parent.mkdir(parents=True, exist_ok=True)
     from .motion import inject
     path.write_text(inject(html), encoding="utf-8")
     return path
+
+
+LAZY_KEYS = ("returns", "history", "research", "search_index")
+
+
+def write_shared_data(out_dir: Path, md: MarketData, universe: pd.DataFrame | None, profiles: Profiles, research: dict | None,
+                      history: dict | None) -> dict[str, str]:
+    """The heavy, slow-changing data both pages use (a year of daily returns, ten years of monthly history, analyst
+    research and the search index), written once as JSON files under out_dir/data/ that the pages fetch after they
+    have drawn. The browser caches them, so opening the builder after the dashboard costs nothing more. Returns
+    {key: relative url}; each url carries the build time so a new build is never served from an old cache."""
+    stamp = datetime.now().strftime("%Y%m%d%H%M")
+    d = out_dir / "data"
+    d.mkdir(parents=True, exist_ok=True)
+    payloads = {"returns": _daily_returns(md, universe, profiles), "history": history or {},
+                "research": {t: dict(r.__dict__) for t, r in (research or {}).items()}, "search_index": _load_search_index()}
+    urls = {}
+    for k, v in payloads.items():
+        (d / f"{k}.json").write_text(json.dumps(_clean(v), default=str, separators=(",", ":")), encoding="utf-8")
+        urls[k] = f"data/{k}.json?v={stamp}"
+    return urls
+
+
+def apply_lazy(data: dict, lazy: dict[str, str] | None) -> dict:
+    """Leave the lazily loaded parts out of a page's embedded data, with empty stand-ins until they arrive."""
+    for k in (lazy or {}):
+        data[k] = [] if k == "search_index" else {}
+    data["lazy"] = lazy or {}
+    return data
+
+
+# The page script that fetches the lazy parts (XMLHttpRequest, so a page opened from disk can still load them when the
+# browser allows file access), merges them into DATA and draws again.
+LAZY_JS = r"""
+DATA.ready = Promise.all(Object.entries(DATA.lazy || {}).map(([k, url]) => new Promise(ok => { const x = new XMLHttpRequest();
+  x.open("GET", url); x.responseType = "json";
+  x.onload = () => { const v = x.response; if (v && (x.status === 200 || x.status === 0)) { if (Array.isArray(v)) DATA[k] = v; else Object.assign(DATA[k] || (DATA[k] = {}), v); } else console.warn("Could not load " + k); ok(); };
+  x.onerror = () => { console.warn("Could not load " + k); ok(); }; x.send(); }))).then(() => { DATA.loaded = true; });
+"""
+
+
+def _factor_lines(plist: list[dict]) -> tuple[list[dict], dict]:
+    """Holding details repeat across 150 portfolios. Keep each holding's details once (line_base) and only what differs
+    in each portfolio's lines; the page puts them back together on load. Lossless."""
+    base: dict[str, dict] = {}
+    for p in plist:
+        out = []
+        for l in p.get("lines", []):
+            t = l.get("ticker")
+            if t not in base:
+                base[t] = {k: v for k, v in l.items() if k != "ticker"}
+            b = base[t]
+            out.append({k: v for k, v in l.items() if k == "ticker" or k not in b or b[k] != v})
+        p["lines"] = out
+    return plist, base
 
 
 def _compact_portfolios(portfolios: list[Portfolio]) -> list[dict]:
@@ -1210,6 +1325,8 @@ def _daily_returns(md: MarketData, universe: pd.DataFrame | None, profiles: Prof
     for ps in proxies.values():
         wanted |= set(ps)
     wanted |= {"VAS.AX", "VGS.AX"}
+    if universe is not None and "twin" in universe.columns:
+        wanted |= {t for t in universe["twin"] if t}
     cols = [t for t in wanted if t in md.prices.columns]
     if not cols:
         return {}

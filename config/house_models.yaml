@@ -9,6 +9,8 @@
 # Weights are percentages of the portfolio and must add to 100. `ticker` is the engine's price-feed code (the
 # workbook's own code is in `code`). `sleeve` is the role the model gives each holding; it is shown on the site and
 # used in the basis of advice drafts. `pays` is the income frequency from the pension model.
+# `inception` and `benchmark` set the live record on the dashboard (portfolio_engine/house_track.py); changing the
+# holdings or weights starts a new segment of that record on the day of the change rather than restarting it.
 # Deliberately not carried across: the workbook's price targets and "targeted growth return / TSR" columns. The site
 # shows history, never forecasts, and a basis of advice must not rest on return expectations.
 #
@@ -33,6 +35,11 @@ balanced_accumulation:
   min_tier: core
   model_balance: 200000
   source: "Model_Portfolios.xlsx, Balanced sheet (October 2026), accumulation column"
+  # The live record (dashboard, "How the house models have done"): bought at the close on the inception date and held.
+  # Benchmark: Vanguard Diversified Growth, 70% growth assets, against the model's 72%.
+  inception: 2026-10-06
+  benchmark: {VDGR.AX: 100}
+  benchmark_label: "Vanguard Diversified Growth ETF (VDGR, 70% growth)"
   holdings:
     # Australian equities 24%
     - {code: SIG,        ticker: SIG.AX,     weight: 2,   sleeve: "Healthcare"}
@@ -81,6 +88,10 @@ balanced_pension:
   min_tier: core
   model_balance: 600000
   source: "Model_Portfolios.xlsx, Balanced sheet (October 2026), pension column"
+  # Benchmark: 70% Vanguard Diversified Growth and 30% Vanguard Diversified Balanced, 64% growth assets, against the model's 65%.
+  inception: 2026-10-06
+  benchmark: {VDGR.AX: 70, VDBA.AX: 30}
+  benchmark_label: "70% VDGR and 30% VDBA (64% growth)"
   holdings:
     # Australian equities 37%
     - {code: ORG,    ticker: ORG.AX,    weight: 3,   sleeve: "Energy income",          pays: "Twice yearly"}

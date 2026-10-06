@@ -46,7 +46,20 @@ cash); and the Core tier allows up to 34 holdings. There is no separate alternat
 none.
 
 ASX listings that no history source carries (listed notes such as SPPHA, exchange-traded bonds such as GSBK54) are priced
-from the ASX's own feed (`market_data._fetch_asx_spot`), with their asset class index standing in for risk and history.
+from the ASX's own feed (`market_data._fetch_asx_spot`). Their risk and history come from a listed stand-in in
+`config/stand_ins.csv` (GSBK54 follows the long government bond ETF GGOV, so its interest-rate risk is not understated;
+SPPHA and DMNHA follow the floating-rate hybrid ETF BHYB).
+
+### The house models' live record
+
+`portfolio_engine/house_track.py` keeps a record for each house model from its `inception` date (6 October 2026): a notional
+$100,000 bought at the model's weights at that day's close and held, valued at every close in Australian dollars with
+dividends reinvested, against its `benchmark` (VDGR for accumulation; 70% VDGR and 30% VDBA for pension). Unlisted funds
+follow their listed twin and the term deposit and cash accrue their yield, and the page says so. A change to a model's
+holdings or weights starts a new segment on the day of the change: the record sells at that day's values and buys the new
+weights, so it carries on rather than restarting. The versions are logged in `data/house_track.json`, which the daily build
+commits. The dashboard shows the record (period returns against the benchmark, the largest fall, the chart and which holdings
+added or cost the most) whenever a house model is selected.
 
 ## ASX facts
 
@@ -331,6 +344,33 @@ FAAA, and ATO and AFCA news through Google News because both refuse automated re
 and writes `output/brief.json` and `output/brief.html` (published as `/brief.html`). Every source fails on its own and
 is listed on the page with its status. The page filters each list and downloads the whole brief as Excel; the
 `/asx` function looks up any ASX code live.
+
+### Switch plan (builder)
+
+Import the client's current holdings with "Import into: the client's current holdings" (units, values and a cost base
+column are read if the sheet has them), or press "Use as the client's current holdings" to set the holdings on the page
+aside, then load or build the target. The switch plan lists every trade: what to sell, what to buy, whole units at today's
+prices, brokerage on the platform's schedule, turnover, and estimated capital gains tax (super 15% with the one-third
+discount, pension phase 0%, or a personal marginal rate with the 50% discount), with income, franking, fees and risk before
+and after. Differences under the tolerance are left alone, holdings marked "keep" are not sold, and the cash account settles
+everything else; when held lines and brokerage would overdraw it, buys are trimmed pro rata and leftover cash is spent a
+whole unit at a time on the buys furthest below target. It downloads as Excel. Capital gains are pro rata to the cost base
+supplied, not by parcel, and ignore carried-forward losses.
+
+### Data check
+
+Every build checks each holding's data (`portfolio_engine/freshness.py`, written to `output/freshness.json` and shown at
+the top of the Daily brief): listed prices older than four days, prices from yesterday's cache because every source failed,
+entered unit prices for unlisted funds older than 35 days, a notional 1.00 unit price on a share or infrastructure fund,
+managers' published returns more than two months old, and ASX facts or research that fell behind. Prices, research
+(`max_age_days: 0.8`) and ASX facts (20 hours) are refreshed by every weekday build.
+
+### Page speed
+
+The heavy data both pages use (a year of daily returns, ten years of monthly history, analyst research and the search index)
+is written once to `output/data/*.json` and fetched after the page has drawn; the browser caches it, so the second page
+costs nothing more. Holding details are stored once rather than in each of the 150 portfolios. The dashboard went from about
+5 MB to 1.6 MB before compression and the builder from 3 MB to 0.8 MB.
 
 ### Missed evenings
 

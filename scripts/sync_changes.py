@@ -9,9 +9,36 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = (ROOT / ".netlify" / "site_url").read_text().strip() if (ROOT / ".netlify" / "site_url").exists() else ""
 PIN = (ROOT / ".netlify" / "edit_pin").read_text().strip() if (ROOT / ".netlify" / "edit_pin").exists() else ""
 
+def sync_fetch_queue() -> None:
+    """Listings the website could not price live (Yahoo refuses its servers at times): add them to
+    config/extra_listings.csv so this build fetches them and publishes /data/listings/<symbol>.json. The fetchq function
+    clears each one once its listing file is published."""
+    try:
+        q = json.load(urllib.request.urlopen(SITE.rstrip("/") + "/.netlify/functions/fetchq", timeout=30))
+    except Exception as e:  # noqa: BLE001
+        print(f"sync: could not fetch the listing queue ({e})"); return
+    pending = q.get("pending", [])
+    if not pending:
+        print("sync: no listings queued"); return
+    path = ROOT / "config" / "extra_listings.csv"
+    have = set()
+    if path.exists():
+        have = {r["symbol"].strip().upper() for r in csv.DictReader(path.open())}
+    new = [p for p in pending if p["symbol"].upper() not in have]
+    write_header = not path.exists()
+    with path.open("a", newline="") as f:
+        w = csv.writer(f, lineterminator="\n")
+        if write_header:
+            w.writerow(["symbol", "name", "exchange", "type", "sector"])
+        for p in new:
+            w.writerow([p["symbol"].upper(), p.get("name") or p["symbol"], "", "EQUITY", ""])
+    print(f"sync: {len(new)} queued listings added to config/extra_listings.csv ({', '.join(p['symbol'] for p in new)})")
+
+
 def main() -> int:
     if not SITE:
         print("sync: no .netlify/site_url; skipping"); return 0
+    sync_fetch_queue()
     url = SITE.rstrip("/") + "/.netlify/functions/changes"
     try:
         state = json.load(urllib.request.urlopen(url, timeout=30))

@@ -270,6 +270,11 @@ def load_universe(settings: Settings, profiles: Profiles, *, include_watchlist: 
         if col not in df.columns:
             df[col] = ""
         df[col] = df[col].fillna("")
+    # Stand-ins for listed securities with no price history (long bonds, new listed notes): config/stand_ins.csv.
+    si = settings.root / "config" / "stand_ins.csv"
+    if si.exists():
+        stand = dict(pd.read_csv(si, dtype=str).fillna("")[["ticker", "twin"]].values)
+        df["twin"] = [tw or stand.get(t, "") for t, tw in zip(df["ticker"], df["twin"])]
     if not include_watchlist:
         df = df[df["status"] == "active"].copy()
     missing = set(UNIVERSE_COLUMNS) - set(df.columns)

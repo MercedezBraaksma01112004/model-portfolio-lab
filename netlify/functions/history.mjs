@@ -1,4 +1,5 @@
 import { yfetch, json } from "./_yahoo.mjs";
+import { nasdaqHistory, isUsSymbol } from "./_nasdaq.mjs";
 // GET /.netlify/functions/history?symbol=BHP.AX
 // Everything the builder page needs to treat a holding it has never seen like one from the engine's universe:
 // name, currency, latest price, trailing dividend yield, ten years of month-end total returns (dividends
@@ -21,10 +22,21 @@ async function fxSeries(currency, range, interval) {
 export default async (req) => {
   const s = new URL(req.url).searchParams.get("symbol")?.trim().toUpperCase();
   if (!s) return json({ error: "symbol required" }, 400);
-  try {
+  let yahooError = "";
+  try { return await fromYahoo(s); } catch (e) { yahooError = String(e.message || e); }
+  // Yahoo refuses data-centre addresses at times. United States listings fall back to Nasdaq; anything else is left for the
+  // cloud build, which can reach Yahoo (the page queues it through the fetchq function).
+  if (isUsSymbol(s)) {
+    try { return json(await nasdaqHistory(s, new URL(req.url).origin), 200, 3600); } catch (e) { yahooError += `; Nasdaq: ${e.message || e}`; }
+  }
+  return json({ error: yahooError || "no data", queue: true }, 502);
+};
+
+async function fromYahoo(s) {
+  {
     const [m, d] = await Promise.all([chart(s, "10y", "1mo"), chart(s, "1y", "1d")]);
     const rm = m.chart?.result?.[0], rd = d.chart?.result?.[0];
-    if (!rm || !rd) return json({ error: "no data" }, 404);
+    if (!rm || !rd) throw new Error("no data");
     const meta = rd.meta || rm.meta || {};
     const currency = (meta.currency || "AUD").toUpperCase();
     // Month-end closes, AUD converted (the engine does the same for its own history)
@@ -61,7 +73,5 @@ export default async (req) => {
       spark: dc.filter((v, i) => v != null && i % Math.max(1, Math.floor(dc.length / 60)) === 0).map(v => +(v / first * 100).toFixed(2)),
       monthly: { months: mmonths, returns: monthly }, daily: { dates, returns: daily },
     }, 200, 3600);
-  } catch (e) {
-    return json({ error: String(e.message || e) }, 502);
   }
-};
+}

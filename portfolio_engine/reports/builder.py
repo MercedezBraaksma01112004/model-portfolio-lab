@@ -86,6 +86,8 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
 .boa-item textarea:focus, #pnotes:focus { outline:2px solid var(--accent); outline-offset:1px; border-color:transparent; }
 .boa-state { font-size:12px; color:var(--faint); }
 .boa-state.ai { color:var(--accent); font-weight:500; }
+.sw-controls { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:4px 14px; margin-bottom:6px; align-items:end; }
+.chip.bad { background:var(--bad-soft, #f7e1e1); color:var(--bad, #a33); }
 .asxbox { border-top:1px solid var(--line); margin-top:12px; padding-top:10px; }
 .house-style { border:1px solid var(--line); border-radius:10px; padding:10px 14px; margin:12px 0 16px; background:var(--surface); }
 .house-style summary { cursor:pointer; font-weight:600; font-size:14px; }
@@ -151,6 +153,7 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
     <div><label for="impsheet">Sheet</label><select id="impsheet" disabled><option>Choose a file first</option></select></div>
     <div style="display:flex;align-items:flex-end"><button class="btn" id="btn-import" type="button" style="min-height:46px;width:100%;justify-content:center" disabled>Import this sheet</button></div>
   </div>
+  <div style="margin-top:8px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><label for="impinto" style="margin:0">Import into</label><select id="impinto" style="max-width:420px"><option value="portfolio">This portfolio (replaces the holdings)</option><option value="current">The client's current holdings, for a switch plan</option></select></div>
   <p class="muted" id="impnote" style="font-size:12.5px;margin:6px 0 0">Any sheet with a column of codes (ASX codes, tickers or HUB24 codes) and a column of weights, dollar values or units. Section headings such as "Australian equities" set the asset class. Everything is priced at today's prices; the file never leaves your browser.</p>
   <div class="subhead">Platform</div>
   <div class="setup">
@@ -179,7 +182,7 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
   <h2>What is in it</h2>
   <div class="toolbar" style="margin-top:4px">
     <span>Total weight: <span class="total" id="total">0.0%</span></span>
-    <button class="btn small" id="btn-norm" type="button">Scale to 100%</button>
+    <button class="btn small" id="btn-norm" type="button">Scale to 100%</button><button class="btn small" id="btn-sw-set" type="button" title="Set these holdings aside as the client's current holdings, then load or build the target to see the trades">Use as the client's current holdings</button>
     <button class="btn small" id="btn-equal" type="button">Equal weight</button>
     <button class="btn small" id="btn-cash" type="button">Fill the gap with cash</button>
     <button class="btn small" id="btn-rules" type="button" title="Weights the way the engine would: by the holdings' weight hints, held to the diversification caps">Weight like the engine</button>
@@ -216,6 +219,25 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
   <div id="checklist"></div>
   <div class="toolbar"><button class="btn primary" id="btn-ai" type="button">Ask AI for a review</button><span class="muted" id="ainote" style="font-size:12.5px"></span></div>
   <div id="airesult"></div>
+</section>
+
+<section id="switch-section" hidden>
+  <div class="eyebrow">Implementation</div>
+  <h2>Switch from the client's current holdings</h2>
+  <p class="sub">The trades that move the client's current holdings to the portfolio on this page: what to sell, what to buy, whole units, brokerage, turnover and capital gains, and how income, franking, fees and risk change. Small differences are left alone to save brokerage, and anything marked "keep" is not sold (a large gain, a holding the client wants).</p>
+  <p id="sw-head" style="margin:0 0 10px;font-weight:500"></p>
+  <div class="sw-controls">
+    <div><label for="sw-tol" title="Holdings within this much of their target are left alone">Tolerance (% of balance)</label><input id="sw-tol" type="text" inputmode="decimal" value="0.5"></div>
+    <div><label for="sw-min">Smallest trade ($)</label><input id="sw-min" type="text" inputmode="numeric" value="500"></div>
+    <div><label for="sw-add">New money ($)</label><input id="sw-add" type="text" inputmode="numeric" value="0"></div>
+    <div><label for="sw-tax">Tax on gains</label><select id="sw-tax"><option value="super">Super fund (15%)</option><option value="pension">Pension phase (0%)</option><option value="personal">Personal or trust (marginal rate)</option></select></div>
+    <div id="sw-rate-wrap" hidden><label for="sw-rate">Marginal rate with Medicare levy (%)</label><input id="sw-rate" type="text" inputmode="decimal" value="32"></div>
+    <div style="display:flex;align-items:flex-end"><label style="display:flex;gap:6px;align-items:center;margin:0 0 12px"><input type="checkbox" id="sw-long" checked> Held over 12 months</label></div>
+  </div>
+  <div class="tiles" id="sw-tiles"></div>
+  <div class="tscroll"><table class="htable" style="margin-top:12px"><thead><tr><th>Holding</th><th>Action</th><th class="num">Now</th><th class="num">Target</th><th class="num">Trade</th><th class="num">Units</th><th class="num">Brokerage</th><th class="num">Gain (est.)</th><th class="no-print"></th></tr></thead><tbody id="sw-rows"></tbody></table></div>
+  <div class="toolbar no-print"><button class="btn primary" id="btn-sw-xlsx" type="button">Download the switch plan as Excel</button><button class="btn" id="btn-sw-clear" type="button">Clear the current holdings</button></div>
+  <p class="muted" id="sw-note" style="font-size:12.5px;margin:8px 0 0"></p>
 </section>
 
 <div class="two">
@@ -308,6 +330,7 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 const DATA = __DATA__;
+__LAZY_JS__
 const VEHICLE = { etf: "ETF", lic: "listed investment company", direct: "share", fund: "managed fund", cash: "cash", sma: "managed portfolio", hybrid: "hybrid", note: "listed note", bond: "exchange-traded bond", td: "term deposit" };
 const CLASSES = DATA.classes, COLORS = DATA.colors, R = DATA.research, U = DATA.universe;
 const UMAP = Object.fromEntries(U.map(u => [u.ticker, u]));
@@ -328,7 +351,7 @@ let toastT; function toast(msg){ const t = sel("toast"); t.textContent = msg; t.
 
 // ------------------------------------------------------------ state
 const DEFAULT_PLATFORM = () => ({ key: DATA.default_platform || Object.keys(DATA.platforms || {})[0] || "custom", account: "super", menu: "auto", custom_pct: null, custom_fixed: null });
-const state = { id: null, name: "", balance: 250000, ref: "balanced", lines: [], isPublic: false, readOnly: false, ownerId: null, ticker: null, dirty: false, platform: DEFAULT_PLATFORM(), notes: "" };
+const state = { id: null, name: "", balance: 250000, ref: "balanced", lines: [], isPublic: false, readOnly: false, ownerId: null, ticker: null, dirty: false, platform: DEFAULT_PLATFORM(), notes: "", current: null };
 const user = { session: null };
 const EXTRA = {};   // ticker -> {daily:{dates,returns}, monthly:{months,returns}} fetched live for holdings outside the universe
 const HS = { text: "" };   // house style basis of advice examples (this browser, the saved portfolio, or config/boa_examples.md)
@@ -374,7 +397,9 @@ async function addSymbol(symbol, cls, meta){
 async function fetchLiveLine(symbol, cls, meta){
   let h = null;
   try { const r = await fetch("/data/listings/" + encodeURIComponent(symbol) + ".json", { cache: "no-cache" }); if (r.ok) h = await r.json(); } catch(e) {}
-  if (!h) { try { h = await api("/history?symbol=" + encodeURIComponent(symbol)); } catch(e) { throw new Error("No data for " + symbol + ": " + e.message + ". Only listings in the search index are available offline."); } }
+  if (!h) { try { h = await api("/history?symbol=" + encodeURIComponent(symbol)); } catch(e) {
+      if (FN) { queueListing(symbol, meta && meta.name); throw new Error(`${symbol} is not available from the live price feeds right now. It is queued, and the next cloud update (within about three hours) will add it; add it again then.`); }
+      throw new Error("No data for " + symbol + ": " + e.message + ". Only listings in the search index are available offline."); } }
   const fx = DATA.fx_aud_per || {}; const rate = h.currency === "AUD" ? 1 : (fx[h.currency] || null);
   if (rate == null) throw new Error("No exchange rate for " + h.currency + "; cannot price " + symbol);
   const vehicle = (h.type === "ETF" || (meta && meta.type === "ETF")) ? "etf" : "direct";
@@ -386,6 +411,10 @@ async function fetchLiveLine(symbol, cls, meta){
   return { ticker: symbol, name: h.name, asset_class: cls || guessClass(symbol, h.name, meta && meta.sector), vehicle, role: "satellite", currency: h.currency, mer_pct: vehicle === "etf" ? 0.2 : 0,
     yield_pct: h.yield_pct || 0, yield_source: "live", franking_pct: 0, sector, region: guessRegion(symbol, h.name), price_aud: h.price * rate, priced_from: "live", weight_pct: 0, source: "live", boa: "", boa_custom: false };
 }
+// Listings the live feeds cannot supply are queued for the cloud build, which fetches them within about three hours.
+const QUEUED = new Set();
+function queueListing(symbol, name){ if (!FN || QUEUED.has(symbol)) return; QUEUED.add(symbol);
+  fetch(FN + "/fetchq", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ symbol, name: name || "" }) }).catch(() => {}); }
 function pushLine(l){ state.lines.push(l); state.ticker = l.ticker; state.dirty = true; sel("q").value = ""; sel("results").innerHTML = ""; render(); toast(l.name + " added at 0%: set its weight in the table"); }
 function removeLine(t){ state.lines = state.lines.filter(l => l.ticker !== t); if (state.ticker === t) state.ticker = null; state.dirty = true; render(); }
 
@@ -575,7 +604,7 @@ function render(){
   const refG = CLASSES.filter(c => c.kind==="growth").reduce((s,c) => s + (ref[c.key]||0), 0);
   sel("allocnote").textContent = `The ${label(DATA.targets, state.ref)} long-run target is ${refG.toFixed(0)}% growth assets; yours is ${fmtP(m.growth_pct,0)}. Differences over 5 points are marked.`;
   renderDiversification(pf); renderBacktest(pf); renderRisk(pf);
-  renderPlatformControls(pf); renderPlatCompare(pf); renderBoa(pf); updateBaseNote(); renderCheck(pf);
+  renderPlatformControls(pf); renderPlatCompare(pf); renderBoa(pf); updateBaseNote(); renderCheck(pf); renderSwitch();
   updateSaveNote(); saveDraft(); track(); saveSummary(pf);
 }
 // A summary of this portfolio for the Compare page, which sets it beside super fund options.
@@ -586,18 +615,18 @@ function saveSummary(pf){ try { const m = pf.metrics; const bal = pf.balance || 
     holdings: pf.lines.length, at: new Date().toISOString() })); } catch (e) {} }
 function updateSaveNote(){ const local = state.id && String(state.id).startsWith("local-");
   sel("savenote").textContent = state.readOnly ? "Read-only shared portfolio. Sign in and use \"Save as a copy\" to make it yours." : state.id ? (state.dirty ? "Unsaved changes" : (local ? "Saved in this browser" : "Saved to your account")) : (state.lines.length ? "Not saved yet" : ""); }
-function saveDraft(){ try { if (!state.readOnly) localStorage.setItem("mpl-builder-draft", JSON.stringify({ name: state.name, balance: state.balance, ref: state.ref, platform: state.platform, notes: state.notes, lines: state.lines, id: state.id, extra: EXTRA, research: Object.fromEntries(state.lines.filter(l => l.source === "live").map(l => [l.ticker, R[l.ticker]])) })); } catch(e) {} }
+function saveDraft(){ try { if (!state.readOnly) localStorage.setItem("mpl-builder-draft", JSON.stringify({ name: state.name, balance: state.balance, ref: state.ref, platform: state.platform, notes: state.notes, lines: state.lines, current: state.current || null, id: state.id, extra: EXTRA, research: Object.fromEntries(state.lines.filter(l => l.source === "live").map(l => [l.ticker, R[l.ticker]])) })); } catch(e) {} }
 
 // ------------------------------------------------------------ undo and redo
 // Every change made through the page lands in a snapshot; Undo steps back through them and Redo forward again.
 // Typing (names, notes, basis of advice) is grouped so one pause in typing is one step.
 const HIST = { undo: [], redo: [], last: null, max: 150 };
-function snap(){ return JSON.stringify({ name: state.name, balance: state.balance, ref: state.ref, platform: state.platform, notes: state.notes, lines: state.lines.map(({ units, dollars, ...rest }) => rest) }); }
+function snap(){ return JSON.stringify({ name: state.name, balance: state.balance, ref: state.ref, platform: state.platform, notes: state.notes, current: state.current || null, lines: state.lines.map(({ units, dollars, ...rest }) => rest) }); }
 function track(){ if (state.readOnly) { updateUndoButtons(); return; } const s = snap(); if (HIST.last === null) { HIST.last = s; updateUndoButtons(); return; }
   if (s === HIST.last) { updateUndoButtons(); return; } HIST.undo.push(HIST.last); if (HIST.undo.length > HIST.max) HIST.undo.shift(); HIST.redo.length = 0; HIST.last = s; updateUndoButtons(); }
 let trackT; function trackSoon(){ clearTimeout(trackT); trackT = setTimeout(track, 700); }
 function resetHistory(){ HIST.undo.length = 0; HIST.redo.length = 0; HIST.last = snap(); updateUndoButtons(); }
-function restoreSnap(s){ const d = JSON.parse(s); state.name = d.name; state.balance = d.balance; state.ref = d.ref; state.platform = d.platform; state.notes = d.notes || ""; state.lines = d.lines; state.dirty = true;
+function restoreSnap(s){ const d = JSON.parse(s); state.name = d.name; state.balance = d.balance; state.ref = d.ref; state.platform = d.platform; state.notes = d.notes || ""; state.lines = d.lines; state.current = d.current || null; state.dirty = true;
   if (state.ticker && !state.lines.some(l => l.ticker === state.ticker)) state.ticker = null;
   sel("pname").value = state.name; sel("pbal").value = state.balance.toLocaleString("en-AU"); sel("pref").value = state.ref; sel("pnotes").value = state.notes; HIST.last = s; render(); }
 function undo(){ if (state.readOnly) return; clearTimeout(trackT); track(); if (!HIST.undo.length) { toast("Nothing to undo"); return; } HIST.redo.push(snap()); restoreSnap(HIST.undo.pop()); updateUndoButtons(); toast("Undone. Redo puts it back."); }
@@ -811,7 +840,7 @@ function renderDiversification(pf){
 function seriesGrowth(key, bal){ const sr = (DATA.history.series||{})[key]; if (!sr) return null; let v = bal; return sr.map(r => v *= 1 + (r||0)); }
 function renderBacktest(pf){
   const H = DATA.history; const bal = pf.balance; const bt = pf.lines.length ? computeBacktest(pf) : null;
-  if (!bt) { sel("bttiles").innerHTML = ""; sel("btchart").innerHTML = `<div class="muted">Add holdings to see the backtest.</div>`; sel("btlegend").innerHTML = sel("btnote").innerHTML = ""; return; }
+  if (!bt) { sel("bttiles").innerHTML = ""; sel("btchart").innerHTML = `<div class="muted">${pf.lines.length && DATA.lazy && DATA.lazy.history && !DATA.loaded ? "Loading the price history…" : "Add holdings to see the backtest."}</div>`; sel("btlegend").innerHTML = sel("btnote").innerHTML = ""; return; }
   sel("bt-title").textContent = `If ${fmtM(bal)} had been invested ${Math.round(bt.years)} years ago`;
   sel("bttiles").innerHTML = [["Worth today", fmtM(bt.end), `from ${fmtM(bal)} in ${H.months[0]}`], ["Per year", fmtS(bt.cagr*100), "compound annual growth, dividends reinvested, before fees and tax"],
     ["Worst fall", fmtP(bt.mdd*100,0), "largest peak-to-trough drop along the way"], ["Best 12 months", fmtS((bt.best||0)*100), "and worst: " + fmtS((bt.worst||0)*100)],
@@ -861,13 +890,14 @@ function renderResults(q){
   const row = (sym, name, d, cls, extra) => `<div class="result"><div><b>${esc(name)}</b> <span class="mono" style="color:var(--faint);font-size:12px">${esc(sym)}</span><div class="d">${d}</div></div><div>${held.has(sym) ? '<span class="chip neutral">in portfolio</span>' : `<button type="button" class="btn small primary" data-add="${esc(sym)}" data-cls="${cls}" ${extra?`data-type="${esc(extra.type||"")}" data-sector="${esc(extra.sector||"")}"`:""}>Add</button>`}</div></div>`;
   let html = uni.map(u => { const r = R[u.ticker] || {}; return row(u.ticker, u.name, `${label(CLASSES, u.asset_class)}, ${esc(u.sector)}, ${esc(u.region)}, ${u.vehicle}${u.twin ? ", unlisted, " + esc((u.liquidity||"").toLowerCase()) : ""}${u.status === "watchlist" ? ", watchlist" : ""}, yield ${fmtP(r.dividend_yield_pct != null ? r.dividend_yield_pct : u.yield,1)}, cost ${fmtP(u.mer,2)}, 1y ${fmtS(r.return_1y_pct)}, 5y ${fmtS(r.return_5y_pct_pa)} ${qualityChip(u.ticker)} ${consensusChip(r)}`, u.asset_class); }).join("");
   if (ext.length) html += `<div class="result" style="background:var(--surface-2)"><div class="d">Outside the engine's universe: fetched live when added</div></div>` + ext.map(x => row(x.symbol, x.name, `${esc(x.exchange)}, ${esc(x.type)}${x.sector ? ", " + esc(x.sector) : ""}`, guessClass(x.symbol, x.name, x.sector), x)).join("");
-  if (!uni.length && !ext.length && q.length >= 2) html += `<div class="result"><div class="d">No match in the index. <button type="button" class="btn small" id="btn-yahoo">Search the price feed for "${esc(q)}"</button>${/^[A-Za-z0-9]{2,6}$/.test(q) ? ` <button type="button" class="btn small" id="btn-asxlook">Look up ${esc(q.toUpperCase())} on the ASX</button>` : ""}<br><span style="font-size:12px">Listed notes, hybrids and exchange-traded bonds are often only on the ASX: they are priced from it, with their asset class index standing in for history.</span></div></div>`;
+  if (!uni.length && !ext.length && q.length >= 2) html += `<div class="result"><div class="d">No match in the index. <button type="button" class="btn small" id="btn-yahoo">Search the price feed for "${esc(q)}"</button>${/^[A-Za-z0-9]{2,6}$/.test(q) ? ` <button type="button" class="btn small" id="btn-asxlook">Look up ${esc(q.toUpperCase())} on the ASX</button>` : ""}${/^[A-Za-z0-9-]{1,7}\.[A-Za-z]{1,3}$/.test(q) && FN ? ` <button type="button" class="btn small" id="btn-queue">Fetch ${esc(q.toUpperCase())} in the next cloud update</button>` : ""}<br><span style="font-size:12px">Listed notes, hybrids and exchange-traded bonds are often only on the ASX: they are priced from it, with their asset class index standing in for history.</span></div></div>`;
   sel("results").innerHTML = html ? `<div class="results">${html}</div>` : "";
   sel("results").querySelectorAll("button[data-add]").forEach(b => b.onclick = () => addSymbol(b.dataset.add, b.dataset.cls, { type: b.dataset.type, sector: b.dataset.sector }));
   // ASX lookup: five-letter ASX codes are hybrids and notes; GSB codes are Commonwealth bonds.
+  const qb = sel("btn-queue"); if (qb) qb.onclick = () => { queueListing(q.toUpperCase(), ""); qb.disabled = true; toast(q.toUpperCase() + " is queued: the next cloud update (within about three hours) adds it, then search for it again."); };
   const ax = sel("btn-asxlook"); if (ax) ax.onclick = async () => { const code = q.toUpperCase(); if (state.lines.some(l => l.ticker === code + ".AX")) { toast(code + " is already in the portfolio"); return; }
     toast("Looking up " + code + " on the ASX…"); try { pushLine(await fetchAsxLine(code, /^GSB|^GTP|^TIB/.test(code) ? "fixed_income" : code.length === 5 ? "credit" : null)); } catch (e) { toast(e.message); } };
-  const y = sel("btn-yahoo"); if (y) y.onclick = async () => { try { const d = await api("/search?q=" + encodeURIComponent(q)); const rs = d.results || []; if (!rs.length) { toast("Nothing found on the price feed"); return; }
+  const y = sel("btn-yahoo"); if (y) y.onclick = async () => { try { const d = await api("/search?q=" + encodeURIComponent(q)); const rs = d.results || []; if (!rs.length) { toast(d.fallback ? "The main price feed is unavailable and nothing matched in the United States or on the ASX. Try the exact code, for example ASML.AS." : "Nothing found on the price feed"); return; }
       sel("results").innerHTML = `<div class="results">` + rs.map(x => row(x.symbol, x.name, `${esc(x.exchange)}, ${esc(x.type)}`, guessClass(x.symbol, x.name, ""), x)).join("") + `</div>`;
       sel("results").querySelectorAll("button[data-add]").forEach(b => b.onclick = () => addSymbol(b.dataset.add, b.dataset.cls, { type: b.dataset.type })); } catch(e) { toast(e.message); } };
 }
@@ -998,7 +1028,8 @@ const IMP_HEAD = { code: /^(asx\s*)?(code|ticker|symbol|security code|stock code
   w: /(alloc|weight|target %|proportion|model\s*%|% of (portfolio|total)|portfolio %|^%$|^% ?alloc)/i, v: /(market value|^value|amount|balance|\$ ?value|allocation \$|\$$)/i,
   u: /^(units|quantity|qty|no\.? of (units|shares)|shares held|holding units)$/i, cls: /(asset class|^class$|category)/i,
   sleeve: /(sleeve|^sector|segment|theme|^role)/i, veh: /^(type|vehicle|structure|security type|instrument|investment type)$/i,
-  yld: /yield/i, mer: /\b(mer|icr|management (fee|cost)|fees? %|expense)\b/i };
+  yld: /yield/i, mer: /\b(mer|icr|management (fee|cost)|fees? %|expense)\b/i,
+  cost: /^(cost base|cost|total cost|book cost|book value|purchase (value|cost)|acquisition cost|cost \$)$/i, ucost: /(average|avg|unit) (cost|price)|cost per (unit|share)|purchase price/i };
 // Every block of holdings on a sheet: one per Code column in the header row, running from just after the previous block's
 // headers to the next block. Each block reads its own columns, section headings, label (text above the header) and FUM.
 function findBlocks(rows){
@@ -1009,7 +1040,7 @@ function findBlocks(rows){
     return codes.map((c, k) => { const lo = los[k], hi = k + 1 < codes.length ? los[k + 1] - 1 : width - 1;
       const f = (re, not) => { for (let j = lo; j <= hi; j++) if (j !== c && re.test(r[j]) && !(not && not.test(r[j]))) return j; return -1; };
       const b = { header: i, lo, hi, code: c, name: f(IMP_HEAD.name), w: f(IMP_HEAD.w, /\$|price|income|yield|growth|return|tsr/i), v: (() => { const strong = f(/(market value|^value|current value|holding value|allocation \$|amount|balance)/i, /%|income|mer|fee|price|cost|unit|target|nav/i); return strong >= 0 ? strong : f(IMP_HEAD.v, /%|income|mer|fee|price|cost|unit|target|nav|cap/i); })(), u: f(IMP_HEAD.u), cls: f(IMP_HEAD.cls),
-        sleeve: f(IMP_HEAD.sleeve), veh: f(IMP_HEAD.veh), yld: f(IMP_HEAD.yld, /\$|income/i), mer: f(IMP_HEAD.mer, /\$/), label: "", fum: null };
+        sleeve: f(IMP_HEAD.sleeve), veh: f(IMP_HEAD.veh), yld: f(IMP_HEAD.yld, /\$|income/i), mer: f(IMP_HEAD.mer, /\$/), cost: f(IMP_HEAD.cost), ucost: f(IMP_HEAD.ucost), label: "", fum: null };
       const words = []; let last = -1;
       for (let y = 0; y < i; y++) { const row = rows[y] || []; for (let j = lo; j <= hi; j++) if (row[j] != null && row[j] !== "") last = y; }
       if (last >= 0) { const t = []; for (let j = lo; j <= hi; j++) { const v = (rows[last] || [])[j]; if (v != null && v !== "" && cellNum(v) == null) t.push(String(v).trim()); }
@@ -1044,7 +1075,8 @@ function parseBlock(rows, b){
     const name = b.name >= 0 ? String(r[b.name] ?? "").trim() : ""; const sleeve = b.sleeve >= 0 ? String(r[b.sleeve] ?? "").trim() : "";
     let cls = b.cls >= 0 ? classFromText(r[b.cls]) : null;
     if (!cls) cls = section === "defensive" ? (defensiveClass(sleeve) || defensiveClass(name)) : (section || defensiveClass(sleeve));
-    items.push({ raw, n, name, sleeve, w: nums[0], v: nums[1], u: nums[2], cls, yld: b.yld >= 0 ? cellNum(r[b.yld]) : null, mer: b.mer >= 0 ? cellNum(r[b.mer]) : null, veh: b.veh >= 0 ? String(r[b.veh] ?? "").trim() : "" }); }
+    const cost = b.cost >= 0 ? cellNum(r[b.cost]) : (b.ucost >= 0 && nums[2] != null && cellNum(r[b.ucost]) != null ? cellNum(r[b.ucost]) * nums[2] : null);
+    items.push({ raw, n, name, sleeve, w: nums[0], v: nums[1], u: nums[2], cost, cls, yld: b.yld >= 0 ? cellNum(r[b.yld]) : null, mer: b.mer >= 0 ? cellNum(r[b.mer]) : null, veh: b.veh >= 0 ? String(r[b.veh] ?? "").trim() : "" }); }
   // Yields and fees written as fractions (0.0535) become percentages; a whole column is one or the other.
   // A fee column of fractions tops out near 0.03 (3%) and a yield column near 0.2 (20%); in percentage points they are larger.
   for (const [k, lim] of [["yld", 0.2], ["mer", 0.03]]) { const vals = items.map(it => it[k]).filter(v => v != null && v !== 0); if (vals.length && Math.max(...vals.map(Math.abs)) <= lim) items.forEach(it => { if (it[k] != null) it[k] = +(it[k] * 100).toFixed(4); }); }
@@ -1097,7 +1129,8 @@ async function resolveItem(it){
   try { return { line: await fetchLiveLine(sym, it.cls, m ? m.meta : null), how: "live" }; } catch (e) { /* no history: try the ASX, then keep the sheet's figures */ }
   if (n.exch === ".AX" || n.exch === ".XA" || (n.exch == null && /^[A-Z0-9]{2,6}$/.test(n.code))) {
     try { return { line: await fetchAsxLine(n.code, it.cls, { name: it.name, mer: it.mer, yld: it.yld, sleeve: it.sleeve, veh: it.veh }), how: "asx" }; } catch (e) { /* not on the ASX either */ } }
-  return { line: manualLine(it, "listed"), how: "sheet" }; }
+  const ml = manualLine(it, "listed"); if (n.exch !== ".AX" && n.exch !== ".XA") queueListing(ml.ticker, it.name);
+  return { line: ml, how: "sheet" }; }
 function readSheet(name){ return XLSX.utils.sheet_to_json(IMP.wb.Sheets[name], { header: 1, raw: true, blankrows: true, defval: null }); }
 sel("impfile").onchange = async () => { const f = sel("impfile").files[0]; if (!f) return; if (typeof XLSX === "undefined") { toast("The spreadsheet library did not load"); return; }
   try { IMP.wb = XLSX.read(await f.arrayBuffer(), { type: "array" }); IMP.file = f.name.replace(/\.[^.]+$/, ""); } catch (e) { toast("Could not read that file: " + e.message); return; }
@@ -1116,14 +1149,15 @@ sel("impfile").onchange = async () => { const f = sel("impfile").files[0]; if (!
 sel("btn-import").onclick = async () => { if (!IMP.wb) return; const opt = IMP.opts.find(o => o.key === sel("impsheet").value); if (!opt) return;
   const rows = readSheet(opt.sheet); const b = opt.block; const p = parseBlock(rows, b);
   if (!p.items.length) { sel("impnote").textContent = "No holdings found in that portfolio."; return; }
-  if (state.lines.length && !confirm(`Replace the current ${state.lines.length} holdings with the ${p.items.length} rows from "${opt.text}"? Undo will bring them back.`)) return;
+  const intoCurrent = sel("impinto").value === "current";
+  if (!intoCurrent && state.lines.length && !confirm(`Replace the current ${state.lines.length} holdings with the ${p.items.length} rows from "${opt.text}"? Undo will bring them back.`)) return;
   sel("btn-import").disabled = true; sel("impnote").textContent = "Importing…";
   const lines = [], how = { universe: [], live: [], asx: [], sheet: [] }; const seen = new Set(); const dupes = [];
   for (const it of p.items) { const { line: l, how: h } = await resolveItem(it);
     if (seen.has(l.ticker)) { dupes.push(it.raw); const prev = lines.find(x => x.ticker === l.ticker); if (prev) { prev._w = (prev._w || 0) + (it.w || 0); prev._v = (prev._v || 0) + (it.v || 0); } continue; } seen.add(l.ticker);
     if (it.cls && CLASSES.some(c => c.key === it.cls) && l.vehicle !== "cash") l.asset_class = it.cls;
     if (it.sleeve) l.sleeve = it.sleeve; if (!l.name || l.name === l.ticker) l.name = it.name || l.name;
-    l._w = it.w; l._v = it.v; l._u = it.u; lines.push(l); how[h].push(it.raw); }
+    l._w = it.w; l._v = it.v; l._u = it.u; l._c = it.cost; lines.push(l); how[h].push(it.raw); }
   // Weights: the weight column if there is one (fractions become percentages), otherwise dollar values, otherwise units at today's prices.
   const has = k => lines.filter(l => l[k] != null).length >= Math.max(1, lines.length * 0.6); let basis = "";
   if (has("_w")) { const sum = lines.reduce((s, l) => s + (l._w || 0), 0); const k = sum > 0 && sum <= 1.5 ? 100 : 1; lines.forEach(l => l.weight_pct = +((l._w || 0) * k).toFixed(3)); basis = "the sheet's weights"; }
@@ -1131,7 +1165,16 @@ sel("btn-import").onclick = async () => { if (!IMP.wb) return; const opt = IMP.o
     lines.forEach(l => l.weight_pct = sum ? +(val(l) / sum * 100).toFixed(3) : 0); basis = has("_v") ? "the sheet's dollar values" : "units at today's prices";
     if (sum > 1000 && !b.fum) { state.balance = Math.round(sum); sel("pbal").value = state.balance.toLocaleString("en-AU"); } }
   if (b.fum) { state.balance = Math.round(b.fum); sel("pbal").value = state.balance.toLocaleString("en-AU"); }
-  lines.forEach(l => { delete l._w; delete l._v; delete l._u; });
+  if (intoCurrent) {
+    // The client's current holdings: units where the sheet has them, otherwise dollar values, otherwise weights of the sheet's balance.
+    const bal = b.fum || state.balance; const curr = lines.map(l => ({ ...l, units: l._u != null ? l._u : null, value: l._v != null ? l._v : (l._u != null && l.price_aud ? l._u * l.price_aud : (l.weight_pct || 0) / 100 * bal), cost: l._c != null ? l._c : null }));
+    curr.forEach(l => { delete l._w; delete l._v; delete l._u; delete l._c; });
+    state.current = { name: [IMP.file, b.label].filter(Boolean).join(", ") || "Current holdings", keep: [], lines: curr };
+    const total = curr.reduce((s, c) => s + curValue(c), 0); if (total > 1000) { state.balance = Math.round(total); sel("pbal").value = state.balance.toLocaleString("en-AU"); }
+    state.dirty = true; render(); sel("btn-import").disabled = false;
+    sel("impnote").innerHTML = `Imported ${curr.length} current holdings worth ${fmtM(total)} at today's prices${curr.some(c => c.cost != null) ? ", with cost bases" : " (no cost base column, so capital gains are not estimated)"}. ${state.lines.length ? "The switch plan below moves them to the portfolio on this page." : "Now load or build the target portfolio; the switch plan appears below it."}${how.sheet.length ? ` Kept at the sheet's figures: ${how.sheet.map(x => esc(x)).join(", ")}.` : ""}`;
+    setTimeout(() => sel(state.lines.length ? "switch-section" : "setup").scrollIntoView({ behavior: "smooth", block: "start" }), 300); toast("Current holdings imported. Undo goes back."); return; }
+  lines.forEach(l => { delete l._w; delete l._v; delete l._u; delete l._c; });
   state.lines = lines; state.ticker = null; state.dirty = true;
   // The label decides the comparison target when it names a profile and a stage ("Balanced ... Pension").
   const lab = (b.label || "") + " " + opt.sheet; const prof = [...(DATA.profiles || [])].sort((x, y) => y.label.length - x.label.length).find(x => new RegExp("\\b" + x.label.replace(/ /g, "\\s*") + "\\b", "i").test(lab));
@@ -1142,7 +1185,7 @@ sel("btn-import").onclick = async () => { if (!IMP.wb) return; const opt = IMP.o
   const parts = [`Imported ${lines.length} holding${lines.length === 1 ? "" : "s"} from "${esc(opt.text.replace(/ \(\d+ holdings.*$/, ""))}", weighted by ${basis}${b.fum ? `, at the sheet's balance of ${fmtM(b.fum)}` : ""}.`];
   if (how.live.length) parts.push(`${how.live.length} fetched from the price feed (${list(how.live)}).`);
   if (how.asx.length) parts.push(`<b>${how.asx.length} priced from the ASX</b> because the price feed has no history for them (${list(how.asx)}); their asset class index stands in for risk and history.`);
-  if (how.sheet.length) parts.push(`<b>${how.sheet.length} kept at the sheet's own figures</b> because no price feed carries them (${list(how.sheet)}): weight, yield and fee from the sheet, no units or history.`);
+  if (how.sheet.length) parts.push(`<b>${how.sheet.length} kept at the sheet's own figures</b> because no price feed carries them right now (${list(how.sheet)}): weight, yield and fee from the sheet, no units or history.${QUEUED.size ? " Listed ones are queued for the next cloud update (within about three hours); import again after it to price them." : ""}`);
   if (p.unread.length) parts.push(`<b>Not read as codes: ${list(p.unread)}</b>. Add them by searching below.`);
   if (p.noweight.length) parts.push(`Skipped because they have no weight, value or units: ${list(p.noweight)}.`);
   if (dupes.length) parts.push(`Listed twice and combined: ${list(dupes)}.`);
@@ -1150,6 +1193,128 @@ sel("btn-import").onclick = async () => { if (!IMP.wb) return; const opt = IMP.o
   parts.push("Prices are today's.");
   sel("impnote").innerHTML = parts.join(" ");
   toast(`Imported ${lines.length} holdings. Undo goes back.`); };
+
+// ------------------------------------------------------------ switch plan: from the client's current holdings to this portfolio
+// The client's current holdings (imported, or the holdings on the page set aside) are valued at today's prices; the
+// target is the portfolio on the page at the same total value, plus any new money. Trades smaller than the tolerance are
+// left alone to save brokerage, holdings the adviser marks "keep" are not sold, listed trades are whole units, and the
+// rounding is left in cash. Capital gains use the cost base from the import where there is one.
+const SW = { tol_pct: 0.5, min_trade: 500, add: 0, tax: "super", rate: 32, long: true };
+function curValue(c){ return c.units != null && c.price_aud ? c.units * c.price_aud : (c.value || 0); }
+function computeFor(lines, bal){ const save = { lines: state.lines, balance: state.balance };
+  state.lines = lines.map(l => ({ ...l })); state.balance = Math.max(bal, 1000); try { return compute(); } finally { state.lines = save.lines; state.balance = save.balance; } }
+function tradeCost(listed, amount, pc, T){ if (!listed || !amount) return 0; const b = pc && pc.brokerage;
+  if (b && b.rate != null) return Math.min(b.max == null ? Infinity : +b.max, Math.max(+b.min || 0, amount * b.rate)); return +(T.brokerage || 0); }
+function switchPlan(){
+  const cur = state.current; if (!cur || !cur.lines || !cur.lines.length || !state.lines.length) return null;
+  const keep = new Set(cur.keep || []); const add = +SW.add || 0;
+  const curLines = cur.lines.map(c => ({ ...c, value: curValue(c) }));
+  const curTotal = curLines.reduce((s, c) => s + c.value, 0); const total = curTotal + add;
+  const kept = curLines.filter(c => keep.has(c.ticker)); const keptValue = kept.reduce((s, c) => s + c.value, 0);
+  const pf = computeFor(state.lines, total); const pc = pf.metrics.platform; const T = DATA.tiers.find(t => t.key === pf.tier) || {};
+  const tgtTotalW = pf.lines.filter(l => !keep.has(l.ticker)).reduce((s, l) => s + (l.weight_pct || 0), 0) || 100;
+  const investable = Math.max(0, total - keptValue);
+  const tickers = [...new Set([...curLines.map(c => c.ticker), ...pf.lines.map(l => l.ticker)])];
+  const tol = Math.max(+SW.min_trade || 0, (+SW.tol_pct || 0) / 100 * total);
+  const rows = tickers.map(t => {
+    const c = curLines.find(x => x.ticker === t), l = pf.lines.find(x => x.ticker === t); const ref = l || c;
+    const curV = c ? c.value : 0; const isKeep = keep.has(t);
+    const tgtV = isKeep ? curV : (l ? (l.weight_pct || 0) / tgtTotalW * investable : 0);
+    let trade = tgtV - curV; const price = (l && l.price_aud) || (c && c.price_aud) || null; const listed = isListed(ref) && !!price;
+    let action;
+    if (isKeep) { trade = 0; action = "Keep"; }
+    else if (curV > 0 && tgtV > 0 && Math.abs(trade) < tol) { trade = 0; action = "Hold"; }
+    else action = curV > 0 && tgtV === 0 ? "Sell all" : trade < 0 ? "Sell part" : curV === 0 ? "Buy" : "Top up";
+    let units = null;
+    if (trade && listed) { units = action === "Sell all" ? (c && c.units != null ? -c.units : -Math.round(curV / price)) : Math.trunc(trade / price); trade = units * price; if (!units) { action = "Hold"; trade = 0; } }
+    const sellFrac = trade < 0 && curV > 0 ? Math.min(1, -trade / curV) : 0;
+    const costBase = c && c.cost != null ? c.cost : null;
+    const gain = sellFrac && costBase != null ? -trade - costBase * sellFrac : null;
+    return { ticker: t, name: ref.name, cls: ref.asset_class, line: l || c, current: curV, target: tgtV, trade, units, price, listed, action, inModel: !!l,
+      brokerage: tradeCost(listed, Math.abs(trade), pc, T), gain, hasCost: costBase != null, final: curV + trade };
+  });
+  // The cash account settles everything else: sale proceeds, new money, brokerage, whole-unit rounding, and the difference
+  // left by holdings that are held or kept. When holds and brokerage would overdraw it, the buys are trimmed pro rata.
+  let cashRow = rows.find(r => r.line && r.line.vehicle === "cash" && r.inModel) || rows.find(r => r.line && r.line.vehicle === "cash");
+  if (!cashRow) { const u = UMAP.CMA || U.find(x => x.vehicle === "cash"); if (u) { const l = lineFromUniverse(u); cashRow = { ticker: l.ticker, name: l.name, cls: "cash", line: l, current: 0, target: 0, trade: 0, units: null, price: 1, listed: false, action: "Hold", inModel: false, brokerage: 0, gain: null, hasCost: false, final: 0 }; rows.push(cashRow); } }
+  const others = rows.filter(r => r !== cashRow);
+  const residual = () => total - others.reduce((s, r) => s + r.final, 0) - others.reduce((s, r) => s + r.brokerage, 0);
+  let trimmed = 0, buys0 = [], B = 0;
+  if (cashRow && residual() < 0) {
+    buys0 = others.filter(r => r.trade > 0); B = buys0.reduce((s, r) => s + r.trade, 0);
+    if (B > 0) { const f = Math.max(0, (B + residual()) / B); trimmed = (1 - f) * 100;
+      buys0.forEach(r => { let t = r.trade * f; if (r.listed && r.price) { r.units = Math.trunc(t / r.price); t = r.units * r.price; if (!r.units) r.units = null; }
+        r.trade = t; r.final = r.current + t; r.brokerage = tradeCost(r.listed, t, pc, T); if (!t) r.action = r.current > 0 ? "Hold" : "Not bought"; }); } }
+  // Whole units leave cash over: spend it a unit at a time on the buys furthest below their target, down to the model's own cash.
+  if (cashRow) { const floor = cashRow.inModel ? cashRow.target : 0; const cand = others.filter(r => r.listed && r.price && !keep.has(r.ticker) && ["Buy", "Top up", "Not bought"].includes(r.action));
+    for (let n = 0; n < 2000 && cand.length; n++) { cand.sort((a, b) => (b.target - b.final) - (a.target - a.final)); const r = cand[0];
+      if (r.target - r.final < r.price / 2) break;
+      const t = r.trade + r.price, br = tradeCost(true, t, pc, T);
+      if (residual() - r.price - (br - r.brokerage) < floor) { cand.shift(); continue; }
+      r.units = (r.units || 0) + 1; r.trade = t; r.final = r.current + t; r.brokerage = br; if (r.action === "Not bought") r.action = r.current > 0 ? "Top up" : "Buy"; }
+    if (trimmed && B) trimmed = Math.max(0, (1 - buys0.reduce((s, r) => s + Math.max(0, r.trade), 0) / B) * 100); }
+  if (cashRow) { cashRow.final = Math.max(0, residual()); cashRow.trade = cashRow.final - cashRow.current; cashRow.brokerage = 0;
+    cashRow.action = Math.abs(cashRow.trade) < 1 ? "Hold" : cashRow.trade > 0 ? "Cash in" : "Cash out";
+    cashRow.note = `settles the sales, buys, new money and brokerage${cashRow.inModel ? `; the model holds ${fmtM(cashRow.target)}` : ""}`; }
+  const sells = rows.filter(r => r.trade < 0 && r.line && r.line.vehicle !== "cash"), buys = rows.filter(r => r.trade > 0 && r.line && r.line.vehicle !== "cash");
+  const turnover = (sells.reduce((s, r) => s - r.trade, 0) + buys.reduce((s, r) => s + r.trade, 0)) / 2 / Math.max(total, 1) * 100;
+  const brokerage = rows.reduce((s, r) => s + r.brokerage, 0);
+  const gains = rows.filter(r => r.gain != null); const netGain = gains.reduce((s, r) => s + r.gain, 0);
+  const rate = SW.tax === "pension" ? 0 : SW.tax === "super" ? 15 : (+SW.rate || 0); const discount = SW.long ? (SW.tax === "super" ? 1 / 3 : SW.tax === "pension" ? 0 : 0.5) : 0;
+  const tax = netGain > 0 ? netGain * (1 - discount) * rate / 100 : 0;
+  const uncosted = sells.filter(r => !r.hasCost && r.line && r.line.vehicle !== "cash").length;
+  // Before and after, on the same measures as the rest of the page.
+  const before = computeFor(curLines.map(c => ({ ...c, weight_pct: c.value / Math.max(curTotal, 1) * 100 })), curTotal);
+  const totalAfter = rows.reduce((s, r) => s + r.final, 0);
+  const afterLines = rows.filter(r => r.final > 0.5).map(r => ({ ...r.line, weight_pct: r.final / Math.max(totalAfter, 1) * 100 }));
+  const after = computeFor(afterLines, totalAfter);
+  return { rows: rows.sort((a, b) => ({ "Sell all": 0, "Sell part": 1, "Buy": 2, "Top up": 3, "Hold": 4, "Keep": 5, "Not bought": 5, "Cash in": 6, "Cash out": 6 }[a.action] - ({ "Sell all": 0, "Sell part": 1, "Buy": 2, "Top up": 3, "Hold": 4, "Keep": 5, "Not bought": 5, "Cash in": 6, "Cash out": 6 }[b.action])) || Math.abs(b.trade) - Math.abs(a.trade)),
+    total, totalAfter, trimmed, curTotal, add, turnover, brokerage, trades: rows.filter(r => r.trade && r.line && r.line.vehicle !== "cash").length, netGain, tax, rate, discount, uncosted, hasCosts: gains.length > 0, before: before.metrics, after: after.metrics }; }
+function renderSwitch(){
+  const box = sel("switch-section"); const cur = state.current; box.hidden = !(cur && cur.lines && cur.lines.length);
+  if (box.hidden) return; const P = switchPlan();
+  sel("sw-head").textContent = `${cur.name || "The client's current holdings"}: ${cur.lines.length} holdings worth ${fmtM(P ? P.curTotal : 0)} at today's prices, moving to "${state.name || "the portfolio on this page"}".`;
+  if (!P) { sel("sw-rows").innerHTML = ""; sel("sw-tiles").innerHTML = `<div class="muted">Add holdings to the portfolio on this page to see the switch.</div>`; return; }
+  const b = P.before, a = P.after; const d = (x, y, f, lowerIsBetter) => { if (x == null || y == null) return ""; const g = lowerIsBetter === null ? 0 : (y - x) * (lowerIsBetter ? -1 : 1);   // null: a change that is neither good nor bad
+    return `<span class="${g > 0 ? "pos" : g < 0 ? "neg" : ""}" style="font-size:12px"> (${y - x >= 0 ? "+" : "−"}${f(Math.abs(y - x))})</span>`; };
+  const fees = m => m.investment_fees_per_year + m.platform_admin_fee_per_year;
+  sel("sw-tiles").innerHTML = [
+    ["Trades", `${P.trades}`, `${fmtP(P.turnover, 0)} of the portfolio changes hands`],
+    ["Brokerage", fmtM(P.brokerage), `${(P.brokerage / Math.max(P.total, 1) * 100).toFixed(2)}% of the balance, one-off`],
+    ["Capital gains", P.hasCosts ? fmtM(P.netGain) : "–", P.hasCosts ? `about ${fmtM(P.tax)} tax at ${P.rate}%${P.discount ? ` after the ${Math.round(P.discount * 100) === 33 ? "one-third" : Math.round(P.discount * 100) + "%"} discount` : ""}${P.uncosted ? `; ${P.uncosted} sale${P.uncosted === 1 ? "" : "s"} without a cost base` : ""}` : "add a cost base column to the import to estimate them"],
+    ["Income a year", fmtM(a.income_per_year) + d(b.income_per_year, a.income_per_year, fmtM), `was ${fmtM(b.income_per_year)}; franking credits ${fmtM(b.franking_credits_per_year)} to ${fmtM(a.franking_credits_per_year)}`],
+    ["Fees a year", fmtM(fees(a)) + d(fees(b), fees(a), fmtM, true), `was ${fmtM(fees(b))} (${fmtP(b.total_ongoing_cost_pct, 2)} to ${fmtP(a.total_ongoing_cost_pct, 2)} all in)`],
+    ["Growth assets", fmtP(a.growth_pct, 0) + d(b.growth_pct, a.growth_pct, x => x.toFixed(0) + " pts", null), `was ${fmtP(b.growth_pct, 0)}; a typical year moved ±${fmtP(b.realised_volatility_pct, 0)} to ±${fmtP(a.realised_volatility_pct, 0)}`],
+  ].map(([k, v, s]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
+  const keep = new Set(state.current.keep || []);
+  sel("sw-rows").innerHTML = P.rows.map(r => `<tr><td><b>${esc(r.name)}</b><br><span class="mono" style="font-size:11.5px;color:var(--faint)">${esc(r.ticker)}${r.inModel ? "" : ", not in the target"}</span>${r.note ? `<br><span class="sleeve">${esc(r.note)}</span>` : ""}</td>
+      <td><span class="chip ${/Sell/.test(r.action) ? "bad" : /Buy|Top/.test(r.action) ? "good" : "neutral"}">${r.action}</span></td>
+      <td class="num">${fmtM(r.current)}</td><td class="num">${fmtM(r.target)}</td><td class="num ${r.trade < 0 ? "neg" : r.trade > 0 ? "pos" : ""}">${r.trade ? (r.trade > 0 ? "+" : "−") + fmtM(Math.abs(r.trade)) : "–"}</td>
+      <td class="num">${r.units ? (r.units > 0 ? "+" : "−") + Math.abs(r.units).toLocaleString("en-AU") : "–"}</td><td class="num">${r.brokerage ? fmtM(r.brokerage) : "–"}</td>
+      <td class="num">${r.gain == null ? (r.trade < 0 && r.line && r.line.vehicle !== "cash" ? '<span class="muted">no cost base</span>' : "–") : (r.gain >= 0 ? "" : "−") + fmtM(Math.abs(r.gain))}</td>
+      <td class="no-print">${r.line && r.line.vehicle !== "cash" && r.current > 0 && !state.readOnly ? `<label style="font-size:12px;white-space:nowrap"><input type="checkbox" data-keep="${esc(r.ticker)}" ${keep.has(r.ticker) ? "checked" : ""}> keep</label>` : ""}</td></tr>`).join("");
+  sel("sw-rows").querySelectorAll("input[data-keep]").forEach(i => i.onchange = () => { const k = new Set(state.current.keep || []); i.checked ? k.add(i.dataset.keep) : k.delete(i.dataset.keep); state.current.keep = [...k]; state.dirty = true; render(); });
+  sel("sw-note").textContent = `${P.trimmed > 0.05 ? `Buys are ${fmtP(P.trimmed, 1)} smaller than the target so the cash account is not overdrawn by the holdings left alone and the brokerage; lower the tolerance or untick "keep" to get closer to the target. ` : ""}Trades under ${fmtM(Math.max(+SW.min_trade || 0, (+SW.tol_pct || 0) / 100 * P.total))} are left alone. Listed trades are whole units at today's prices; unlisted funds and term deposits trade in dollars. Sells settle before buys. Capital gains are estimates from the cost base in the import (pro rata, not by parcel) and ignore carried-forward losses; check them against the platform's tax report before acting.`; }
+function setCurrentFrom(lines, name){ state.current = { name: name || "Current holdings", keep: [], lines: lines.map(l => ({ ...l, units: l.units != null ? l.units : null, value: l.value != null ? l.value : l.dollars || 0 })) }; state.dirty = true; }
+function switchExcel(){ const P = switchPlan(); if (!P) { toast("Nothing to export yet"); return; } if (typeof XLSX === "undefined") { toast("The spreadsheet library did not load"); return; }
+  const wb = XLSX.utils.book_new(); const b = P.before, a = P.after;
+  const sum = [["Switch plan", state.name || ""], ["From", state.current.name || "Current holdings"], ["Prices as of", DATA.as_of], ["Current value", P.curTotal], ["New money", P.add], ["Total after brokerage", P.totalAfter], ["Buys trimmed to keep cash positive", P.trimmed / 100],
+    ["Trades", P.trades], ["Turnover", P.turnover / 100], ["Brokerage", P.brokerage], ["Net capital gain (estimate)", P.hasCosts ? P.netGain : "no cost base supplied"], ["Tax on it (estimate)", P.hasCosts ? P.tax : ""], ["Tax rate used", P.rate / 100], [],
+    ["", "Before", "After"], ["Income a year", b.income_per_year, a.income_per_year], ["Franking credits a year", b.franking_credits_per_year, a.franking_credits_per_year], ["Fund fees a year", b.investment_fees_per_year, a.investment_fees_per_year],
+    ["Platform fees a year", b.platform_admin_fee_per_year, a.platform_admin_fee_per_year], ["Total ongoing cost %", b.total_ongoing_cost_pct / 100, a.total_ongoing_cost_pct / 100], ["Growth assets %", b.growth_pct / 100, a.growth_pct / 100], ["Realised volatility (1y)", (b.realised_volatility_pct || 0) / 100, (a.realised_volatility_pct || 0) / 100], [],
+    ["Estimates only. Capital gains are pro rata to the cost base supplied, not by parcel; check against the platform's tax report. Not advice."]];
+  const ws1 = XLSX.utils.aoa_to_sheet(sum); ws1["!cols"] = [{ wch: 32 }, { wch: 18 }, { wch: 18 }]; XLSX.utils.book_append_sheet(wb, ws1, "Summary");
+  const rows = [["Order", "Code", "Holding", "Asset class", "Action", "Current $", "Target $", "Trade $", "Units", "Price (AUD)", "Brokerage", "Capital gain (est.)", "In the target"]]
+    .concat(P.rows.map((r, i) => [i + 1, r.ticker, r.name, label(CLASSES, r.cls), r.action, Math.round(r.current), Math.round(r.target), Math.round(r.trade), r.units, r.price, Math.round(r.brokerage), r.gain == null ? null : Math.round(r.gain), r.inModel ? "yes" : "no"]));
+  const ws2 = XLSX.utils.aoa_to_sheet(rows); ws2["!cols"] = [{ wch: 6 }, { wch: 11 }, { wch: 34 }, { wch: 22 }, { wch: 10 }, { wch: 12 }, { wch: 12 }, { wch: 12 }, { wch: 9 }, { wch: 11 }, { wch: 10 }, { wch: 16 }, { wch: 12 }]; XLSX.utils.book_append_sheet(wb, ws2, "Trades");
+  XLSX.writeFile(wb, `switch_plan_${(state.name || "portfolio").replace(/[^a-z0-9]+/gi, "_").toLowerCase()}.xlsx`); toast("Switch plan downloaded"); }
+sel("sw-tol").oninput = sel("sw-min").oninput = sel("sw-add").oninput = sel("sw-tax").onchange = sel("sw-rate").oninput = sel("sw-long").onchange = () => {
+  SW.tol_pct = parseFloat(sel("sw-tol").value) || 0; SW.min_trade = parseFloat(String(sel("sw-min").value).replace(/[^0-9.]/g, "")) || 0; SW.add = parseFloat(String(sel("sw-add").value).replace(/[^0-9.-]/g, "")) || 0;
+  SW.tax = sel("sw-tax").value; SW.rate = parseFloat(sel("sw-rate").value) || 0; SW.long = sel("sw-long").checked; sel("sw-rate-wrap").hidden = SW.tax !== "personal"; renderSwitch(); };
+sel("btn-sw-xlsx").onclick = switchExcel;
+sel("btn-sw-clear").onclick = () => { state.current = null; state.dirty = true; render(); toast("Current holdings cleared. Undo brings them back."); };
+sel("btn-sw-set").onclick = () => { if (!state.lines.length) { toast("Nothing on the page to set aside"); return; } const pf = compute();
+  setCurrentFrom(pf.lines.map(l => ({ ...l, value: l.dollars })), state.name || "Current holdings"); render(); toast("The holdings on the page are now the client's current holdings. Load or build the target portfolio next."); };
 
 // ------------------------------------------------------------ portfolio check (rules)
 const SEV_ORDER = { high: 0, medium: 1, low: 2 };
@@ -1273,9 +1438,9 @@ sel("btn-ai").onclick = async () => { if (AI.running) return; if (!SB) { toast("
 
 // ------------------------------------------------------------ accounts (Supabase)
 const SB = (DATA.supabase && DATA.supabase.url && DATA.supabase.key && window.supabase) ? window.supabase.createClient(DATA.supabase.url, DATA.supabase.key) : null;
-function serialise(){ return { version: 2, ai_review: AI.result && !AI.result.error ? { ...AI.result, at: AI.at } : null, name: state.name, balance: state.balance, ref: state.ref, platform: state.platform, notes: state.notes, lines: state.lines.map(l => ({ ...l, boa: boaText(l) })), house_style: HS.text || "", extra: Object.fromEntries(state.lines.filter(l => EXTRA[l.ticker]).map(l => [l.ticker, EXTRA[l.ticker]])), research: Object.fromEntries(state.lines.filter(l => l.source === "live" && R[l.ticker]).map(l => [l.ticker, R[l.ticker]])), saved_as_of: DATA.as_of }; }
+function serialise(){ return { version: 2, ai_review: AI.result && !AI.result.error ? { ...AI.result, at: AI.at } : null, name: state.name, balance: state.balance, ref: state.ref, platform: state.platform, notes: state.notes, lines: state.lines.map(l => ({ ...l, boa: boaText(l) })), house_style: HS.text || "", current: state.current || null, extra: Object.fromEntries(state.lines.filter(l => EXTRA[l.ticker]).map(l => [l.ticker, EXTRA[l.ticker]])), research: Object.fromEntries(state.lines.filter(l => l.source === "live" && R[l.ticker]).map(l => [l.ticker, R[l.ticker]])), saved_as_of: DATA.as_of }; }
 function hydrate(d, { readOnly=false, id=null, ownerId=null, isPublic=false } = {}){
-  Object.assign(EXTRA, d.extra || {}); Object.assign(R, d.research || {}); if (d.house_style) { HS.text = d.house_style; if (sel("hs-examples")) sel("hs-examples").value = HS.text; }
+  Object.assign(EXTRA, d.extra || {}); Object.assign(R, d.research || {}); if (d.house_style) { HS.text = d.house_style; if (sel("hs-examples")) sel("hs-examples").value = HS.text; } state.current = d.current || null;
   state.lines = (d.lines || []).map(l => { const u = UMAP[l.ticker]; if (u && l.source !== "live") { const f = lineFromUniverse(u); f.weight_pct = l.weight_pct; f.asset_class = l.asset_class || f.asset_class; f.boa = l.boa || ""; f.boa_custom = !!l.boa_custom; f.boa_ai = !!l.boa_ai; f.sleeve = l.sleeve || ""; return f; } return { boa: "", boa_custom: false, ...l }; });
   state.name = d.name || ""; state.balance = d.balance || 250000; state.ref = d.ref || "balanced"; state.id = id; state.readOnly = readOnly; state.ownerId = ownerId; state.isPublic = isPublic; state.dirty = false; state.ticker = null;
   state.platform = { ...DEFAULT_PLATFORM(), ...(d.platform || {}) }; state.notes = d.notes || ""; AI.result = d.ai_review || null; AI.at = d.ai_review ? d.ai_review.at : null; renderAI();
@@ -1428,6 +1593,7 @@ renderFilters();
   try { const d = JSON.parse(localStorage.getItem("mpl-builder-draft") || "null"); if (d && d.lines && d.lines.length) { hydrate(d, { id: d.id || null, ownerId: isLocalId(d.id) ? "local" : (user.session ? user.session.user.id : null) }); state.dirty = !!d.id; updateSaveNote(); resetHistory(); toast("Restored your last draft from this browser"); addAfter(); return; } } catch(e) {}
   render(); resetHistory(); addAfter();
 })();
+DATA.ready.then(() => render());   // risk, back test and research fill in once the shared data has arrived
 </script>
 </body>
 </html>
@@ -1483,7 +1649,7 @@ STAGE_NOUN = {"early_accumulation": "early accumulator", "accumulation": "accumu
 def write_builder(path: Path, portfolios: list[Portfolio], profiles: Profiles, md: MarketData, universe: pd.DataFrame,
                   research: dict | None, prices: dict[str, float], *, settings_site_url: str = "", quality: dict | None = None,
                   platform_cfg: dict | None = None, pds: dict | None = None, history: dict | None = None, esg: dict | None = None,
-                  supabase: dict | None = None, as_of: str = "", platforms: dict | None = None, asx: dict | None = None) -> Path:
+                  supabase: dict | None = None, as_of: str = "", platforms: dict | None = None, asx: dict | None = None, lazy: dict | None = None) -> Path:
     classes = [{"key": k, "label": v["label"], "kind": v["kind"]} for k, v in profiles.asset_classes.items()]
     colors = {c["key"]: f"--series-{i + 1}" for i, c in enumerate(classes)}
     light_vars = " ".join(f"--series-{i + 1}:{dash.PALETTE_LIGHT[i % len(dash.PALETTE_LIGHT)]};" for i in range(len(classes)))
@@ -1551,8 +1717,10 @@ def write_builder(path: Path, portfolios: list[Portfolio], profiles: Profiles, m
         "search_index": dash._load_search_index(),
         "supabase": {"url": (supabase or {}).get("url", ""), "key": (supabase or {}).get("anon_key", "")},
     }
+    if lazy:
+        dash.apply_lazy(data, lazy)
     html = (TEMPLATE.replace("__CSS__", _css().replace("__LIGHT_VARS__", light_vars).replace("__DARK_VARS__", dark_vars))
-            .replace("__DATA__", json.dumps(dash._clean(data), default=str)))
+            .replace("__LAZY_JS__", dash.LAZY_JS).replace("__DATA__", json.dumps(dash._clean(data), default=str, separators=(",", ":"))))
     path.parent.mkdir(parents=True, exist_ok=True)
     from .motion import inject
     path.write_text(inject(html), encoding="utf-8")

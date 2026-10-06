@@ -18,6 +18,8 @@ TEMPLATE = r"""<!doctype html>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
 <style>
 __CSS__
+.frtable { width:100%; border-collapse:collapse; margin-top:12px; min-width:720px; } .frtable th { text-align:left; font-size:12px; color:var(--muted); font-weight:600; padding:6px 10px 6px 0; border-bottom:1px solid var(--line); }
+.frtable td { padding:8px 10px 8px 0; border-bottom:1px solid var(--line); font-size:13px; vertical-align:top; } .frtable td:last-child { min-width:280px; } .frtable td.mono { white-space:nowrap; }
 .groups { display:grid; gap:18px; }
 .numtiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(190px, 1fr)); gap:12px; }
 .numtiles .tile .v { font-size:24px; }
@@ -68,6 +70,15 @@ __CSS__
     <button class="btn" id="btn-print" type="button">Print or save as PDF</button>
     <a class="btn" href="/data/brief.json" download>Raw data (JSON)</a>
   </div>
+</section>
+
+<section id="fresh" hidden>
+  <div class="eyebrow">Data check</div>
+  <h2 id="fr-title">Is every holding's data up to date?</h2>
+  <p class="sub">Checked at each build: the last price of every holding in the universe, the unit prices entered for unlisted funds, the ASX dividend and franking facts, analyst research, and the managers' published returns. Holdings in the house models and the published portfolios are listed first.</p>
+  <div class="tiles" id="frtiles"></div>
+  <div class="tscroll"><table class="frtable"><thead><tr><th>Holding</th><th>Price from</th><th>Price date</th><th>What needs attention</th></tr></thead><tbody id="frrows"></tbody></table></div>
+  <p class="muted" id="frnote" style="font-size:12.5px;margin:8px 0 0"></p>
 </section>
 
 <section id="numbers">
@@ -182,6 +193,15 @@ function renderAnns(){ const latestDay = (B.announcements[0] || {}).date ? D(B.a
   sel("afilters").querySelectorAll("button[data-f]").forEach(b => b.onclick = () => { AF[b.dataset.f] = !AF[b.dataset.f]; renderAnns(); });
   const aq = sel("aq"); aq.oninput = () => { AF.q = aq.value; const pos = aq.selectionStart; renderAnns(); const n = sel("aq"); n.focus(); n.setSelectionRange(pos, pos); }; }
 renderAnns();
+function renderFresh(){ const F = B.freshness; if (!F || !F.rows) return; sel("fresh").hidden = false;
+  const bad = F.rows.filter(r => r.status !== "ok"); const im = F.in_models || {};
+  sel("fr-title").textContent = bad.length ? `${bad.length} of ${F.total} holdings need attention` : `All ${F.total} holdings are up to date`;
+  sel("frtiles").innerHTML = [["Up to date", String(F.counts.ok), `of ${F.total} holdings, prices as of ${F.as_of}`], ["Stale", String(F.counts.stale), `${im.stale || 0} in a published portfolio`], ["Notional unit price", String(F.counts.notional), `${im.notional || 0} in a published portfolio; enter the real price when it is quoted`]]
+    .map(([k, v, s]) => `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
+  const show = bad.slice(0, 60);
+  sel("frrows").innerHTML = show.map(r => `<tr><td><b>${esc(r.name)}</b><br><span class="mono" style="font-size:11.5px;color:var(--faint)">${esc(r.ticker)}${r.house ? ", house model" : r.in_model ? ", in a portfolio" : r.watchlist ? ", watch list" : ""}</span></td><td>${esc(r.price_source || "")}</td><td class="mono">${esc(r.price_date || "–")}</td><td><span class="chip ${r.status === "stale" ? "serious" : "neutral"}">${r.status === "stale" ? "stale" : "notional"}</span> ${r.issues.map(esc).join("; ")}</td></tr>`).join("") || `<tr><td colspan="4" class="muted">Nothing to fix today.</td></tr>`;
+  sel("frnote").textContent = (bad.length > show.length ? `Showing the first ${show.length} of ${bad.length}; the Excel download has them all. ` : "") + "Listed prices older than four days are stale; entered unit prices older than 35 days are stale. A notional 1.00 on a share fund is a placeholder: harmless for sizing, because unlisted funds trade in dollars, but not a price to quote." + (F.synthetic ? " This build used synthetic test prices." : ""); }
+renderFresh();
 sel("btn-look").onclick = async () => { const code = sel("lcode").value.trim().toUpperCase().replace(/\.AX$/, ""); if (!/^[A-Z0-9]{2,6}$/.test(code)) { toast("Enter an ASX code such as CBA"); return; }
   if (!FN) { toast("Live lookups work on the published site"); return; } sel("lout").innerHTML = `<div class="muted">Fetching ${code}…</div>`;
   try { const r = await fetch(FN + "/asx?code=" + encodeURIComponent(code)); const j = await r.json(); if (!r.ok) throw new Error(j.error || r.statusText);
@@ -262,6 +282,7 @@ sel("btn-xlsx").onclick = () => { if (typeof XLSX === "undefined") { toast("The 
   add([["Date", "Source", "Type", "Title", "Summary", "Advice related", "Link"]].concat((B.regulatory || []).map(r => [r.date, r.source, r.tag, r.title, r.summary, r.relevant ? "yes" : "", r.link])), "Regulation and law", [18, 16, 18, 70, 70, 10, 60]);
   add([["Date", "Source", "Headline", "Link"]].concat((B.wrap || []).map(w => [w.date, w.source, w.title, w.link])), "Market wrap", [18, 16, 80, 60]);
   if (M.up) add([["Ticker", "Holding", "Change %", "Last price"]].concat(M.up.concat(M.down).map(r => [r.ticker, r.name, r.change_pct / 100, r.price])), "Moves", [12, 36, 10, 12]);
+  if (B.freshness && B.freshness.rows) add([["Code", "Holding", "Status", "In a portfolio", "House model", "Price from", "Price date", "Issues"]].concat(B.freshness.rows.map(r => [r.ticker, r.name, r.status, r.in_model ? "yes" : "", r.house ? "yes" : "", r.price_source || "", r.price_date || "", r.issues.join("; ")])), "Data check", [12, 36, 10, 10, 10, 30, 12, 90]);
   add([["Source", "Status", "Items", "Note", "Link"]].concat(B.sources.map(s => [s.name, s.ok ? "ok" : "unavailable", s.items, s.note, s.url])), "Sources", [50, 12, 8, 60, 60]);
   XLSX.writeFile(wb, `daily_brief_${B.date}.xlsx`); toast("Downloaded"); };
 </script>

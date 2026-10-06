@@ -73,3 +73,39 @@ VEFI.AX,screened_fund,,Vanguard's ethically conscious global bond index with the
 ESGI.AX,screened_fund,,MSCI World ex Australia ESG Leaders; fossil fuel reserves excluded.,2026-09-04
 ETHI.AX,screened_fund,,Betashares climate leaders screen plus exclusions.,2026-09-04
 FAIR.AX,screened_fund,,Betashares Australian sustainability leaders screen plus exclusions.,2026-09-04
+AVGO,acceptable,,Semiconductors and infrastructure software (VMware); clear of the screens.,2026-10-07
+AYUPA.AX,acceptable,,Capital instruments of Australian Unity (health insurance; aged and home care; retirement communities; wealth); clear of the screens; care quality is the material issue.,2026-10-07
+BNT0101AU,watch,,Concentrated growth fund with no exclusion screen; its March 2026 holdings include Jumbo Interactive (online lotteries) alongside technology; healthcare and retail names.,2026-10-07
+BOQ.AX,watch,,Regional bank; kept. The 2023 APRA court-enforceable undertaking (with a $50 million capital add-on) and AUSTRAC enforceable undertaking over risk and anti-money laundering controls are the governance history to know.,2026-10-07
+CCP.AX,watch,,Debt purchaser and consumer lender in Australia and the US; clear of the screens; kept. Collection practices and lending to financially stressed customers are the conduct risks to follow.,2026-10-07
+CGFPD.AX,acceptable,,Capital notes of Challenger (annuities and funds management); clear of the screens.,2026-10-07
+DBI.AX,excluded,fossil_fuels,Owns the Dalrymple Bay Coal Terminal; 84% of revenue comes from mines shipping mainly metallurgical coal and the rest mostly thermal; fails the fossil fuel screen (metallurgical coal counts).,2026-10-07
+ELD.AX,acceptable,,Rural services (farm inputs; livestock agency; wool; rural real estate and finance); clear of the screens.,2026-10-07
+EME,watch,,Electrical and mechanical contractor for data centres; hospitals and factories; kept. Its US industrial services segment (7% of 2025 revenue) maintains oil refineries and petrochemical plants; a minor fossil fuel involvement.,2026-10-07
+ETL1293AU,watch,,Concentrated activist fund with no exclusion screen; L1's activist positions have included Santos (oil and gas) and Z Energy (fuel retail); check the holdings at each review.,2026-10-07
+ETN,watch,,Electrical power management for data centres and grids; kept. The aerospace segment (15% of 2025 sales) supplies fuel and hydraulic systems for military as well as commercial aircraft and the January 2026 Ultra PCS purchase adds aerospace and defence electronics.,2026-10-07
+FGG.AX,watch,,Fund of global managers run for charity; underlying managers are not screened; kept for its philanthropic purpose.,2026-10-07
+GIFL.XA,watch,,Active global listed infrastructure fund (toll roads; airports; regulated utilities) that can hold gas networks and utilities burning fossil fuels; kept because there is no screened infrastructure fund on the ASX or Cboe.,2026-10-07
+GSBK54.AX,acceptable,,Australian Government bond; no company involvement.,2026-10-07
+GSF0874AU,excluded,fossil_fuels,Concentrated global small and mid cap fund whose top five holdings at September 2026 included Targa Resources (gas gathering and pipelines; 6.8%) and Leonardo DRS (defence electronics; 5.3%); fails the fossil fuel and weapons screens at that size.,2026-10-07
+GTT.PA,excluded,fossil_fuels,Designs the membrane containment systems used in LNG carriers and terminals and earns royalties on them; its revenue depends on LNG shipping; fails the fossil fuel screen.,2026-10-07
+IPH.AX,acceptable,,Intellectual property services (patent and trade mark attorneys); clear of the screens.,2026-10-07
+ISRG,acceptable,,Robotic surgery systems; clear of the screens; product safety litigation is the material issue.,2026-10-07
+LUN.TO,watch,,Copper and zinc miner with no coal or petroleum; kept. The 2022 sinkhole beside its Alcaparrosa mine in Chile led to the permanent closure of the workings involved and regulatory charges; tailings and water are the issues to follow.,2026-10-07
+MA,acceptable,,Payments network; clear of the screens; data privacy and merchant fees are the material issues.,2026-10-07
+MMS.AX,acceptable,,Salary packaging and novated leasing (a growing share of electric vehicles); clear of the screens.,2026-10-07
+MTS.AX,watch,,Wholesaler to IGA supermarkets plus Mitre 10 and Total Tools; kept. Tobacco and liquor wholesaling (Cellarbrations; The Bottle-O) are large parts of the business; screens usually exclude producers only.,2026-10-07
+PAYS.XA,acceptable,,Multi-sector bond fund (government; bank and corporate credit) to which Schroders applies exclusions for thermal coal miners; tobacco producers and controversial weapons.,2026-10-07
+PRY.MI,acceptable,,Power transmission and telecom cables for grids and data centres; clear of the screens.,2026-10-07
+RFF.AX,watch,,Agricultural landlord (almonds; macadamias; cattle; cropping); kept. A small vineyard holding leased to Treasury Wine Estates is a minor link to alcohol production.,2026-10-07
+SET.AX,watch,,Active income LIC of about 50 ASX shares with overweight positions in BHP (metallurgical coal) and Ampol (fuel refining and retail); not screened and no screened substitute is set; kept.,2026-10-07
+SGP.AX,acceptable,,Residential communities; retirement living and logistics property; clear of the screens.,2026-10-07
+SPK.AX,acceptable,,New Zealand telecommunications; clear of the screens.,2026-10-07
+SPPHA.AX,watch,,Listed notes over a private infrastructure debt portfolio that may lend to traditional energy assets; the prospectus says there is no ESG screening; kept.,2026-10-07
+SU.PA,leader,,Energy management and automation for buildings; grids and data centres; strong disclosure and decarbonisation record; clear of the screens.,2026-10-07
+SUN.AX,acceptable,,General insurer (AAMI; GIO; Suncorp); clear of the screens; its 2020 policy ended thermal coal exposure and new oil and gas underwriting by 2025.,2026-10-07
+TD12,acceptable,,Bank term deposit held through the platform; clear of the screens.,2026-10-07
+VEU.AX,watch,,Index of developed and emerging markets outside the US that holds Shell; TotalEnergies; BP and other oil; gas and coal producers; no screened substitute is set in esg.yaml so it stays on watch.,2026-10-07
+WGB.AX,watch,,Global LIC of concentrated quality holdings; not screened; the June 2026 top 20 includes Safran (aircraft engines and defence) and Siemens Energy (gas turbines) but no fossil fuel producers.,2026-10-07
+WHT1465AU,watch,,Quantitative global long/short fund spread across most of the developed market; it excludes tobacco and thermal coal miners from its longs but holds energy and defence companies (aerospace and defence 3.4% in August 2026).,2026-10-07
+WPR.AX,watch,,Owns service station and convenience properties; most rent comes from Viva Energy (a fuel refiner and retailer); not a producer itself but its income depends on fuel retailing.,2026-10-07

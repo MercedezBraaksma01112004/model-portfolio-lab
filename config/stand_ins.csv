@@ -1,0 +1,4 @@
+ticker,twin,reason
+GSBK54.AX,GGOV.AX,"Long Commonwealth bond (2054, modified duration about 14 to 15 years): no price history in the feed, so a long-duration government bond ETF (about 17 years, hedged) stands in for risk and history. The general bond index (VAF, about 5.5 years) would understate its volatility by two to three times."
+SPPHA.AX,BHYB.AX,"Floating-rate listed notes (BBSW plus 3.25%) without price history: the listed hybrids and notes ETF stands in."
+DMNHA.AX,BHYB.AX,"Floating-rate listed notes (BBSW plus 3.00%) without price history: the listed hybrids and notes ETF stands in."

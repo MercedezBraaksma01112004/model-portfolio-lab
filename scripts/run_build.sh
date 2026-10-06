@@ -11,6 +11,7 @@ echo "=== $(date '+%Y-%m-%d %H:%M') build start"
 if [ ! -f data/cache/search_index.json ] || [ -n "$(find data/cache/search_index.json -mtime +7 2>/dev/null)" ]; then "$PY" scripts/build_search_index.py; fi
 "$PY" -m portfolio_engine --refresh build || { echo "build failed"; exit 1; }
 mkdir -p site && cp output/dashboard.html site/index.html && cp output/builder.html site/builder.html
+mkdir -p site/data && cp output/data/*.json site/data/ && cp output/fx_monthly.json site/data/ 2>/dev/null   # the pages fetch these after drawing
 "$PY" scripts/quality_report.py >/dev/null && cp output/quality_review.html site/quality.html
 cp output/model_portfolios_latest.xlsx site/model_portfolios_latest.xlsx
 "$PY" scripts/build_listing_data.py >/dev/null 2>&1 || echo "listing data build failed (the builder page falls back to the live function)"

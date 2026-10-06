@@ -596,6 +596,12 @@ def main(argv: list[str]) -> int:
     else:
         data = build()
         path.write_text(json.dumps(data, indent=1, default=str))
+    # The build's data check (portfolio_engine/freshness.py), shown at the top of the brief.
+    fp = out / "freshness.json"
+    try:
+        data["freshness"] = json.loads(fp.read_text()) if fp.exists() else None
+    except (OSError, ValueError):
+        data["freshness"] = None
     from portfolio_engine.reports.brief import write_brief
     page = write_brief(out / "brief.html", data)
     ok = sum(1 for s in data["sources"] if s["ok"])

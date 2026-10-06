@@ -61,7 +61,7 @@ jobs:
               due -= timedelta(days=1)
           while due.weekday() >= 5:
               due -= timedelta(days=1)
-          pending = len((fetch("/.netlify/functions/changes") or {}).get("pending", []))
+          pending = len((fetch("/.netlify/functions/changes") or {}).get("pending", [])) + len((fetch("/.netlify/functions/fetchq") or {}).get("pending", []))
           built = (fetch("/data/build.json") or {}).get("built_at")
           stale = not built or datetime.fromisoformat(built) < due
           print(f"pending={pending} built={built} due={due.isoformat()} stale={stale}", file=sys.stderr)
@@ -125,6 +125,10 @@ jobs:
           cp output/builder.html site/builder.html
           cp output/compare.html site/compare.html
           cp output/model_portfolios_latest.xlsx site/model_portfolios_latest.xlsx
+          mkdir -p site/data && cp output/fx_monthly.json site/data/fx_monthly.json 2>/dev/null || echo "no fx_monthly.json"
+          # Shared data both pages fetch after they have drawn (daily returns, history, research, search index), and the data check.
+          cp output/data/*.json site/data/
+          [ -f output/freshness.json ] && cp output/freshness.json site/data/freshness.json
           python scripts/generate_quality_verdicts.py
           python scripts/quality_report.py > /dev/null && cp output/quality_review.html site/quality.html
           python scripts/build_listing_data.py
@@ -156,7 +160,7 @@ jobs:
         run: |
           git config user.name "portfolio-engine bot"
           git config user.email "actions@users.noreply.github.com"
-          for f in config/universe.csv config/quality_review.csv config/universe_scorecard.csv data/my_holdings.csv data/cache/state.json data/applied_changes.json data/super_funds.json; do [ -f "$f" ] && git add "$f"; done
+          for f in config/universe.csv config/quality_review.csv config/universe_scorecard.csv config/extra_listings.csv data/my_holdings.csv data/cache/state.json data/applied_changes.json data/super_funds.json data/house_track.json; do [ -f "$f" ] && git add "$f"; done
           git diff --cached --quiet || git commit -m "Daily build: holdings and tactical state as of $(date -u +%Y-%m-%d)"
           git push
 

@@ -44,6 +44,7 @@ class Context:
         self._load_universes()
         self.manual = load_manual_prices(self.settings)
         tickers = set(self.universe_all.loc[~self.universe_all["ticker"].isin(self.manual), "ticker"])
+        tickers |= {t for t in self.universe_all["twin"] if t}   # stand-ins for unlisted funds and unpriced listings
         for v in self.settings.raw.get("returns", {}).get("long_history_proxies", {}).values():
             tickers |= set([v] if isinstance(v, str) else v)
         for ps in self.profiles.tactical.get("proxies", {}).values():
@@ -186,21 +187,58 @@ def cmd_build(args) -> int:
     pds = load_pds_links(ctx.settings, ctx.universe_all, ctx.sma_menu)
     xlsx = write_workbook(out / f"model_portfolios_{stamp}{suffix}.xlsx", list(unique.values()), p, ctx.settings, ctx.md,
                           ctx.view, ctx.universe_all, prices, origin, ctx.research, ctx.review, ctx.quality, pds=pds, esg=ctx.esg)
+    # The house models' live record since inception; the version log is only written from real prices.
+    from .house_track import track_house_models
+    try:
+        track = track_house_models(p, ctx.universe_all, ctx.md, ctx.settings.root / "data" / "house_track.json", write=not ctx.md.synthetic)
+    except Exception as e:  # noqa: BLE001  a failed record must never stop the build
+        log.warning("House model record failed: %s", e)
+        track = {}
+    # Daily returns, history, research and the search index: shared files fetched after each page has drawn.
+    from .reports.html import write_shared_data
+    lazy = write_shared_data(out, ctx.md, ctx.universe_all, p, ctx.research, ctx.history)
     html = write_dashboard(out / f"dashboard{suffix}.html", portfolios, p, ctx.md, ctx.view, ctx.research, ctx.universe_all, ctx.review,
                            settings_site_url=ctx.settings.raw.get("publish", {}).get("site_url", ""), quality=ctx.quality,
                            platform_cfg=ctx.settings.raw.get("platform", {}), class_corr=ctx.class_corr, pds=pds, history=ctx.history, esg=ctx.esg,
-                           supabase=ctx.settings.raw.get("accounts", {}).get("supabase", {}), asx={t: asx_compact(f) for t, f in ctx.asx_facts.items()})
+                           supabase=ctx.settings.raw.get("accounts", {}).get("supabase", {}), asx={t: asx_compact(f) for t, f in ctx.asx_facts.items()},
+                           house_track=track, lazy=lazy)
     from .reports.compare import write_compare
     write_compare(out / f"compare{suffix}.html", load_platforms(ctx.settings))
     builder = write_builder(out / f"builder{suffix}.html", portfolios, p, ctx.md, ctx.universe_all, ctx.research, prices,
                             settings_site_url=ctx.settings.raw.get("publish", {}).get("site_url", ""), quality=ctx.quality,
                             platform_cfg=ctx.settings.raw.get("platform", {}), pds=pds, history=ctx.history, esg=ctx.esg,
                             supabase=ctx.settings.raw.get("accounts", {}).get("supabase", {}), platforms=load_platforms(ctx.settings),
-                            asx={t: asx_compact(f) for t, f in ctx.asx_facts.items()})
+                            asx={t: asx_compact(f) for t, f in ctx.asx_facts.items()}, lazy=lazy)
     (out / f"portfolios_{stamp}{suffix}.json").write_text(json.dumps(
         {"as_of": str(ctx.md.as_of.date()), "synthetic": ctx.md.synthetic, "tactical": ctx.view.to_dict(),
          "research": research_to_records(ctx.research), "review": review_to_records(ctx.review), "quality": ctx.quality,
          "portfolios": [pf.to_dict() for pf in portfolios]}, indent=1, default=str))
+    # Month-end exchange rates (AUD per unit), published for the website's Nasdaq fallback, which has no exchange rate feed.
+    from .market_data import _quotes_foreign_per_aud
+    fxm = {}
+    for ccy, t in (ctx.md.fx_tickers or {}).items():
+        if t in ctx.md.prices.columns:
+            fs = ctx.md.prices[t].dropna()
+            fs = 1.0 / fs if _quotes_foreign_per_aud(t) else fs
+            fxm[ccy] = {k: round(float(v), 6) for k, v in fs.groupby(fs.index.strftime("%Y-%m")).last().items()}
+    (out / "fx_monthly.json").write_text(json.dumps({"built": str(ctx.md.as_of.date()), "aud_per": fxm}))
+    # Is every holding's data up to date? Shown at the top of the Daily brief.
+    try:
+        from .freshness import data_freshness
+        mp = ctx.settings.path("manual_prices")
+        mdates = {}
+        if mp.exists():
+            mdf = pd.read_csv(mp, dtype=str).fillna("")
+            mdates = {r["ticker"]: r.get("as_of", "") for _, r in mdf.iterrows()}
+        unl = ctx.settings.root / "config" / "unlisted_funds.csv"
+        udf = pd.read_csv(unl, dtype=str).fillna("") if unl.exists() else pd.DataFrame(columns=["ticker"])
+        in_models = {l["ticker"] for pf in unique.values() for l in pf.to_dict().get("lines", [])}
+        house = {h["ticker"] for m in (p.house_models or {}).values() if isinstance(m, dict) for h in (m.get("holdings") or [])}
+        fresh = data_freshness(ctx.universe_all, ctx.md, ctx.manual, mdates, udf, ctx.research or {}, ctx.asx_facts or {}, in_models, house)
+        (out / "freshness.json").write_text(json.dumps(fresh, default=str))
+        print(f"  Data     : {fresh['counts']['ok']} of {fresh['total']} holdings up to date; {fresh['counts']['stale']} stale, {fresh['counts']['notional']} notional unit prices")
+    except Exception as e:  # noqa: BLE001  a failed check must never stop the build
+        log.warning("Data freshness check failed: %s", e)
     # Latest copies with stable names so a bookmark or a scheduled job always finds them.
     import shutil
     shutil.copy(xlsx, out / f"model_portfolios_latest{suffix}.xlsx")
