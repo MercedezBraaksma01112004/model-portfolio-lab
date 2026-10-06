@@ -23,6 +23,7 @@ from .builder import build_portfolio, build_sma_portfolio, load_sma_menu, price_
 from .config import load_profiles, load_settings, load_universe, load_quality_review, load_pds_links, load_discover_menu, load_sma_twins, load_esg
 from .market_data import get_market_data, load_manual_prices
 from .rebalance import analyse, load_current_holdings
+from .asx_facts import get_asx_facts, apply_asx_facts, compact as asx_compact
 from .research import get_research, research_to_records
 from .review import run_review, apply_review, review_to_records
 from .reports.excel import write_workbook
@@ -37,8 +38,10 @@ class Context:
     def __init__(self, args):
         self.settings = load_settings(Path(args.config) if getattr(args, "config", None) else None)
         self.profiles = load_profiles(self.settings)
-        self.universe = load_universe(self.settings, self.profiles)
-        self.universe_all = load_universe(self.settings, self.profiles, include_watchlist=True)
+        # ASX facts (last dividend's franking, yield, security type and terms) for every ASX listing, applied to the universe.
+        self.asx_facts = get_asx_facts(list(load_universe(self.settings, self.profiles, include_watchlist=True)["ticker"]),
+                                       self.settings.root / "data" / "cache" / "asx_facts.json", offline=getattr(args, "offline", False))
+        self._load_universes()
         self.manual = load_manual_prices(self.settings)
         tickers = set(self.universe_all.loc[~self.universe_all["ticker"].isin(self.manual), "ticker"])
         for v in self.settings.raw.get("returns", {}).get("long_history_proxies", {}).values():
@@ -78,10 +81,15 @@ class Context:
             for c in changes:
                 log.warning("review applied: %s", c)
             if changes:
-                self.universe = load_universe(self.settings, self.profiles)
-                self.universe_all = load_universe(self.settings, self.profiles, include_watchlist=True)
+                self._load_universes()
         if self.md.synthetic:
             log.warning("OFFLINE MODE: prices are synthetic. Outputs are for testing the pipeline only.")
+
+    def _load_universes(self) -> None:
+        self.universe, notes = apply_asx_facts(load_universe(self.settings, self.profiles), self.asx_facts)
+        self.universe_all, _ = apply_asx_facts(load_universe(self.settings, self.profiles, include_watchlist=True), self.asx_facts)
+        if notes:
+            log.info("ASX franking applied to %d holdings: %s", len(notes), "; ".join(notes[:12]))
 
     def _class_correlations(self) -> dict:
         """One-year correlation matrix between the asset class proxy ETFs."""
@@ -181,13 +189,14 @@ def cmd_build(args) -> int:
     html = write_dashboard(out / f"dashboard{suffix}.html", portfolios, p, ctx.md, ctx.view, ctx.research, ctx.universe_all, ctx.review,
                            settings_site_url=ctx.settings.raw.get("publish", {}).get("site_url", ""), quality=ctx.quality,
                            platform_cfg=ctx.settings.raw.get("platform", {}), class_corr=ctx.class_corr, pds=pds, history=ctx.history, esg=ctx.esg,
-                           supabase=ctx.settings.raw.get("accounts", {}).get("supabase", {}))
+                           supabase=ctx.settings.raw.get("accounts", {}).get("supabase", {}), asx={t: asx_compact(f) for t, f in ctx.asx_facts.items()})
     from .reports.compare import write_compare
     write_compare(out / f"compare{suffix}.html", load_platforms(ctx.settings))
     builder = write_builder(out / f"builder{suffix}.html", portfolios, p, ctx.md, ctx.universe_all, ctx.research, prices,
                             settings_site_url=ctx.settings.raw.get("publish", {}).get("site_url", ""), quality=ctx.quality,
                             platform_cfg=ctx.settings.raw.get("platform", {}), pds=pds, history=ctx.history, esg=ctx.esg,
-                            supabase=ctx.settings.raw.get("accounts", {}).get("supabase", {}), platforms=load_platforms(ctx.settings))
+                            supabase=ctx.settings.raw.get("accounts", {}).get("supabase", {}), platforms=load_platforms(ctx.settings),
+                            asx={t: asx_compact(f) for t, f in ctx.asx_facts.items()})
     (out / f"portfolios_{stamp}{suffix}.json").write_text(json.dumps(
         {"as_of": str(ctx.md.as_of.date()), "synthetic": ctx.md.synthetic, "tactical": ctx.view.to_dict(),
          "research": research_to_records(ctx.research), "review": review_to_records(ctx.review), "quality": ctx.quality,

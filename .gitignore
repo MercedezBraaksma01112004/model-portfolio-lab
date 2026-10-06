@@ -12,3 +12,5 @@ node_modules/
 *.zip
 *.tgz
 .DS_Store
+data/cache/asx_facts.json
+data/cache/asx_spot.json

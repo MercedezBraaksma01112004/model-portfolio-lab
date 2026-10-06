@@ -92,7 +92,8 @@ __CSS__
   <div class="alist" id="alist"></div>
   <div id="lookup" style="margin-top:18px">
     <div class="eyebrow">Look up any ASX code</div>
-    <div class="fchips"><input id="lcode" type="search" placeholder="ASX code, for example CBA" maxlength="6" autocomplete="off"><button type="button" id="btn-look" class="btn small primary">Show announcements</button></div>
+    <p class="muted" style="font-size:12.5px;margin:4px 0 8px">Shows the ASX's own facts (last dividend and its franking, yield, security type and terms for notes and hybrids) and the latest announcements. From there it can go straight into a portfolio in the builder, or into the universe so every model and the daily build can use it.</p>
+    <div class="fchips"><input id="lcode" type="search" placeholder="ASX code, for example CBA" maxlength="6" autocomplete="off"><button type="button" id="btn-look" class="btn small primary">Look up</button></div>
     <div class="lookup-out" id="lout"></div>
   </div>
 </section>
@@ -184,8 +185,46 @@ renderAnns();
 sel("btn-look").onclick = async () => { const code = sel("lcode").value.trim().toUpperCase().replace(/\.AX$/, ""); if (!/^[A-Z0-9]{2,6}$/.test(code)) { toast("Enter an ASX code such as CBA"); return; }
   if (!FN) { toast("Live lookups work on the published site"); return; } sel("lout").innerHTML = `<div class="muted">Fetching ${code}…</div>`;
   try { const r = await fetch(FN + "/asx?code=" + encodeURIComponent(code)); const j = await r.json(); if (!r.ok) throw new Error(j.error || r.statusText);
-    const h = j.header || {}; sel("lout").innerHTML = `<div style="margin-bottom:6px"><b>${esc(j.name || code)}</b>${h.priceLast != null ? `, last $${num(h.priceLast, 3)} ${h.priceChangePercent != null ? `<span class="chg ${h.priceChangePercent > 0 ? "up" : h.priceChangePercent < 0 ? "down" : ""}">${h.priceChangePercent > 0 ? "+" : ""}${num(h.priceChangePercent, 2)}%</span>` : ""}` : ""}</div><div class="alist">${(j.items || []).map(a => annRow(a, false)).join("") || '<div class="empty">No recent announcements.</div>'}</div>`;
+    const h = j.header || {}; LK.code = code; LK.data = j; sel("lout").innerHTML = `<div style="margin-bottom:6px"><b>${esc(j.name || code)}</b>${h.priceLast != null ? `, last $${num(h.priceLast, 3)} ${h.priceChangePercent != null ? `<span class="chg ${h.priceChangePercent > 0 ? "up" : h.priceChangePercent < 0 ? "down" : ""}">${h.priceChangePercent > 0 ? "+" : ""}${num(h.priceChangePercent, 2)}%</span>` : ""}` : ""}</div>${factsHtml(code, j)}<div class="alist">${(j.items || []).map(a => annRow(a, false)).join("") || '<div class="empty">No recent announcements.</div>'}</div>`;
+    wireLookup(code, j);
   } catch (e) { sel("lout").innerHTML = `<div class="empty">Could not fetch ${esc(code)}: ${esc(e.message)}</div>`; } };
+// The ASX's facts for the code looked up, and the two ways to use it: a portfolio in the builder, or the engine's universe.
+const LK = { code: "", data: null };
+const fdate = d => { const x = new Date(d); return isNaN(x) ? d : x.toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" }); };
+const KIND_CLASS = { "hybrid or preference security": "credit", "listed note": "credit", "government bond": "fixed_income" };
+const CLASS_OPTS = [["aus_equity", "Australian equities"], ["intl_equity", "International equities"], ["infrastructure", "Property and infrastructure"], ["alternatives", "Alternatives"], ["fixed_income", "Fixed income"], ["credit", "Credit and hybrids"], ["cash", "Cash"]];
+function guessLookupClass(f){ if (KIND_CLASS[f.kind]) return KIND_CLASS[f.kind]; const t = ((f.description || "") + " " + (f.security || "")).toLowerCase();
+  if (/real estate|reit|property/.test((f.sector || "").toLowerCase() + " " + t)) return "infrastructure"; if (/global|international|world|s&p 500|nasdaq|emerging|asia/.test(t)) return "intl_equity";
+  if (/bond|fixed income|fixed interest/.test(t)) return "fixed_income"; if (/credit|loan|debt|hybrid/.test(t)) return "credit"; return "aus_equity"; }
+function factsHtml(code, j){ const f = j.facts || {}; const rows = [];
+  if (f.kind) rows.push(["Security", f.kind + (f.security && !/^ordinary fully paid$/i.test(f.security) ? ": " + f.security : "")]);
+  if (f.last_dividend != null) rows.push(["Last dividend or distribution", `${f.dividend_currency && f.dividend_currency !== "AUD" ? f.dividend_currency + " " : "$"}${(+f.last_dividend).toFixed(4).replace(/0+$/, "").replace(/\.$/, "")}${f.franking_pct != null ? ", " + (+f.franking_pct).toFixed(0) + "% franked" : ""}`]);
+  if (f.ex_date) rows.push(["Ex date, pay date", fdate(f.ex_date) + (f.pay_date ? ", " + fdate(f.pay_date) : "")]);
+  if (f.yield_pct != null) rows.push(["Annual yield", f.yield_pct.toFixed(2) + "%"]); if (f.pe != null) rows.push(["Price to earnings", f.pe.toFixed(1)]);
+  if (f.low_52w != null && f.high_52w != null) rows.push(["52 week range", `$${f.low_52w} to $${f.high_52w}`]); if (f.sector) rows.push(["Sector", f.sector + (f.industry ? ", " + f.industry : "")]);
+  if (f.market_cap) rows.push(["Market value", "$" + (f.market_cap / 1e9 >= 1 ? (f.market_cap / 1e9).toFixed(1) + " bn" : Math.round(f.market_cap / 1e6) + " m")]); if (f.listed) rows.push(["Listed", fdate(f.listed)]);
+  const pin = (() => { try { return localStorage.getItem("mpl-pin") || ""; } catch (e) { return ""; } })();
+  return `<div class="lookup-facts" style="border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:6px 0 12px">
+    ${f.description ? `<p style="margin:0 0 8px;font-size:13.5px">${esc(f.description)}</p>` : ""}
+    ${rows.length ? `<table style="font-size:13px;border-collapse:collapse">${rows.map(([k, v]) => `<tr><td style="color:var(--muted);padding:2px 14px 2px 0;vertical-align:top">${k}</td><td style="padding:2px 0">${esc(v)}</td></tr>`).join("")}</table>` : `<p class="muted" style="margin:0">The ASX returned no dividend or security details for ${esc(code)}.</p>`}
+    <div class="fchips" style="margin-top:10px;align-items:center">
+      <a class="btn small primary" href="/builder.html?add=${encodeURIComponent(code)}" style="text-decoration:none">Add to a portfolio in the builder</a>
+      <span class="muted" style="font-size:12.5px">or add to the universe as</span>
+      <select id="lk-class" style="font:inherit;font-size:13px;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--text)">${CLASS_OPTS.map(([k, l]) => `<option value="${k}" ${k === guessLookupClass(f) ? "selected" : ""}>${l}</option>`).join("")}</select>
+      <input id="lk-pin" type="password" placeholder="edit PIN" value="${esc(pin)}" style="max-width:110px" autocomplete="off">
+      <button type="button" class="btn small" id="lk-add">Add to the universe</button>
+    </div>
+    <div class="muted" id="lk-note" style="font-size:12.5px;margin-top:6px"></div></div>`; }
+function wireLookup(code, j){ const b = sel("lk-add"); if (!b) return;
+  b.onclick = async () => { const pin = sel("lk-pin").value.trim(); if (!pin) { sel("lk-note").textContent = "Enter the edit PIN (the same one the model portfolios page uses)."; return; }
+    try { localStorage.setItem("mpl-pin", pin); } catch (e) {}
+    const f = j.facts || {}; const cls = sel("lk-class").value;
+    const vehicle = f.kind === "ETF" ? "etf" : ["hybrid or preference security", "listed note"].includes(f.kind) ? "hybrid" : f.kind === "government bond" ? "bond" : /listed investment/i.test(f.description || "") ? "lic" : "direct";
+    b.disabled = true; sel("lk-note").textContent = "Adding…";
+    try { const r = await fetch(FN + "/changes", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ pin, action: "add", ticker: code + ".AX", asset_class: cls, name: j.name || code, vehicle, role: "satellite", min_tier: "core", weight_hint: 3, note: "added from the ASX lookup in the Daily brief" }) });
+      const out = await r.json().catch(() => ({})); if (!r.ok) throw new Error(out.error || r.statusText);
+      sel("lk-note").innerHTML = `Queued: ${esc(code)} joins the universe at the next build (within about three hours), with its price, dividends, franking and research pulled in. It then appears in the builder's search, the quality review and the model portfolios when it fits.`;
+    } catch (e) { sel("lk-note").textContent = "Not added: " + e.message; b.disabled = false; } }; }
 sel("lcode").onkeydown = e => { if (e.key === "Enter") sel("btn-look").click(); };
 
 // ---- whole market

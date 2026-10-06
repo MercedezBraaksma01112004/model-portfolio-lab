@@ -771,7 +771,11 @@ function sheetHtml(l, pf){
         <dt>Volatility (1y)</dt><dd>${fmtP(r.volatility_1y_pct)}</dd>
         <dt>Dividend yield</dt><dd>${fmtP(l.yield_pct,2)}${l.yield_source==="live"?"° ("+(r.yield_basis||"trailing 12 months")+")":" (configured)"}</dd>
         ${r.data_flags && r.data_flags.length ? `<dt>Data caution</dt><dd style="font-family:inherit;color:var(--serious);text-align:right">${r.data_flags.join("; ")}</dd>` : ""}
-        <dt>Franking (estimate)</dt><dd>${fmtP(l.franking_pct,0)}</dd>
+        ${(() => { const f = (DATA.asx || {})[l.ticker]; if (!f) return `<dt>Franking (estimate)</dt><dd>${fmtP(l.franking_pct,0)}</dd>`;
+          const div = f.last_dividend != null ? `${f.dividend_currency && f.dividend_currency !== "AUD" ? f.dividend_currency + " " : "$"}${(+f.last_dividend).toFixed(4).replace(/0+$/, "").replace(/\.$/, "")}` : "";
+          return `<dt>Franking</dt><dd>${fmtP(l.franking_pct,0)}${f.franking_pct != null && Math.abs(f.franking_pct - (l.franking_pct||0)) < 1 ? " (ASX)" : ""}</dd>`
+            + (div ? `<dt>Last dividend (ASX)</dt><dd>${div}${f.ex_date ? ", ex " + new Date(f.ex_date).toLocaleDateString("en-AU", { day: "numeric", month: "short" }) : ""}</dd>` : "")
+            + (f.security && !/^ordinary fully paid$/i.test(f.security) && f.kind !== "ETF" ? `<dt>Security (ASX)</dt><dd style="font-family:inherit;font-size:12.5px">${f.security}</dd>` : ""); })()}
         ${r.pe_trailing!=null ? `<dt>Price to earnings</dt><dd>${r.pe_trailing.toFixed(1)}${r.pe_forward?" / fwd "+r.pe_forward.toFixed(1):""}</dd>` : ""}
         ${r.market_cap!=null ? `<dt>${r.quote_type==="ETF"?"Fund size":"Market cap"}${ccy}</dt><dd>${fmtBig(r.market_cap)}</dd>` : ""}
         <dt>Management cost</dt><dd>${fmtP(l.mer_pct,2)}</dd>
@@ -1117,7 +1121,7 @@ def write_dashboard(path: Path, portfolios: list[Portfolio], profiles: Profiles,
                     research: dict | None = None, universe: pd.DataFrame | None = None, review: list | None = None,
                     settings_site_url: str = "", quality: dict | None = None, platform_cfg: dict | None = None,
                     class_corr: dict | None = None, pds: dict | None = None, history: dict | None = None, esg: dict | None = None,
-                    supabase: dict | None = None) -> Path:
+                    supabase: dict | None = None, asx: dict | None = None) -> Path:
     classes = [{"key": k, "label": v["label"], "kind": v["kind"]} for k, v in profiles.asset_classes.items()]
     colors = {c["key"]: f"--series-{i + 1}" for i, c in enumerate(classes)}
     light_vars = " ".join(f"--series-{i + 1}:{PALETTE_LIGHT[i % len(PALETTE_LIGHT)]};" for i in range(len(classes)))
@@ -1149,7 +1153,7 @@ def write_dashboard(path: Path, portfolios: list[Portfolio], profiles: Profiles,
                    "max_holdings": v["max_holdings"], "min_holding": v["min_holding_dollars"], "brokerage": v["brokerage_dollars"]} for k, v in tiers],
         "platform": platform_cfg or {}, "class_corr": class_corr or {}, "pds": pds or {},
         "defaults": {"profile": "balanced", "stage": "accumulation", "tier": tiers[1][0] if len(tiers) > 1 else tiers[0][0]},
-        "saa": saa, "stage_saa": stage_saa, "stage_rules": stage_rules,
+        "saa": saa, "stage_saa": stage_saa, "stage_rules": stage_rules, "asx": asx or {},
         "tactical": tactical, "research": research_json,
         "review": [r.__dict__ for r in (review or [])],
         "site_url": (settings_site_url or ""), "fx_aud_per_usd": md.fx_aud_per_usd, "fx_aud_per": md.fx_aud_per, "quality": quality or {},

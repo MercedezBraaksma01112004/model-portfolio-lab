@@ -86,6 +86,7 @@ dialog.auth::backdrop { background:rgba(10,12,11,.45); }
 .boa-item textarea:focus, #pnotes:focus { outline:2px solid var(--accent); outline-offset:1px; border-color:transparent; }
 .boa-state { font-size:12px; color:var(--faint); }
 .boa-state.ai { color:var(--accent); font-weight:500; }
+.asxbox { border-top:1px solid var(--line); margin-top:12px; padding-top:10px; }
 .house-style { border:1px solid var(--line); border-radius:10px; padding:10px 14px; margin:12px 0 16px; background:var(--surface); }
 .house-style summary { cursor:pointer; font-weight:600; font-size:14px; }
 #hs-examples { width:100%; min-height:150px; font:inherit; font-size:13.5px; line-height:1.5; padding:10px 12px; border:1.5px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); resize:vertical; }
@@ -767,11 +768,34 @@ function renderSheet(pf){
       <p class="summary">${esc(blurb)}</p>${r.sparkline && r.sparkline.length ? `<div class="eyebrow">Last 12 months, dividends reinvested, rebased to 100</div>${spark(r.sparkline, col, 600, 120, true)}` : ""}</div>
       <dl class="kv"><dt>Analyst view</dt><dd>${consensusChip(r)}</dd><dt>1 year return</dt><dd>${fmtS(r.return_1y_pct)}</dd><dt>3 years, per year</dt><dd>${fmtS(r.return_3y_pct_pa)}</dd><dt>5 years, per year</dt><dd>${fmtS(r.return_5y_pct_pa)}</dd><dt>10 years, per year</dt><dd>${fmtS(r.return_10y_pct_pa)}</dd>
       ${r.history_years != null ? `<dt>History available</dt><dd>${r.history_years} years</dd>` : ""}<dt>Volatility (1y)</dt><dd>${fmtP(r.volatility_1y_pct)}</dd><dt>Worst fall in the last year</dt><dd>${fmtP(r.max_drawdown_1y_pct)}</dd>
-      <dt>Dividend yield</dt><dd>${fmtP(l.yield_pct,2)}</dd><dt>Franking (estimate)</dt><dd>${fmtP(l.franking_pct,0)}</dd><dt>Management cost</dt><dd>${fmtP(l.mer_pct,2)}</dd>
+      <dt>Dividend yield</dt><dd>${fmtP(l.yield_pct,2)}${l.yield_source === "asx" ? " (ASX)" : ""}</dd><dt>Franking${(asxFactsOf(l.ticker) || {}).franking_pct != null && Math.abs((asxFactsOf(l.ticker).franking_pct) - (l.franking_pct || 0)) < 1 ? " (ASX, last dividend)" : " (estimate)"}</dt><dd>${fmtP(l.franking_pct,0)}</dd><dt>Management cost</dt><dd>${fmtP(l.mer_pct,2)}</dd>
       ${r.market_cap!=null ? `<dt>${r.quote_type==="ETF"?"Fund size":"Market cap"}${ccy}</dt><dd>${r.market_cap >= 1e9 ? "$" + (r.market_cap/1e9).toFixed(1) + " bn" : fmtM(r.market_cap)}</dd>` : ""}
       <dt>Beta to ASX 200 (1y)</dt><dd>${(pf.metrics.holding_beta_asx200||{})[l.ticker] != null ? pf.metrics.holding_beta_asx200[l.ticker].toFixed(2) : "–"}</dd>
-      <dt>Documents</dt><dd style="font-family:inherit">${docLink(l.ticker)}</dd><dt>Data</dt><dd style="font-family:inherit;color:var(--faint)">${esc(r.source||l.priced_from)}${r.fetched?", "+r.fetched:""}</dd></dl></div>`;
+      <dt>Documents</dt><dd style="font-family:inherit">${docLink(l.ticker)}</dd><dt>Data</dt><dd style="font-family:inherit;color:var(--faint)">${esc(r.source||l.priced_from)}${r.fetched?", "+r.fetched:""}</dd></dl></div>${asxPanel(l)}`;
+  const rb = sel("asx-refresh"); if (rb) rb.onclick = async e => { e.stopPropagation(); rb.disabled = true; rb.textContent = "Fetching…";
+    try { await asxLookup(l.ticker); toast("Updated from the ASX"); renderSheet(compute()); } catch (err) { toast(err.message); rb.disabled = false; rb.textContent = "Get the latest from the ASX"; } };
+  const ub = sel("asx-use"); if (ub) ub.onclick = e => { e.stopPropagation(); const f = asxFactsOf(l.ticker) || {}; const was = `${fmtP(l.yield_pct, 2)} yield, ${fmtP(l.franking_pct, 0)} franked`;
+    if (f.franking_pct != null) l.franking_pct = +f.franking_pct; if (f.yield_pct) { l.yield_pct = +f.yield_pct; l.yield_source = "asx"; }
+    state.dirty = true; render(); toast(`${l.ticker.replace(/\.(AX|XA)$/, "")}: now ${fmtP(l.yield_pct, 2)} yield, ${fmtP(l.franking_pct, 0)} franked from the ASX (was ${was}). Undo goes back.`); };
 }
+// ASX facts: kept by the daily build for every ASX holding (DATA.asx), or fetched live for any code (R[t].asx).
+const asxFactsOf = t => (R[t] && R[t].asx) || (DATA.asx || {})[t] || null;
+async function asxLookup(t){ const code = t.replace(/\.(AX|XA)$/, ""); const d = await api("/asx?code=" + encodeURIComponent(code));
+  if (!d.facts || !Object.keys(d.facts).length) throw new Error("The ASX returned no details for " + code);
+  R[t] = { ...(R[t] || { ticker: t, name: d.name, consensus_label: "no coverage", return_proxy: {} }), asx: d.facts }; return d; }
+const fdate = d => { const x = new Date(d); return isNaN(x) ? String(d) : x.toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" }); };
+function asxPanel(l){ if (!/\.(AX|XA)$/.test(l.ticker)) return "";
+  const f = asxFactsOf(l.ticker); const rows = [];
+  if (f) { if (f.kind) rows.push(["Security", f.kind + (f.security && !/^ordinary fully paid$/i.test(f.security) ? ": " + f.security : "")]);
+    if (f.last_dividend != null) rows.push(["Last dividend or distribution", `${f.dividend_currency && f.dividend_currency !== "AUD" ? f.dividend_currency + " " : "$"}${(+f.last_dividend).toFixed(4).replace(/0+$/, "").replace(/\.$/, "")}${f.franking_pct != null ? ", " + (+f.franking_pct).toFixed(0) + "% franked" : ""}`]);
+    if (f.ex_date) rows.push(["Ex date, pay date", fdate(f.ex_date) + (f.pay_date ? ", " + fdate(f.pay_date) : "")]);
+    if (f.yield_pct != null) rows.push(["Annual yield", fmtP(f.yield_pct, 2)]); if (f.pe != null) rows.push(["Price to earnings", (+f.pe).toFixed(1)]);
+    if (f.low_52w != null && f.high_52w != null) rows.push(["52 week range", `$${f.low_52w} to $${f.high_52w}`]); if (f.sector) rows.push(["Sector", f.sector + (f.industry ? ", " + f.industry : "")]);
+    if (f.listed) rows.push(["Listed", fdate(f.listed)]); }
+  const differs = f && ((f.franking_pct != null && f.last_dividend != null && Math.abs((l.franking_pct || 0) - f.franking_pct) >= 1) || (f.yield_pct && Math.abs((l.yield_pct || 0) - f.yield_pct) >= 0.1));
+  return `<div class="asxbox"><div class="eyebrow">From the ASX${f && f.fetched ? ", " + esc(f.fetched) : ""}</div>${f ? (f.description ? `<p class="summary" style="margin:4px 0 8px">${esc(f.description)}</p>` : "")
+      + `<dl class="kv">${rows.map(([k, v]) => `<dt>${k}</dt><dd style="font-family:inherit">${esc(v)}</dd>`).join("")}</dl>` : `<p class="muted" style="margin:4px 0">No ASX details on file for this holding yet.</p>`}
+    <div class="acts no-print" style="margin-top:8px">${FN ? `<button type="button" class="btn small" id="asx-refresh">Get the latest from the ASX</button>` : ""}${differs && !state.readOnly ? ` <button type="button" class="btn small primary" id="asx-use">Use the ASX's yield and franking in this portfolio</button>` : ""}</div></div>`; }
 function renderDiversification(pf){
   if (!pf.lines.length) { sel("divtiles").innerHTML = ""; ["secstack","regstack","seclegend","reglegend","divflags"].forEach(id => sel(id).innerHTML = ""); return; }
   const d = diversification(pf);
@@ -1044,11 +1068,15 @@ async function fetchAsxLine(code, cls, meta = {}){
   const c = String(code).replace(/\.(AX|XA)$/i, "").toUpperCase();
   const d = await api("/asx?code=" + encodeURIComponent(c)); const price = d.header && d.header.priceLast;
   if (!price) throw new Error("The ASX has no price for " + c);
-  const sym = c + ".AX"; const name = meta.name || titleCase(d.name || c); const k = cls || meta.cls || guessClass(sym, name, "");
-  R[sym] = { ticker: sym, name, consensus_label: "no coverage", return_proxy: {}, price, price_currency: "AUD", source: "ASX (last price; no history, so the asset class index stands in)", fetched: new Date().toISOString().slice(0, 10) };
-  const vehicle = vehicleFromText(meta.veh, k) || (k === "credit" ? "hybrid" : k === "fixed_income" ? "bond" : "direct");
-  return { ticker: sym, name, asset_class: k, vehicle, role: "satellite", currency: "AUD", mer_pct: meta.mer ?? 0, yield_pct: meta.yld ?? 0, yield_source: meta.yld != null ? "sheet" : "none",
-    franking_pct: 0, sector: meta.sleeve || (k === "credit" ? "Hybrids and notes" : k === "fixed_income" ? "Bonds" : ""), region: "Australia", price_aud: price, priced_from: "asx", weight_pct: 0, source: "asx", sleeve: meta.sleeve || "", boa: "", boa_custom: false }; }
+  const f = d.facts || {}; const sym = c + ".AX"; const name = meta.name || titleCase(d.name || c);
+  const k = cls || meta.cls || ({ PR: "credit", FLC: "credit", FRG: "fixed_income" })[f.issue_type] || guessClass(sym, name, "");
+  R[sym] = { ticker: sym, name, consensus_label: "no coverage", return_proxy: {}, price, price_currency: "AUD", asx: f,
+    summary: [f.description, f.security && !/^ordinary fully paid$/i.test(f.security) ? "Security: " + f.security + "." : ""].filter(Boolean).join(" "),
+    source: "ASX (price and facts; no price history, so the asset class index stands in)", fetched: new Date().toISOString().slice(0, 10) };
+  const vehicle = vehicleFromText(meta.veh, k) || ({ ETF: "etf", PR: "hybrid", FLC: "hybrid", FRG: "bond" })[f.issue_type] || (/listed investment/i.test(f.description || "") ? "lic" : null) || (k === "credit" ? "hybrid" : k === "fixed_income" ? "bond" : "direct");
+  const yld = meta.yld ?? f.yield_pct ?? null;
+  return { ticker: sym, name, asset_class: k, vehicle, role: "satellite", currency: "AUD", mer_pct: meta.mer ?? 0, yield_pct: yld ?? 0, yield_source: meta.yld != null ? "sheet" : f.yield_pct != null ? "asx" : "none",
+    franking_pct: f.franking_pct ?? 0, sector: meta.sleeve || f.sector || (k === "credit" ? "Hybrids and notes" : k === "fixed_income" ? "Bonds" : ""), region: "Australia", price_aud: price, priced_from: "asx", weight_pct: 0, source: "asx", sleeve: meta.sleeve || "", boa: "", boa_custom: false }; }
 // A holding with no price feed at all (an unlisted fund outside the universe, a term deposit, an unpriceable listing): kept at
 // the sheet's weight with the sheet's yield and fee so the portfolio still adds up, and labelled as such.
 function manualLine(it, kind){
@@ -1390,8 +1418,15 @@ renderFilters();
       history.replaceState(null, "", location.pathname); render(); resetHistory(); toast("Loaded " + mo.label + " from the model portfolios");
       setTimeout(() => sel("check").scrollIntoView({ behavior: "smooth", block: "start" }), 300); return; }
     toast("That model is a managed portfolio or ESG version, which the builder cannot open"); }
-  try { const d = JSON.parse(localStorage.getItem("mpl-builder-draft") || "null"); if (d && d.lines && d.lines.length) { hydrate(d, { id: d.id || null, ownerId: isLocalId(d.id) ? "local" : (user.session ? user.session.user.id : null) }); state.dirty = !!d.id; updateSaveNote(); resetHistory(); toast("Restored your last draft from this browser"); return; } } catch(e) {}
-  render(); resetHistory();
+  // Opened from the Daily brief's ASX lookup (?add=CODE): add that holding to the current draft at 0%.
+  const addCode = (params.get("add") || "").trim().toUpperCase().replace(/\.(AX|XA)$/, "");
+  const addAfter = () => { if (!/^[A-Z0-9]{2,6}$/.test(addCode)) return; history.replaceState(null, "", location.pathname);
+    const sym = [addCode + ".AX", addCode + ".XA", addCode].find(t => UMAP[t]);
+    if (state.lines.some(l => l.ticker === sym || l.ticker === addCode + ".AX")) { toast(addCode + " is already in this portfolio"); return; }
+    if (sym) addSymbol(sym); else { toast("Fetching " + addCode + " from the ASX…"); fetchAsxLine(addCode).then(l => pushLine(l)).catch(e => toast(e.message)); }
+    setTimeout(() => sel("holdings-section").scrollIntoView({ behavior: "smooth", block: "start" }), 400); };
+  try { const d = JSON.parse(localStorage.getItem("mpl-builder-draft") || "null"); if (d && d.lines && d.lines.length) { hydrate(d, { id: d.id || null, ownerId: isLocalId(d.id) ? "local" : (user.session ? user.session.user.id : null) }); state.dirty = !!d.id; updateSaveNote(); resetHistory(); toast("Restored your last draft from this browser"); addAfter(); return; } } catch(e) {}
+  render(); resetHistory(); addAfter();
 })();
 </script>
 </body>
@@ -1448,7 +1483,7 @@ STAGE_NOUN = {"early_accumulation": "early accumulator", "accumulation": "accumu
 def write_builder(path: Path, portfolios: list[Portfolio], profiles: Profiles, md: MarketData, universe: pd.DataFrame,
                   research: dict | None, prices: dict[str, float], *, settings_site_url: str = "", quality: dict | None = None,
                   platform_cfg: dict | None = None, pds: dict | None = None, history: dict | None = None, esg: dict | None = None,
-                  supabase: dict | None = None, as_of: str = "", platforms: dict | None = None) -> Path:
+                  supabase: dict | None = None, as_of: str = "", platforms: dict | None = None, asx: dict | None = None) -> Path:
     classes = [{"key": k, "label": v["label"], "kind": v["kind"]} for k, v in profiles.asset_classes.items()]
     colors = {c["key"]: f"--series-{i + 1}" for i, c in enumerate(classes)}
     light_vars = " ".join(f"--series-{i + 1}:{dash.PALETTE_LIGHT[i % len(dash.PALETTE_LIGHT)]};" for i in range(len(classes)))
@@ -1503,6 +1538,7 @@ def write_builder(path: Path, portfolios: list[Portfolio], profiles: Profiles, m
                               + [{"key": f"{k}@{st}", "label": f"{v['label']} ({STAGE_NOUN.get(st, st)})", "sub": f"{sum(sv[c] for c in growth):.0f}% growth"}
                                  for st, sv in (v.get("saa_by_stage") or {}).items()])],
         "boa_examples": _boa_examples(),
+        "asx": asx or {},
         "sizing": getattr(profiles, "sizing", {}) or {},
         "tiers": [{"key": k, "label": split(v["label"])[0], "min_balance": v["min_balance"], "max_holdings": v["max_holdings"], "min_holding": v["min_holding_dollars"], "brokerage": v["brokerage_dollars"]} for k, v in tiers],
         "platform": platform_cfg or {}, "pds": pds or {}, "quality": quality or {},

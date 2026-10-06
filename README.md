@@ -48,6 +48,19 @@ none.
 ASX listings that no history source carries (listed notes such as SPPHA, exchange-traded bonds such as GSBK54) are priced
 from the ASX's own feed (`market_data._fetch_asx_spot`), with their asset class index standing in for risk and history.
 
+## ASX facts
+
+`portfolio_engine/asx_facts.py` pulls the ASX's own data for every ASX listing in the universe at each build (about ten
+seconds; cached in `data/cache/asx_facts.json`, and a code the ASX cannot answer keeps its last good facts): the last
+dividend or distribution and the share of it that was franked, ex and pay dates, annual yield, P/E, the 52 week range, the
+security type (share, ETF, hybrid, listed note, government bond) and, for notes and hybrids, the terms (margin, maturity or
+call date), plus the issuer's description, sector and listing date. The build replaces the configured franking with the
+franking of the last dividend actually paid, fills a yield where none is configured and names holdings added by code. The
+dashboard and the builder show the facts on each holding's fact sheet; the builder can refresh them live and apply the
+ASX's yield and franking to a holding. The Daily brief's ASX lookup shows the same facts for any code, with "Add to a
+portfolio in the builder" (`builder.html?add=CODE`) and "Add to the universe" (queued with the edit PIN and applied by the
+next build).
+
 ## How a portfolio is built
 
 1. **Risk profile** gives the strategic asset allocation (SAA) across seven classes:

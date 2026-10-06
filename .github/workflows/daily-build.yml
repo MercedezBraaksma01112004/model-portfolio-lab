@@ -87,6 +87,8 @@ jobs:
             data/cache/prices.csv
             data/cache/research.json
             data/cache/search_index.json
+            data/cache/asx_facts.json
+            data/cache/asx_spot.json
           key: market-cache-${{ github.run_id }}
           restore-keys: |
             market-cache-
