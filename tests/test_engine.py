@@ -97,7 +97,11 @@ def test_no_tactical_matches_saa(ctx):
     s, p, u, md, manual, _ = ctx
     pf = build_portfolio(s, p, u, md, manual, None, profile="balanced", life_stage="early_accumulation", balance=500000)
     assert all(v == 0 for v in pf.tilts.values())
-    assert abs(pf.metrics["growth_pct"] - 70) < 2
+    target_growth = sum(p.saa_for("balanced", "early_accumulation")[c] for c in p.growth_classes)
+    assert abs(pf.metrics["growth_pct"] - target_growth) < 1
+    pf = build_portfolio(s, p, u, md, manual, None, profile="growth", life_stage="accumulation", balance=500000)
+    assert all(v == 0 for v in pf.tilts.values())
+    assert abs(pf.metrics["growth_pct"] - sum(p.saa_for("growth")[c] for c in p.growth_classes)) < 2
 
 
 def test_platform_fee_bands(ctx):
@@ -229,6 +233,8 @@ def test_diversification_rules(ctx):
     assert d.get("enabled")
     for prof, stage, bal in all_combos(p):
         pf = build_portfolio(s, p, u, md, manual, view, profile=prof, life_stage=stage, balance=bal)
+        if pf.house:
+            continue   # a fixed house model keeps its own spread; the engine's sector rules apply to its own selections
         per_sector = int(d["max_direct_per_sector"][pf.tier])
         cw = pf.class_weights()
         relaxed = any("rule relaxed" in w or "sector cap could not" in w for w in pf.warnings)
@@ -292,3 +298,55 @@ def test_platform_schedules_are_complete():
                 assert ups == sorted(ups), (key, mk)
                 assert all(0 <= b["rate"] < 0.02 for b in bands), (key, mk)
                 assert all(f.get("cap") is None or f["cap"] > 0 for f in m.get("percent_fees", [])), (key, mk)
+
+
+def test_house_models(ctx):
+    """Balanced at the Core tier and above is the house model: the model's holdings at the model's weights (to whole
+    units, rounding in cash), no tilts. Below Core, and under the ESG screen, the engine builds to the same allocation."""
+    s, p, u, md, manual, view = ctx
+    from portfolio_engine.config import load_universe
+    ua = load_universe(s, p, include_watchlist=True)
+    assert p.house_models, "house models not loaded"
+    for key, model in ((k, m) for k, m in p.house_models.items() if isinstance(m, dict) and "holdings" in m):
+        want = {h["ticker"]: float(h["weight"]) for h in model["holdings"]}
+        assert abs(sum(want.values()) - 100) < 1e-9
+        for stage in model["stages"]:
+            for tier, t in p.balance_tiers.items():
+                bal = float(t["representative_balance"])
+                pf = build_portfolio(s, p, u, md, manual, view, profile=model["profile"], life_stage=stage, balance=bal, universe_all=ua)
+                if p.tier_order(tier) < p.tier_order(model["min_tier"]):
+                    assert not pf.house, (key, tier)
+                    continue
+                assert pf.house and pf.house["key"] == key, (key, stage, tier)
+                got = {l.ticker: l.weight_pct for l in pf.lines}
+                assert set(got) == set(want), (key, set(want) ^ set(got))
+                rounding = sum(100 * (l.price_aud or 0) / bal for l in pf.lines if l.priced_from != "manual")   # whole units: at most one unit short per line
+                for tk, w in want.items():
+                    tol = rounding + 0.01 if tk == "CMA" else max(0.25, 100 * (next(l for l in pf.lines if l.ticker == tk).price_aud or 0) / bal + 1e-9)
+                    assert abs(got[tk] - w) <= tol, (key, tier, tk, got[tk], w)
+                assert abs(sum(got.values()) - 100) < 1e-6 and abs(sum(l.dollars for l in pf.lines) - bal) < 0.01
+                assert all(v == 0 for v in pf.tilts.values())
+        # the ESG variant is the engine's own, to the same allocation
+        stage = model["stages"][0]
+        from portfolio_engine.config import load_esg
+        esg = build_portfolio(s, p, u, md, manual, view, profile=model["profile"], life_stage=stage, balance=500000, esg=load_esg(s), universe_all=ua)
+        assert not esg.house
+    # pension-phase SAA replaces the home bias: the engine's own retirement portfolios start from saa_by_stage
+    for prof in ("conservative", "moderate"):
+        pf = build_portfolio(s, p, u, md, manual, None, profile=prof, life_stage="retirement", balance=500000)
+        saa = p.saa_for(prof, "retirement")
+        assert pf.saa == saa
+        assert abs(pf.target_class_weights["aus_equity"] - saa["aus_equity"]) < 1e-9
+
+
+def test_sizing_follows_house_model(ctx):
+    """Engine-built portfolios size positions like the house model: an index ETF core or a fund larger than a single
+    company in the same class."""
+    s, p, u, md, manual, view = ctx
+    pf = build_portfolio(s, p, u, md, manual, None, profile="growth", life_stage="accumulation", balance=500000)
+    intl = [l for l in pf.lines if l.asset_class == "intl_equity"]
+    direct = [l.weight_pct for l in intl if l.vehicle == "direct"]
+    pooled = [l.weight_pct for l in intl if l.vehicle in ("etf", "lic", "fund") and l.role in ("core", "fallback")]
+    if direct and pooled:
+        assert max(pooled) > max(direct)
+    assert len(pf.lines) <= p.balance_tiers[pf.tier]["max_holdings"]

@@ -28,10 +28,11 @@ class MarketData:
     synthetic: bool = False
     fx_aud_per: dict[str, float] = field(default_factory=dict)   # currency code -> AUD per 1 unit (USD, EUR, CAD, ...)
     fx_tickers: dict[str, str] = field(default_factory=dict)     # currency code -> the FX ticker that priced it
+    spot: dict[str, float] = field(default_factory=dict)         # last price only (ASX feed) for listings the history sources lack
 
     def latest(self, ticker: str) -> float | None:
         if ticker not in self.prices.columns:
-            return None
+            return self.spot.get(ticker)
         s = self.prices[ticker].dropna()
         return float(s.iloc[-1]) if len(s) else None
 
@@ -172,6 +173,42 @@ def _fetch_synthetic(tickers: list[str], days: int) -> pd.DataFrame:
     return pd.DataFrame(frames)
 
 
+ASX_API = "https://asx.api.markitdigital.com/asx-research/1.0"
+
+
+def _fetch_asx_spot(tickers: list[str]) -> dict[str, float]:
+    """Last traded price from the ASX for ASX listings no history source carries (listed notes, exchange-traded
+    bonds, some hybrids). A price only: risk and history for these use the asset class index ETF."""
+    import requests
+    out: dict[str, float] = {}
+    headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36",
+               "Accept": "application/json"}
+    for t in tickers:
+        if not t.upper().endswith(".AX"):
+            continue
+        code = t[:-3].lower()
+        try:
+            r = requests.get(f"{ASX_API}/companies/{code}/header", headers=headers, timeout=12)
+            if r.status_code != 200:
+                continue
+            price = (r.json().get("data") or {}).get("priceLast")
+            if price:
+                out[t] = float(price)
+        except Exception as e:  # noqa: BLE001
+            log.debug("ASX price failed for %s: %s", t, e)
+    if out:
+        log.info("ASX feed priced %d listings without history: %s", len(out), ", ".join(sorted(out)))
+    return out
+
+
+def _spot_cache(path: Path) -> dict[str, float]:
+    import json
+    try:
+        return {k: float(v) for k, v in json.loads(path.read_text()).items()} if path.exists() else {}
+    except Exception:  # noqa: BLE001
+        return {}
+
+
 # ---------------------------------------------------------------- cache and load
 
 def load_manual_prices(settings: Settings) -> dict[str, float]:
@@ -222,10 +259,14 @@ def get_market_data(settings: Settings, tickers: list[str], *, force_refresh: bo
         return _finish(prices, fx_ticker, {t: "synthetic" for t in wanted}, synthetic=True, fx_map=fx_map)
 
     cached = _read_cache(cache_path)
+    spot_path = cache_path.parent / "asx_spot.json"
     if cached is not None and not force_refresh and _cache_is_fresh(cache_path, md_cfg["max_cache_age_hours"]):
-        if all(t in cached.columns for t in wanted):
+        spot = _spot_cache(spot_path) if _cache_is_fresh(spot_path, md_cfg["max_cache_age_hours"]) else {}
+        have = [t for t in wanted if t in cached.columns]
+        if all(t in cached.columns or t in spot for t in wanted):
             log.info("Using cached prices from %s", cache_path)
-            return _finish(cached[wanted], fx_ticker, {t: "cache" for t in wanted}, fx_map=fx_map)
+            src = {t: "cache" for t in have} | {t: "asx" for t in wanted if t not in cached.columns}
+            return _finish(cached[have], fx_ticker, src, fx_map=fx_map, spot={t: spot[t] for t in wanted if t not in cached.columns})
 
     prices = pd.DataFrame()
     source_by_ticker: dict[str, str] = {}
@@ -265,6 +306,23 @@ def get_market_data(settings: Settings, tickers: list[str], *, force_refresh: bo
                 source_by_ticker[t] = "stale-cache"
             remaining = [t for t in remaining if t not in stale]
             log.warning("Using stale cache for %s", stale)
+    spot: dict[str, float] = {}
+    if remaining:
+        # ASX listings with no history anywhere (listed notes, exchange-traded bonds): today's price from the ASX.
+        previous = _spot_cache(spot_path)
+        spot = _fetch_asx_spot(remaining)
+        for t in spot:
+            source_by_ticker[t] = "asx"
+        for t in remaining:   # the ASX could not be reached for this one: keep its last good price, marked stale
+            if t not in spot and t in previous:
+                spot[t] = previous[t]
+                source_by_ticker[t] = "asx-stale"
+        remaining = [t for t in remaining if t not in spot]
+        try:
+            import json
+            spot_path.write_text(json.dumps({**previous, **spot}))
+        except OSError:
+            pass
     if remaining:
         log.warning("No price data for %s", remaining)
 
@@ -276,11 +334,11 @@ def get_market_data(settings: Settings, tickers: list[str], *, force_refresh: bo
     # Merge into the cache so partial refreshes do not lose older columns.
     merged = prices if cached is None else cached.drop(columns=[c for c in prices.columns if c in cached.columns]).join(prices, how="outer")
     merged.sort_index().to_csv(cache_path)
-    return _finish(prices, fx_ticker, source_by_ticker, fx_map=fx_map)
+    return _finish(prices, fx_ticker, source_by_ticker, fx_map=fx_map, spot=spot)
 
 
 def _finish(prices: pd.DataFrame, fx_ticker: str, sources: dict[str, str], synthetic: bool = False,
-            fx_map: dict[str, str] | None = None) -> MarketData:
+            fx_map: dict[str, str] | None = None, spot: dict[str, float] | None = None) -> MarketData:
     prices = prices.sort_index().ffill()
     fx = float(prices[fx_ticker].dropna().iloc[-1]) if fx_ticker in prices.columns and prices[fx_ticker].dropna().shape[0] else None
     # AUDUSD=X quotes USD per AUD; we want AUD per USD.
@@ -297,4 +355,4 @@ def _finish(prices: pd.DataFrame, fx_ticker: str, sources: dict[str, str], synth
         elif ccy != "USD":
             log.warning("No FX rate for %s (%s); holdings in that currency will be left unconverted", ccy, t)
     return MarketData(prices=prices, fx_aud_per_usd=aud_per_usd, as_of=as_of,
-                      source_by_ticker=sources, synthetic=synthetic, fx_aud_per=aud_per, fx_tickers=fx_map)
+                      source_by_ticker=sources, synthetic=synthetic, fx_aud_per=aud_per, fx_tickers=fx_map, spot=dict(spot or {}))

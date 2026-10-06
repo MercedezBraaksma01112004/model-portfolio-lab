@@ -12,9 +12,10 @@ export default async (req) => {
       fetch(`${API}/companies/${code.toLowerCase()}/announcements`, { headers: HEADERS }),
       fetch(`${API}/companies/${code.toLowerCase()}/header`, { headers: HEADERS }),
     ]);
-    if (!a.ok) return json({ error: a.status === 404 ? `no ASX listing found for ${code}` : `the ASX returned ${a.status}` }, a.status === 404 ? 404 : 502);
-    const d = (await a.json()).data || {};
-    const header = h.ok ? ((await h.json()).data || {}) : {};
+    const header = h.ok ? ((await h.json().catch(() => ({}))).data || {}) : {};
+    // Listed notes, hybrids and bonds sometimes have a price but no announcements feed: the price is enough for the builder.
+    if (!a.ok && header.priceLast == null) return json({ error: a.status === 404 ? `no ASX listing found for ${code}` : `the ASX returned ${a.status}` }, a.status === 404 ? 404 : 502);
+    const d = a.ok ? ((await a.json().catch(() => ({}))).data || {}) : { displayName: header.displayName || header.name || code, items: [] };
     const items = (d.items || []).map(it => ({
       code, name: d.displayName || "", headline: it.headline || "", date: it.date, price_sensitive: !!it.isPriceSensitive,
       type: (it.announcementType || "").replace(/\b\w+/g, w => w[0] + w.slice(1).toLowerCase()),

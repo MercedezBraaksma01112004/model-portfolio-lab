@@ -42,6 +42,28 @@ class Profiles:
     sma: dict[str, Any] = field(default_factory=dict)
     diversification: dict[str, Any] = field(default_factory=dict)
     selection: dict[str, Any] = field(default_factory=dict)
+    sizing: dict[str, Any] = field(default_factory=dict)
+    house_models: dict[str, Any] = field(default_factory=dict)   # config/house_models.yaml: fixed portfolios by profile and stage
+
+    def saa_for(self, profile: str, life_stage: str | None = None) -> dict[str, float]:
+        """The strategic allocation for a profile in a life stage: `saa_by_stage[stage]` where the profile has one
+        (pension phase), otherwise `saa`."""
+        rp = self.risk_profiles[profile]
+        by_stage = rp.get("saa_by_stage") or {}
+        return {c: float(v) for c, v in (by_stage.get(life_stage) or rp["saa"]).items()}
+
+    def has_stage_saa(self, profile: str, life_stage: str | None) -> bool:
+        return bool(life_stage and (self.risk_profiles[profile].get("saa_by_stage") or {}).get(life_stage))
+
+    def house_model_for(self, profile: str, life_stage: str, tier: str) -> tuple[str | None, dict | None]:
+        """The fixed house model that answers for this profile, stage and tier, if any."""
+        for key, m in (self.house_models or {}).items():
+            if not isinstance(m, dict) or "holdings" not in m:
+                continue
+            if m.get("profile") == profile and life_stage in (m.get("stages") or []) \
+                    and self.tier_order(tier) >= self.tier_order(m.get("min_tier", "core")):
+                return key, m
+        return None, None
 
     @property
     def growth_classes(self) -> list[str]:
@@ -80,6 +102,22 @@ class Profiles:
             missing = set(self.asset_classes) - set(rp["saa"])
             if missing:
                 raise ValueError(f"Risk profile {name} missing classes {missing}")
+            for stage, saa in (rp.get("saa_by_stage") or {}).items():
+                if stage not in self.life_stages:
+                    raise ValueError(f"Risk profile {name} has an SAA for unknown stage {stage}")
+                if abs(sum(saa.values()) - 100) > 1e-6 or set(self.asset_classes) - set(saa):
+                    raise ValueError(f"Risk profile {name} {stage} SAA must cover every class and sum to 100")
+        for key, m in (self.house_models or {}).items():
+            if not isinstance(m, dict) or "holdings" not in m:
+                continue
+            total = sum(float(h["weight"]) for h in m["holdings"])
+            if abs(total - 100) > 1e-6:
+                raise ValueError(f"House model {key} weights sum to {total}, not 100")
+            if m.get("profile") not in self.risk_profiles or set(m.get("stages") or []) - set(self.life_stages):
+                raise ValueError(f"House model {key} names an unknown profile or stage")
+            tickers = [h["ticker"] for h in m["holdings"]]
+            if len(tickers) != len(set(tickers)):
+                raise ValueError(f"House model {key} lists a ticker twice")
         for name, ls in self.life_stages.items():
             if ls["max_profile"] not in self.risk_profiles:
                 raise ValueError(f"Life stage {name} max_profile unknown")
@@ -117,7 +155,14 @@ def load_profiles(settings: Settings) -> Profiles:
         sma=raw.get("sma", {}),
         diversification=raw.get("diversification", {}),
         selection=raw.get("selection", {}),
+        sizing=raw.get("sizing", {}),
     )
+    hcfg = raw.get("house_models") or {}
+    if hcfg.get("enabled", False) and hcfg.get("file"):
+        hp = Path(hcfg["file"])
+        hp = hp if hp.is_absolute() else settings.root / hp
+        if hp.exists():
+            p.house_models = yaml.safe_load(hp.read_text()) or {}
     p.validate()
     return p
 
@@ -127,12 +172,12 @@ KNOWN_ETFS = {"VAS", "VGS", "VAF", "VAP", "IFRA", "GOLD", "NDQ", "VGE", "VGAD", 
               "IAF", "BILL", "VIF", "VBND", "HBRD", "BHYB", "PMGOLD", "QAU", "VDGR", "VDBA", "YLDX", "IHVV", "IJP", "IEM"}
 
 SUFFIX_CURRENCY = {".AX": "AUD", ".XA": "AUD", ".NZ": "NZD", ".TO": "CAD", ".V": "CAD", ".L": "GBP", ".PA": "EUR", ".MI": "EUR",
-                   ".DE": "EUR", ".AS": "EUR", ".MC": "EUR", ".BR": "EUR", ".SW": "CHF", ".HK": "HKD", ".T": "JPY", ".SI": "SGD"}
+                   ".DE": "EUR", ".AS": "EUR", ".MC": "EUR", ".BR": "EUR", ".SW": "CHF", ".HK": "HKD", ".T": "JPY", ".SI": "SGD", ".TW": "TWD"}
 
 
 SUFFIX_REGION = {".AX": "Australia", ".XA": "Australia", ".NZ": "New Zealand", ".TO": "Canada", ".V": "Canada", ".L": "United Kingdom",
                  ".PA": "Europe", ".MI": "Europe", ".DE": "Europe", ".AS": "Europe", ".MC": "Europe", ".BR": "Europe", ".SW": "Europe",
-                 ".HK": "Asia", ".T": "Asia", ".SI": "Asia"}
+                 ".HK": "Asia", ".T": "Asia", ".SI": "Asia", ".TW": "Asia"}
 
 YAHOO_SECTORS = {"Financial Services": "Financials", "Basic Materials": "Materials", "Technology": "Technology", "Healthcare": "Healthcare",
                  "Communication Services": "Communication", "Consumer Cyclical": "Consumer discretionary", "Consumer Defensive": "Consumer staples",
@@ -213,7 +258,8 @@ def load_universe(settings: Settings, profiles: Profiles, *, include_watchlist: 
             t = str(r["ticker"]).strip().upper()
             if t in set(df["ticker"]):
                 continue
-            rows.append({"ticker": t, "name": r["name"], "asset_class": r["asset_class"], "vehicle": "fund", "role": r["role"] or "satellite", "currency": "AUD",
+            is_td = r["asset_class"] == "cash" and ("term deposit" in str(r["name"]).lower() or t.startswith("TD"))
+            rows.append({"ticker": t, "name": r["name"], "asset_class": r["asset_class"], "vehicle": "td" if is_td else "fund", "role": r["role"] or "satellite", "currency": "AUD",
                          "mer": float(r["mer"] or 0), "yield": float(r["yield"] or 0), "franking": float(r["franking"] or 0), "weight_hint": float(r["weight_hint"] or 2),
                          "min_tier": r["min_tier"] or "established", "max_weight": float(r["max_weight"] or 5), "priority": float(r["priority"] or 3),
                          "notes": f"Unlisted fund ({r['liquidity']}); unit price {r['unit_price']} as at {r['price_date']}. " + r["notes"], "source": "unlisted_fund",

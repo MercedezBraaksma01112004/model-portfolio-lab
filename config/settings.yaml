@@ -22,6 +22,8 @@ market_data:
     GBP: GBPAUD=X
     NZD: NZDAUD=X
     CHF: CHFAUD=X
+    JPY: JPYAUD=X
+    TWD: TWDAUD=X
 
 # Published site (Netlify). The dashboard's add/remove controls talk to this site's functions.
 publish:

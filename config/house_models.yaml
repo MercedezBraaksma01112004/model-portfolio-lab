@@ -1,0 +1,132 @@
+# House models: fixed holdings and weights that replace the engine's own selection for a risk profile and life stage.
+#
+# Source: Model_Portfolios.xlsx, "Balanced" sheet, supplied October 2026. The accumulation model was set at $200,000
+# and the pension model at $600,000; the weights apply at any balance from the min_tier upwards (Core, $50,000 and up).
+# Below that tier, and under the ESG screen, the engine builds the portfolio itself to the same asset allocation
+# (risk_profiles.balanced in profiles.yaml), because 28 to 34 holdings cannot be implemented sensibly under $50,000
+# and the house model is not screened.
+#
+# Weights are percentages of the portfolio and must add to 100. `ticker` is the engine's price-feed code (the
+# workbook's own code is in `code`). `sleeve` is the role the model gives each holding; it is shown on the site and
+# used in the basis of advice drafts. `pays` is the income frequency from the pension model.
+# Deliberately not carried across: the workbook's price targets and "targeted growth return / TSR" columns. The site
+# shows history, never forecasts, and a basis of advice must not rest on return expectations.
+#
+# How the house model is structured (the engine's own portfolios follow the same pattern; see `sizing` and the
+# risk profile SAAs in profiles.yaml):
+#   Accumulation, 72 growth / 28 defensive. Growth is 61% international: about 13 direct global quality and AI
+#   infrastructure leaders at 2% each, two active global managers at 5% and a broad ex-US index ETF at 6%. The
+#   Australian sleeve (24%) is mostly managers and LICs at 5% (two income, one small-cap growth, one activist)
+#   with two direct names at 2%. Infrastructure 4% in two lines.
+#   Pension, 65 growth / 35 defensive. Growth is 57% Australian: eleven high, mostly fully franked yield names at
+#   2 to 3% and two income LICs at 6.5%; property 6% in three REITs; international 16% through two global LICs that
+#   pay franked dividends plus Spark New Zealand; infrastructure 6%.
+#   Defensive, both stages, in layers: cash at call (3.5 to 6%), a term deposit (9 to 10%), a long Commonwealth
+#   bond, an absolute return bond ETF, then a credit ladder of mutual capital instruments, listed notes,
+#   subordinated debt and a capital note at 2 to 3% each.
+
+balanced_accumulation:
+  label: "Balanced house model (accumulation)"
+  short: "House model"
+  profile: balanced
+  stages: [early_accumulation, accumulation]
+  min_tier: core
+  model_balance: 200000
+  source: "Model_Portfolios.xlsx, Balanced sheet (October 2026), accumulation column"
+  holdings:
+    # Australian equities 24%
+    - {code: SIG,        ticker: SIG.AX,     weight: 2,   sleeve: "Healthcare"}
+    - {code: SGH,        ticker: SGH.AX,     weight: 2,   sleeve: "Industrial"}
+    - {code: ETL1293AU,  ticker: ETL1293AU,  weight: 5,   sleeve: "Satellite fund"}
+    - {code: SET,        ticker: SET.AX,     weight: 5,   sleeve: "Core income"}
+    - {code: FGX,        ticker: FGX.AX,     weight: 5,   sleeve: "Core income"}
+    - {code: BNT0101AU,  ticker: BNT0101AU,  weight: 5,   sleeve: "Core growth"}
+    # International equities 44%
+    - {code: PANW.NAS,   ticker: PANW,       weight: 2,   sleeve: "Cyber security"}
+    - {code: GTT.PAR,    ticker: GTT.PA,     weight: 2,   sleeve: "Industrial"}
+    - {code: VRT.NYS,    ticker: VRT,        weight: 2,   sleeve: "AI infrastructure services"}
+    - {code: MSFT.NAS,   ticker: MSFT,       weight: 2,   sleeve: "Mega cap technology"}
+    - {code: LLY.NYS,    ticker: LLY,        weight: 2,   sleeve: "Healthcare"}
+    - {code: GOOGL.NAS,  ticker: GOOGL,      weight: 2,   sleeve: "Mega cap technology"}
+    - {code: AVGO.NAS,   ticker: AVGO,       weight: 2,   sleeve: "Mega cap technology"}
+    - {code: ISRG.NAS,   ticker: ISRG,       weight: 2,   sleeve: "Healthcare"}
+    - {code: EME.NYS,    ticker: EME,        weight: 2,   sleeve: "Engineering"}
+    - {code: LUN.TSX,    ticker: LUN.TO,     weight: 2,   sleeve: "Copper mining"}
+    - {code: ETN.NYS,    ticker: ETN,        weight: 2,   sleeve: "AI infrastructure services"}
+    - {code: MA.NYS,     ticker: MA,         weight: 2,   sleeve: "Financials"}
+    - {code: SU.PAR,     ticker: SU.PA,      weight: 2,   sleeve: "AI infrastructure services"}
+    - {code: WHT1465AU,  ticker: WHT1465AU,  weight: 5,   sleeve: "Core growth"}
+    - {code: VEU.ASX,    ticker: VEU.AX,     weight: 6,   sleeve: "Core diversified"}
+    - {code: GSF0874AU,  ticker: GSF0874AU,  weight: 5,   sleeve: "Core growth"}
+    - {code: PRY.MTA,    ticker: PRY.MI,     weight: 2,   sleeve: "Infrastructure (cables)"}
+    # Infrastructure and alternatives 4%
+    - {code: GIFL.ASX,   ticker: GIFL.XA,    weight: 2,   sleeve: "Infrastructure"}
+    - {code: IFT.ASX,    ticker: IFT.AX,     weight: 2,   sleeve: "Infrastructure"}
+    # Defensive 28%
+    - {code: CMA,        ticker: CMA,        weight: 3.5, sleeve: "Cash"}
+    - {code: TERM,       ticker: TD12,       weight: 9,   sleeve: "Term deposit"}
+    - {code: GSBK54,     ticker: GSBK54.AX,  weight: 2,   sleeve: "Australian government bonds"}
+    - {code: PAYS,       ticker: PAYS.XA,    weight: 2.5, sleeve: "Global corporate bonds"}
+    - {code: AYUPA,      ticker: AYUPA.AX,   weight: 2,   sleeve: "Mutual capital instrument (non-bank capital)"}
+    - {code: SPPHA,      ticker: SPPHA.AX,   weight: 2,   sleeve: "Listed note (infrastructure debt)"}
+    - {code: MQSD,       ticker: MQSD.AX,    weight: 2.5, sleeve: "Subordinated debt"}
+    - {code: YLDX.CXA,   ticker: YLDX.XA,    weight: 2.5, sleeve: "Subordinated debt"}
+    - {code: CGFPD,      ticker: CGFPD.AX,   weight: 2,   sleeve: "Hybrid"}
+
+balanced_pension:
+  label: "Balanced house model (pension)"
+  short: "House model"
+  profile: balanced
+  stages: [retirement]
+  min_tier: core
+  model_balance: 600000
+  source: "Model_Portfolios.xlsx, Balanced sheet (October 2026), pension column"
+  holdings:
+    # Australian equities 37%
+    - {code: ORG,    ticker: ORG.AX,    weight: 3,   sleeve: "Energy income",          pays: "Twice yearly"}
+    - {code: ELD,    ticker: ELD.AX,    weight: 3,   sleeve: "Agribusiness income",    pays: "Twice yearly"}
+    - {code: MMS,    ticker: MMS.AX,    weight: 2,   sleeve: "Salary packaging income", pays: "Twice yearly"}
+    - {code: SUN,    ticker: SUN.AX,    weight: 3,   sleeve: "Insurance income",       pays: "Twice yearly"}
+    - {code: FGX,    ticker: FGX.AX,    weight: 6.5, sleeve: "Core income (LIC)",      pays: "Twice yearly"}
+    - {code: IPH,    ticker: IPH.AX,    weight: 2.5, sleeve: "Professional services income", pays: "Twice yearly"}
+    - {code: BOQ,    ticker: BOQ.AX,    weight: 3,   sleeve: "Regional bank income",   pays: "Twice yearly"}
+    - {code: CCP,    ticker: CCP.AX,    weight: 2,   sleeve: "Financials income",      pays: "Twice yearly"}
+    - {code: SET,    ticker: SET.AX,    weight: 6.5, sleeve: "Core income",            pays: "Monthly"}
+    - {code: DRR,    ticker: DRR.AX,    weight: 3,   sleeve: "Royalty income",         pays: "Twice yearly"}
+    - {code: MTS,    ticker: MTS.AX,    weight: 2.5, sleeve: "Consumer staples income", pays: "Twice yearly"}
+    # Australian property 6% (property and infrastructure class)
+    - {code: RFF,    ticker: RFF.AX,    weight: 2,   sleeve: "Australian property (agricultural)", pays: "Quarterly"}
+    - {code: SGP,    ticker: SGP.AX,    weight: 2,   sleeve: "Australian property (diversified)",  pays: "Twice yearly"}
+    - {code: WPR,    ticker: WPR.AX,    weight: 2,   sleeve: "Australian property (service stations)", pays: "Quarterly"}
+    # International equities 16%
+    - {code: SPK,    ticker: SPK.AX,    weight: 3,   sleeve: "Telecommunications income (New Zealand)", pays: "Twice yearly"}
+    - {code: WGB,    ticker: WGB.AX,    weight: 6.5, sleeve: "Global income (LIC)",    pays: "Twice yearly"}
+    - {code: FGG,    ticker: FGG.AX,    weight: 6.5, sleeve: "Global income (LIC)",    pays: "Twice yearly"}
+    # Infrastructure 6%
+    - {code: GIFL,   ticker: GIFL.XA,   weight: 3,   sleeve: "Infrastructure",         pays: "Quarterly"}
+    - {code: DBI,    ticker: DBI.AX,    weight: 3,   sleeve: "Infrastructure",         pays: "Quarterly"}
+    # Defensive 35%
+    - {code: CMA,    ticker: CMA,       weight: 6,   sleeve: "Cash",                   pays: "Monthly"}
+    - {code: TERM,   ticker: TD12,      weight: 10,  sleeve: "Term deposit",           pays: "At maturity"}
+    - {code: GSBK54, ticker: GSBK54.AX, weight: 2.5, sleeve: "Australian government bonds", pays: "Twice yearly"}
+    - {code: PAYS,   ticker: PAYS.XA,   weight: 2.5, sleeve: "Global corporate bonds", pays: "Monthly"}
+    - {code: AYUPA,  ticker: AYUPA.AX,  weight: 2.5, sleeve: "Mutual capital instrument (non-bank capital)", pays: "Twice yearly"}
+    - {code: SPPHA,  ticker: SPPHA.AX,  weight: 3,   sleeve: "Listed note (infrastructure debt)", pays: "Monthly"}
+    - {code: MQSD,   ticker: MQSD.AX,   weight: 3,   sleeve: "Subordinated debt",      pays: "Monthly"}
+    - {code: YLDX.CXA, ticker: YLDX.XA, weight: 3,   sleeve: "Subordinated debt",      pays: "Monthly"}
+    - {code: CGFPD,  ticker: CGFPD.AX,  weight: 2.5, sleeve: "Hybrid",                 pays: "Quarterly"}
+
+# The model's watch list: held in the universe as watchlist names (screened and searchable, not held).
+watch:
+  - {code: "Dyno Nobel",               ticker: DNL.AX}
+  - {code: "Arm Holdings",             ticker: ARM}
+  - {code: "Generation Development",   ticker: GDG.AX}
+  - {code: "Hub24",                    ticker: HUB.AX}
+  - {code: "GYG",                      ticker: GYG.AX}
+  - {code: "Gem Life",                 ticker: GLF.AX}
+  - {code: "Delta Electronics (2308)", ticker: 2308.TW}
+  - {code: "Celestica",                ticker: CLS}
+  - {code: "Harmonic Drive Systems",   ticker: 6324.T}
+  - {code: "Dominion DMNHA",           ticker: DMNHA.AX, note: "Yield in excess of 7.5% currently"}
+  - {code: "Scentre Group (Westfield)", ticker: SCG.AX}
+  - {code: "Chemring",                 ticker: CHG.L}

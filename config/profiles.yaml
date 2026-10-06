@@ -1,7 +1,16 @@
-# Strategic asset allocation and rules. Class weights for Balanced come from the HUB24 true
-# balanced model; the other profiles scale the growth and defensive sleeves around it. Every number here is an assumption you should
-# be able to defend. Growth classes: aus_equity, intl_equity, infrastructure, alternatives.
-# Defensive classes: fixed_income, credit, cash. Weights are percentages and must sum to 100.
+# Strategic asset allocation and rules. Since October 2026 every allocation follows the structure of the Balanced
+# house model (config/house_models.yaml): accumulation portfolios hold about 61% of their growth assets overseas,
+# 33% in Australian shares and 6% in infrastructure; pension portfolios hold 57% in Australian shares (for franked
+# income), 18% in property and infrastructure and 25% overseas. The defensive sleeve is built in layers: cash at
+# call and a term deposit (together about 45%), government and absolute return bonds (about 15%) and a credit ladder
+# of mutual capital instruments, notes, subordinated debt and hybrids (about 40%). Conservative and Moderate keep
+# more of their defensive sleeve in bonds and cash and less in credit, because hybrids and subordinated debt fall
+# with shares in a crisis (2008, March 2020) and a cautious investor's defensive assets have to hold up when shares
+# do not. The house model holds no separate alternatives, so the alternatives class is 0 everywhere; add it back
+# here if you want it. Every number is an assumption you should be able to defend.
+# Growth classes: aus_equity, intl_equity, infrastructure, alternatives. Defensive: fixed_income, credit, cash.
+# Weights are percentages and must sum to 100. `saa` is used for the early accumulator and accumulator stages;
+# `saa_by_stage.retirement`, where present, replaces it in pension phase (and replaces the home bias rule).
 
 asset_classes:
   aus_equity:      {label: "Australian equities",        kind: growth}
@@ -16,31 +25,38 @@ risk_profiles:
   conservative:
     label: Conservative
     order: 1
-    saa: {aus_equity: 11, intl_equity: 14, infrastructure: 3, alternatives: 2, fixed_income: 35, credit: 15, cash: 20}
+    saa: {aus_equity: 10, intl_equity: 18.5, infrastructure: 1.5, alternatives: 0, fixed_income: 24.5, credit: 17.5, cash: 28}
+    saa_by_stage:
+      retirement: {aus_equity: 17, intl_equity: 7.5, infrastructure: 5.5, alternatives: 0, fixed_income: 24.5, credit: 17.5, cash: 28}
     tolerance_pp: 3          # asset class drift band, percentage points
     min_horizon_years: 2
   moderate:
     label: Moderate
     order: 2
-    saa: {aus_equity: 18, intl_equity: 23, infrastructure: 5, alternatives: 4, fixed_income: 25, credit: 15, cash: 10}
+    saa: {aus_equity: 16.5, intl_equity: 30.5, infrastructure: 3, alternatives: 0, fixed_income: 12.5, credit: 16.5, cash: 21}
+    saa_by_stage:
+      retirement: {aus_equity: 28.5, intl_equity: 12.5, infrastructure: 9, alternatives: 0, fixed_income: 12.5, credit: 16.5, cash: 21}
     tolerance_pp: 3
     min_horizon_years: 3
   balanced:
     label: Balanced
     order: 3
-    saa: {aus_equity: 26, intl_equity: 32, infrastructure: 6, alternatives: 6, fixed_income: 15, credit: 10, cash: 5}   # growth split from the HUB24 true balanced model; international ahead of Australian for accumulation
+    # The house model exactly: accumulation 72/28, pension 65/35.
+    saa: {aus_equity: 24, intl_equity: 44, infrastructure: 4, alternatives: 0, fixed_income: 4.5, credit: 11, cash: 12.5}
+    saa_by_stage:
+      retirement: {aus_equity: 37, intl_equity: 16, infrastructure: 12, alternatives: 0, fixed_income: 5, credit: 14, cash: 16}
     tolerance_pp: 4
     min_horizon_years: 5
   growth:
     label: Growth
     order: 4
-    saa: {aus_equity: 30, intl_equity: 41, infrastructure: 8, alternatives: 6, fixed_income: 7, credit: 5, cash: 3}
+    saa: {aus_equity: 28.5, intl_equity: 52, infrastructure: 4.5, alternatives: 0, fixed_income: 2.5, credit: 6, cash: 6.5}
     tolerance_pp: 4
     min_horizon_years: 7
   high_growth:
     label: High Growth
     order: 5
-    saa: {aus_equity: 34, intl_equity: 46, infrastructure: 9, alternatives: 6, fixed_income: 0, credit: 2, cash: 3}
+    saa: {aus_equity: 31.5, intl_equity: 58, infrastructure: 5.5, alternatives: 0, fixed_income: 0, credit: 2, cash: 3}
     tolerance_pp: 5
     min_horizon_years: 9
 
@@ -81,7 +97,8 @@ life_stages:
     cash_floor_pp: 8
     income_preference: 1.0        # weight within a class scales with grossed-up yield
     franking_preference: 1.0
-    home_bias_pp: 18              # of the international sleeve moves to Australian equities for franking (retirement only)
+    home_bias_pp: 18              # of the international sleeve moves to Australian equities for franking (retirement only;
+                                  # not applied where the profile has its own retirement SAA, which already leans Australian)
     home_bias_max_share_of_intl: 0.6   # but never more than this share of the international sleeve, so some overseas exposure remains
     min_equity_yield_pct: 3.0     # grossed-up; growth-only names (no dividend) are left out
     prefer_income_vehicles: true  # income LICs and high-yield ETFs rank ahead of growth satellites
@@ -104,9 +121,9 @@ balance_tiers:
     order: 2
     min_balance: 50000
     representative_balance: 150000
-    allowed_vehicles: [etf, fund, lic, lit, cash, td, direct, hybrid]
-    max_holdings: 14
-    max_per_class: 3
+    allowed_vehicles: [etf, fund, lic, lit, cash, td, direct, hybrid, bond]
+    max_holdings: 34          # the house model runs 34 lines at $200,000; 2% of $150,000 is the $3,000 minimum
+    max_per_class: 14
     min_holding_dollars: 3000
     brokerage_dollars: 20
   established:
@@ -114,9 +131,9 @@ balance_tiers:
     order: 3
     min_balance: 250000
     representative_balance: 500000
-    allowed_vehicles: [etf, fund, lic, lit, cash, td, direct, hybrid]
-    max_holdings: 26
-    max_per_class: 8
+    allowed_vehicles: [etf, fund, lic, lit, cash, td, direct, hybrid, bond]
+    max_holdings: 36
+    max_per_class: 16
     min_holding_dollars: 5000
     brokerage_dollars: 30
   high:
@@ -124,9 +141,9 @@ balance_tiers:
     order: 4
     min_balance: 1000000
     representative_balance: 2000000
-    allowed_vehicles: [etf, fund, lic, lit, cash, td, direct, hybrid]
-    max_holdings: 36
-    max_per_class: 12
+    allowed_vehicles: [etf, fund, lic, lit, cash, td, direct, hybrid, bond]
+    max_holdings: 40
+    max_per_class: 18
     min_holding_dollars: 10000
     brokerage_dollars: 50
 
@@ -180,7 +197,7 @@ sma:
 diversification:
   enabled: true
   spread_sectors_first: true           # the first name from each sector is chosen before any sector gets a second
-  max_direct_per_sector: {starter: 1, core: 2, established: 3, high: 4}   # single companies from one sector within a class
+  max_direct_per_sector: {starter: 1, core: 3, established: 5, high: 5}   # single companies from one sector within a class (the house model holds five industrial names offshore)
   max_sector_share_of_class: 0.35      # single companies in one sector may not exceed this share of the class weight
   max_region_share_of_direct: 0.75     # at most this share of a class's single companies may come from one country
   region_rule_classes: [intl_equity]   # the country rule only makes sense where the names span countries
@@ -206,3 +223,22 @@ selection:
     balanced:    {momentum: 0.10, trend: 0.10, r3: 0.15, r5: 0.20, r10: 0.20, consensus: 0.15, low_vol: 0.15, yield: 0.10, style: {growth: 0.1, quality: 0.25, income: 0.1, defensive: 0.0}}
     moderate:    {momentum: 0.05, trend: 0.10, r3: 0.10, r5: 0.15, r10: 0.20, consensus: 0.10, low_vol: 0.30, yield: 0.20, style: {growth: -0.1, quality: 0.2, income: 0.25, defensive: 0.1}}
     conservative: {momentum: 0.0, trend: 0.10, r3: 0.05, r5: 0.10, r10: 0.20, consensus: 0.10, low_vol: 0.35, yield: 0.30, style: {growth: -0.3, quality: 0.2, income: 0.3, defensive: 0.2}}
+
+# Position sizes, from the house model. The weight of each holding within its asset class is proportional to these
+# figures (they replace the per-holding weight_hint, except for your own additions in data/my_holdings.csv):
+# a single company about 2%, an active fund or listed investment company about 5%, the broad index ETF at the core
+# of a sleeve about 6%, an ETF satellite or a credit line 2 to 2.5%, the term deposit about 9% beside 3.5% cash at
+# call. In pension phase single companies and LICs are sized up (house model: 2 to 3% and 6.5%).
+sizing:
+  enabled: true
+  hint_by_vehicle: {direct: 2.0, lic: 5.0, fund: 5.0, lit: 3.0, hybrid: 2.5, bond: 2.0, td: 9.0, cash: 3.5}
+  etf_core: 6.0
+  etf_satellite: 2.5
+  term_deposits: [TD12]       # cash-class funds sized as a term deposit
+  term_deposit_hint: 9.0
+  retirement_multiplier: {direct: 1.25, lic: 1.3}
+
+# Fixed house models (config/house_models.yaml) replace the engine's own selection where they apply.
+house_models:
+  enabled: true
+  file: config/house_models.yaml

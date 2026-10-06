@@ -87,6 +87,7 @@ table.cmp tr.sel td { background:var(--accent-soft); }
   </div>
   <div class="tscroll" style="margin-top:14px"><table class="cmp"><thead><tr><th>Platform and menu</th><th class="num">Administration</th><th class="num">Other platform fees</th><th class="num">Platform total a year</th><th class="num">% of balance</th><th class="num">Brokerage a year</th><th class="num">Total with brokerage</th><th>Holds listed?</th><th>Rate card</th></tr></thead><tbody id="p-rows"></tbody></table></div>
   <p class="muted" id="p-note" style="font-size:12.5px;margin:8px 0 0"></p>
+  <p style="font-size:12.5px;margin:8px 0 0;padding:8px 12px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0"><b>Your selected investments may not be available on every platform.</b> Each platform has its own investment menu, and unlisted funds, international shares, listed notes and exchange-traded bonds are the most likely to be missing. This table compares administration costs only; check each holding against the platform's menu before relying on it.</p>
   <div class="toolbar no-print"><button class="btn" id="p-xlsx" type="button">Download as Excel</button></div>
 </section>
 <section>

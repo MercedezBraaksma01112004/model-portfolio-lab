@@ -24,12 +24,37 @@ Running `build` creates, in `output/`:
 * `builder.html`: the "Build your own portfolio" page (see below).
 * `portfolios_<date>.json`: everything, for any other tool you want to feed.
 
+## House models
+
+`config/house_models.yaml` holds fixed portfolios that replace the engine's own selection. Since October 2026 the Balanced
+profile is the house model from `Model_Portfolios.xlsx`: the accumulation model (34 holdings, 72% growth) for the early
+accumulator and accumulator stages, the pension model (28 holdings, 65% growth) for retirement, at the Core tier and above
+($50,000 up). The engine prices each model, converts it to whole units at the balance with the rounding left in cash and
+reports on it; it does not select, reweight or tilt it. Below $50,000, and under the ESG screen, the engine builds Balanced
+itself to the house model's allocation. Each holding's role in the model (`sleeve`) is shown on the site, carried into the
+builder and used in the basis of advice drafts. The workbook's price targets and "targeted TSR" columns are deliberately not
+carried across. Every house holding is tagged in `universe.csv` (`lists`: `house_acc`, `house_ret`), so the weekly screen never
+moves it to the watchlist and the engine's own portfolios lead with it. The model's watch list is in the universe as
+watchlist names.
+
+The rest of the engine follows the house model's structure (`profiles.yaml`): accumulation allocations hold about 61% of the
+growth assets overseas and pension allocations about 57% in Australian shares (`saa_by_stage.retirement`, which replaces the
+old home bias rule); the defensive sleeve is cash and a term deposit, then bonds, then a credit ladder, with Conservative and
+Moderate holding more bonds and cash and less credit; `sizing` sets position sizes like the model's (a single company about
+2%, a manager or LIC about 5%, a core index ETF about 6%, a credit line 2 to 2.5%, the term deposit about 9% beside 3.5%
+cash); and the Core tier allows up to 34 holdings. There is no separate alternatives allocation, because the house model has
+none.
+
+ASX listings that no history source carries (listed notes such as SPPHA, exchange-traded bonds such as GSBK54) are priced
+from the ASX's own feed (`market_data._fetch_asx_spot`), with their asset class index standing in for risk and history.
+
 ## How a portfolio is built
 
 1. **Risk profile** gives the strategic asset allocation (SAA) across seven classes:
    Australian equities, international equities, property and infrastructure, alternatives,
-   fixed income, credit and hybrids, cash. The Balanced SAA is anchored on your HUB24
-   true balanced 70/30 model; the other four profiles scale around it.
+   fixed income, credit and hybrids, cash. The Balanced SAA is the house model's own allocation
+   (72/28 in accumulation, 65/35 in pension phase); the other four profiles follow its structure
+   at their own growth levels (see House models above).
 2. **Tactical tilts** move each class by at most 5 percentage points from its SAA, and the
    net growth-versus-defensive shift is also capped at 5 points. The signals are trend
    (price versus 200 day average), momentum (12-1 month return less cash) and a
@@ -255,13 +280,33 @@ publish insurance, member services or other benefits, so they are not shown.
 
 ### Importing models, the portfolio check and the AI review
 
-The builder imports a model from any Excel or CSV sheet with a column of codes (ASX codes, tickers or HUB24 codes) and
-a column of weights, dollar values or units; section headings set the asset class and unmatched codes are listed. The
-portfolio check applies fixed rules (allocation against the target, concentration, analyst and quality warnings, cost,
-platform savings, overlap, cash, volatility, correlation, income, small holdings, unfinished basis of advice) with a
-reason for each and buttons that make the change. The AI review sends the portfolio's figures and the check's findings to
-Claude through the `review-background` function (signed-in accounts only, 25 reviews per account a day, results read
-back through `review-status`); it needs the `ANTHROPIC_API_KEY` environment variable on the Netlify site.
+The builder imports a model from any Excel or CSV sheet with a column of codes and a column of weights, dollar values or
+units, including two or more portfolios side by side on one sheet (each block with its own Code column; each is offered as a
+separate choice, labelled from the text above it, with its FUM used as the balance). Codes can be ASX codes, tickers,
+exchange-suffixed codes (PANW.NAS, GTT.PAR, LUN.TSX, PRY.MTA, YLDX.CXA, VEU.ASX), prefixed codes (NASDAQ:PANW), Bloomberg
+codes (PANW US), APIR codes, HUB24 codes, CMA and TERM. Section headings set the asset class; within a "Defensive" heading
+each row's sleeve or name decides cash, bonds or credit. A code the universe does not hold is fetched from the price feed;
+an ASX listing with no history is priced from the ASX; anything else (an unlisted fund outside the universe) is kept at the
+sheet's weight, yield and fee. The note lists every holding that was not fully matched; nothing is dropped silently.
+
+The portfolio check applies fixed rules (allocation against the target, concentration, analyst and quality warnings, cost,
+platform savings, overlap, cash, volatility, correlation, income, small holdings, unfinished basis of advice) with a reason for
+each and buttons that make the change. Its cost rule compares like with like only: a cheaper index fund is suggested only when
+it gives the same exposure (asset class, region and segment such as small companies, income or infrastructure), never a broad
+index fund in place of a specialist one, and long/short, activist and absolute return funds are left alone. The AI review sends
+the portfolio's figures, each holding's exposure, role and the adviser's own reasons, and the check's findings to Claude through
+the `review-background` function (signed-in accounts only, 25 uses per account a day, results read back through
+`review-status`); its instructions carry the same like-for-like rule. It needs the `ANTHROPIC_API_KEY` environment variable on
+the Netlify site. The platform comparison carries the caveat that the selected investments may not be on every platform.
+
+### Basis of advice in house style
+
+Each holding's automatic draft follows the Statement of Advice layout: why we recommend it, advantages, other things to
+consider, from the holding's own facts and never past returns. "House style" on the builder takes two to five passages from
+the adviser's own Statements of Advice (pasted on the page, or shipped as defaults in `config/boa_examples.md`) and "Write
+with AI in house style" drafts every holding to match them, through the same background function (`mode: "boa"`), with
+client-specific reasons left as bracketed placeholders. AI drafts are marked until edited. The section sits at the bottom of
+the page, below the allocation, history and risk sections.
 
 ### Daily brief
 

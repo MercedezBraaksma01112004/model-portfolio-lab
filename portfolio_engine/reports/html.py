@@ -434,7 +434,7 @@ a.btn { text-decoration:none; }
 <script>
 const DATA = __DATA__;
 const STAGE_NOUN = { early_accumulation: "early accumulator", accumulation: "accumulator", retirement: "retiree" };
-const VEHICLE = { etf: "ETF", lic: "listed investment company", direct: "share", fund: "managed fund", cash: "cash", sma: "managed portfolio", hybrid: "hybrid", note: "listed note" };
+const VEHICLE = { etf: "ETF", lic: "listed investment company", direct: "share", fund: "managed fund", cash: "cash", sma: "managed portfolio", hybrid: "hybrid", note: "listed note", bond: "exchange-traded bond", td: "term deposit" };
 const WHO = { early_accumulation: "An <b>early accumulator</b>", accumulation: "An <b>accumulator</b>", retirement: "A <b>retiree</b>" };
 const CLASSES = DATA.classes, COLORS = DATA.colors, R = DATA.research;
 const fmtP = (x, d=1) => (x==null||isNaN(x)) ? "–" : x.toFixed(d) + "%";
@@ -589,7 +589,8 @@ function render(){
     (${fmtP(m.total_ongoing_cost_pct,2)} of the balance) and pay roughly <b>${fmtM(m.income_per_year)} a year</b> in income.`;
   sel("readout").innerHTML +=
     capped ? `<br><b>Note:</b> ${label(DATA.profiles, state.profile)} was asked for, but the rules cap the ${S.toLowerCase()} stage at ${P}, so that is what was built.` : "";
-  sel("title").textContent = `${P} ${STAGE_NOUN[pf.life_stage] || S.toLowerCase()}, ${T.label.toLowerCase()} tier` + (isSma ? ", managed portfolio" : "") + (pf.esg && pf.esg.screened ? ", ESG screened" : "");
+  const isHouse = !!(pf.house && pf.house.key);
+  sel("title").textContent = `${P} ${STAGE_NOUN[pf.life_stage] || S.toLowerCase()}, ${T.label.toLowerCase()} tier` + (isSma ? ", managed portfolio" : "") + (isHouse ? ", house model" : "") + (pf.esg && pf.esg.screened ? ", ESG screened" : "");
   sel("print-meta").textContent = `Model Portfolio Lab. Balance ${fmtM(pf.balance)}. Prices as of ${pf.as_of}. Illustrative only, not advice.`;
   sel("tiles").innerHTML = [
     ["Growth / defensive", `${fmtP(m.growth_pct,0)} / ${fmtP(m.defensive_pct,0)}`, "shares and property versus bonds and cash"],
@@ -632,17 +633,25 @@ function render(){
     why.push(`${S} keeps <b>${fmtP(DATA.stage_rules[pf.life_stage].cash_floor_pp,0)} in cash</b> outside the managed portfolio as a spending buffer; the manager holds a little more inside it.`);
     why.push(`Market-signal tilts are not applied: the manager sets the tactical allocation inside the portfolio.`);
   }
+  if (isHouse) {
+    why.push(`This is the <b>${pf.house.label}</b>: its holdings and weights are fixed (${pf.house.source}). The engine prices it, converts it to whole units at this balance with the rounding left in cash, and reports on it. Its own selection rules and market-signal tilts do not apply.`);
+    why.push(`Each holding's role in the model is shown under its name. Position sizes follow the model: single companies about 2%, managers and listed investment companies about 5 to 6.5%, defensive lines 2 to 3%, with cash at call and a term deposit as the base of the defensive sleeve.`);
+    if (pf.house.model_balance) why.push(`The model was set at ${fmtM(pf.house.model_balance)}. Below about $150,000 its 2% lines fall under ${fmtM(T.min_holding)} each, so check that brokerage on each purchase is worth paying.`);
+  }
   const biggest = CLASSES.map(c => [c, pf.tilts[c.key]||0]).sort((a,b) => Math.abs(b[1]) - Math.abs(a[1]))[0];
-  if (isSma) {} else if (DATA.tactical.enabled && Math.abs(biggest[1]) >= 0.5) why.push(`Market signals moved <b>${biggest[0].label.toLowerCase()}</b> ${biggest[1]>0?"up":"down"} by ${Math.abs(biggest[1]).toFixed(1)} points from its long-run target; the defensive classes absorbed the difference.`);
+  if (isSma || isHouse) {} else if (DATA.tactical.enabled && Math.abs(biggest[1]) >= 0.5) why.push(`Market signals moved <b>${biggest[0].label.toLowerCase()}</b> ${biggest[1]>0?"up":"down"} by ${Math.abs(biggest[1]).toFixed(1)} points from its long-run target; the defensive classes absorbed the difference.`);
   else if (!isSma) why.push(`Market signals are close to neutral today, so the weights sit near the long-run targets.`);
   const st = DATA.stage_rules[pf.life_stage];
   if (!isSma && st.cash_floor_pp > 0 && (cw.cash||0) >= st.cash_floor_pp - 0.5) why.push(`${S} keeps at least <b>${st.cash_floor_pp}% in cash</b> as a spending buffer.`);
-  if (!isSma && st.home_bias_pp > 0) why.push(`${st.home_bias_pp} points moved from international to <b>Australian shares</b>: a pension account pays no tax, so franking credits are refunded in cash and a 4% fully franked dividend is worth 5.7% to it.`);
-  if (!isSma && st.income_preference > 0) why.push(`Within each class, holdings are weighted by <b>grossed-up yield</b> (cash dividend plus franking credit), so franked income ranks ahead of unfranked and ahead of price growth${st.min_equity_yield_pct ? `; equity holdings yielding under ${st.min_equity_yield_pct}% grossed up are left out` : ""}.`);
-  if (!isSma) why.push(`At ${T.label.toLowerCase()} balances the rules allow up to <b>${T.max_holdings} holdings</b> with at least ${fmtM(T.min_holding)} each, so brokerage does not eat the return.`);
+  if (!isSma && !isHouse && st.home_bias_pp > 0 && !(DATA.stage_saa || {})[pf.profile_used + "@" + pf.life_stage]) why.push(`${st.home_bias_pp} points moved from international to <b>Australian shares</b>: a pension account pays no tax, so franking credits are refunded in cash and a 4% fully franked dividend is worth 5.7% to it.`);
+  if (!isSma && !isHouse && (DATA.stage_saa || {})[pf.profile_used + "@" + pf.life_stage]) why.push(`In pension phase this profile has its own long-run target that leans to <b>Australian shares</b> for franked income (a pension account is refunded its franking credits in cash), following the house model's pension structure.`);
+  if (!isSma && !isHouse && st.income_preference > 0) why.push(`Within each class, holdings are weighted by <b>grossed-up yield</b> (cash dividend plus franking credit), so franked income ranks ahead of unfranked and ahead of price growth${st.min_equity_yield_pct ? `; equity holdings yielding under ${st.min_equity_yield_pct}% grossed up are left out` : ""}.`);
+  if (!isSma && !isHouse) why.push(`At ${T.label.toLowerCase()} balances the rules allow up to <b>${T.max_holdings} holdings</b> with at least ${fmtM(T.min_holding)} each, so brokerage does not eat the return.`);
   sel("why").innerHTML = why.map(w => `<li>${w}</li>`).join("");
 
-  sel("explain").innerHTML = `<p>This is a <b>${P.toLowerCase()}</b> portfolio: the long-run target is ${fmtP(DATA.saa[pf.profile_used].growth,0)} growth assets, which historically means
+  const stSaa = (DATA.stage_saa || {})[pf.profile_used + "@" + pf.life_stage];
+  const targetGrowth = stSaa ? CLASSES.filter(c => c.kind === "growth").reduce((t, c) => t + (stSaa[c.key] || 0), 0) : DATA.saa[pf.profile_used].growth;
+  sel("explain").innerHTML = `<p>This is a <b>${P.toLowerCase()}</b> portfolio: the long-run target is ${fmtP(targetGrowth,0)} growth assets, which historically means
     deeper falls in bad years in exchange for higher returns over ${DATA.saa[pf.profile_used].horizon}+ years. ${st.blurb}</p>
     <p>Over the last year this mix moved about ±${fmtP(m.realised_volatility_pct,0)}. A simple average of the holdings' own volatilities would say
     ${fmtP(m.weighted_avg_holding_vol_pct,0)}; the difference is diversification, because the holdings do not all move together.</p>
@@ -654,7 +663,8 @@ function render(){
   const classLabel = k => k === "__sma__" ? "Diversified (managed)" : label(CLASSES, k);
   const classColor = k => k === "__sma__" ? "var(--accent)" : cssColor(k);
   sel("holdings").innerHTML = pf.lines.map(l => { const r = R[l.ticker] || {}; const col = classColor(l.asset_class);
-    return `<tr class="row ${state.ticker===l.ticker?"active":""}" tabindex="0" data-t="${l.ticker}"><td><b>${l.name}</b><br><span class="mono" style="font-size:11.5px;color:var(--faint)">${l.ticker}, ${VEHICLE[l.vehicle] || l.vehicle}</span> ${qualityChip(l.ticker)}</td>
+    const sleeve = isHouse && pf.house.sleeves ? pf.house.sleeves[l.ticker] : "";
+    return `<tr class="row ${state.ticker===l.ticker?"active":""}" tabindex="0" data-t="${l.ticker}"><td><b>${l.name}</b><br><span class="mono" style="font-size:11.5px;color:var(--faint)">${l.ticker}, ${VEHICLE[l.vehicle] || l.vehicle}</span> ${qualityChip(l.ticker)}${sleeve ? `<br><span style="font-size:12px;color:var(--muted)">${sleeve}${pf.house.pays && pf.house.pays[l.ticker] ? `, pays ${pf.house.pays[l.ticker].toLowerCase()}` : ""}</span>` : ""}</td>
       <td><span class="dot" style="background:${col}"></span>${classLabel(l.asset_class)}</td><td class="num">${fmtP(l.weight_pct,1)}</td>
       <td><div class="bar"><span style="width:${l.weight_pct/maxW*100}%;background:${col}"></span></div></td>
       <td>${consensusChip(r)}${l.consensus_multiplier && Math.abs(l.consensus_multiplier-1) >= 0.01 ? `<span class="mult ${l.consensus_multiplier>1?"pos":"neg"}" title="weight scaled within its asset class by the analyst consensus">${l.consensus_multiplier>1?"+":""}${Math.round((l.consensus_multiplier-1)*100)}% weight</span>` : ""}</td>
@@ -1119,6 +1129,7 @@ def write_dashboard(path: Path, portfolios: list[Portfolio], profiles: Profiles,
                 "signals": (view.to_dict()["signals"] if view else {})}
     growth = profiles.growth_classes
     saa = {k: {"growth": sum(v["saa"][c] for c in growth), "horizon": v.get("min_horizon_years", 5)} for k, v in profiles.risk_profiles.items()}
+    stage_saa = {f"{k}@{st}": {c: float(w) for c, w in sv.items()} for k, v in profiles.risk_profiles.items() for st, sv in (v.get("saa_by_stage") or {}).items()}
     stage_rules = {k: {"cash_floor_pp": v["cash_floor_pp"], "home_bias_pp": v["home_bias_pp"], "income_preference": v["income_preference"],
                        "min_equity_yield_pct": v.get("min_equity_yield_pct", 0), "blurb": STAGE_BLURBS.get(k, "")} for k, v in profiles.life_stages.items()}
     research_json = {t: dict(r.__dict__) for t, r in (research or {}).items()}
@@ -1138,7 +1149,7 @@ def write_dashboard(path: Path, portfolios: list[Portfolio], profiles: Profiles,
                    "max_holdings": v["max_holdings"], "min_holding": v["min_holding_dollars"], "brokerage": v["brokerage_dollars"]} for k, v in tiers],
         "platform": platform_cfg or {}, "class_corr": class_corr or {}, "pds": pds or {},
         "defaults": {"profile": "balanced", "stage": "accumulation", "tier": tiers[1][0] if len(tiers) > 1 else tiers[0][0]},
-        "saa": saa, "stage_rules": stage_rules,
+        "saa": saa, "stage_saa": stage_saa, "stage_rules": stage_rules,
         "tactical": tactical, "research": research_json,
         "review": [r.__dict__ for r in (review or [])],
         "site_url": (settings_site_url or ""), "fx_aud_per_usd": md.fx_aud_per_usd, "fx_aud_per": md.fx_aud_per, "quality": quality or {},

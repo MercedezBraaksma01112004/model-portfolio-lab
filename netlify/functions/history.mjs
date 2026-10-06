@@ -3,7 +3,7 @@ import { yfetch, json } from "./_yahoo.mjs";
 // Everything the builder page needs to treat a holding it has never seen like one from the engine's universe:
 // name, currency, latest price, trailing dividend yield, ten years of month-end total returns (dividends
 // reinvested) converted to AUD, and the last year of daily returns in the holding's own currency.
-const FX = { USD: "AUDUSD=X", EUR: "EURAUD=X", CAD: "CADAUD=X", GBP: "GBPAUD=X", NZD: "NZDAUD=X", CHF: "CHFAUD=X", JPY: "JPYAUD=X", HKD: "HKDAUD=X", SGD: "SGDAUD=X" };
+const FX = { USD: "AUDUSD=X", EUR: "EURAUD=X", CAD: "CADAUD=X", GBP: "GBPAUD=X", NZD: "NZDAUD=X", CHF: "CHFAUD=X", JPY: "JPYAUD=X", HKD: "HKDAUD=X", SGD: "SGDAUD=X", TWD: "TWDAUD=X" };
 const chart = (s, range, interval) => yfetch(`https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(s)}?range=${range}&interval=${interval}&events=div`);
 const closes = r => (r.indicators?.adjclose?.[0]?.adjclose || r.indicators?.quote?.[0]?.close || []);
 const monthKey = ts => { const d = new Date(ts * 1000); return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; };

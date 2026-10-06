@@ -83,6 +83,7 @@ class Portfolio:
     implementation: str = "direct"          # "direct" (holdings chosen one by one) or "sma" (one managed portfolio)
     sma: dict = field(default_factory=dict)  # chosen managed portfolio and shortlist when implementation == "sma"
     esg: dict = field(default_factory=dict)  # {"screened": True, "changes": [...]} when built under the ESG screen
+    house: dict = field(default_factory=dict)  # set when the portfolio is a fixed house model (config/house_models.yaml)
 
     def class_weights(self) -> dict[str, float]:
         if self.implementation == "sma":
@@ -124,20 +125,23 @@ def plain_warnings(warnings: list[str], profiles: Profiles) -> list[str]:
     return [one(w) for w in warnings]
 
 
-def strategic_plus_tactical(profiles: Profiles, profile: str, view: TacticalView | None) -> tuple[dict, dict, dict]:
-    saa = {c: float(v) for c, v in profiles.risk_profiles[profile]["saa"].items()}
+def strategic_plus_tactical(profiles: Profiles, profile: str, view: TacticalView | None,
+                            life_stage: str | None = None) -> tuple[dict, dict, dict]:
+    saa = profiles.saa_for(profile, life_stage)
     tilts = view.tilts_for(saa, profiles) if view is not None else {c: 0.0 for c in saa}
     target = {c: saa[c] + tilts[c] for c in saa}
     return saa, tilts, target
 
 
-def apply_life_stage(profiles: Profiles, target: dict[str, float], life_stage: str, warnings: list[str]) -> dict[str, float]:
+def apply_life_stage(profiles: Profiles, target: dict[str, float], life_stage: str, warnings: list[str],
+                     skip_home_bias: bool = False) -> dict[str, float]:
     ls = profiles.life_stages[life_stage]
     t = dict(target)
     # Home bias: shift from international to Australian equities, but never strip more than a set share
-    # of the international sleeve, so a conservative pension still holds some overseas shares.
+    # of the international sleeve, so a conservative pension still holds some overseas shares. A profile with its
+    # own pension-phase SAA already leans Australian, so the shift is not applied on top of it.
     max_share = float(ls.get("home_bias_max_share_of_intl", 0.6))
-    shift = min(float(ls.get("home_bias_pp", 0)), t.get("intl_equity", 0.0) * max_share)
+    shift = 0.0 if skip_home_bias else min(float(ls.get("home_bias_pp", 0)), t.get("intl_equity", 0.0) * max_share)
     if shift > 0:
         t["intl_equity"] -= shift
         t["aus_equity"] += shift
@@ -307,12 +311,15 @@ def fit_scores(universe: pd.DataFrame, research: dict, profile: str, ls: dict, c
     return pd.Series(scores, index=universe.index), pd.Series(styles, index=universe.index), pd.Series(excl, index=universe.index)
 
 
-def _pick_diverse(elig: pd.DataFrame, n: int, tier: str, cfg: dict, warnings: list[str], asset_class: str) -> pd.DataFrame:
+def _pick_diverse(elig: pd.DataFrame, n: int, tier: str, cfg: dict, warnings: list[str], asset_class: str,
+                  need: float | None = None) -> pd.DataFrame:
     """Take the first `n` eligible holdings in priority order, but skip a single company when its sector already has
     the tier's quota in this class, or when its country would hold more than the allowed share of the class's single
-    companies. Caps are relaxed (region first, then sector) only if they would leave the class short."""
-    if not cfg.get("enabled", True) or n >= len(elig):
+    companies. Caps are relaxed (region first, then sector) only if they would leave the class short: fewer names
+    than asked for is fine when their maximum weights can still carry the class weight (`need`)."""
+    if not cfg.get("enabled", True):
         return elig.head(n).copy()
+    n = min(n, len(elig))
     per_sector = int((cfg.get("max_direct_per_sector") or {}).get(tier, 99))
     region_share = float(cfg.get("max_region_share_of_direct", 1.0)) if asset_class in (cfg.get("region_rule_classes") or ["intl_equity"]) else 1.0
     # Spread first, then rank: the first name from each sector (for funds, each sector and region) comes before any
@@ -336,6 +343,10 @@ def _pick_diverse(elig: pd.DataFrame, n: int, tier: str, cfg: dict, warnings: li
         else:
             elig = elig.assign(_rank=ranks).sort_values(["_rank", "priority", "weight_hint"], ascending=[True, True, False]).drop(columns="_rank")
 
+    # The country rule is a share of the class's single companies, so it is measured against the number of single
+    # companies the class is expected to hold (those among the first n candidates), not against every name in it.
+    exp_direct = max(1, int((elig.head(n)["vehicle"] == "direct").sum()))
+
     def attempt(sector_cap: int, region_cap: float) -> list:
         picked, sectors, regions = [], {}, {}
         for idx, r in elig.iterrows():
@@ -343,7 +354,7 @@ def _pick_diverse(elig: pd.DataFrame, n: int, tier: str, cfg: dict, warnings: li
             sec, reg = str(r.get("sector", "")), str(r.get("region", ""))
             if direct and sectors.get(sec, 0) >= sector_cap:
                 continue
-            if direct and regions.get(reg, 0) + 1 > max(1, math.ceil(region_cap * n)):
+            if direct and region_cap < 1.0 and regions.get(reg, 0) + 1 > max(1, math.ceil(region_cap * exp_direct)):
                 continue
             picked.append(idx)
             if direct:
@@ -354,12 +365,14 @@ def _pick_diverse(elig: pd.DataFrame, n: int, tier: str, cfg: dict, warnings: li
         return picked
 
     picked = attempt(per_sector, region_share)
+    if len(picked) < n and picked and need is not None and float(elig.loc[picked, "max_weight"].astype(float).sum()) >= need:
+        return elig.loc[picked].copy()   # fewer names, every rule kept
     if len(picked) < n:
         picked = attempt(per_sector, 1.0)
         if len(picked) < n:
             picked = attempt(99, 1.0)
         else:
-            warnings.append(f"«{asset_class}»: the limit on holdings from one country was relaxed to fill {n} holdings.")
+            warnings.append(f"«{asset_class}»: the limit on holdings from one country was relaxed to fill {n} holdings (country rule relaxed).")
     return elig.loc[picked].copy()
 
 
@@ -385,11 +398,11 @@ def select_holdings(universe: pd.DataFrame, profiles: Profiles, target: dict[str
             warnings.append(f"No eligible holding for «{c}» at the «{tier}» tier, so its weight was moved to a related asset class.")
             continue
         n = caps[c]
-        chosen = _pick_diverse(elig, n, tier, dcfg, warnings, c)
+        chosen = _pick_diverse(elig, n, tier, dcfg, warnings, c, need=active[c])
         # Add names until the selected holdings' max_weight caps can carry the class weight.
         while n < len(elig) and chosen["max_weight"].sum() < active[c] and sum(len(v) for v in selection.values()) + n < max_holdings:
             n += 1
-            chosen = _pick_diverse(elig, n, tier, dcfg, warnings, c)
+            chosen = _pick_diverse(elig, n, tier, dcfg, warnings, c, need=active[c])
         selection[c] = chosen
     return selection
 
@@ -609,8 +622,17 @@ def build_portfolio(settings: Settings, profiles: Profiles, universe: pd.DataFra
     tcfg = profiles.balance_tiers[tier]
     ls = profiles.life_stages[life_stage]
 
-    saa, tilts, target = strategic_plus_tactical(profiles, profile_used, view)
-    target = apply_life_stage(profiles, target, life_stage, warnings)
+    hkey, house = profiles.house_model_for(profile_used, life_stage, tier)
+    if house and not esg:
+        return build_house_portfolio(settings, profiles, universe, md, manual, key=hkey, model=house, profile=profile,
+                                     profile_used=profile_used, life_stage=life_stage, tier=tier, balance=balance,
+                                     research=research, universe_all=universe_all, warnings=warnings)
+    if house and esg:
+        warnings.append(f"{house['label']} is not ESG screened, so this is the engine's screened portfolio built to the same asset allocation.")
+
+    saa, tilts, target = strategic_plus_tactical(profiles, profile_used, view, life_stage)
+    target = apply_life_stage(profiles, target, life_stage, warnings, skip_home_bias=profiles.has_stage_saa(profile_used, life_stage))
+    universe = apply_sizing(universe, profiles, life_stage)
     if scfg.get("enabled", True):
         fit, style, excluded = fit_scores(universe, research, profile_used, ls, scfg)
         universe = universe.assign(_fit=fit, style=style, _excluded=excluded)
@@ -622,6 +644,9 @@ def build_portfolio(settings: Settings, profiles: Profiles, universe: pd.DataFra
                 want.add("income")
             if profile_used in ("growth", "high_growth", "balanced") and life_stage not in ("retirement",):
                 want.add("growth")
+            # The house model's holdings lead every portfolio in their stage: the pension model's in retirement,
+            # the accumulation model's otherwise.
+            want.add("house_ret" if life_stage == "retirement" else "house_acc")
             tags = universe["lists"].fillna("").astype(str)
             lead = tags.apply(lambda x: any(w in x.split() for w in want))
             other = (tags != "") & ~lead & (universe["vehicle"] == "direct")
@@ -732,6 +757,133 @@ def build_portfolio(settings: Settings, profiles: Profiles, universe: pd.DataFra
     return Portfolio(id=pid, profile_requested=profile, profile_used=profile_used, life_stage=life_stage, tier=tier,
                      balance=balance, saa=saa, tilts=tilts, target_class_weights=target, lines=lines,
                      metrics=metrics, warnings=plain_warnings(warnings, profiles), as_of=str(md.as_of.date()), synthetic=md.synthetic, esg=esg_info)
+
+
+def apply_sizing(universe: pd.DataFrame, profiles: Profiles, life_stage: str) -> pd.DataFrame:
+    """Relative position sizes from the house model (profiles.yaml `sizing`): a single company about 2, an active fund or
+    LIC about 5, a core index ETF about 6, a satellite ETF or credit line 2 to 2.5, a term deposit about 9 beside cash at
+    3.5. They replace weight_hint, except on the user's own additions, which keep the hint they were given."""
+    cfg = getattr(profiles, "sizing", {}) or {}
+    if not cfg.get("enabled"):
+        return universe
+    by_vehicle = cfg.get("hint_by_vehicle") or {}
+    tds = set(cfg.get("term_deposits") or [])
+    mult = (cfg.get("retirement_multiplier") or {}) if life_stage == "retirement" else {}
+
+    def hint(r) -> float:
+        if str(r.get("source", "")) == "manual_addition":
+            return float(r["weight_hint"])
+        if r["ticker"] in tds:
+            return float(cfg.get("term_deposit_hint", 9.0))
+        v = str(r["vehicle"])
+        if v == "etf":
+            h = float(cfg.get("etf_core", 6.0)) if str(r["role"]) in ("core", "fallback") else float(cfg.get("etf_satellite", 2.5))
+        else:
+            h = float(by_vehicle.get(v, r["weight_hint"]))
+        return h * float(mult.get(v, 1.0))
+
+    out = universe.copy()
+    out["weight_hint"] = [hint(r) for _, r in out.iterrows()]
+    return out
+
+
+def build_house_portfolio(settings: Settings, profiles: Profiles, universe: pd.DataFrame, md: MarketData,
+                          manual: dict[str, float], *, key: str, model: dict, profile: str, profile_used: str,
+                          life_stage: str, tier: str, balance: float, research: dict | None,
+                          universe_all: pd.DataFrame | None, warnings: list[str]) -> Portfolio:
+    """A fixed house model (config/house_models.yaml): the model's own holdings and weights, priced today, converted to
+    whole units at this balance with the rounding left in cash. Nothing is selected or tilted. A holding that is not
+    in the universe or has no price today is held in cash, with a note."""
+    research = research or {}
+    rcfg = settings.raw.get("research", {})
+    tcfg = profiles.balance_tiers[tier]
+    pool = universe_all if universe_all is not None else universe
+    pool = fill_sector_region(pool, research).drop_duplicates("ticker")
+    idx = pool.set_index("ticker", drop=False)
+    holdings = [(h, float(h["weight"])) for h in model["holdings"]]
+    prices, origin = price_lookup(idx.loc[[h["ticker"] for h, _ in holdings if h["ticker"] in idx.index]], md, manual)
+    warnings.append(f"{model['label']}: the holdings and weights are fixed ({model.get('source', 'house model')}). "
+                    "The engine's selection rules and tactical tilts do not apply; it prices the model, sizes it to the balance and reports on it.")
+    target = {c: 0.0 for c in profiles.asset_classes}
+    rows: list[dict] = []
+    to_cash = 0.0
+    review_threshold = float(rcfg.get("review_threshold", 3.5))
+    for h, w in holdings:
+        t = h["ticker"]
+        if t not in idx.index:
+            warnings.append(f"{t} ({h.get('code', t)}) is not in the universe, so its {w:g}% is held in cash.")
+            to_cash += w
+            target["cash"] += w
+            continue
+        r = idx.loc[t]
+        cls = h.get("asset_class") or r["asset_class"]
+        target[cls] = target.get(cls, 0.0) + w
+        if t not in prices:
+            warnings.append(f"{t} ({h.get('code', t)}) has no price today, so its {w:g}% is held in cash until it does.")
+            to_cash += w
+            continue
+        hr = research.get(t)
+        live_yield = getattr(hr, "dividend_yield_pct", None)
+        cm = getattr(hr, "consensus_mean", None)
+        if cm is not None and (getattr(hr, "analysts", 0) or 0) >= int(rcfg.get("min_analysts", 3)) and cm >= review_threshold:
+            warnings.append(f"{t}: analyst consensus {getattr(hr, 'consensus_label', '')} ({cm:.1f}); review this holding")
+        rows.append({"ticker": t, "name": r["name"], "asset_class": cls, "vehicle": r["vehicle"], "role": r["role"],
+                     "currency": r["currency"], "source": "house_model", "weight_pct": w, "mer_pct": float(r["mer"]),
+                     "yield_pct": float(live_yield) if live_yield is not None else float(r["yield"]),
+                     "yield_source": "live" if live_yield is not None else "config", "franking_pct": float(r["franking"]),
+                     "price_aud": prices[t], "priced_from": origin[t], "weight_hint": w,
+                     "sector": str(r.get("sector", "") or ""), "region": str(r.get("region", "") or ""),
+                     "style": str(r.get("style", "") or ""), "fit_score": 0.0,
+                     "consensus_label": getattr(hr, "consensus_label", "") or "", "consensus_mean": cm,
+                     "analysts": getattr(hr, "analysts", None), "consensus_multiplier": 1.0})
+    if not any(r["asset_class"] == "cash" for r in rows):
+        # Nothing in the model can hold cash today: add the cash account so the weights still add to 100.
+        cash = pool[(pool["asset_class"] == "cash") & (pool["vehicle"] == "cash")].head(1)
+        t = cash["ticker"].iloc[0] if len(cash) else "CMA"
+        rows.append({"ticker": t, "name": str(cash["name"].iloc[0]) if len(cash) else "Cash account", "asset_class": "cash", "vehicle": "cash", "role": "core",
+                     "currency": "AUD", "source": "house_model", "weight_pct": 0.0, "mer_pct": 0.0, "yield_pct": float(cash["yield"].iloc[0]) if len(cash) else 0.0,
+                     "yield_source": "config", "franking_pct": 0.0, "price_aud": manual.get(t, 1.0), "priced_from": "manual", "weight_hint": 0.0,
+                     "sector": "Cash", "region": "Australia", "style": "", "fit_score": 0.0, "consensus_label": "", "consensus_mean": None, "analysts": None, "consensus_multiplier": 1.0})
+        warnings.append(f"No cash holding in {model['label']} could be priced, so {t} was added to hold the rounding and any unpriced weight.")
+    df = pd.DataFrame(rows)
+    cash_i = df.index[df["ticker"] == "CMA"]
+    if not len(cash_i):
+        cash_i = df.index[df["asset_class"] == "cash"]
+    if to_cash and len(cash_i):
+        df.loc[cash_i[0], "weight_pct"] += to_cash
+    df["dollars"] = df["weight_pct"] / 100 * balance
+    listed = df["priced_from"] != "manual"
+    df["units"] = np.where(listed, np.floor(df["dollars"] / df["price_aud"]), df["dollars"] / df["price_aud"])
+    df["dollars"] = df["units"] * df["price_aud"]
+    residual = balance - df["dollars"].sum()
+    if len(cash_i):
+        i = cash_i[0]
+        df.loc[i, "dollars"] += residual
+        df.loc[i, "units"] = df.loc[i, "dollars"] / df.loc[i, "price_aud"]
+    else:
+        warnings.append(f"There is no cash holding to absorb a rounding difference of ${residual:,.2f}.")
+    df["weight_pct"] = df["dollars"] / balance * 100
+    min_hold = float(tcfg["min_holding_dollars"])
+    small = df[(df["dollars"] < min_hold - df["price_aud"].clip(lower=1.0)) & (df["asset_class"] != "cash")]   # more than one unit short
+    if len(small):
+        warnings.append(f"At ${balance:,.0f}, {len(small)} holding{'s are' if len(small) != 1 else ' is'} under the ${min_hold:,.0f} minimum the engine uses "
+                        f"at this tier ({', '.join(small['ticker'].head(8))}{'…' if len(small) > 8 else ''}). The house model keeps them; check that brokerage "
+                        "on each purchase is worth paying at this size.")
+    df = df.sort_values(["asset_class", "weight_pct"], ascending=[True, False])
+    lines = [Line(**{k: (None if (isinstance(v, float) and math.isnan(v)) else v) for k, v in r.items()})
+             for r in df[[f.name for f in Line.__dataclass_fields__.values()]].to_dict("records")]
+    metrics = compute_metrics(settings, profiles, df, md, balance, tier, pool)
+    metrics.update(weighted_returns(df, research))
+    house = {"key": key, "label": model["label"], "short": model.get("short", "House model"), "source": model.get("source", ""),
+             "model_balance": model.get("model_balance"),
+             "sleeves": {h["ticker"]: h.get("sleeve", "") for h, _ in holdings},
+             "weights": {h["ticker"]: w for h, w in holdings},
+             "pays": {h["ticker"]: h["pays"] for h, _ in holdings if h.get("pays")},
+             "codes": {h["ticker"]: str(h.get("code", h["ticker"])) for h, _ in holdings}}
+    return Portfolio(id=f"{profile_used}__{life_stage}__{tier}", profile_requested=profile, profile_used=profile_used,
+                     life_stage=life_stage, tier=tier, balance=balance, saa=dict(target), tilts={c: 0.0 for c in target},
+                     target_class_weights=dict(target), lines=lines, metrics=metrics, warnings=plain_warnings(warnings, profiles),
+                     as_of=str(md.as_of.date()), synthetic=md.synthetic, house=house)
 
 
 # ---------------------------------------------------------------- metrics
@@ -1095,7 +1247,7 @@ def build_sma_portfolio(settings: Settings, profiles: Profiles, universe: pd.Dat
             if len(picks) >= n:
                 break
     chosen = picks[0]
-    saa = {c: float(v) for c, v in profiles.risk_profiles[profile_used]["saa"].items()}
+    saa = profiles.saa_for(profile_used, life_stage)
     cash_floor = float(ls.get("cash_floor_pp", 0))
     sma_pct = 100.0 - cash_floor
     cash_row = universe[universe["asset_class"] == "cash"].sort_values("priority").head(1)

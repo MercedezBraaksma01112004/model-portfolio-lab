@@ -34,7 +34,9 @@ ADD_CAP_AUD = 8e9       # and this market capitalisation (shares only)
 MAX_ADDED = 80          # at most this many additions per run, best scores first
 DROP_SCORE = 20         # an active universe share below this with a falling price moves to the watchlist
 NEVER = {"AMC.AX", "AMCR"}   # Amcor: excluded by standing instruction
-KEEP = set(pd.read_csv(ROOT / "config" / "universe.csv", dtype=str).fillna("").query("notes.str.contains('Pinned by Mercedez')", engine="python")["ticker"])   # pinned: the screen never moves these
+_U = pd.read_csv(ROOT / "config" / "universe.csv", dtype=str).fillna("")
+# Pinned: the screen never moves these. Pinned by hand, or held in a house model (config/house_models.yaml).
+KEEP = set(_U[_U["notes"].str.contains("Pinned by Mercedez") | _U.get("lists", pd.Series("", index=_U.index)).str.contains("house_")]["ticker"])
 
 
 def clip(x, lo, hi):
