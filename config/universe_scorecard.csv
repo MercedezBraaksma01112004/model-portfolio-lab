@@ -35,7 +35,7 @@ JCI,Johnson Controls,yes,89.7,kept (active),136.5,50.46,45.19,20.46,16.81,30.59,
 CSX,CSX Corporation,yes,89.5,kept (active),125.3,34.88,14.61,8.55,17.23,21.61,-13.36,1.16,Buy,10.0,5y +9% a year; 10y +17%; ±22%; consensus Buy
 KMI,Kinder Morgan,yes,89.4,kept (active),103.4,24.71,27.63,21.95,10.1,20.87,-11.3,3.64,Buy,10.0,5y +22% a year; 10y +10%; ±21%; consensus Buy
 GOOGL,Alphabet Inc. (Class A),yes,89.3,kept (active),6154.8,49.04,37.66,20.91,25.88,31.63,-21.05,0.24,Strong Buy,10.0,5y +21% a year; 10y +26%; ±32%; consensus Strong Buy
-MS,Morgan Stanley,yes,89.0,kept (active),427.1,27.96,38.37,18.34,20.74,28.43,-18.83,2.18,Buy,10.0,5y +18% a year; 10y +21%; ±28%; consensus Buy
+MS,Morgan Stanley,yes,89.0,kept (active),427.1,27.97,38.37,18.34,20.74,28.43,-18.83,2.18,Buy,10.0,5y +18% a year; 10y +21%; ±28%; consensus Buy
 TTE.PA,TotalEnergies SE,yes,88.9,kept (active),277.9,65.07,14.16,19.19,12.41,22.82,-17.51,4.39,Buy,10.7,5y +19% a year; 10y +12%; ±23%; consensus Buy
 JPM,JPMorgan Chase,yes,88.8,kept (active),1266.7,12.8,32.51,19.05,19.34,22.45,-15.47,1.85,Buy,10.0,5y +19% a year; 10y +19%; ±22%; consensus Buy
 GILD,Gilead Sciences,yes,88.5,kept (active),268.3,32.19,24.48,24.58,12.19,26.51,-21.59,2.15,Strong Buy,10.0,5y +25% a year; 10y +12%; ±27%; consensus Strong Buy
@@ -498,9 +498,9 @@ GLW,Corning Inc.,,49.2,not added,202.4,90.46,78.47,40.01,24.7,73.52,-51.48,0.71,
 RRL.AX,Regis Resources Ltd,,49.2,not added,5.5,24.87,63.72,30.9,12.88,55.47,-41.77,4.86,,10.0,5y +31% a year; 10y +13%; ±55%
 RMD,ResMed|,,49.1,not added,44.1,-14.53,15.22,-0.26,16.25,28.49,-33.4,1.07,,10.0,5y -0% a year; 10y +16%; ±28%
 RMD.AX,Resmed Inc,yes,49.1,kept (active),45.8,-22.77,15.11,-2.0,15.49,29.32,-38.68,1.08,Strong Buy,10.0,5y -2% a year; 10y +15%; ±29%; consensus Strong Buy
+GLS.AX,L1 Global Long Short Fund Ltd,,49.0,not added,1.0,22.5,17.65,7.89,6.35,33.72,-23.66,1.56,,10.0,5y +8% a year; 10y +6%; ±34%
 BALL,Ball Corporation,,49.0,not added,21.4,25.88,4.88,-5.94,6.44,25.78,-21.83,1.37,,10.0,5y -6% a year; 10y +6%; ±26%
 BKI.AX,Bki Investment Company Ltd,,48.9,not added,1.4,5.57,6.85,6.58,5.79,14.57,-8.07,5.58,,10.0,5y +7% a year; 10y +6%; ±15%
-GLS.AX,L1 Global Long Short Fund Ltd,,48.9,not added,1.0,22.5,17.65,7.89,6.35,33.84,-23.66,1.56,,10.0,5y +8% a year; 10y +6%; ±34%
 TSLA,"Tesla, Inc.",yes,48.9,kept (active),2163.1,-7.45,20.22,2.12,42.04,45.21,-39.1,0.0,Buy,10.0,5y +2% a year; 10y +42%; ±45%; consensus Buy
 CI,Cigna,,48.5,not added,102.3,-3.96,-4.07,9.36,9.67,32.51,-20.95,2.19,,10.0,5y +9% a year; 10y +10%; ±33%
 IGL.AX,Ive Group Ltd,,48.5,not added,0.4,-6.54,16.65,13.94,9.01,30.71,-20.91,7.84,,10.0,5y +14% a year; 10y +9%; ±31%
