@@ -27,7 +27,7 @@ MNST,Monster Beverage,yes,90.4,kept (active),122.3,25.37,15.91,17.22,15.51,26.77
 STT,State Street Corporation,yes,90.2,kept (active),68.8,61.36,39.26,17.49,12.32,24.44,-11.79,1.97,Buy,10.0,5y +17% a year; 10y +12%; ±24%; consensus Buy
 C,Citigroup,yes,89.9,kept (active),311.2,40.94,48.59,18.93,12.85,29.38,-14.76,1.91,Strong Buy,10.0,5y +19% a year; 10y +13%; ±29%; consensus Strong Buy
 MAR,Marriott International,yes,89.9,kept (active),136.5,41.79,22.08,20.78,18.57,27.22,-18.16,0.77,Buy,10.0,5y +21% a year; 10y +19%; ±27%; consensus Buy
-VRTX,Vertex Pharmaceuticals,yes,89.9,kept (active),185.0,25.08,8.7,24.35,21.13,28.4,-15.21,0.0,Strong Buy,10.0,5y +24% a year; 10y +21%; ±28%; consensus Strong Buy
+VRTX,Vertex Pharmaceuticals,yes,89.9,kept (active),184.9,25.08,8.7,24.35,21.13,28.4,-15.21,0.0,Strong Buy,10.0,5y +24% a year; 10y +21%; ±28%; consensus Strong Buy
 GTT.PA,Gaztransport & Technigaz SA,yes,89.9,kept (active),12.9,36.38,27.51,31.95,28.62,24.01,-15.0,4.13,Strong Buy,10.7,5y +32% a year; 10y +29%; ±24%; consensus Strong Buy
 CVX,Chevron Corporation,yes,89.8,kept (active),595.1,47.97,14.56,19.52,11.98,23.9,-20.81,3.33,Strong Buy,10.0,5y +20% a year; 10y +12%; ±24%; consensus Strong Buy
 GOOG,Alphabet Inc. (Class C),yes,89.7,kept (active),6088.3,46.86,36.71,20.61,26.04,31.14,-20.75,0.25,Strong Buy,10.0,5y +21% a year; 10y +26%; ±31%; consensus Strong Buy
@@ -117,7 +117,7 @@ HUBB,Hubbell Incorporated,yes,80.1,kept (active),35.9,17.49,18.48,22.58,18.77,32
 STLD,Steel Dynamics,yes,80.1,kept (active),48.9,70.6,28.55,33.15,24.44,36.36,-22.37,0.88,Buy,10.0,5y +33% a year; 10y +24%; ±36%; consensus Buy
 CPU.AX,Computershare Ltd.,yes,79.9,kept (watchlist),23.4,14.52,21.1,19.85,16.7,23.23,-24.83,2.97,Hold,10.0,5y +20% a year; 10y +17%; ±23%; consensus Hold
 STO.AX,Santos Ltd,yes,79.9,kept (active),28.5,38.18,10.08,9.73,11.82,27.43,-14.56,3.51,Strong Buy,10.0,5y +10% a year; 10y +12%; ±27%; consensus Strong Buy
-NDSN,Nordson Corporation,yes,79.8,kept (active),26.2,45.62,13.5,8.09,13.98,21.89,-14.15,1.04,no coverage,10.0,5y +8% a year; 10y +14%; ±22%
+NDSN,Nordson Corporation,yes,79.8,kept (active),26.2,45.62,13.49,8.09,13.98,21.89,-14.15,1.04,no coverage,10.0,5y +8% a year; 10y +14%; ±22%
 NSC,Norfolk Southern,yes,79.5,kept (active),102.1,12.14,17.4,5.36,14.67,20.66,-12.47,1.7,Hold,10.0,5y +5% a year; 10y +15%; ±21%; consensus Hold
 NTRS,Northern Trust,yes,79.3,kept (active),44.0,37.73,36.32,11.31,11.18,24.68,-12.39,1.95,Hold,10.0,5y +11% a year; 10y +11%; ±25%; consensus Hold
 CAT,Caterpillar Inc.,yes,79.2,kept (active),526.6,64.4,49.63,35.59,27.44,40.34,-26.7,0.77,Buy,10.0,5y +36% a year; 10y +27%; ±40%; consensus Buy
@@ -408,7 +408,7 @@ DELL,Dell Technologies,,55.6,not added,511.8,294.19,102.73,65.65,47.11,74.57,-32
 DVN,Devon Energy,,55.5,not added,75.0,52.28,1.4,10.46,4.49,34.19,-22.15,2.32,,10.0,5y +10% a year; 10y +4%; ±34%
 EXR,Extra Space Storage,,55.5,not added,40.3,-0.68,10.56,-2.04,11.75,22.85,-16.7,4.81,,10.0,5y -2% a year; 10y +12%; ±23%
 AIG,American International Group,,55.5,not added,56.1,-2.91,6.99,9.52,5.35,24.09,-16.98,2.47,,10.0,5y +10% a year; 10y +5%; ±24%
-SHOP.TO,Shopify Inc.,yes,55.5,kept (active),317.6,15.35,48.27,7.26,45.06,56.49,-47.66,,Strong Buy,10.7,5y +7% a year; 10y +45%; ±56%; consensus Strong Buy
+SHOP.TO,Shopify Inc.,yes,55.5,kept (active),314.9,15.35,48.27,7.26,45.06,56.49,-47.66,,Strong Buy,10.7,5y +7% a year; 10y +45%; ±56%; consensus Strong Buy
 G6M.AX,Group 6 Metals Ltd,,55.2,not added,0.8,14.0,195.9,81.42,54.0,44.76,-26.74,0.0,,10.0,5y +81% a year; 10y +54%; ±45%
 GMD.AX,Genesis Minerals Ltd,yes,55.2,kept (active),8.7,19.61,71.9,43.32,40.15,62.76,-42.99,0.68,Strong Buy,10.0,5y +43% a year; 10y +40%; ±63%; consensus Strong Buy
 HBAN,Huntington Bancshares,,55.2,not added,44.3,1.98,17.86,5.53,7.24,26.57,-21.26,4.05,,10.0,5y +6% a year; 10y +7%; ±27%
@@ -656,7 +656,7 @@ AMC.AX,Amcor Plc,,37.1,excluded by standing instruction,27.9,5.73,0.91,-0.65,2.8
 DRR.AX,Deterra Royalties Ltd,yes,37.0,kept (active),2.1,-1.05,-0.23,6.73,,25.1,-16.18,5.92,Hold,6.0,5y +7% a year; ±25%; consensus Hold
 AGVT.AX,Betashares Australian Government Bond ETF,yes,36.8,kept (active),,-2.02,4.57,-0.47,,5.34,-5.44,4.41,no coverage,7.2,5y -0% a year; ±5%
 AXON,Axon Enterprise,yes,36.7,kept (active),49.2,-39.85,23.54,20.43,32.78,62.47,-54.45,0.0,Strong Buy,10.0,5y +20% a year; 10y +33%; ±62%; consensus Strong Buy
-NXG.AX,Nexgen Energy (Canada) Ltd,yes,36.5,kept (active),8.2,-8.36,10.71,10.54,,51.92,-37.09,0.0,Strong Buy,5.2,5y +11% a year; ±52%; consensus Strong Buy
+NXG.AX,Nexgen Energy (Canada) Ltd,yes,36.5,kept (active),8.1,-8.36,10.71,10.54,,51.92,-37.09,0.0,Strong Buy,5.2,5y +11% a year; ±52%; consensus Strong Buy
 AMP.AX,Amp Ltd,,36.4,not added,6.2,50.25,36.25,20.68,-3.3,42.99,-38.33,2.05,,10.0,5y +21% a year; 10y -3%; ±43%
 EGH.AX,Eureka Group Holdings Ltd,,36.4,not added,0.3,16.6,14.5,1.02,0.47,31.62,-17.26,2.35,,10.0,5y +1% a year; 10y +0%; ±32%
 SDF.AX,Steadfast Group Ltd,,36.4,not added,6.4,-0.81,5.76,7.67,14.05,45.35,-39.91,3.63,,10.0,5y +8% a year; 10y +14%; ±45%
