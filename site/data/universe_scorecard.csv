@@ -1,0 +1,1103 @@
+ticker,name,in_universe,score,decision,market_cap_aud_bn,return_1y,return_3y_pa,return_5y_pa,return_10y_pa,volatility_1y,worst_fall_1y,yield,consensus,history_years,why
+WELL,Welltower,yes,97.5,kept (active),242.5,36.25,39.54,28.85,19.08,22.75,-12.61,1.3,Strong Buy,10.0,5y +29% a year; 10y +19%; ±23%; consensus Strong Buy
+KO,Coca-Cola Company (The),yes,97.3,kept (active),576.9,38.08,18.06,15.66,12.99,18.82,-7.87,2.23,Strong Buy,10.0,5y +16% a year; 10y +13%; ±19%; consensus Strong Buy
+WMB,Williams Companies,yes,95.3,kept (active),122.8,23.14,27.58,27.34,15.19,24.9,-13.14,2.95,Strong Buy,10.0,5y +27% a year; 10y +15%; ±25%; consensus Strong Buy
+CB,Chubb Limited,yes,95.1,kept (active),197.2,28.05,16.18,16.05,13.63,19.35,-10.25,0.84,Buy,10.0,5y +16% a year; 10y +14%; ±19%; consensus Buy
+TRGP,Targa Resources,yes,94.8,kept (active),90.3,92.31,50.29,45.04,24.46,28.39,-10.57,1.52,Strong Buy,10.0,5y +45% a year; 10y +24%; ±28%; consensus Strong Buy
+AIZ,Assurant,yes,94.7,kept (active),20.1,37.76,22.31,15.7,15.74,22.14,-12.9,1.23,Strong Buy,10.0,5y +16% a year; 10y +16%; ±22%; consensus Strong Buy
+ABBV,AbbVie,yes,94.6,kept (active),713.8,28.06,26.22,25.91,22.47,25.83,-15.74,2.44,Strong Buy,10.0,5y +26% a year; 10y +22%; ±26%; consensus Strong Buy
+WAB,Wabtec,yes,94.5,kept (active),66.2,39.62,33.45,27.16,13.93,26.25,-10.85,0.43,Strong Buy,10.0,5y +27% a year; 10y +14%; ±26%; consensus Strong Buy
+V,Visa Inc.,yes,94.2,kept (active),1093.3,19.85,17.45,16.63,19.92,22.17,-17.18,0.65,Strong Buy,10.0,5y +17% a year; 10y +20%; ±22%; consensus Strong Buy
+BNY,BNY Mellon,yes,93.8,kept (active),139.5,37.39,48.51,24.35,15.46,21.69,-16.5,1.61,Buy,10.0,5y +24% a year; 10y +15%; ±22%; consensus Buy
+ETR,Entergy,yes,93.8,kept (active),73.0,14.94,30.87,21.58,17.08,20.38,-15.91,2.39,Strong Buy,10.0,5y +22% a year; 10y +17%; ±20%; consensus Strong Buy
+HLT,Hilton Worldwide,yes,93.6,kept (active),113.2,32.51,28.71,21.71,22.72,23.73,-13.57,0.17,Buy,10.0,5y +22% a year; 10y +23%; ±24%; consensus Buy
+TRV,Travelers Companies (The),yes,93.6,kept (active),120.1,52.44,32.04,24.24,16.89,20.6,-9.94,1.16,Hold,10.0,5y +24% a year; 10y +17%; ±21%; consensus Hold
+AAPL,Apple Inc.,yes,93.3,kept (active),7255.3,35.24,23.41,20.71,31.08,24.06,-13.8,0.3,Buy,10.0,5y +21% a year; 10y +31%; ±24%; consensus Buy
+AME,Ametek,yes,93.2,kept (active),77.6,25.93,15.81,14.62,19.15,23.9,-13.57,0.56,Buy,10.0,5y +15% a year; 10y +19%; ±24%; consensus Buy
+JNJ,Johnson &amp; Johnson,yes,93.0,kept (active),903.1,40.03,20.56,14.78,12.74,20.76,-10.96,2.0,Buy,10.0,5y +15% a year; 10y +13%; ±21%; consensus Buy
+TD.TO,The Toronto-Dominion Bank,yes,93.0,kept (active),288.0,58.07,35.84,19.2,15.85,16.79,-8.0,2.53,no coverage,10.7,5y +19% a year; 10y +16%; ±17%
+RY.TO,Royal Bank of Canada,yes,92.7,kept (active),394.1,39.48,40.79,20.26,17.04,15.12,-10.87,2.35,no coverage,10.7,5y +20% a year; 10y +17%; ±15%
+ROST,Ross Stores,yes,92.3,kept (active),106.0,49.43,23.19,18.35,15.1,26.18,-13.03,0.75,Buy,10.0,5y +18% a year; 10y +15%; ±26%; consensus Buy
+PM,Philip Morris International,yes,92.1,kept (active),445.7,32.08,32.25,23.47,14.91,28.19,-18.54,2.99,Strong Buy,10.0,5y +23% a year; 10y +15%; ±28%; consensus Strong Buy
+CVX,Chevron Corporation,yes,91.1,kept (active),644.3,53.22,17.6,21.41,12.87,24.07,-20.81,3.05,Strong Buy,10.0,5y +21% a year; 10y +13%; ±24%; consensus Strong Buy
+ALL,Allstate,yes,90.9,kept (active),92.6,34.96,24.59,20.19,17.28,25.21,-19.02,1.65,Buy,10.0,5y +20% a year; 10y +17%; ±25%; consensus Buy
+GWW,W. W. Grainger,yes,90.8,kept (active),90.7,41.59,19.82,26.85,22.01,23.46,-13.35,0.7,Hold,10.0,5y +27% a year; 10y +22%; ±23%; consensus Hold
+CAH,Cardinal Health,yes,90.7,kept (active),83.7,60.82,38.17,44.48,17.64,29.76,-20.42,0.81,Strong Buy,10.0,5y +44% a year; 10y +18%; ±30%; consensus Strong Buy
+FAST,Fastenal,yes,90.7,kept (active),85.4,24.48,20.17,17.12,19.9,24.28,-11.55,1.83,Hold,10.0,5y +17% a year; 10y +20%; ±24%; consensus Hold
+MNST,Monster Beverage,yes,90.5,kept (active),130.8,34.2,18.53,18.81,16.3,26.62,-17.7,0.0,Buy,10.0,5y +19% a year; 10y +16%; ±27%; consensus Buy
+CSX,CSX Corporation,yes,90.4,kept (active),134.0,45.07,17.23,10.03,18.04,22.44,-13.36,1.08,Buy,10.0,5y +10% a year; 10y +18%; ±22%; consensus Buy
+KMI,Kinder Morgan,yes,90.1,kept (active),108.5,35.62,29.57,23.06,10.6,20.96,-11.3,3.45,Buy,10.0,5y +23% a year; 10y +11%; ±21%; consensus Buy
+MAR,Marriott International,yes,90.0,kept (active),146.4,47.81,25.01,22.52,19.43,27.12,-18.16,0.71,Buy,10.0,5y +23% a year; 10y +19%; ±27%; consensus Buy
+VRTX,Vertex Pharmaceuticals,yes,90.0,kept (active),190.7,24.89,9.75,25.07,21.49,29.04,-15.21,0.0,Strong Buy,10.0,5y +25% a year; 10y +21%; ±29%; consensus Strong Buy
+JPM,JPMorgan Chase,yes,89.9,kept (active),1257.7,14.86,32.08,18.82,19.22,22.1,-15.47,1.85,Buy,10.0,5y +19% a year; 10y +19%; ±22%; consensus Buy
+TTE.PA,TotalEnergies SE,yes,89.9,kept (active),288.1,59.63,15.65,20.02,12.78,22.7,-17.51,4.2,Buy,10.7,5y +20% a year; 10y +13%; ±23%; consensus Buy
+GOOG,Alphabet Inc. (Class C),yes,89.7,kept (active),5567.7,26.39,32.61,18.43,24.88,31.16,-20.75,0.27,Strong Buy,10.0,5y +18% a year; 10y +25%; ±31%; consensus Strong Buy
+MA,Mastercard,yes,89.7,kept (active),778.0,10.01,15.38,15.57,21.54,22.51,-18.48,0.55,Strong Buy,10.0,5y +16% a year; 10y +22%; ±23%; consensus Strong Buy
+HIG,Hartford (The),yes,89.6,kept (active),53.4,12.65,21.76,17.6,14.58,19.7,-15.64,1.73,Buy,10.0,5y +18% a year; 10y +15%; ±20%; consensus Buy
+GTT.PA,Gaztransport & Technigaz SA,yes,89.6,kept (active),11.9,26.15,25.27,28.12,26.25,24.56,-15.0,4.46,Strong Buy,10.7,5y +28% a year; 10y +26%; ±25%; consensus Strong Buy
+BRK-B,Berkshire Hathaway,yes,89.5,kept (active),1664.5,11.61,13.23,15.34,14.1,14.65,-9.42,0.0,Buy,10.0,5y +15% a year; 10y +14%; ±15%; consensus Buy
+JCI,Johnson Controls,yes,89.4,kept (active),122.4,28.87,39.73,17.72,15.46,31.17,-12.71,0.85,Buy,10.0,5y +18% a year; 10y +15%; ±31%; consensus Buy
+GOOGL,Alphabet Inc. (Class A),yes,89.3,kept (active),5621.4,28.02,33.49,18.7,24.72,31.65,-21.05,0.27,Strong Buy,10.0,5y +19% a year; 10y +25%; ±32%; consensus Strong Buy
+RSG,Republic Services,yes,89.3,kept (active),105.3,9.8,15.11,15.4,18.61,20.12,-14.63,1.05,Buy,10.0,5y +15% a year; 10y +19%; ±20%; consensus Buy
+OKE,Oneok,yes,89.1,kept (active),85.7,44.03,15.01,15.72,12.93,27.19,-12.55,4.45,Buy,10.0,5y +16% a year; 10y +13%; ±27%; consensus Buy
+AFL,Aflac,yes,89.0,kept (active),87.3,15.97,14.74,22.25,16.55,17.16,-13.75,1.97,Hold,10.0,5y +22% a year; 10y +17%; ±17%; consensus Hold
+DGX,Quest Diagnostics,yes,89.0,kept (active),38.2,34.91,21.44,14.32,13.79,23.92,-11.55,1.39,Buy,10.0,5y +14% a year; 10y +14%; ±24%; consensus Buy
+GILD,Gilead Sciences,yes,88.8,kept (active),277.2,33.72,25.9,25.43,12.58,26.79,-21.59,2.06,Strong Buy,10.0,5y +25% a year; 10y +13%; ±27%; consensus Strong Buy
+QBE.AX,Qbe Insurance Group Ltd,yes,88.8,kept (active),39.6,38.08,24.98,22.15,12.93,21.01,-15.45,4.19,Buy,10.0,5y +22% a year; 10y +13%; ±21%; consensus Buy
+PH,Parker Hannifin,yes,88.7,kept (active),157.8,15.03,30.31,27.44,22.91,27.07,-19.34,0.87,Strong Buy,10.0,5y +27% a year; 10y +23%; ±27%; consensus Strong Buy
+STT,State Street Corporation,yes,88.7,kept (active),65.4,49.19,36.82,16.25,11.72,24.11,-14.39,2.06,Buy,10.0,5y +16% a year; 10y +12%; ±24%; consensus Buy
+MET,MetLife,yes,88.5,kept (active),92.6,34.49,19.07,15.19,12.0,23.28,-17.46,2.27,Buy,10.0,5y +15% a year; 10y +12%; ±23%; consensus Buy
+UNP,Union Pacific Corporation,yes,88.4,kept (active),246.4,34.88,10.67,7.62,14.35,22.67,-12.79,1.91,Strong Buy,10.0,5y +8% a year; 10y +14%; ±23%; consensus Strong Buy
+AEP,American Electric Power,yes,88.2,kept (active),100.7,15.38,20.21,14.49,12.77,19.35,-14.58,2.92,Buy,10.0,5y +14% a year; 10y +13%; ±19%; consensus Buy
+C,Citigroup,yes,88.2,kept (active),289.5,27.86,44.93,17.16,12.0,29.42,-16.46,2.04,Strong Buy,10.0,5y +17% a year; 10y +12%; ±29%; consensus Strong Buy
+LIN,Linde plc,yes,88.2,kept (active),332.8,14.5,7.81,12.8,18.34,19.04,-16.03,1.24,Strong Buy,10.0,5y +13% a year; 10y +18%; ±19%; consensus Strong Buy
+CNQ.TO,Canadian Natural Resources Limited,yes,88.0,kept (active),161.8,83.43,25.9,30.65,19.05,30.1,-18.68,3.2,Buy,10.7,5y +31% a year; 10y +19%; ±30%; consensus Buy
+ENEL.MI,Enel SpA,yes,87.8,kept (active),144.7,12.8,24.3,11.9,14.75,20.44,-13.7,2.85,Buy,10.7,5y +12% a year; 10y +15%; ±20%; consensus Buy
+MCK,McKesson,yes,87.7,kept (active),167.6,27.75,26.71,39.77,23.39,30.96,-27.17,0.34,Strong Buy,10.0,5y +40% a year; 10y +23%; ±31%; consensus Strong Buy
+PSX,Phillips 66,yes,87.7,kept (active),163.8,117.13,35.89,37.5,18.28,31.52,-17.28,1.75,Buy,10.0,5y +38% a year; 10y +18%; ±32%; consensus Buy
+COST,Costco,yes,87.6,kept (active),639.3,8.35,20.08,18.42,24.07,19.75,-18.2,0.55,Buy,10.0,5y +18% a year; 10y +24%; ±20%; consensus Buy
+WMT,Walmart,yes,87.5,kept (active),1371.9,14.39,27.64,22.63,20.76,26.28,-23.34,0.81,Strong Buy,10.0,5y +23% a year; 10y +21%; ±26%; consensus Strong Buy
+XOM,ExxonMobil,yes,87.4,kept (active),1059.9,60.93,19.64,29.12,13.05,26.07,-20.11,2.27,Buy,10.0,5y +29% a year; 10y +13%; ±26%; consensus Buy
+MRK,Merck &amp; Co.,yes,87.3,kept (active),507.2,70.73,11.77,15.41,13.7,29.66,-11.37,2.35,Buy,10.0,5y +15% a year; 10y +14%; ±30%; consensus Buy
+NUE,Nucor,yes,87.2,kept (active),84.6,90.82,18.65,21.93,18.81,31.59,-18.43,0.86,Buy,10.0,5y +22% a year; 10y +19%; ±32%; consensus Buy
+VTR,Ventas,yes,86.9,kept (active),63.4,27.13,26.55,15.52,8.87,22.77,-19.9,2.35,Strong Buy,10.0,5y +16% a year; 10y +9%; ±23%; consensus Strong Buy
+ADI,Analog Devices,yes,86.8,kept (active),268.3,61.82,32.81,21.11,21.06,36.14,-20.68,1.1,Strong Buy,10.0,5y +21% a year; 10y +21%; ±36%; consensus Strong Buy
+LLY,Lilly (Eli),yes,86.6,kept (active),1629.9,57.47,28.97,41.4,37.59,34.96,-23.18,0.52,Strong Buy,10.0,5y +41% a year; 10y +38%; ±35%; consensus Strong Buy
+MSI,Motorola Solutions,yes,86.3,kept (active),111.9,8.29,16.91,16.79,22.21,25.76,-20.8,1.02,Strong Buy,10.0,5y +17% a year; 10y +22%; ±26%; consensus Strong Buy
+AMGN,Amgen,yes,86.1,kept (active),340.3,55.42,19.7,21.75,16.05,29.57,-16.57,2.24,Hold,10.0,5y +22% a year; 10y +16%; ±30%; consensus Hold
+VLO,Valero Energy,yes,86.1,kept (active),175.1,151.16,48.75,47.02,26.97,36.98,-12.12,1.11,Buy,10.0,5y +47% a year; 10y +27%; ±37%; consensus Buy
+NOVN.SW,Novartis AG,yes,86.0,kept (active),420.9,26.19,18.82,16.05,11.68,23.23,-14.97,2.89,Hold,10.7,5y +16% a year; 10y +12%; ±23%; consensus Hold
+DE,Deere &amp; Company,yes,85.9,kept (active),244.5,37.2,17.92,16.23,23.1,32.96,-19.9,1.02,Buy,10.0,5y +16% a year; 10y +23%; ±33%; consensus Buy
+TJX,TJX Companies,yes,85.1,kept (active),228.2,3.64,16.0,20.74,16.49,21.23,-26.83,1.24,Strong Buy,10.0,5y +21% a year; 10y +16%; ±21%; consensus Strong Buy
+TSM,Taiwan Semiconductor Manufacturing Company Limited,yes,85.1,kept (active),3091.8,45.7,68.55,31.79,32.76,38.46,-21.55,0.92,Strong Buy,10.7,5y +32% a year; 10y +33%; ±38%; consensus Strong Buy
+SPG,Simon Property Group,yes,85.0,kept (active),114.3,24.02,26.46,15.08,7.71,19.26,-15.63,4.2,Buy,10.0,5y +15% a year; 10y +8%; ±19%; consensus Buy
+LYV,Live Nation Entertainment,yes,85.0,kept (active),58.0,14.11,25.58,13.12,21.19,30.74,-17.99,0.0,Strong Buy,10.0,5y +13% a year; 10y +21%; ±31%; consensus Strong Buy
+CSCO,Cisco,yes,84.9,kept (active),595.1,53.44,25.66,18.36,17.77,35.34,-18.7,1.58,Buy,10.0,5y +18% a year; 10y +18%; ±35%; consensus Buy
+MPC,Marathon Petroleum,yes,84.9,kept (active),185.7,140.37,43.35,53.12,30.52,35.51,-18.33,0.86,Buy,10.0,5y +53% a year; 10y +31%; ±36%; consensus Buy
+MS,Morgan Stanley,yes,84.8,kept (active),407.1,16.6,36.05,17.14,20.12,28.29,-21.48,2.28,Buy,10.0,5y +17% a year; 10y +20%; ±28%; consensus Buy
+CTAS,Cintas,yes,84.7,kept (active),126.3,17.45,17.94,18.3,25.0,23.23,-20.04,0.84,no coverage,10.0,5y +18% a year; 10y +25%; ±23%
+FITB,Fifth Third Bancorp,yes,84.6,kept (active),68.3,29.84,31.02,9.45,11.99,25.29,-21.21,3.06,Strong Buy,10.0,5y +9% a year; 10y +12%; ±25%; consensus Strong Buy
+CTVA,"Corteva, Inc.",yes,84.5,kept (active),11.9,33.43,21.11,15.66,14.05,30.16,-16.55,0.86,Strong Buy,7.4,5y +16% a year; 10y +14%; ±30%; consensus Strong Buy
+CFG,Citizens Financial Group,yes,84.4,kept (active),39.0,31.36,40.65,12.33,11.67,25.38,-18.32,2.83,Strong Buy,10.0,5y +12% a year; 10y +12%; ±25%; consensus Strong Buy
+WM,Waste Management,yes,84.3,kept (active),136.1,12.58,11.38,11.61,15.99,21.18,-17.05,1.53,Buy,10.0,5y +12% a year; 10y +16%; ±21%; consensus Buy
+IBKR,Interactive Brokers,yes,84.2,kept (active),198.4,21.85,55.41,38.35,26.23,39.45,-18.7,0.41,Strong Buy,10.0,5y +38% a year; 10y +26%; ±39%; consensus Strong Buy
+PFG,Principal Financial Group,yes,84.0,kept (active),33.1,41.43,17.41,15.67,11.35,22.52,-11.96,2.99,Hold,10.0,5y +16% a year; 10y +11%; ±23%; consensus Hold
+PKG,Packaging Corporation of America,yes,83.8,kept (active),31.1,17.95,16.21,17.28,15.34,28.28,-17.21,2.24,Buy,10.0,5y +17% a year; 10y +15%; ±28%; consensus Buy
+BHP.AX,Bhp Group Ltd,yes,83.5,kept (active),279.8,33.27,12.34,18.11,17.54,30.1,-18.98,4.39,Hold,10.0,5y +18% a year; 10y +18%; ±30%; consensus Hold
+ACGL,Arch Capital Group,yes,83.4,kept (active),49.8,17.06,4.06,22.52,15.46,20.45,-14.08,0.0,Buy,10.0,5y +23% a year; 10y +15%; ±20%; consensus Buy
+SOL.AX,Washington H. Soul Pattinson And Company Ltd,yes,83.4,kept (active),17.6,25.23,14.94,10.52,15.23,18.94,-7.86,2.4,thin coverage,10.0,5y +11% a year; 10y +15%; ±19%; consensus thin coverage
+DRI,Darden Restaurants,yes,83.3,kept (active),34.4,18.66,13.63,13.42,15.38,27.51,-15.12,2.91,Buy,10.0,5y +13% a year; 10y +15%; ±28%; consensus Buy
+RTX,RTX Corporation,yes,82.9,kept (active),366.4,8.04,31.11,20.68,14.22,24.93,-20.06,1.48,Buy,10.0,5y +21% a year; 10y +14%; ±25%; consensus Buy
+PNC,PNC Financial Services,yes,82.8,kept (active),127.3,27.27,25.43,6.5,11.72,21.07,-17.21,3.3,Buy,10.0,5y +6% a year; 10y +12%; ±21%; consensus Buy
+LH,Labcorp,yes,82.7,kept (active),37.9,17.01,15.6,8.54,13.18,23.99,-13.41,0.88,Strong Buy,10.0,5y +9% a year; 10y +13%; ±24%; consensus Strong Buy
+NSC,Norfolk Southern,yes,82.7,kept (active),105.4,18.14,18.63,6.02,15.03,20.99,-12.47,1.64,Hold,10.0,5y +6% a year; 10y +15%; ±21%; consensus Hold
+COP,ConocoPhillips,yes,82.6,kept (active),256.6,71.94,7.74,20.7,16.27,30.78,-22.28,2.24,Buy,10.0,5y +21% a year; 10y +16%; ±31%; consensus Buy
+NVDA,Nvidia,yes,82.6,kept (active),7306.5,16.63,67.77,54.9,59.03,37.67,-20.21,0.25,Strong Buy,10.0,5y +55% a year; 10y +59%; ±38%; consensus Strong Buy
+CPU.AX,Computershare Ltd.,yes,82.3,kept (watchlist),24.5,19.26,23.6,21.32,17.42,22.8,-24.3,2.8,Hold,10.0,5y +21% a year; 10y +17%; ±23%; consensus Hold
+EMR,Emerson Electric,yes,82.3,kept (active),126.3,20.8,19.39,14.08,14.35,31.62,-23.45,1.4,Buy,10.0,5y +14% a year; 10y +14%; ±32%; consensus Buy
+CME,CME Group,yes,82.1,kept (active),155.9,17.93,13.75,12.83,15.64,24.45,-31.09,3.7,Buy,10.0,5y +13% a year; 10y +16%; ±24%; consensus Buy
+TT,Trane Technologies,yes,81.8,kept (active),138.0,5.88,28.85,22.42,25.32,29.14,-16.1,0.72,Buy,10.0,5y +22% a year; 10y +25%; ±29%; consensus Buy
+WSM,"Williams-Sonoma, Inc.",yes,81.8,kept (active),43.0,38.1,47.78,26.51,28.98,33.04,-23.27,1.15,Buy,10.0,5y +27% a year; 10y +29%; ±33%; consensus Buy
+MO,Altria,yes,81.7,kept (active),179.8,24.88,28.65,21.93,9.7,26.11,-14.63,5.68,Hold,10.0,5y +22% a year; 10y +10%; ±26%; consensus Hold
+STO.AX,Santos Ltd,yes,81.7,kept (active),30.2,46.13,11.24,10.42,12.17,27.17,-14.56,3.4,Strong Buy,10.0,5y +10% a year; 10y +12%; ±27%; consensus Strong Buy
+PGR,Progressive Corporation,yes,81.6,kept (active),188.5,10.26,12.7,23.56,25.67,26.49,-14.28,6.09,Hold,10.0,5y +24% a year; 10y +26%; ±26%; consensus Hold
+FPH.AX,Fisher & Paykel Healthcare Corporation Ltd,yes,81.4,kept (active),23.3,28.63,29.49,7.72,19.56,23.99,-23.14,1.1,Buy,10.0,5y +8% a year; 10y +20%; ±24%; consensus Buy
+NDAQ,"Nasdaq, Inc.",yes,81.3,kept (active),82.1,17.38,25.09,11.04,19.81,28.41,-23.38,1.13,Buy,10.0,5y +11% a year; 10y +20%; ±28%; consensus Buy
+NDSN,Nordson Corporation,yes,81.2,kept (active),25.0,35.47,11.8,7.12,13.46,22.25,-14.15,1.08,Buy,10.0,5y +7% a year; 10y +13%; ±22%; consensus Buy
+GRMN,Garmin,yes,81.0,kept (active),80.9,19.73,39.92,19.58,22.92,34.46,-25.58,1.32,Buy,10.0,5y +20% a year; 10y +23%; ±34%; consensus Buy
+CP.TO,Canadian Pacific Kansas City Limited,yes,81.0,kept (active),111.8,18.48,9.77,6.62,13.28,21.51,-11.97,0.79,Buy,10.7,5y +7% a year; 10y +13%; ±22%; consensus Buy
+ED,Consolidated Edison,yes,80.7,kept (active),60.7,18.25,9.64,14.25,9.64,17.78,-10.0,3.05,Hold,10.0,5y +14% a year; 10y +10%; ±18%; consensus Hold
+HST,Host Hotels &amp; Resorts,yes,80.7,kept (active),24.5,60.72,20.38,15.06,8.46,24.72,-15.27,6.74,Buy,10.0,5y +15% a year; 10y +8%; ±25%; consensus Buy
+EXPD,Expeditors International,yes,80.6,kept (active),36.2,66.72,18.84,12.46,16.18,30.71,-15.88,0.81,Hold,10.0,5y +12% a year; 10y +16%; ±31%; consensus Hold
+ASML,ASML Holding N.V.,yes,80.6,kept (active),859.0,52.03,39.76,15.42,32.22,45.76,-21.95,0.58,Strong Buy,10.7,5y +15% a year; 10y +32%; ±46%; consensus Strong Buy
+STLD,Steel Dynamics,yes,80.4,kept (active),49.7,62.75,29.09,33.48,24.6,35.73,-22.37,0.86,Buy,10.0,5y +33% a year; 10y +25%; ±36%; consensus Buy
+SHEL.L,Shell plc,yes,80.4,kept (active),431.4,40.77,13.59,18.02,6.82,22.83,-19.82,2.82,Buy,10.7,5y +18% a year; 10y +7%; ±23%; consensus Buy
+BSL.AX,Bluescope Steel Ltd,yes,80.3,kept (active),14.3,65.8,25.94,13.96,16.8,33.67,-15.13,9.27,Buy,10.0,5y +14% a year; 10y +17%; ±34%; consensus Buy
+ROK,Rockwell Automation,yes,80.3,kept (active),66.8,19.33,15.01,8.9,14.98,31.04,-18.73,1.31,Buy,10.0,5y +9% a year; 10y +15%; ±31%; consensus Buy
+PCAR,Paccar,yes,80.2,kept (active),80.9,11.06,9.73,18.35,14.89,26.82,-22.48,2.56,Buy,10.0,5y +18% a year; 10y +15%; ±27%; consensus Buy
+FDX,FedEx,yes,80.1,kept (active),100.7,58.07,14.05,13.22,9.28,28.24,-17.3,1.6,Buy,10.0,5y +13% a year; 10y +9%; ±28%; consensus Buy
+GS,Goldman Sachs,yes,80.1,kept (active),366.1,19.56,41.12,20.84,18.18,32.01,-23.61,2.04,Hold,10.0,5y +21% a year; 10y +18%; ±32%; consensus Hold
+RL,Ralph Lauren Corporation,yes,80.1,kept (active),31.8,12.97,46.81,28.46,16.76,34.88,-19.4,1.02,Strong Buy,10.0,5y +28% a year; 10y +17%; ±35%; consensus Strong Buy
+CMI,Cummins,yes,79.9,kept (active),100.4,23.83,31.4,20.61,17.37,36.85,-29.67,1.61,Buy,10.0,5y +21% a year; 10y +17%; ±37%; consensus Buy
+APA.AX,Apa Group,yes,79.8,kept (active),15.4,34.22,19.51,13.67,9.67,15.75,-6.84,5.03,Hold,10.0,5y +14% a year; 10y +10%; ±16%; consensus Hold
+CINF,Cincinnati Financial,yes,79.7,kept (active),38.9,17.0,20.31,12.21,12.5,20.65,-16.53,2.07,Hold,10.0,5y +12% a year; 10y +12%; ±21%; consensus Hold
+EBAY,eBay Inc.,yes,79.7,kept (active),77.0,29.3,43.49,13.16,18.27,35.84,-19.97,1.0,Hold,10.0,5y +13% a year; 10y +18%; ±36%; consensus Hold
+GL,Globe Life,yes,79.7,kept (active),18.0,21.19,9.27,15.43,10.51,19.72,-12.13,0.77,Buy,10.0,5y +15% a year; 10y +11%; ±20%; consensus Buy
+RIO.AX,Rio Tinto Ltd,yes,79.7,kept (active),237.9,17.14,12.93,16.77,17.24,29.3,-23.52,4.54,Hold,10.0,5y +17% a year; 10y +17%; ±29%; consensus Hold
+FANG,Diamondback Energy,yes,79.5,kept (active),80.7,40.98,8.44,20.08,10.22,32.62,-19.09,2.1,Strong Buy,10.0,5y +20% a year; 10y +10%; ±33%; consensus Strong Buy
+IOO.AX,iShares Global 100 ETF,yes,79.5,kept (active),,10.42,22.9,16.91,17.08,12.09,-12.05,1.18,no coverage,10.0,5y +17% a year; 10y +17%; ±12%
+MQG.AX,Macquarie Group Ltd,yes,79.4,kept (active),96.0,12.81,19.15,8.23,15.71,22.84,-14.95,2.83,no coverage,10.0,5y +8% a year; 10y +16%; ±23%
+NI,NiSource,yes,79.4,kept (active),29.7,1.81,19.39,17.09,11.25,18.07,-20.01,2.71,Strong Buy,10.0,5y +17% a year; 10y +11%; ±18%; consensus Strong Buy
+L,Loews Corporation,yes,79.2,kept (active),32.9,13.5,17.33,17.06,10.99,16.05,-12.49,0.22,no coverage,10.0,5y +17% a year; 10y +11%; ±16%
+EQIX,Equinix,yes,79.1,kept (active),133.9,16.51,7.95,6.09,13.8,25.81,-14.56,2.13,Strong Buy,10.0,5y +6% a year; 10y +14%; ±26%; consensus Strong Buy
+EOG,EOG Resources,yes,78.9,kept (active),120.7,54.36,8.86,18.89,8.9,29.17,-13.65,2.52,Buy,10.0,5y +19% a year; 10y +9%; ±29%; consensus Buy
+MFF.AX,Mff Capital Investments Ltd,,78.7,too small or outside the screened markets,3.1,15.44,28.52,16.58,14.67,17.94,-13.21,4.08,,10.0,5y +17% a year; 10y +15%; ±18%
+FTNT,Fortinet,yes,78.6,kept (active),183.5,106.63,40.43,22.71,41.33,43.29,-14.34,0.0,Hold,10.0,5y +23% a year; 10y +41%; ±43%; consensus Hold
+TDY,Teledyne Technologies,yes,78.6,kept (active),40.6,14.44,14.09,7.92,18.16,25.53,-15.18,0.0,Buy,10.0,5y +8% a year; 10y +18%; ±26%; consensus Buy
+ALV.DE,Allianz SE,yes,78.2,kept (active),,26.65,30.79,22.18,17.2,17.92,-12.35,4.03,Hold,10.7,5y +22% a year; 10y +17%; ±18%; consensus Hold
+INCM.AX,Betashares S&P Global High Dividend Aristocrats ETF,yes,78.2,kept (active),,12.13,18.3,13.28,14.05,8.52,-7.05,4.89,no coverage,8.0,5y +13% a year; 10y +14%; ±9%
+LMT,Lockheed Martin,yes,78.1,kept (active),193.5,24.75,8.43,16.82,11.96,29.41,-26.87,2.33,Buy,10.0,5y +17% a year; 10y +12%; ±29%; consensus Buy
+NTRS,Northern Trust,yes,78.1,kept (active),43.0,35.08,35.23,10.78,10.91,24.13,-14.66,1.99,Hold,10.0,5y +11% a year; 10y +11%; ±24%; consensus Hold
+ORLY,O'Reilly Automotive,yes,78.1,kept (active),105.2,-7.07,10.12,18.74,18.35,25.98,-18.65,0.0,Strong Buy,10.0,5y +19% a year; 10y +18%; ±26%; consensus Strong Buy
+NTAP,NetApp,yes,78.1,kept (active),60.0,84.38,41.11,23.42,23.23,45.46,-20.79,0.97,Buy,10.0,5y +23% a year; 10y +23%; ±45%; consensus Buy
+ECL,Ecolab,yes,78.0,kept (active),115.5,6.48,17.25,8.09,11.48,21.76,-20.09,1.01,Strong Buy,10.0,5y +8% a year; 10y +11%; ±22%; consensus Strong Buy
+WRB,W. R. Berkley Corporation,yes,78.0,kept (active),39.5,2.05,17.43,20.6,18.5,22.29,-17.24,2.52,Hold,10.0,5y +21% a year; 10y +18%; ±22%; consensus Hold
+IRM,Iron Mountain,yes,77.9,kept (active),47.1,9.54,23.12,25.68,20.06,33.1,-25.15,3.14,Strong Buy,10.0,5y +26% a year; 10y +20%; ±33%; consensus Strong Buy
+HSBA.L,HSBC Holdings plc,yes,77.9,kept (active),437.6,35.35,30.01,25.38,7.98,26.74,-18.13,4.14,Hold,10.7,5y +25% a year; 10y +8%; ±27%; consensus Hold
+AMZN,Amazon,yes,77.8,kept (active),3810.6,12.46,19.13,9.54,21.76,34.76,-21.74,0.0,Strong Buy,10.0,5y +10% a year; 10y +22%; ±35%; consensus Strong Buy
+VRSN,Verisign,yes,77.8,kept (active),38.9,22.92,12.12,8.36,15.55,28.56,-20.25,1.05,Buy,10.0,5y +8% a year; 10y +16%; ±29%; consensus Buy
+CASY,Casey's,yes,77.7,kept (active),37.1,33.17,33.57,32.31,21.11,37.67,-36.13,0.33,Strong Buy,10.0,5y +32% a year; 10y +21%; ±38%; consensus Strong Buy
+TXN,Texas Instruments,yes,77.7,kept (active),368.3,68.65,24.87,13.08,18.33,42.24,-23.37,2.01,Buy,10.0,5y +13% a year; 10y +18%; ±42%; consensus Buy
+SIE.DE,Siemens Aktiengesellschaft,yes,77.7,kept (active),310.7,8.82,29.05,15.8,13.69,32.56,-20.5,2.1,Buy,10.7,5y +16% a year; 10y +14%; ±33%; consensus Buy
+MTB,M&amp;T Bank,yes,77.6,kept (active),45.5,25.74,25.01,13.55,8.12,21.2,-16.98,2.71,Hold,10.0,5y +14% a year; 10y +8%; ±21%; consensus Hold
+ANZ.AX,Anz Group Holdings Ltd,yes,77.5,kept (active),118.3,13.16,24.15,13.71,9.09,21.72,-15.36,4.15,Hold,10.0,5y +14% a year; 10y +9%; ±22%; consensus Hold
+IVV.AX,iShares S&P 500 ETF,yes,77.3,kept (active),,6.66,19.89,13.82,15.71,10.32,-11.34,1.03,no coverage,10.0,5y +14% a year; 10y +16%; ±10%
+NDQ.AX,Betashares NASDAQ 100 ETF,yes,77.3,kept (active),,7.68,22.71,14.97,20.8,16.6,-15.17,1.5,no coverage,10.0,5y +15% a year; 10y +21%; ±17%
+BLK,BlackRock,yes,77.2,kept (active),260.3,2.14,21.25,7.63,15.39,27.2,-20.21,1.99,Strong Buy,10.0,5y +8% a year; 10y +15%; ±27%; consensus Strong Buy
+RF,Regions Financial Corporation,yes,77.2,kept (active),34.2,21.79,26.1,9.42,12.43,23.07,-18.45,3.88,Hold,10.0,5y +9% a year; 10y +12%; ±23%; consensus Hold
+EVRG,Evergy,yes,77.2,kept (active),27.7,12.12,20.7,11.59,8.57,16.47,-11.14,3.29,Buy,10.0,5y +12% a year; 10y +9%; ±16%; consensus Buy
+PNW,Pinnacle West Capital,yes,76.8,kept (active),18.3,18.75,13.1,16.94,8.48,17.07,-15.97,3.44,Buy,10.0,5y +17% a year; 10y +8%; ±17%; consensus Buy
+AMP,Ameriprise Financial,yes,76.8,kept (active),62.1,4.61,13.95,13.48,18.88,26.14,-20.87,1.34,Hold,10.0,5y +13% a year; 10y +19%; ±26%; consensus Hold
+PWR,Quanta Services,yes,76.6,kept (active),114.4,23.63,42.32,36.37,33.12,45.37,-32.75,0.08,Strong Buy,10.0,5y +36% a year; 10y +33%; ±45%; consensus Strong Buy
+VTS.AX,Vanguard US Total Market Shares ETF,yes,76.4,kept (active),,6.2,19.75,12.85,15.22,10.47,-11.05,0.8,no coverage,10.0,5y +13% a year; 10y +15%; ±10%
+SNA,Snap-on,yes,76.4,kept (active),25.9,4.48,10.32,16.23,11.19,19.12,-15.38,2.77,Buy,10.0,5y +16% a year; 10y +11%; ±19%; consensus Buy
+CPAY,Corpay,yes,76.3,kept (active),38.0,42.85,17.84,11.98,11.33,36.62,-20.2,0.0,Strong Buy,10.0,5y +12% a year; 10y +11%; ±37%; consensus Strong Buy
+CAT,Caterpillar Inc.,yes,76.1,kept (active),450.4,31.89,41.58,31.16,25.33,40.56,-35.81,0.68,Buy,10.0,5y +31% a year; 10y +25%; ±41%; consensus Buy
+GD,General Dynamics,yes,76.1,kept (active),133.4,3.53,11.31,15.22,10.17,22.41,-17.51,1.81,Buy,10.0,5y +15% a year; 10y +10%; ±22%; consensus Buy
+DOV,Dover Corporation,yes,76.0,kept (active),37.8,9.56,12.31,5.77,15.45,24.62,-19.65,1.06,Strong Buy,10.0,5y +6% a year; 10y +15%; ±25%; consensus Strong Buy
+SO,Southern Company,yes,76.0,kept (active),152.8,0.14,11.65,13.98,12.3,17.9,-15.53,3.22,Hold,10.0,5y +14% a year; 10y +12%; ±18%; consensus Hold
+NEM,Newmont,yes,75.7,kept (active),166.2,27.47,42.24,20.65,16.93,48.22,-32.1,0.92,Strong Buy,10.0,5y +21% a year; 10y +17%; ±48%; consensus Strong Buy
+ATO,Atmos Energy,yes,75.6,kept (active),41.7,0.86,16.17,17.91,12.67,16.06,-17.8,2.31,Hold,10.0,5y +18% a year; 10y +13%; ±16%; consensus Hold
+AXP,American Express,yes,75.6,kept (active),307.8,-8.67,27.17,16.0,18.59,25.43,-23.9,1.14,Buy,10.0,5y +16% a year; 10y +19%; ±25%; consensus Buy
+IHVV.AX,iShares S&P 500 (AUD Hedged) ETF,yes,75.5,kept (active),,14.42,22.57,10.34,13.13,13.94,-9.02,4.03,no coverage,10.0,5y +10% a year; 10y +13%; ±14%
+ENB.TO,Enbridge Inc.,yes,75.5,kept (active),152.6,7.72,22.68,11.78,7.85,17.19,-17.3,5.72,Buy,10.7,5y +12% a year; 10y +8%; ±17%; consensus Buy
+HCA,HCA Healthcare,yes,75.4,kept (active),144.7,7.58,24.4,15.94,22.74,31.19,-33.62,0.65,Buy,10.0,5y +16% a year; 10y +23%; ±31%; consensus Buy
+RJF,Raymond James Financial,yes,75.4,kept (active),43.4,-2.85,16.1,13.05,15.18,24.96,-18.87,1.37,Buy,10.0,5y +13% a year; 10y +15%; ±25%; consensus Buy
+FCX,Freeport-McMoRan,yes,75.3,kept (active),132.6,58.74,21.71,14.53,17.62,47.58,-24.31,0.93,Buy,10.0,5y +15% a year; 10y +18%; ±48%; consensus Buy
+IAG.AX,Insurance Australia Group Ltd,yes,75.3,kept (active),20.9,16.72,21.03,17.14,8.86,26.55,-19.88,3.59,Buy,10.0,5y +17% a year; 10y +9%; ±27%; consensus Buy
+WOW.AX,Woolworths Group Ltd,yes,75.3,kept (active),51.1,59.65,9.27,4.94,11.66,22.6,-14.71,2.32,Hold,10.0,5y +5% a year; 10y +12%; ±23%; consensus Hold
+QUAL.AX,VanEck MSCI International Quality ETF,yes,75.2,kept (active),,5.08,16.5,11.67,15.34,10.14,-10.55,3.45,no coverage,10.0,5y +12% a year; 10y +15%; ±10%
+COL.AX,Coles Group Ltd.,yes,75.2,kept (active),33.0,10.23,21.36,11.4,,20.45,-11.23,3.18,Buy,7.9,5y +11% a year; ±20%; consensus Buy
+GM,General Motors,yes,75.0,kept (active),93.8,13.37,35.42,9.02,10.89,33.06,-16.62,0.92,Strong Buy,10.0,5y +9% a year; 10y +11%; ±33%; consensus Strong Buy
+DUK,Duke Energy,yes,74.8,kept (active),138.6,1.62,12.54,9.72,10.43,16.58,-13.67,3.43,Buy,10.0,5y +10% a year; 10y +10%; ±17%; consensus Buy
+VGS.AX,Vanguard MSCI Index International Shares ETF,yes,74.7,kept (active),,6.08,18.97,12.46,13.87,9.93,-10.49,1.21,no coverage,10.0,5y +12% a year; 10y +14%; ±10%
+FFIV,"F5, Inc.",yes,74.6,kept (active),36.5,49.9,39.31,18.07,13.2,35.07,-24.92,0.0,Hold,10.0,5y +18% a year; 10y +13%; ±35%; consensus Hold
+USB,U.S. Bancorp,yes,74.6,kept (active),132.1,29.24,24.29,5.62,6.39,22.17,-16.21,3.53,Buy,10.0,5y +6% a year; 10y +6%; ±22%; consensus Buy
+VGAD.AX,Vanguard MSCI International Shares (Hedged) ETF,yes,74.6,kept (active),,14.65,21.88,10.43,12.31,13.77,-8.32,2.38,no coverage,10.0,5y +10% a year; 10y +12%; ±14%
+ORG.AX,Origin Energy Ltd,yes,74.5,kept (active),21.0,2.29,16.2,25.51,11.66,24.09,-20.64,4.93,Buy,10.0,5y +26% a year; 10y +12%; ±24%; consensus Buy
+HUBB,Hubbell Incorporated,yes,74.2,kept (active),33.2,2.32,15.24,20.55,17.77,31.82,-21.01,1.3,Buy,10.0,5y +21% a year; 10y +18%; ±32%; consensus Buy
+HQLT.AX,Betashares Global Quality Leaders Currency Hedged ETF,yes,74.2,kept (active),,12.67,18.01,7.97,14.05,14.67,-9.99,4.08,no coverage,6.4,5y +8% a year; 10y +14%; ±15%
+VESG.AX,Vanguard Ethically Conscious International Shares Index ETF,yes,74.2,kept (esg),,6.91,18.79,11.88,14.05,11.56,-12.37,1.33,no coverage,8.1,5y +12% a year; 10y +14%; ±12%
+PGF.AX,Pm Capital Global Opportunities Fund Ltd,,74.1,too small or outside the screened markets,1.9,19.21,27.97,18.35,17.32,21.91,-17.3,4.72,,10.0,5y +18% a year; 10y +17%; ±22%
+COR,Cencora,yes,74.0,kept (active),91.3,3.05,19.0,25.65,20.02,31.21,-32.44,0.71,Buy,10.0,5y +26% a year; 10y +20%; ±31%; consensus Buy
+JBL,Jabil,yes,73.8,kept (active),40.1,29.58,25.56,37.06,30.77,47.21,-30.65,0.12,Strong Buy,10.0,5y +37% a year; 10y +31%; ±47%; consensus Strong Buy
+PANW,Palo Alto Networks,yes,73.8,kept (active),417.2,68.36,39.04,35.4,33.18,49.18,-36.01,0.0,Strong Buy,10.0,5y +35% a year; 10y +33%; ±49%; consensus Strong Buy
+BAC,Bank of America,yes,73.6,kept (active),505.3,0.07,23.26,5.12,12.37,21.75,-21.85,2.29,Strong Buy,10.0,5y +5% a year; 10y +12%; ±22%; consensus Strong Buy
+IEX,IDEX Corporation,yes,73.6,kept (active),23.6,35.16,3.57,2.95,11.34,22.22,-14.49,1.29,Strong Buy,10.0,5y +3% a year; 10y +11%; ±22%; consensus Strong Buy
+NWS.AX,News Corporation..,yes,73.5,kept (active),26.1,5.75,13.78,10.41,12.53,26.4,-23.15,0.59,Strong Buy,10.0,5y +10% a year; 10y +13%; ±26%; consensus Strong Buy
+TMO,Thermo Fisher Scientific,yes,73.2,kept (active),355.2,18.39,11.5,2.95,18.24,29.23,-31.38,0.27,Strong Buy,10.0,5y +3% a year; 10y +18%; ±29%; consensus Strong Buy
+ETN,Eaton Corporation,yes,73.0,kept (active),200.9,-2.36,17.56,20.34,21.71,40.21,-21.82,1.21,Strong Buy,10.0,5y +20% a year; 10y +22%; ±40%; consensus Strong Buy
+CBOE,Cboe Global Markets,yes,72.8,kept (active),49.9,42.8,24.09,23.7,19.52,35.51,-36.73,0.68,Hold,10.0,5y +24% a year; 10y +20%; ±36%; consensus Hold
+KDP,Keurig Dr Pepper,yes,72.8,kept (active),68.0,31.48,4.66,3.57,13.15,27.51,-17.71,2.62,Buy,10.0,5y +4% a year; 10y +13%; ±28%; consensus Buy
+HACK.AX,Betashares Global Cybersecurity ETF,yes,72.8,kept (active),,23.46,28.51,15.81,18.87,30.77,-28.43,3.31,no coverage,10.0,5y +16% a year; 10y +19%; ±31%
+OR.PA,L'Oréal S.A.,yes,72.6,kept (active),371.1,18.73,5.99,4.07,11.84,24.45,-14.44,1.65,Buy,10.7,5y +4% a year; 10y +12%; ±24%; consensus Buy
+NWS,News Corp (Class B),yes,72.5,kept (active),26.1,13.96,13.66,11.0,13.08,26.73,-17.71,0.59,thin coverage,10.0,5y +11% a year; 10y +13%; ±27%; consensus thin coverage
+KEYS,Keysight Technologies,yes,72.3,kept (active),75.0,83.1,31.7,12.86,24.65,45.72,-20.55,0.0,no coverage,10.0,5y +13% a year; 10y +25%; ±46%
+AIR.PA,Airbus SE,yes,72.2,kept (active),241.0,-5.95,18.29,13.7,14.98,29.01,-27.71,1.67,Buy,10.7,5y +14% a year; 10y +15%; ±29%; consensus Buy
+VHY.AX,Vanguard Australian Shares High Yield ETF,yes,72.0,kept (active),,10.86,16.5,12.44,10.3,10.52,-4.84,3.64,no coverage,10.0,5y +12% a year; 10y +10%; ±11%
+MMS.AX,Mcmillan Shakespeare Ltd,yes,72.0,kept (active),1.4,21.52,15.13,17.03,14.43,26.68,-18.66,6.67,Hold,10.0,5y +17% a year; 10y +14%; ±27%; consensus Hold
+TWR.AX,Tower Ltd,,71.6,too small or outside the screened markets,0.6,17.87,220.94,103.36,46.2,26.77,-14.43,10.83,,10.0,5y +103% a year; 10y +46%; ±27%
+JHPI.AX,JPMorgan Equity Premium Income (Hedged) Complex ETF,yes,71.6,kept (active),,6.51,8.21,12.37,14.05,11.96,-6.61,,no coverage,3.4,5y +12% a year; 10y +14%; ±12%
+FERG,Ferguson Enterprises,yes,71.5,kept (active),62.0,-6.82,12.49,11.8,17.37,29.66,-19.36,1.58,Buy,10.0,5y +12% a year; 10y +17%; ±30%; consensus Buy
+AEE,Ameren,,71.4,added,39.4,6.63,12.34,9.74,12.18,17.69,-15.56,2.74,,10.0,5y +10% a year; 10y +12%; ±18%
+MPL.AX,Medibank Private Ltd,yes,71.4,kept (active),13.7,9.08,18.1,13.06,11.43,21.15,-16.77,3.85,no coverage,10.0,5y +13% a year; 10y +11%; ±21%
+WES.AX,Wesfarmers Ltd,yes,71.4,kept (active),91.2,-10.25,19.92,11.13,15.99,21.53,-23.41,2.76,Hold,10.0,5y +11% a year; 10y +16%; ±22%; consensus Hold
+ADM,Archer Daniels Midland,yes,71.4,kept (active),55.0,31.61,3.78,8.93,10.21,27.61,-12.29,2.59,Hold,10.0,5y +9% a year; 10y +10%; ±28%; consensus Hold
+APH,Amphenol,yes,71.3,kept (active),254.7,7.48,49.17,33.29,25.96,45.99,-28.19,0.69,Strong Buy,10.0,5y +33% a year; 10y +26%; ±46%; consensus Strong Buy
+CF,CF Industries,yes,71.3,kept (active),25.7,40.51,13.34,20.17,19.12,42.81,-25.45,1.75,Hold,10.0,5y +20% a year; 10y +19%; ±43%; consensus Hold
+NWSA,News Corp (Class A),,71.3,added,22.0,18.77,11.66,8.72,12.46,26.0,-17.13,0.64,,10.0,5y +9% a year; 10y +12%; ±26%
+CNP,CenterPoint Energy,,71.1,added,35.4,6.06,14.29,13.87,9.54,17.6,-18.21,2.24,,10.0,5y +14% a year; 10y +10%; ±18%
+NEE,NextEra Energy,yes,71.1,kept (active),244.0,1.01,11.54,3.24,14.72,21.26,-21.73,2.98,Buy,10.0,5y +3% a year; 10y +15%; ±21%; consensus Buy
+UYLD.AX,Global X S&P 500 Covered Call ETF,yes,71.1,kept (active),,4.84,8.41,12.37,14.05,12.72,-7.97,10.43,no coverage,3.7,5y +12% a year; 10y +14%; ±13%
+A,Agilent Technologies,yes,71.0,kept (active),69.0,17.51,15.5,3.91,16.37,32.53,-29.75,0.59,Buy,10.0,5y +4% a year; 10y +16%; ±33%; consensus Buy
+MOAT.AX,VanEck Morningstar Wide Moat ETF,yes,71.0,kept (active),,3.57,13.66,10.86,14.47,12.74,-15.16,9.51,no coverage,10.0,5y +11% a year; 10y +14%; ±13%
+ADP,Automatic Data Processing,yes,70.9,kept (active),172.9,12.31,11.08,10.39,15.68,28.31,-31.81,2.21,Hold,10.0,5y +10% a year; 10y +16%; ±28%; consensus Hold
+MSFT,Microsoft,yes,70.6,kept (active),5485.9,1.01,12.57,11.85,26.48,32.97,-34.5,0.7,Strong Buy,10.0,5y +12% a year; 10y +26%; ±33%; consensus Strong Buy
+QOZ.AX,Betashares FTSE RAFI Australia 200 ETF,yes,70.5,kept (active),,10.21,16.93,11.1,10.14,11.67,-8.6,3.8,no coverage,10.0,5y +11% a year; 10y +10%; ±12%
+URI,United Rentals,,70.2,added,95.7,15.99,34.05,25.26,27.92,43.32,-25.52,0.73,,10.0,5y +25% a year; 10y +28%; ±43%
+ESGI.AX,VanEck MSCI International Sustainable Equity ETF,yes,70.2,kept (esg),,4.43,14.04,9.78,14.05,14.81,-14.92,2.71,no coverage,8.6,5y +10% a year; 10y +14%; ±15%
+DBI.AX,Dalrymple Bay Infrastructure Ltd,yes,70.0,kept (active),2.8,38.02,36.59,29.01,,24.01,-14.73,4.59,no coverage,5.8,5y +29% a year; ±24%
+ITW,Illinois Tool Works,yes,70.0,kept (active),112.3,10.42,6.37,7.96,11.66,21.69,-17.44,2.36,Hold,10.0,5y +8% a year; 10y +12%; ±22%; consensus Hold
+SU.PA,Schneider Electric S.E.,yes,70.0,kept (active),213.8,-6.98,19.04,12.0,16.13,35.46,-26.64,1.84,Strong Buy,10.7,5y +12% a year; 10y +16%; ±35%; consensus Strong Buy
+BFL.AX,Bsp Financial Group Ltd,,69.8,too small or outside the screened markets,3.6,6.78,23.52,19.84,,19.11,-12.63,6.91,,5.2,5y +20% a year; ±19%
+BKR,Baker Hughes,yes,69.7,kept (active),76.7,12.86,15.03,21.07,5.24,32.89,-23.99,1.69,Strong Buy,10.0,5y +21% a year; 10y +5%; ±33%; consensus Strong Buy
+CHD,Church &amp; Dwight,,69.7,added,31.8,25.37,3.48,6.91,11.55,23.04,-13.81,1.14,,10.0,5y +7% a year; 10y +12%; ±23%
+HWM,Howmet Aerospace,yes,69.7,kept (active),106.3,-6.78,56.79,46.77,30.47,34.59,-36.4,0.27,Strong Buy,10.0,5y +47% a year; 10y +30%; ±35%; consensus Strong Buy
+PLD,Prologis,yes,69.6,kept (active),175.1,3.93,7.82,1.61,13.51,20.4,-16.65,3.33,Buy,10.0,5y +2% a year; 10y +14%; ±20%; consensus Buy
+SIG.AX,Sigma Healthcare Ltd,yes,69.5,kept (active),31.5,-10.59,65.04,39.59,11.65,24.19,-19.71,1.46,Buy,10.0,5y +40% a year; 10y +12%; ±24%; consensus Buy
+CL,Colgate-Palmolive,,69.4,added,95.6,25.16,7.44,8.72,7.14,22.97,-16.97,2.2,,10.0,5y +9% a year; 10y +7%; ±23%
+PG,Procter &amp; Gamble,yes,69.4,kept (active),538.2,10.32,1.92,6.65,10.71,20.84,-15.52,2.63,Buy,10.0,5y +7% a year; 10y +11%; ±21%; consensus Buy
+ALD.AX,Ampol Ltd,yes,69.3,kept (active),9.3,33.76,12.47,10.96,7.31,28.43,-15.4,6.25,Buy,10.0,5y +11% a year; 10y +7%; ±28%; consensus Buy
+ALL.AX,Aristocrat Leisure Ltd,yes,69.3,kept (active),37.9,0.66,20.33,8.16,17.49,28.71,-31.94,1.55,Strong Buy,10.0,5y +8% a year; 10y +17%; ±29%; consensus Strong Buy
+DLR,Digital Realty,yes,69.3,kept (active),92.8,0.78,11.14,6.73,10.9,27.58,-16.83,2.84,Strong Buy,10.0,5y +7% a year; 10y +11%; ±28%; consensus Strong Buy
+WFC,Wells Fargo,yes,69.3,kept (active),352.3,-0.4,26.31,14.23,8.08,25.54,-23.02,2.25,Buy,10.0,5y +14% a year; 10y +8%; ±26%; consensus Buy
+XEL,Xcel Energy,,69.0,added,63.5,0.63,9.88,8.84,11.37,19.24,-15.39,2.99,,10.0,5y +9% a year; 10y +11%; ±19%
+SIQ.AX,Smartgroup Corporation Ltd,,68.9,too small or outside the screened markets,1.6,57.72,18.88,15.94,14.38,30.2,-22.52,4.52,,10.0,5y +16% a year; 10y +14%; ±30%
+TDG,TransDigm Group,yes,68.7,kept (active),86.3,-18.43,12.06,17.83,21.35,26.78,-25.79,0.0,Buy,10.0,5y +18% a year; 10y +21%; ±27%; consensus Buy
+HNDQ.AX,Betashares NASDAQ 100 Currency Hedged ETF,yes,68.6,kept (active),,15.51,25.32,11.19,,20.61,-11.92,2.16,no coverage,6.2,5y +11% a year; ±21%
+ANET,Arista Networks,yes,68.4,kept (active),309.5,12.4,45.89,48.33,41.3,54.01,-28.33,0.0,Strong Buy,10.0,5y +48% a year; 10y +41%; ±54%; consensus Strong Buy
+SHW,Sherwin-Williams,yes,68.4,kept (active),116.9,3.56,9.91,3.77,16.15,27.85,-20.99,0.94,Buy,10.0,5y +4% a year; 10y +16%; ±28%; consensus Buy
+TEL,TE Connectivity,yes,68.2,kept (active),85.2,-11.12,18.3,10.31,14.52,35.35,-21.11,1.1,Strong Buy,10.0,5y +10% a year; 10y +15%; ±35%; consensus Strong Buy
+WDS.AX,Woodside Energy Group Ltd,yes,68.2,kept (active),62.5,43.19,4.98,15.61,7.34,29.66,-23.38,4.96,Hold,10.0,5y +16% a year; 10y +7%; ±30%; consensus Hold
+VEU.AX,Vanguard All-World ex-US Shares ETF,yes,68.1,kept (active),,6.09,16.99,10.02,10.26,13.29,-9.87,2.49,no coverage,10.0,5y +10% a year; 10y +10%; ±13%
+2308.TW,"Delta Electronics, Inc.",yes,68.1,kept (watchlist),176.5,55.26,73.83,47.66,28.28,56.33,-40.36,0.74,Strong Buy,10.7,5y +48% a year; 10y +28%; ±56%; consensus Strong Buy
+IJP.AX,iShares MSCI Japan ETF,yes,68.0,kept (active),,10.37,16.51,10.44,9.23,19.44,-12.39,5.11,no coverage,10.0,5y +10% a year; 10y +9%; ±19%
+NWH.AX,Nrw Holdings Ltd,,67.9,not added,3.0,27.62,39.87,33.48,32.28,38.34,-25.24,3.82,,10.0,5y +33% a year; 10y +32%; ±38%
+APD,Air Products,,67.8,not added,88.0,23.86,2.21,4.54,11.33,26.47,-12.44,2.35,,10.0,5y +5% a year; 10y +11%; ±26%
+LNT,Alliant Energy,,67.8,not added,23.7,5.09,12.45,9.11,10.99,17.09,-18.38,3.02,,10.0,5y +9% a year; 10y +11%; ±17%
+NHC.AX,New Hope Corporation Ltd,,67.7,not added,5.2,66.43,9.89,38.23,23.52,37.13,-19.94,6.56,,10.0,5y +38% a year; 10y +24%; ±37%
+WAT,Waters Corporation,,67.7,not added,59.4,27.88,19.93,5.76,13.76,35.26,-31.32,0.0,,10.0,5y +6% a year; 10y +14%; ±35%
+MND.AX,Monadelphous Group Ltd,,67.3,not added,2.8,25.46,29.77,26.98,14.17,35.91,-16.25,3.97,,10.0,5y +27% a year; 10y +14%; ±36%
+JEPI.AX,JPMorgan Equity Premium Income Complex ETF,yes,67.1,kept (active),,-1.86,6.03,12.37,14.05,9.24,-9.88,7.53,no coverage,4.0,5y +12% a year; 10y +14%; ±9%
+PHM,PulteGroup,,67.0,not added,31.4,-1.12,14.35,22.61,22.54,33.23,-22.8,0.88,,10.0,5y +23% a year; 10y +23%; ±33%
+NAB.AX,National Australia Bank Ltd,yes,66.9,kept (active),124.5,-0.76,19.22,12.89,8.98,23.06,-25.76,4.12,Hold,10.0,5y +13% a year; 10y +9%; ±23%; consensus Hold
+WEC,WEC Energy Group,,66.9,not added,47.1,-0.72,11.32,9.45,11.34,16.65,-14.46,3.37,,10.0,5y +9% a year; 10y +11%; ±17%
+EG,Everest Group,,66.9,not added,20.1,18.23,-0.69,12.82,9.73,23.94,-12.62,1.48,,10.0,5y +13% a year; 10y +10%; ±24%
+DRUG.AX,Betashares Global Healthcare ETF (Hedged),yes,66.8,kept (active),,18.93,11.48,5.76,9.51,15.67,-10.69,3.65,no coverage,10.0,5y +6% a year; 10y +10%; ±16%
+MCO,Moody's Corporation,,66.7,not added,108.8,2.43,13.63,6.12,19.06,28.11,-23.61,0.83,,10.0,5y +6% a year; 10y +19%; ±28%
+KEY,KeyCorp,,66.6,not added,30.5,25.27,29.25,4.34,7.01,22.72,-17.76,3.89,,10.0,5y +4% a year; 10y +7%; ±23%
+PRU,Prudential Financial,,66.6,not added,55.3,20.43,10.1,7.64,6.86,22.25,-21.46,4.77,,10.0,5y +8% a year; 10y +7%; ±22%
+VNT.AX,Ventia Services Group Ltd,,66.5,not added,4.8,13.58,35.04,31.39,,25.86,-20.1,4.1,,4.9,5y +31% a year; ±26%
+DAL,Delta Air Lines,,66.3,not added,78.7,31.62,31.83,16.8,6.68,38.86,-22.9,1.05,,10.0,5y +17% a year; 10y +7%; ±39%
+TLS.AX,Telstra Group Ltd,yes,66.2,kept (active),54.9,5.01,14.01,9.94,4.94,15.23,-15.59,4.24,Hold,10.0,5y +10% a year; 10y +5%; ±15%; consensus Hold
+PRY.MI,Prysmian S.p.A.,yes,66.1,kept (active),46.5,11.18,42.97,26.71,17.95,41.97,-37.67,0.92,Buy,10.7,5y +27% a year; 10y +18%; ±42%; consensus Buy
+HLI.AX,Helia Group Ltd,,66.0,not added,1.4,20.62,38.79,41.24,20.67,36.52,-16.88,23.42,,10.0,5y +41% a year; 10y +21%; ±37%
+QHAL.AX,VanEck MSCI International Quality (Hedged) ETF,yes,65.9,kept (active),,14.28,19.49,9.33,,13.87,-9.72,3.36,no coverage,7.6,5y +9% a year; ±14%
+DNL.AX,Dyno Nobel Ltd.,yes,65.7,kept (watchlist),6.7,23.34,19.46,12.32,6.26,28.41,-18.49,3.66,Buy,10.0,5y +12% a year; 10y +6%; ±28%; consensus Buy
+SCHW,Charles Schwab Corporation,yes,65.7,kept (active),224.7,-2.56,18.23,4.92,11.12,25.44,-21.18,1.35,Buy,10.0,5y +5% a year; 10y +11%; ±25%; consensus Buy
+DD,DuPont,,65.7,not added,25.0,34.25,12.2,12.69,5.94,30.0,-18.6,1.78,,10.0,5y +13% a year; 10y +6%; ±30%
+CDA.AX,Codan Ltd,yes,65.6,kept (active),10.1,61.25,94.96,43.71,45.86,53.29,-26.32,0.88,Buy,10.0,5y +44% a year; 10y +46%; ±53%; consensus Buy
+VAE.AX,Vanguard FTSE Asia ex Japan Shares ETF,yes,65.6,kept (active),,6.94,19.4,9.16,9.94,21.41,-12.66,2.66,no coverage,10.0,5y +9% a year; 10y +10%; ±21%
+GE,GE Aerospace,yes,65.4,kept (active),417.8,-7.26,44.25,36.53,8.59,33.2,-25.75,0.63,Strong Buy,10.0,5y +37% a year; 10y +9%; ±33%; consensus Strong Buy
+SGH.AX,Sgh Ltd,yes,65.4,kept (active),32.3,-17.44,14.3,14.93,19.4,28.26,-28.85,1.61,Buy,10.0,5y +15% a year; 10y +19%; ±28%; consensus Buy
+ICE,Intercontinental Exchange,,65.3,not added,119.9,5.11,12.63,6.16,13.67,25.29,-29.32,1.25,,10.0,5y +6% a year; 10y +14%; ±25%
+SFR.AX,Sandfire Resources Ltd,yes,65.2,kept (active),8.6,21.5,46.41,27.91,15.8,44.04,-30.92,1.9,Hold,10.0,5y +28% a year; 10y +16%; ±44%; consensus Hold
+MSCI,MSCI,,65.2,not added,55.4,16.26,7.21,1.04,25.19,30.56,-18.07,1.29,,10.0,5y +1% a year; 10y +25%; ±31%
+AZN.L,AstraZeneca PLC,yes,65.2,kept (active),377.7,2.39,8.22,7.32,9.99,26.48,-26.26,1.87,Strong Buy,10.7,5y +7% a year; 10y +10%; ±26%; consensus Strong Buy
+AMD,Advanced Micro Devices,yes,65.1,kept (active),1191.7,117.97,67.62,35.46,51.41,68.33,-27.76,0.0,Strong Buy,10.0,5y +35% a year; 10y +51%; ±68%; consensus Strong Buy
+LYL.AX,Lycopodium Ltd,,65.0,not added,0.9,60.03,33.82,42.7,29.16,37.86,-22.85,3.06,,10.0,5y +43% a year; 10y +29%; ±38%
+META,Meta Platforms,yes,65.0,kept (watchlist),2335.9,-11.88,25.05,16.57,19.49,42.69,-29.94,0.33,Strong Buy,10.0,5y +17% a year; 10y +19%; ±43%; consensus Strong Buy
+YUM,Yum! Brands,,65.0,not added,52.9,5.85,6.46,7.44,11.89,24.55,-18.54,1.95,,10.0,5y +7% a year; 10y +12%; ±25%
+IHD.AX,iShares S&P/ASX Dividend Opportunities ETF,yes,65.0,kept (active),,5.53,15.1,10.53,7.79,12.35,-7.36,4.22,no coverage,10.0,5y +11% a year; 10y +8%; ±12%
+AVGO,Broadcom,yes,64.8,kept (active),2206.5,-5.15,53.29,48.11,39.08,45.91,-32.65,0.8,Strong Buy,10.0,5y +48% a year; 10y +39%; ±46%; consensus Strong Buy
+VZ,Verizon,yes,64.6,kept (active),259.5,21.6,11.16,4.04,4.9,26.98,-17.79,6.43,Buy,10.0,5y +4% a year; 10y +5%; ±27%; consensus Buy
+EW,Edwards Lifesciences,,64.6,not added,69.8,17.48,8.53,-4.28,13.35,25.49,-13.19,0.0,,10.0,5y -4% a year; 10y +13%; ±25%
+HPE,Hewlett Packard Enterprise,,64.5,not added,131.0,144.37,52.26,36.06,19.11,58.42,-26.36,1.03,,10.0,5y +36% a year; 10y +19%; ±58%
+TKO,TKO Group Holdings,,64.4,not added,18.3,-3.57,26.17,27.35,27.92,31.65,-22.45,1.77,,10.0,5y +27% a year; 10y +28%; ±32%
+LUN.TO,Lundin Mining Corporation,yes,64.4,kept (active),25.5,44.31,53.26,26.97,21.9,56.21,-33.67,0.26,Buy,10.7,5y +27% a year; 10y +22%; ±56%; consensus Buy
+FE,FirstEnergy,,64.2,not added,35.7,2.97,9.9,9.43,8.99,16.32,-15.44,3.95,,10.0,5y +9% a year; 10y +9%; ±16%
+MRSH,Marsh McLennan,,64.2,not added,115.5,7.85,-0.02,6.68,13.83,25.78,-16.66,1.9,,10.0,5y +7% a year; 10y +14%; ±26%
+PRU.AX,Perseus Mining Ltd,yes,64.0,kept (active),7.2,16.18,50.11,30.71,26.52,43.84,-28.47,2.59,Buy,10.0,5y +31% a year; 10y +27%; ±44%; consensus Buy
+VEQ.AX,Vanguard FTSE Europe Shares ETF,yes,64.0,kept (active),,1.54,14.8,8.86,9.92,12.71,-12.42,2.26,no coverage,10.0,5y +9% a year; 10y +10%; ±13%
+DTE.DE,Deutsche Telekom AG,yes,64.0,kept (active),193.0,-10.71,11.38,12.73,9.68,28.19,-27.77,3.94,Strong Buy,10.7,5y +13% a year; 10y +10%; ±28%; consensus Strong Buy
+MTD,Mettler Toledo,,63.9,not added,42.4,17.07,15.63,3.99,15.96,31.43,-31.9,0.0,,10.0,5y +4% a year; 10y +16%; ±31%
+SUN.AX,Suncorp Group Ltd,yes,63.9,kept (active),21.6,7.5,14.46,13.15,8.58,25.18,-29.94,3.87,Hold,10.0,5y +13% a year; 10y +9%; ±25%; consensus Hold
+ALQ.AX,Als Ltd,yes,63.5,kept (active),10.0,-8.61,25.47,11.23,15.4,29.59,-25.96,2.16,Buy,10.0,5y +11% a year; 10y +15%; ±30%; consensus Buy
+CRWD,CrowdStrike,yes,63.5,kept (active),353.8,86.05,70.45,29.71,,55.66,-37.18,0.0,Strong Buy,7.3,5y +30% a year; ±56%; consensus Strong Buy
+LSF.AX,L1 Long Short Fund Ltd,,63.5,not added,2.8,30.97,21.41,13.44,,29.27,-16.82,3.33,,8.5,5y +13% a year; ±29%
+EXC,Exelon,,63.4,not added,59.7,-2.95,5.07,8.47,11.24,19.98,-18.54,3.73,,10.0,5y +8% a year; 10y +11%; ±20%
+ANN.AX,Ansell Ltd,,63.3,not added,6.5,40.57,32.69,10.75,10.24,25.73,-32.42,2.07,,10.0,5y +11% a year; 10y +10%; ±26%
+SPGI,S&amp;P Global,yes,63.3,kept (active),189.0,-0.24,8.18,2.35,16.78,31.18,-28.48,0.82,Strong Buy,10.0,5y +2% a year; 10y +17%; ±31%; consensus Strong Buy
+BMY,Bristol Myers Squibb,,63.2,not added,177.7,48.73,8.11,7.07,5.36,28.29,-15.91,4.04,,10.0,5y +7% a year; 10y +5%; ±28%
+WBC.AX,Westpac Banking Corporation,yes,63.1,kept (active),125.6,-1.6,27.71,13.32,6.84,21.22,-20.02,4.19,Underperform,10.0,5y +13% a year; 10y +7%; ±21%; consensus Underperform
+AYLD.AX,Global X S&P/ASX 200 Covered Call ETF,yes,62.9,kept (active),,8.31,11.12,7.11,8.94,8.93,-3.77,7.48,no coverage,3.7,5y +7% a year; 10y +9%; ±9%
+AIG,American International Group,,62.8,not added,55.8,6.99,9.1,10.81,5.97,23.62,-16.98,2.31,,10.0,5y +11% a year; 10y +6%; ±24%
+KR,Kroger,,62.7,not added,49.6,1.57,13.26,15.21,10.75,29.9,-26.16,2.11,,10.0,5y +15% a year; 10y +11%; ±30%
+DHHF.AX,Betashares Diversified All Growth ETF,yes,62.7,kept (watchlist),,4.01,16.21,9.87,,9.64,-8.03,2.08,no coverage,6.8,5y +10% a year; ±10%
+SYF,Synchrony Financial,,62.6,not added,33.2,3.05,36.15,13.73,11.22,31.2,-27.61,1.67,,10.0,5y +14% a year; 10y +11%; ±31%
+IEM.AX,iShares MSCI Emerging Markets ETF,yes,62.6,kept (active),,7.05,17.91,7.59,8.58,21.26,-12.94,1.53,no coverage,10.0,5y +8% a year; 10y +9%; ±21%
+IFRA.AX,VanEck FTSE Global Infrastructure (Hedged) ETF,yes,62.6,kept (active),,8.91,15.51,6.61,7.41,11.49,-10.44,3.02,no coverage,10.0,5y +7% a year; 10y +7%; ±11%
+DHI,D. R. Horton,,62.5,not added,53.7,-6.91,9.32,13.02,20.29,35.79,-21.01,1.23,,10.0,5y +13% a year; 10y +20%; ±36%
+TGT,Target Corporation,,62.4,not added,100.8,71.92,12.33,-5.63,11.2,30.78,-13.33,2.94,,10.0,5y -6% a year; 10y +11%; ±31%
+ASIA.AX,Betashares Asia Technology Tigers ETF,yes,62.3,kept (active),,26.0,36.6,13.92,,38.46,-24.12,2.13,no coverage,8.1,5y +14% a year; ±38%
+PSA,Public Storage,,62.2,not added,75.5,4.76,9.7,4.43,8.98,23.43,-13.9,3.89,,10.0,5y +4% a year; 10y +9%; ±23%
+ORI.AX,Orica Ltd,yes,62.1,kept (active),10.7,6.68,19.16,11.39,5.48,24.55,-28.9,2.65,Strong Buy,10.0,5y +11% a year; 10y +5%; ±25%; consensus Strong Buy
+SRG.AX,Srg Global Ltd,,62.1,not added,2.2,17.86,81.37,51.52,26.26,37.57,-23.42,2.11,,10.0,5y +52% a year; 10y +26%; ±38%
+PMGOLD.AX,Perth Mint Gold,yes,62.1,kept (active),,-9.21,21.98,19.07,13.68,24.57,-27.18,0.0,no coverage,10.0,5y +19% a year; 10y +14%; ±25%
+FOXA,Fox Corporation (Class A),,61.8,not added,37.4,16.83,27.98,14.28,,35.34,-35.58,0.84,,7.6,5y +14% a year; ±35%
+STW.AX,SPDR S&P/ASX 200 ETF,yes,61.8,kept (active),,0.68,13.21,7.91,9.08,12.22,-8.44,3.85,no coverage,10.0,5y +8% a year; 10y +9%; ±12%
+BN.TO,Brookfield Corporation,yes,61.8,kept (active),119.7,-16.54,24.22,6.18,13.07,26.92,-24.31,0.49,Buy,10.7,5y +6% a year; 10y +13%; ±27%; consensus Buy
+BP.L,BP p.l.c.,yes,61.8,kept (active),184.9,44.35,5.86,12.23,2.55,30.94,-24.85,3.97,Buy,10.7,5y +12% a year; 10y +3%; ±31%; consensus Buy
+CBA.AX,Commonwealth Bank of Australia,yes,61.8,kept (watchlist),274.2,-1.55,22.66,13.34,12.78,24.38,-17.93,3.08,Sell,10.7,5y +13% a year; 10y +13%; ±24%; consensus Sell
+ULTA,Ulta Beauty,,61.7,not added,33.3,20.28,14.53,13.01,10.09,35.47,-36.23,0.0,,10.0,5y +13% a year; 10y +10%; ±35%
+SRE,Sempra,,61.3,not added,72.9,-5.33,6.24,10.61,9.53,20.31,-21.71,3.1,,10.0,5y +11% a year; 10y +10%; ±20%
+FOX,Fox Corporation (Class B),,61.2,not added,33.5,16.01,26.91,13.47,,34.19,-34.14,0.94,,7.6,5y +13% a year; ±34%
+IOZ.AX,iShares Core S&P/ASX 200 ETF,yes,61.1,kept (active),,0.58,12.82,7.68,8.92,12.18,-8.45,3.49,no coverage,10.0,5y +8% a year; 10y +9%; ±12%
+ETHI.AX,Betashares Global Sustainability Leaders ETF,yes,61.1,kept (esg),,4.39,15.71,9.77,,11.7,-14.78,1.75,no coverage,9.8,5y +10% a year; ±12%
+WST,West Pharmaceutical Services,,61.0,not added,36.6,28.38,4.06,-0.18,18.38,31.63,-22.23,0.22,,10.0,5y -0% a year; 10y +18%; ±32%
+FGG.AX,Future Generation Global Ltd,yes,61.0,kept (active),,5.53,18.28,5.41,7.81,16.21,-9.69,6.87,no coverage,10.0,5y +5% a year; 10y +8%; ±16%
+GOLD.AX,Global X Physical Gold,yes,60.9,kept (active),,-9.55,21.65,18.74,13.32,25.42,-27.32,0.0,no coverage,10.0,5y +19% a year; 10y +13%; ±25%
+D,Dominion Energy,,60.8,not added,76.7,11.87,18.99,2.83,3.78,20.88,-15.07,4.1,,10.0,5y +3% a year; 10y +4%; ±21%
+EME,Emcor,yes,60.8,kept (active),40.6,-8.18,41.26,41.72,26.36,45.77,-32.33,0.25,Strong Buy,10.0,5y +42% a year; 10y +26%; ±46%; consensus Strong Buy
+DVA,DaVita,,60.7,not added,16.2,45.69,29.76,14.08,12.19,46.49,-27.86,0.0,,10.0,5y +14% a year; 10y +12%; ±46%
+VDHG.AX,Vanguard Diversified High Growth Index ETF,yes,60.7,kept (watchlist),,4.78,15.47,8.51,,9.73,-7.32,3.5,no coverage,8.9,5y +9% a year; ±10%
+SBUX,Starbucks,,60.6,not added,153.6,22.13,2.48,2.93,8.78,27.51,-16.35,2.44,,10.0,5y +3% a year; 10y +9%; ±28%
+CHG.L,Chemring Group PLC,yes,60.6,kept (watchlist),2.8,-5.79,23.38,12.33,14.09,31.39,-21.78,1.51,Strong Buy,10.7,5y +12% a year; 10y +14%; ±31%; consensus Strong Buy
+VAS.AX,Vanguard Australian Shares Index ETF,yes,60.5,kept (active),,-0.08,12.65,7.4,8.93,12.4,-8.56,3.18,no coverage,10.0,5y +7% a year; 10y +9%; ±12%
+KIM,Kimco Realty,,60.4,not added,21.2,11.12,11.13,6.91,4.91,18.0,-16.19,4.5,,10.0,5y +7% a year; 10y +5%; ±18%
+MU,Micron Technology,yes,60.3,kept (active),1412.9,325.06,129.01,69.37,48.08,81.41,-39.1,0.06,Strong Buy,10.0,5y +69% a year; 10y +48%; ±81%; consensus Strong Buy
+MMM,3M,,60.2,not added,118.8,2.91,30.87,8.15,5.89,25.69,-18.77,1.77,,10.0,5y +8% a year; 10y +6%; ±26%
+DTE,DTE Energy,,60.1,not added,36.9,-3.42,11.23,8.05,9.55,17.73,-21.04,3.53,,10.0,5y +8% a year; 10y +10%; ±18%
+INCY,Incyte,,60.1,not added,33.3,30.31,24.97,13.19,1.93,33.7,-18.33,0.0,,10.0,5y +13% a year; 10y +2%; ±34%
+QAN.AX,Qantas Airways Ltd,yes,60.0,kept (active),12.7,-16.77,23.62,11.63,12.13,30.65,-23.24,4.7,Strong Buy,10.0,5y +12% a year; 10y +12%; ±31%; consensus Strong Buy
+IQV,IQVIA,,59.9,not added,60.5,26.2,11.61,2.6,14.54,40.19,-35.87,0.0,,10.0,5y +3% a year; 10y +15%; ±40%
+TCL.AX,Transurban Group,yes,59.6,kept (active),44.2,-0.67,11.35,5.44,7.64,16.07,-15.11,4.87,Hold,10.0,5y +5% a year; 10y +8%; ±16%; consensus Hold
+ESS,Essex Property Trust,,59.6,not added,24.6,10.57,9.91,1.21,6.87,19.71,-9.77,3.69,,10.0,5y +1% a year; 10y +7%; ±20%
+CVL.AX,Civmec Ltd,,59.3,not added,0.8,11.42,22.38,23.78,,29.15,-21.2,3.9,,8.2,5y +24% a year; ±29%
+HAS,Hasbro,,59.3,not added,18.0,54.36,37.61,9.61,7.36,32.4,-27.31,2.4,,10.0,5y +10% a year; 10y +7%; ±32%
+TPR,"Tapestry, Inc.",,59.3,not added,33.5,-1.74,57.63,28.33,15.76,40.77,-32.68,1.49,,10.0,5y +28% a year; 10y +16%; ±41%
+TFC,Truist Financial,,59.1,not added,80.7,14.9,21.17,0.62,5.4,23.29,-20.67,4.33,,10.0,5y +1% a year; 10y +5%; ±23%
+ELV,Elevance Health,,59.0,not added,119.3,29.89,-2.22,3.19,14.37,35.05,-26.49,1.56,,10.0,5y +3% a year; 10y +14%; ±35%
+PFE,Pfizer,yes,59.0,kept (active),244.3,30.68,2.7,-0.79,5.11,21.18,-15.72,5.71,Hold,10.0,5y -1% a year; 10y +5%; ±21%; consensus Hold
+SSM.AX,Service Stream Ltd,,59.0,not added,1.4,0.33,39.66,23.12,12.31,26.95,-20.17,2.97,,10.0,5y +23% a year; 10y +12%; ±27%
+BEN,Franklin Resources,,59.0,not added,23.7,43.88,13.19,6.3,3.4,27.61,-19.21,4.25,,10.0,5y +6% a year; 10y +3%; ±28%
+BXB.AX,Brambles Ltd,yes,58.8,kept (active),28.7,-9.43,21.79,20.1,9.55,30.25,-34.17,3.03,Buy,10.0,5y +20% a year; 10y +10%; ±30%; consensus Buy
+MVW.AX,VanEck Australian Equal Weight ETF,yes,58.8,kept (active),,-0.6,10.94,6.93,8.75,13.32,-8.89,3.37,no coverage,10.0,5y +7% a year; 10y +9%; ±13%
+AJG,Arthur J. Gallagher &amp; Co.,,58.7,not added,82.5,-3.22,2.24,12.67,20.99,32.16,-31.22,1.02,,10.0,5y +13% a year; 10y +21%; ±32%
+ALLE,Allegion,,58.6,not added,18.7,4.77,19.2,9.62,12.35,29.77,-29.84,0.93,,10.0,5y +10% a year; 10y +12%; ±30%
+CVS,CVS Health,,58.5,not added,157.4,19.78,11.45,5.95,5.98,31.66,-22.63,3.53,,10.0,5y +6% a year; 10y +6%; ±32%
+DTL.AX,Data#3 Ltd,,58.5,not added,2.0,55.73,29.45,22.44,28.16,42.65,-33.82,2.39,,10.0,5y +22% a year; 10y +28%; ±43%
+RMD.AX,Resmed Inc,yes,58.5,kept (active),50.5,-12.23,18.9,-0.07,16.62,29.69,-36.31,0.97,Strong Buy,10.0,5y -0% a year; 10y +17%; ±30%; consensus Strong Buy
+BBY,Best Buy,,58.5,not added,26.3,26.8,15.79,1.83,12.84,37.99,-32.01,3.86,,10.0,5y +2% a year; 10y +13%; ±38%
+AZO,AutoZone,,58.4,not added,64.3,-15.87,5.8,14.21,16.12,30.21,-29.64,0.0,,10.0,5y +14% a year; 10y +16%; ±30%
+CMS,CMS Energy,,58.4,not added,28.4,-3.64,8.52,7.63,9.53,17.6,-20.45,3.23,,10.0,5y +8% a year; 10y +10%; ±18%
+APO,Apollo Global Management,,58.3,not added,95.8,-6.69,11.47,11.63,24.83,35.72,-34.05,1.9,,10.0,5y +12% a year; 10y +25%; ±36%
+EXR,Extra Space Storage,,58.3,not added,40.1,-0.88,12.48,-1.02,12.33,22.95,-15.69,4.54,,10.0,5y -1% a year; 10y +12%; ±23%
+GNG.AX,Gr Engineering Services Ltd,,58.3,not added,1.3,80.33,53.34,38.63,25.3,47.52,-25.53,4.0,,10.0,5y +39% a year; 10y +25%; ±48%
+JBHT,J.B. Hunt,,58.3,not added,31.3,36.18,6.77,4.99,10.68,34.12,-25.27,0.79,,10.0,5y +5% a year; 10y +11%; ±34%
+CGF.AX,Challenger Ltd,,58.2,not added,7.8,36.74,31.81,15.62,4.68,33.65,-21.49,2.77,,10.0,5y +16% a year; 10y +5%; ±34%
+COF,Capital One,,57.9,not added,170.0,-6.65,23.75,9.39,11.84,31.04,-31.47,1.58,,10.0,5y +9% a year; 10y +12%; ±31%
+MPWR,Monolithic Power Systems,,57.9,not added,100.7,7.61,33.81,19.31,32.32,54.52,-32.29,0.66,,10.0,5y +19% a year; 10y +32%; ±55%
+SNL.AX,Supply Network Ltd,,57.9,not added,1.5,2.33,38.15,38.2,38.47,32.11,-27.38,2.27,,10.0,5y +38% a year; 10y +38%; ±32%
+AMT,American Tower,yes,57.8,kept (watchlist),128.0,5.41,2.98,-2.9,10.15,28.73,-15.69,3.67,Strong Buy,10.0,5y -3% a year; 10y +10%; ±29%; consensus Strong Buy
+QAU.AX,Betashares Gold Bullion ETF (Hedged),yes,57.8,kept (active),,-2.98,24.33,15.14,10.94,28.84,-28.96,5.51,no coverage,10.0,5y +15% a year; 10y +11%; ±29%
+HON,Honeywell Technologies,yes,57.7,kept (active),96.7,-0.06,4.44,3.29,10.01,26.14,-21.93,2.08,Buy,10.0,5y +3% a year; 10y +10%; ±26%; consensus Buy
+PAC.AX,Pacific Current Group Ltd,,57.7,not added,0.3,7.57,9.09,11.14,14.32,32.79,-11.54,4.6,,10.0,5y +11% a year; 10y +14%; ±33%
+BRG.AX,Breville Group Ltd,,57.5,not added,4.6,9.23,15.16,2.56,15.55,29.67,-23.2,1.22,,10.0,5y +3% a year; 10y +16%; ±30%
+DVN,Devon Energy,,57.4,not added,74.6,54.74,2.68,11.3,4.89,34.23,-22.15,2.22,,10.0,5y +11% a year; 10y +5%; ±34%
+PPL,PPL Corporation,,57.4,not added,35.1,-3.3,12.52,9.12,5.63,18.22,-18.37,3.22,,10.0,5y +9% a year; 10y +6%; ±18%
+BFG.AX,Bell Financial Group Ltd,,57.3,not added,0.5,16.21,18.84,0.73,15.13,30.39,-14.58,8.46,,10.0,5y +1% a year; 10y +15%; ±30%
+DDR.AX,Dicker Data Ltd,,57.3,not added,2.7,45.96,16.95,4.01,26.31,36.9,-21.18,3.09,,10.0,5y +4% a year; 10y +26%; ±37%
+FIX,Comfort Systems USA,,57.3,not added,86.5,35.69,78.23,68.17,44.85,59.54,-45.91,0.27,,10.0,5y +68% a year; 10y +45%; ±60%
+HZN.AX,Horizon Oil Ltd,,57.3,not added,0.4,13.9,24.82,37.79,30.84,40.7,-27.47,12.5,,10.0,5y +38% a year; 10y +31%; ±41%
+BDX,Becton Dickinson,,57.1,not added,68.5,39.23,-1.26,4.83,6.73,26.16,-23.08,2.0,,10.0,5y +5% a year; 10y +7%; ±26%
+PL8.AX,Plato Income Maximiser Ltd.,yes,57.1,kept (active),,1.06,10.74,9.65,,16.76,-15.47,5.26,no coverage,9.4,5y +10% a year; ±17%
+S32.AX,South32 Ltd,yes,57.0,kept (active),18.5,33.48,10.25,6.96,8.36,40.17,-22.2,3.16,Buy,10.0,5y +7% a year; 10y +8%; ±40%; consensus Buy
+A200.AX,Betashares Australia 200 ETF,yes,56.9,kept (active),,0.87,13.0,7.86,,12.14,-8.4,3.41,no coverage,8.4,5y +8% a year; ±12%
+CWY.AX,Cleanaway Waste Management Ltd,,56.9,not added,6.7,17.76,12.65,4.39,12.88,34.38,-18.89,2.29,,10.0,5y +4% a year; 10y +13%; ±34%
+FTV,Fortive,,56.9,not added,24.7,22.35,4.06,2.98,6.85,26.84,-14.84,0.41,,10.0,5y +3% a year; 10y +7%; ±27%
+ODFL,Old Dominion,,56.9,not added,53.3,37.13,-3.27,3.55,21.79,37.44,-30.34,0.62,,10.0,5y +4% a year; 10y +22%; ±37%
+TPL,Texas Pacific Land Corporation,,56.8,not added,33.4,9.42,15.75,22.24,28.92,48.64,-39.45,0.69,,10.0,5y +22% a year; 10y +29%; ±49%
+RVTY,Revvity,,56.8,not added,24.1,61.76,19.9,-0.84,13.05,38.8,-30.09,0.13,,10.0,5y -1% a year; 10y +13%; ±39%
+SAP.DE,SAP SE,yes,56.8,kept (active),395.2,-9.9,21.6,13.93,11.81,40.98,-44.6,1.17,Strong Buy,10.7,5y +14% a year; 10y +12%; ±41%; consensus Strong Buy
+KSC.AX,K & S Corporation Ltd,,56.7,not added,0.4,-9.16,11.7,16.96,11.84,23.87,-14.14,3.65,,10.0,5y +17% a year; 10y +12%; ±24%
+UNH,UnitedHealth Group,yes,56.7,kept (active),539.1,20.24,-8.74,1.44,12.92,34.84,-28.56,2.15,Strong Buy,10.0,5y +1% a year; 10y +13%; ±35%; consensus Strong Buy
+WHC.AX,Whitehaven Coal Ltd,,56.7,not added,6.3,14.21,4.56,31.29,16.9,38.41,-29.07,1.26,,10.0,5y +31% a year; 10y +17%; ±38%
+CHC.AX,Charter Hall Group,yes,56.6,kept (active),9.5,-11.02,36.08,6.1,20.44,30.18,-30.4,2.53,Buy,10.0,5y +6% a year; 10y +20%; ±30%; consensus Buy
+VCX.AX,Vicinity Centres,yes,56.6,kept (active),11.3,-3.78,18.29,12.9,3.65,21.51,-16.38,5.15,Hold,10.0,5y +13% a year; 10y +4%; ±22%; consensus Hold
+WTW,Willis Towers Watson,,56.5,not added,38.1,0.43,9.4,9.19,12.55,30.97,-28.5,1.16,,10.0,5y +9% a year; 10y +13%; ±31%
+CI,Cigna,,56.4,not added,101.7,4.48,-1.05,11.41,10.71,32.63,-20.95,1.99,,10.0,5y +11% a year; 10y +11%; ±33%
+VGE.AX,Vanguard FTSE Emerging Markets Shares ETF,yes,56.4,kept (active),,-2.07,12.99,5.92,7.47,14.73,-11.31,1.53,no coverage,10.0,5y +6% a year; 10y +7%; ±15%
+AUI.AX,Australian United Investment Company Ltd,,56.3,not added,2.6,6.36,12.64,6.78,8.66,12.92,-9.74,3.12,,10.0,5y +7% a year; 10y +9%; ±13%
+GMG.AX,Goodman Group,yes,56.3,kept (active),51.9,-24.66,7.82,4.1,16.48,29.44,-26.79,1.19,Strong Buy,10.0,5y +4% a year; 10y +16%; ±29%; consensus Strong Buy
+MDLZ,Mondelez International,,56.2,not added,105.7,8.72,-1.39,5.28,7.79,23.69,-15.69,3.15,,10.0,5y +5% a year; 10y +8%; ±24%
+WGN.AX,Wagners Holding Company Ltd,,56.2,not added,0.9,68.99,75.02,22.48,,42.33,-23.14,1.07,,8.8,5y +22% a year; ±42%
+AMAT,Applied Materials,,56.0,not added,609.9,64.85,37.91,25.05,30.22,60.41,-48.14,0.53,,10.0,5y +25% a year; 10y +30%; ±60%
+SYY,Sysco,,56.0,not added,52.9,8.56,6.87,5.6,7.95,27.46,-23.98,2.64,,10.0,5y +6% a year; 10y +8%; ±27%
+REG,Regency Centers,,55.9,not added,18.7,6.81,8.03,6.71,5.76,16.05,-13.5,4.06,,10.0,5y +7% a year; 10y +6%; ±16%
+HBAN,Huntington Bancshares,,55.8,not added,44.1,1.82,18.19,5.7,7.33,25.87,-21.26,3.99,,10.0,5y +6% a year; 10y +7%; ±26%
+REGN,Regeneron Pharmaceuticals,,55.8,not added,107.7,41.29,-1.74,6.45,8.72,32.98,-25.85,0.46,,10.0,5y +6% a year; 10y +9%; ±33%
+VETH.AX,Vanguard Ethically Conscious Australian Shares ETF,yes,55.8,kept (esg),,-7.06,12.05,5.52,8.94,13.33,-10.34,2.88,no coverage,6.0,5y +6% a year; 10y +9%; ±13%
+DELL,Dell Technologies,,55.6,not added,508.9,196.62,85.8,57.2,43.28,76.22,-32.34,0.53,,10.0,5y +57% a year; 10y +43%; ±76%
+MYS.AX,Mystate Ltd,,55.6,not added,0.9,17.98,26.57,4.85,7.42,24.18,-12.45,4.89,,10.0,5y +5% a year; 10y +7%; ±24%
+VBLD.AX,Vanguard Global Infrastructure ETF,yes,55.6,kept (active),,1.47,11.86,7.37,,12.97,-10.13,2.15,no coverage,8.0,5y +7% a year; ±13%
+VDGR.AX,Vanguard Diversified Growth Index ETF,yes,55.6,kept (watchlist),,3.5,12.88,6.53,,8.01,-5.99,4.32,no coverage,8.9,5y +7% a year; ±8%
+GCI.AX,Gryphon Capital Income Trust,yes,55.4,kept (active),,5.69,7.81,7.46,,8.19,-4.69,7.66,no coverage,8.4,5y +7% a year; ±8%
+MAS,Masco,,55.3,not added,19.2,12.65,12.09,6.63,11.73,35.54,-24.38,1.65,,10.0,5y +7% a year; 10y +12%; ±36%
+EXPE,Expedia Group,,55.1,not added,45.3,36.38,41.1,13.99,10.22,50.97,-37.44,0.63,,10.0,5y +14% a year; 10y +10%; ±51%
+KSL.AX,Kina Securities Ltd,,55.1,not added,0.3,-5.64,21.48,16.12,9.82,23.01,-21.78,9.65,,10.0,5y +16% a year; 10y +10%; ±23%
+O,Realty Income,,55.0,not added,72.9,-0.3,8.57,2.71,6.15,17.11,-18.55,5.71,,10.0,5y +3% a year; 10y +6%; ±17%
+IVZ,Invesco,,54.7,not added,19.3,29.09,31.24,8.12,4.16,33.92,-22.03,3.0,,10.0,5y +8% a year; 10y +4%; ±34%
+KLAC,KLA Corporation,,54.7,not added,384.2,26.76,42.35,34.52,36.97,60.74,-51.51,0.57,,10.0,5y +35% a year; 10y +37%; ±61%
+MDT,Medtronic,yes,54.6,kept (active),175.0,5.79,10.93,0.21,6.28,24.71,-28.9,2.96,Buy,10.0,5y +0% a year; 10y +6%; ±25%; consensus Buy
+RMD,ResMed,,54.6,not added,43.8,-3.68,18.64,1.5,17.28,28.84,-33.4,0.97,,10.0,5y +2% a year; 10y +17%; ±29%
+AWK,American Water Works,,54.5,not added,36.8,3.14,5.84,-0.4,9.9,23.11,-12.7,2.41,,10.0,5y -0% a year; 10y +10%; ±23%
+RCL,Royal Caribbean Group,,54.5,not added,105.7,-10.29,45.47,29.57,15.32,47.99,-32.73,1.97,,10.0,5y +30% a year; 10y +15%; ±48%
+PEG,Public Service Enterprise Group,,54.4,not added,48.3,-10.15,5.25,7.38,10.16,18.87,-21.46,3.67,,10.0,5y +7% a year; 10y +10%; ±19%
+EVN.AX,Evolution Mining Ltd,yes,54.3,kept (active),23.1,9.28,50.34,28.13,22.4,53.52,-40.98,3.63,Hold,10.0,5y +28% a year; 10y +22%; ±54%; consensus Hold
+TER,Teradyne,,54.3,not added,99.9,113.05,50.36,19.54,30.67,77.89,-36.23,0.17,,10.0,5y +20% a year; 10y +31%; ±78%
+HPQ,HP Inc.,,54.2,not added,41.2,27.19,9.46,7.51,12.69,46.03,-34.39,3.56,,10.0,5y +8% a year; 10y +13%; ±46%
+MAH.AX,Macmahon Holdings Ltd,,54.2,not added,2.3,108.81,90.76,41.75,29.29,56.39,-22.01,2.28,,10.0,5y +42% a year; 10y +29%; ±56%
+GSK.L,GSK plc,yes,54.2,kept (active),144.8,15.38,9.14,5.86,1.34,24.71,-23.46,3.58,Hold,10.7,5y +6% a year; 10y +1%; ±25%; consensus Hold
+AZJ.AX,Aurizon Holdings Ltd,,54.1,not added,6.4,18.71,9.53,8.08,2.84,20.25,-17.81,5.97,,10.0,5y +8% a year; 10y +3%; ±20%
+BKNG,Booking Holdings,yes,54.1,kept (active),169.1,-21.69,9.55,12.36,11.2,37.69,-29.68,1.04,Strong Buy,10.0,5y +12% a year; 10y +11%; ±38%; consensus Strong Buy
+CRH,CRH plc,,54.1,not added,77.6,-26.95,14.94,16.78,13.6,32.27,-39.04,1.37,,10.0,5y +17% a year; 10y +14%; ±32%
+FGX.AX,Future Generation Australia Ltd,yes,54.1,kept (active),,2.41,11.67,3.97,6.12,16.49,-11.19,5.39,no coverage,10.0,5y +4% a year; 10y +6%; ±16%
+HSIC,Henry Schein,,53.8,not added,13.5,35.23,6.18,3.79,4.62,25.48,-17.23,0.0,,10.0,5y +4% a year; 10y +5%; ±25%
+CDNS,Cadence Design Systems,,53.7,not added,137.7,-7.46,5.64,14.07,29.15,40.82,-34.21,0.0,,10.0,5y +14% a year; 10y +29%; ±41%
+BALL,Ball Corporation,,53.7,not added,21.2,33.1,8.47,-4.02,7.53,26.15,-21.83,1.23,,10.0,5y -4% a year; 10y +8%; ±26%
+WAF.AX,West African Resources Ltd,,53.4,not added,4.0,10.42,65.54,20.89,30.48,49.2,-31.71,6.29,,10.0,5y +21% a year; 10y +30%; ±49%
+ARG.AX,Argo Investments Ltd,yes,53.4,kept (active),,4.49,7.62,3.88,6.35,10.72,-7.31,4.19,no coverage,10.0,5y +4% a year; 10y +6%; ±11%
+GDX.AX,VanEck Gold Miners ETF,yes,53.2,kept (active),,5.61,39.15,23.85,16.38,46.0,-38.41,18.14,no coverage,10.0,5y +24% a year; 10y +16%; ±46%
+OXY,Occidental Petroleum,,53.1,not added,82.6,51.87,-0.41,16.98,2.27,34.88,-27.29,1.63,,10.0,5y +17% a year; 10y +2%; ±35%
+LRCX,Lam Research,,53.0,not added,618.8,53.51,52.7,35.14,38.82,65.62,-47.92,0.49,,10.0,5y +35% a year; 10y +39%; ±66%
+EQT,EQT Corporation,,52.8,not added,44.7,4.2,7.13,26.08,5.4,29.83,-28.09,1.2,,10.0,5y +26% a year; 10y +5%; ±30%
+ISRG,Intuitive Surgical,yes,52.7,kept (active),224.8,-18.14,15.76,5.9,21.11,33.98,-44.0,0.0,Buy,10.0,5y +6% a year; 10y +21%; ±34%; consensus Buy
+CBRE,CBRE Group,,52.7,not added,53.4,-22.18,18.65,5.64,16.85,33.64,-27.37,0.0,,10.0,5y +6% a year; 10y +17%; ±34%
+GNP.AX,Genusplus Group Ltd,,52.4,not added,1.6,27.32,91.92,49.73,,45.3,-29.17,0.72,,5.8,5y +50% a year; ±45%
+NST.AX,Northern Star Resources Ltd,yes,52.2,kept (active),34.4,2.35,30.73,24.31,23.83,54.9,-45.32,2.28,Buy,10.0,5y +24% a year; 10y +24%; ±55%; consensus Buy
+SCG.AX,Scentre Group,yes,52.2,kept (active),18.5,-11.92,18.91,8.58,3.23,18.81,-19.7,5.13,Buy,10.0,5y +9% a year; 10y +3%; ±19%; consensus Buy
+STE,Steris,,52.2,not added,28.9,-3.37,0.93,2.14,15.42,25.97,-25.37,0.84,,10.0,5y +2% a year; 10y +15%; ±26%
+STX,Seagate Technology,,52.2,not added,274.7,179.12,107.14,54.27,38.32,76.39,-42.49,0.47,,10.0,5y +54% a year; 10y +38%; ±76%
+LITE,Lumentum,,52.1,not added,138.5,353.35,160.4,58.21,35.46,99.42,-42.8,0.0,,10.0,5y +58% a year; 10y +35%; ±99%
+VTRS,Viatris,,52.0,not added,28.8,82.48,27.96,12.43,-4.1,32.4,-18.97,2.64,,10.0,5y +12% a year; 10y -4%; ±32%
+TTWO,Take-Two Interactive,,51.9,not added,53.9,-18.36,12.06,4.22,16.36,33.4,-26.45,0.0,,10.0,5y +4% a year; 10y +16%; ±33%
+SYK,Stryker Corporation,yes,51.8,kept (active),167.3,-18.68,2.05,5.48,12.51,30.31,-30.01,1.14,Strong Buy,10.0,5y +5% a year; 10y +13%; ±30%; consensus Strong Buy
+VSO.AX,Vanguard MSCI Australian Small Companies ETF,yes,51.8,kept (active),,-8.08,12.22,4.09,8.6,17.96,-16.81,5.08,no coverage,10.0,5y +4% a year; 10y +9%; ±18%
+HD,Home Depot (The),yes,51.7,kept (watchlist),456.2,-14.22,3.36,0.99,12.98,26.61,-26.54,2.89,Buy,10.0,5y +1% a year; 10y +13%; ±27%; consensus Buy
+SJM,J.M. Smucker Company (The),,51.7,not added,17.8,34.6,5.84,6.58,4.38,28.81,-22.82,3.33,,10.0,5y +7% a year; 10y +4%; ±29%
+SXE.AX,Southern Cross Electrical Engineering Ltd,,51.6,not added,1.2,61.12,71.62,47.72,27.8,55.26,-31.77,2.75,,10.0,5y +48% a year; 10y +28%; ±55%
+ALI.AX,Argo Global Listed Infrastructure Ltd,,51.5,not added,0.5,3.19,12.43,4.84,7.29,17.79,-8.27,4.05,,10.0,5y +5% a year; 10y +7%; ±18%
+CHRW,C.H. Robinson,,51.3,not added,26.2,13.41,18.29,11.56,9.67,46.35,-35.23,1.8,,10.0,5y +12% a year; 10y +10%; ±46%
+VMRK,Vivmark Residential,,51.3,not added,65.8,4.36,5.43,-0.88,4.97,21.08,-14.77,4.44,,10.0,5y -1% a year; 10y +5%; ±21%
+IFT.AX,Infratil Ltd.,yes,51.2,kept (active),9.9,-7.37,4.57,6.79,17.26,29.36,-25.34,1.58,no coverage,10.0,5y +7% a year; 10y +17%; ±29%
+NOC,Northrop Grumman,,51.0,not added,96.6,-8.56,3.22,12.1,10.64,28.21,-37.8,1.75,,10.0,5y +12% a year; 10y +11%; ±28%
+NESN.SW,Nestlé S.A.,yes,50.9,kept (active),372.9,8.27,-1.5,-3.49,4.41,20.83,-13.57,3.7,Buy,10.7,5y -3% a year; 10y +4%; ±21%; consensus Buy
+APZ.AX,Aspen Group,,50.7,not added,1.1,-9.41,46.6,28.54,25.98,33.6,-32.15,2.36,,10.0,5y +29% a year; 10y +26%; ±34%
+EXE,Expand Energy,,50.7,not added,28.2,-8.08,2.44,14.77,,30.33,-30.37,2.45,,5.7,5y +15% a year; ±30%
+VDBA.AX,Vanguard Diversified Balanced Index ETF,yes,50.6,kept (watchlist),,2.43,10.51,4.61,,6.55,-5.2,5.48,no coverage,8.9,5y +5% a year; ±7%
+T,AT&amp;T,,50.5,not added,236.9,-7.89,13.96,10.12,4.71,28.05,-28.89,5.14,,10.0,5y +10% a year; 10y +5%; ±28%
+BGA.AX,Bega Cheese Ltd,,50.4,not added,1.9,21.4,34.51,5.55,4.87,25.73,-20.83,2.28,,10.0,5y +6% a year; 10y +5%; ±26%
+PWH.AX,Pwr Holdings Ltd,,50.3,not added,1.1,34.22,5.94,4.86,17.7,41.68,-21.3,0.7,,10.0,5y +5% a year; 10y +18%; ±42%
+WQG.AX,Wcm Global Growth Ltd,,50.3,not added,0.6,6.6,27.19,9.15,,24.59,-20.46,4.48,,9.3,5y +9% a year; ±25%
+CDP.AX,Carindale Property Trust,,50.2,not added,0.4,5.83,18.57,9.77,2.06,21.21,-8.01,5.59,,10.0,5y +10% a year; 10y +2%; ±21%
+EMR.AX,Emerald Resources Nl,,50.2,not added,4.2,19.18,30.68,43.05,29.96,54.21,-42.87,0.0,,10.0,5y +43% a year; 10y +30%; ±54%
+GPT.AX,Gpt Group,yes,50.2,kept (active),9.1,-10.4,15.17,3.6,5.03,20.98,-20.86,5.11,Buy,10.0,5y +4% a year; 10y +5%; ±21%; consensus Buy
+MRVL,Marvell Technology,,50.2,not added,348.2,173.38,63.35,29.1,33.77,80.16,-48.35,0.11,,10.0,5y +29% a year; 10y +34%; ±80%
+RG1.AX,Regal Partners Global Investments Ltd,,50.1,not added,0.5,29.94,18.72,4.22,,25.6,-15.43,4.66,,9.1,5y +4% a year; ±26%
+MCD,McDonald's,yes,50.0,kept (active),251.2,-16.57,-2.5,4.1,10.98,19.53,-30.98,2.98,Buy,10.0,5y +4% a year; 10y +11%; ±20%; consensus Buy
+CIEN,Ciena,,49.8,not added,79.0,82.91,89.29,44.19,31.99,76.66,-49.65,0.0,,10.0,5y +44% a year; 10y +32%; ±77%
+IBM,IBM,yes,49.8,kept (active),333.9,-9.99,19.61,21.98,9.98,48.99,-37.5,2.7,Buy,10.0,5y +22% a year; 10y +10%; ±49%; consensus Buy
+BG,Bunge Global,,49.7,not added,29.2,9.85,-1.12,6.51,8.04,29.37,-21.71,2.74,,10.0,5y +7% a year; 10y +8%; ±29%
+SUBD.AX,VanEck Australian Subordinated Debt ETF,yes,49.7,kept (active),,4.98,6.09,4.87,,0.91,-0.24,5.47,no coverage,7.0,5y +5% a year; ±1%
+VEEV,Veeva Systems,,49.6,not added,63.0,10.82,14.85,1.71,22.33,43.1,-49.37,0.0,,10.0,5y +2% a year; 10y +22%; ±43%
+ARM,Arm Holdings plc,yes,49.6,kept (watchlist),320.7,26.88,61.47,12.37,14.05,76.99,-52.19,,Buy,3.1,5y +12% a year; 10y +14%; ±77%; consensus Buy
+JBH.AX,Jb Hi-Fi Ltd,yes,49.5,kept (active),8.0,-33.34,22.58,13.56,16.2,31.51,-41.18,4.6,Hold,10.0,5y +14% a year; 10y +16%; ±32%; consensus Hold
+LHX,L3Harris,,49.5,not added,62.7,-12.82,10.32,5.2,12.07,28.22,-37.51,1.97,,10.0,5y +5% a year; 10y +12%; ±28%
+FPR.AX,Fleetpartners Group Ltd,,49.3,not added,1.1,88.27,31.13,17.47,4.88,40.28,-24.98,4.98,,10.0,5y +17% a year; 10y +5%; ±40%
+VMC,Vulcan Materials Company,,49.3,not added,44.8,-9.24,7.5,9.09,9.36,28.7,-26.68,0.78,,10.0,5y +9% a year; 10y +9%; ±29%
+COHR,Coherent Corp.,,49.2,not added,93.9,72.92,85.91,30.02,22.36,88.4,-51.32,0.0,,10.0,5y +30% a year; 10y +22%; ±88%
+DHR,Danaher Corporation,,49.2,not added,214.1,3.04,3.01,-1.98,14.04,30.14,-32.97,0.67,,10.0,5y -2% a year; 10y +14%; ±30%
+FRT,Federal Realty Investment Trust,,49.2,not added,13.2,12.62,7.08,3.64,2.0,16.57,-16.7,4.18,,10.0,5y +4% a year; 10y +2%; ±17%
+SGM.AX,Sims Ltd,,49.2,not added,3.9,35.08,17.08,8.81,7.45,38.96,-35.24,1.77,,10.0,5y +9% a year; 10y +7%; ±39%
+EX20.AX,Betashares Australian Ex-20 ETF,yes,49.2,kept (active),,-8.97,10.13,4.03,7.6,17.54,-15.96,2.89,no coverage,10.0,5y +4% a year; 10y +8%; ±18%
+ES,Eversource Energy,,49.1,not added,34.6,-4.35,9.33,0.88,7.13,24.33,-15.13,4.61,,10.0,5y +1% a year; 10y +7%; ±24%
+GLW,Corning Inc.,,49.0,not added,201.3,43.82,64.02,33.1,21.56,74.35,-52.04,0.92,,10.0,5y +33% a year; 10y +22%; ±74%
+INTC,Intel,,49.0,not added,892.3,124.9,29.26,15.22,12.5,77.91,-41.9,0.0,,10.0,5y +15% a year; 10y +12%; ±78%
+RIC.AX,Ridley Corporation Ltd,,48.9,not added,1.0,-9.65,9.82,19.0,11.19,29.2,-21.71,3.99,,10.0,5y +19% a year; 10y +11%; ±29%
+PAYX,Paychex,,48.9,not added,50.1,-0.77,2.3,3.64,11.31,30.47,-30.17,3.83,,10.0,5y +4% a year; 10y +11%; ±30%
+QCOM,Qualcomm,yes,48.8,kept (active),265.7,4.98,15.61,9.38,13.6,54.09,-40.98,2.07,Hold,10.0,5y +9% a year; 10y +14%; ±54%; consensus Hold
+LOW,Lowe's,yes,48.7,kept (watchlist),159.8,-16.11,0.37,0.26,13.94,28.17,-36.85,2.45,Strong Buy,10.0,5y +0% a year; 10y +14%; ±28%; consensus Strong Buy
+HBRD.AX,Betashares Active Australian Hybrids Fund,yes,48.6,kept (active),,4.57,5.68,4.48,,1.34,-0.3,5.38,no coverage,8.9,5y +4% a year; ±1%
+UBER,Uber,yes,48.5,kept (active),198.2,-27.62,12.71,10.83,,35.17,-33.87,0.0,Strong Buy,7.4,5y +11% a year; ±35%; consensus Strong Buy
+SHOP.TO,Shopify Inc.,yes,48.5,kept (active),311.6,0.74,49.89,5.92,44.82,56.58,-47.66,,Strong Buy,10.7,5y +6% a year; 10y +45%; ±57%; consensus Strong Buy
+TNE.AX,Technology One Ltd,yes,48.4,kept (active),10.6,-14.98,31.9,22.84,20.34,43.53,-47.38,1.18,Buy,10.0,5y +23% a year; 10y +20%; ±44%; consensus Buy
+CGS.AX,Cogstate Ltd,,48.3,not added,0.6,44.5,34.36,8.42,13.01,48.81,-29.45,1.15,,10.0,5y +8% a year; 10y +13%; ±49%
+DOW.AX,Downer Edi Ltd,,48.3,not added,4.5,-3.73,28.28,6.5,6.93,23.49,-23.64,4.1,,10.0,5y +6% a year; 10y +7%; ±23%
+ECHO,EchoStar,,48.3,not added,39.0,19.06,78.34,31.7,8.45,53.87,-40.84,0.0,,10.0,5y +32% a year; 10y +8%; ±54%
+BKI.AX,Bki Investment Company Ltd,,48.2,not added,1.4,5.27,6.45,6.34,5.67,14.57,-8.07,5.64,,10.0,5y +6% a year; 10y +6%; ±15%
+QPON.AX,Betashares Australian Bank Senior Floating Rate Bond ETF,yes,48.2,kept (active),,4.85,5.38,4.29,,0.84,-0.23,4.38,no coverage,9.4,5y +4% a year; ±1%
+ABT,Abbott Laboratories,yes,48.1,kept (watchlist),252.3,-16.51,1.59,-1.17,13.36,27.3,-36.06,2.45,Strong Buy,10.0,5y -1% a year; 10y +13%; ±27%; consensus Strong Buy
+CRL,Charles River Laboratories,,48.1,not added,19.7,78.13,22.15,-4.16,17.79,45.95,-33.88,0.0,,10.0,5y -4% a year; 10y +18%; ±46%
+KVUE,Kenvue,,48.1,not added,47.0,38.46,3.23,,,24.67,-12.5,5.3,,3.4,no 5 year record; ±25%
+ABNB,Airbnb,,47.9,not added,136.3,36.61,10.01,1.76,,36.08,-21.48,0.0,,5.8,5y +2% a year; ±36%
+TMUS,T-Mobile US,yes,47.9,kept (active),233.9,-29.0,0.48,8.45,12.31,33.5,-32.19,2.67,Strong Buy,10.0,5y +8% a year; 10y +12%; ±34%; consensus Strong Buy
+AVY,Avery Dennison,,47.8,not added,18.3,0.61,0.19,-0.36,12.57,23.63,-21.62,2.12,,10.0,5y -0% a year; 10y +13%; ±24%
+WDC,Western Digital,,47.8,not added,213.1,173.54,118.02,56.56,24.28,81.18,-55.5,0.16,,10.0,5y +57% a year; 10y +24%; ±81%
+GLIN.AX,AMP Capital Global Infrastructure Securities ETF,yes,47.5,kept (active),,8.79,15.51,,,11.18,-9.66,6.25,no coverage,3.4,no 5 year record; ±11%
+FLOT.AX,VanEck Australian Floating Rate ETF,yes,47.4,kept (active),,4.61,4.99,3.98,,1.02,-0.16,4.58,no coverage,9.2,5y +4% a year; ±1%
+NXPI,NXP Semiconductors,,47.3,not added,87.4,9.74,9.62,6.8,11.37,49.04,-33.65,1.7,,10.0,5y +7% a year; 10y +11%; ±49%
+APA,APA Corporation,,47.3,not added,21.8,114.37,9.45,19.59,0.68,44.49,-27.72,1.95,,10.0,5y +20% a year; 10y +1%; ±44%
+BHYB.AX,Betashares Australian Major Bank Hybrids ETF,yes,47.3,kept (active),,4.3,5.2,3.94,,2.43,-0.92,4.93,no coverage,5.5,5y +4% a year; ±2%
+ULVR.L,Unilever PLC,yes,47.3,kept (active),205.2,-0.21,5.47,3.76,3.01,22.39,-25.46,3.3,Hold,10.7,5y +4% a year; 10y +3%; ±22%; consensus Hold
+VAU.AX,Vault Minerals Ltd,,47.2,not added,6.0,13.81,36.17,25.46,23.77,56.27,-41.81,1.35,,10.0,5y +25% a year; 10y +24%; ±56%
+ASX.AX,Asx Ltd,yes,47.1,kept (active),13.0,20.49,9.29,-1.14,6.83,30.5,-27.84,3.13,Hold,10.0,5y -1% a year; 10y +7%; ±30%; consensus Hold
+BCI.AX,Bci Minerals Ltd,,47.0,not added,1.5,32.89,23.46,0.85,12.31,41.47,-25.56,0.0,,10.0,5y +1% a year; 10y +12%; ±41%
+GRX.AX,Greenx Metals Ltd,,47.0,not added,0.3,23.08,0.7,34.49,10.18,44.94,-19.71,0.0,,10.0,5y +34% a year; 10y +10%; ±45%
+VST,Vistra Corp.,,47.0,not added,66.9,-28.03,57.43,52.26,30.82,50.54,-32.95,0.67,,10.0,5y +52% a year; 10y +31%; ±51%
+SMR.AX,Stanmore Resources Ltd,,46.9,not added,2.4,27.08,-7.14,25.43,19.92,46.06,-27.03,4.88,,10.0,5y +25% a year; 10y +20%; ±46%
+IHHY.AX,iShares Global High Yield Bond (AUD Hedged) ETF,yes,46.9,kept (active),,1.04,7.22,2.66,3.36,5.45,-2.77,6.0,no coverage,10.7,5y +3% a year; 10y +3%; ±5%
+ALK.AX,Alkane Resources Ltd,,46.8,not added,2.3,39.31,35.82,10.74,18.61,58.35,-30.4,1.36,,10.0,5y +11% a year; 10y +19%; ±58%
+DIS,Walt Disney Company (The),yes,46.8,kept (active),277.1,1.35,8.92,-5.91,2.8,26.87,-20.25,1.33,Strong Buy,10.0,5y -6% a year; 10y +3%; ±27%; consensus Strong Buy
+J,Jacobs Solutions,,46.7,not added,23.0,-9.54,6.65,6.7,12.63,32.65,-33.04,0.97,,10.0,5y +7% a year; 10y +13%; ±33%
+OMC,Omnicom Group,,46.6,not added,28.9,8.67,4.24,9.64,3.92,35.69,-17.85,3.82,,10.0,5y +10% a year; 10y +4%; ±36%
+ZBRA,Zebra Technologies,,46.6,not added,25.3,21.5,18.15,-5.22,17.93,48.62,-35.83,0.0,,10.0,5y -5% a year; 10y +18%; ±49%
+ISEC.AX,iShares Enhanced Cash ETF,yes,46.3,kept (active),,4.31,4.44,3.57,,0.31,-0.03,4.37,no coverage,9.3,5y +4% a year; ±0%
+GMD.AX,Genesis Minerals Ltd,yes,46.2,kept (active),7.2,2.96,61.92,38.27,37.64,61.65,-42.99,0.81,Strong Buy,10.0,5y +38% a year; 10y +38%; ±62%; consensus Strong Buy
+UAL,United Airlines Holdings,,46.2,not added,52.0,2.52,36.38,17.87,4.26,48.24,-29.76,0.0,,10.0,5y +18% a year; 10y +4%; ±48%
+DJRE.AX,SPDR Dow Jones Global Real Estate ETF,yes,46.2,kept (active),,-2.59,9.6,1.66,4.0,13.2,-11.7,2.84,no coverage,10.0,5y +2% a year; 10y +4%; ±13%
+AAA.AX,Betashares Australian High Interest Cash ETF,yes,46.1,kept (active),,4.26,4.31,3.53,2.48,0.33,-0.02,4.12,no coverage,10.0,5y +4% a year; 10y +2%; ±0%
+IDXX,Idexx Laboratories,,46.1,not added,58.1,-11.39,8.64,-1.89,17.89,32.28,-34.17,0.0,,10.0,5y -2% a year; 10y +18%; ±32%
+G6M.AX,Group 6 Metals Ltd,,46.0,not added,0.7,0.8,184.01,77.01,52.1,46.49,-35.22,0.0,,10.0,5y +77% a year; 10y +52%; ±46%
+BILL.AX,iShares Core Cash ETF,yes,46.0,kept (active),,4.2,4.3,3.47,,0.33,-0.04,4.18,no coverage,9.3,5y +3% a year; ±0%
+GLS.AX,L1 Global Long Short Fund Ltd,,45.6,not added,1.1,16.29,16.6,7.31,6.06,33.9,-23.66,1.6,,10.0,5y +7% a year; 10y +6%; ±34%
+SLB,Schlumberger,,45.6,not added,102.9,44.26,-3.84,13.4,-1.65,36.36,-22.27,2.31,,10.0,5y +13% a year; 10y -2%; ±36%
+AFI.AX,Australian Foundation Investment Company Ltd,yes,45.4,kept (active),,-3.78,5.5,1.76,5.69,13.36,-13.0,6.07,no coverage,10.0,5y +2% a year; 10y +6%; ±13%
+PAYS.XA,Schroder Absolute Return Income Active ETF,yes,45.4,kept (active),,3.3,5.7,3.63,1.59,2.67,-0.89,5.09,no coverage,6.9,5y +4% a year; 10y +2%; ±3%
+REH.AX,Reece Ltd,yes,45.0,kept (active),10.7,52.21,1.11,-1.37,8.79,36.28,-23.33,1.08,Hold,10.0,5y -1% a year; 10y +9%; ±36%; consensus Hold
+FLEX,Flex Ltd.,,45.0,not added,61.3,16.59,51.51,44.3,22.33,71.31,-54.04,0.0,,10.0,5y +44% a year; 10y +22%; ±71%
+KKR,KKR &amp; Co.,,44.9,not added,115.3,-23.29,15.39,5.24,22.41,37.7,-41.14,0.83,,10.0,5y +5% a year; 10y +22%; ±38%
+CPT,Camden Property Trust,,44.8,not added,15.8,1.61,7.07,-4.27,6.98,19.89,-17.64,4.13,,10.0,5y -4% a year; 10y +7%; ±20%
+VACF.AX,Vanguard Australian Corporate Fixed Interest ETF,yes,44.7,kept (active),,0.72,5.14,2.35,2.84,2.96,-2.07,4.02,no coverage,10.0,5y +2% a year; 10y +3%; ±3%
+SAN.PA,Sanofi,yes,44.6,kept (active),142.3,-9.19,-4.54,1.63,4.95,22.38,-18.28,5.53,Buy,10.7,5y +2% a year; 10y +5%; ±22%; consensus Buy
+NFLX,Netflix,yes,44.5,kept (active),398.5,-39.41,14.09,0.92,20.08,35.76,-43.81,0.0,Buy,10.0,5y +1% a year; 10y +20%; ±36%; consensus Buy
+VRT,Vertiv,yes,44.5,kept (active),105.3,3.37,63.83,51.42,,66.03,-49.69,0.13,Strong Buy,8.2,5y +51% a year; ±66%; consensus Strong Buy
+MCY.AX,Mercury Nz Ltd,,44.4,not added,7.7,-1.51,5.77,2.31,11.23,34.86,-9.93,3.94,,10.0,5y +2% a year; 10y +11%; ±35%
+HUB.AX,Hub24 Ltd,yes,44.2,kept (watchlist),5.5,-40.12,31.6,17.25,28.37,44.2,-46.96,1.16,Strong Buy,10.0,5y +17% a year; 10y +28%; ±44%; consensus Strong Buy
+VYS.AX,Vysarn Ltd,,44.1,not added,0.4,13.56,56.44,50.08,35.1,54.14,-42.49,0.0,,10.0,5y +50% a year; 10y +35%; ±54%
+CBAPM.AX,Commonwealth Bank of Australia,yes,44.1,kept (active),,3.95,6.09,1.43,1.59,5.0,-1.54,4.61,no coverage,3.4,5y +1% a year; 10y +2%; ±5%
+CNU.AX,Chorus Ltd,,44.0,not added,2.8,-13.57,5.86,7.15,10.83,19.0,-21.55,6.32,,10.0,5y +7% a year; 10y +11%; ±19%
+DXC.AX,Dexus Convenience Retail Reit,,44.0,not added,0.4,1.8,16.0,3.42,,18.26,-11.87,7.57,,9.2,5y +3% a year; ±18%
+RGN.AX,Region Group,,44.0,not added,2.6,-3.0,11.35,1.77,6.56,14.84,-13.17,6.24,,10.0,5y +2% a year; 10y +7%; ±15%
+IGL.AX,Ive Group Ltd,,43.9,not added,0.4,-11.29,15.49,13.26,8.68,31.55,-24.65,8.08,,10.0,5y +13% a year; 10y +9%; ±32%
+RFF.AX,Rural Funds Group,yes,43.9,kept (active),0.8,5.51,8.79,-1.64,7.74,19.95,-15.98,6.08,no coverage,10.0,5y -2% a year; 10y +8%; ±20%
+VEA.AX,Viva Energy Group Ltd,,43.9,not added,5.0,62.7,3.81,9.24,,42.54,-23.77,4.18,,8.2,5y +9% a year; ±43%
+NVR,"NVR, Inc.",,43.9,not added,22.7,-22.11,0.12,5.58,15.01,27.79,-31.29,0.0,,10.0,5y +6% a year; 10y +15%; ±28%
+TROW,T. Rowe Price,,43.8,not added,31.8,5.47,6.0,-8.64,8.04,23.6,-19.76,5.03,,10.0,5y -9% a year; 10y +8%; ±24%
+TSLA,"Tesla, Inc.",yes,43.8,kept (active),2068.2,-18.38,18.22,1.11,41.32,45.14,-39.1,0.0,Buy,10.0,5y +1% a year; 10y +41%; ±45%; consensus Buy
+MVA.AX,VanEck Australian Property ETF,yes,43.7,kept (active),,-13.63,12.78,2.7,6.37,21.46,-20.36,6.03,no coverage,10.0,5y +3% a year; 10y +6%; ±21%
+AMC.AX,Amcor Plc,,43.6,excluded by standing instruction,29.6,11.37,4.01,1.17,3.82,25.64,-27.14,5.68,,10.0,5y +1% a year; 10y +4%; ±26%
+MCHP,Microchip Technology,,43.6,not added,62.8,18.2,0.77,3.78,11.27,49.71,-31.84,2.43,,10.0,5y +4% a year; 10y +11%; ±50%
+MEZ.AX,Meridian Energy Ltd,yes,43.5,kept (active),12.2,-7.62,5.18,2.81,10.21,31.15,-17.03,3.91,no coverage,10.0,5y +3% a year; 10y +10%; ±31%
+NABPI.AX,National Australia Bank Limited,yes,43.5,kept (active),,3.07,5.59,1.43,1.59,4.07,-1.38,1.61,no coverage,4.3,5y +1% a year; 10y +2%; ±4%
+PDI.AX,Pdi Gold Ltd,,43.4,not added,3.8,24.21,44.43,30.09,20.81,70.38,-40.78,0.0,,10.0,5y +30% a year; 10y +21%; ±70%
+WMA.AX,Wam Alternative Assets Limited,yes,43.4,kept (watchlist),,-0.47,2.37,3.12,2.86,17.13,-7.69,3.09,no coverage,10.7,5y +3% a year; 10y +3%; ±17%
+PEP,PepsiCo,yes,43.3,kept (watchlist),265.0,-6.2,-5.44,1.28,7.06,21.12,-25.22,4.25,Hold,10.0,5y +1% a year; 10y +7%; ±21%; consensus Hold
+TLC.AX,The Lottery Corporation Ltd,yes,43.2,kept (active),12.0,-0.85,9.61,,,20.52,-16.68,3.06,Buy,4.4,no 5 year record; ±21%; consensus Buy
+CLS,Celestica Inc.,yes,43.1,kept (watchlist),47.0,-6.49,117.46,95.15,36.83,77.22,-44.04,,Strong Buy,10.7,5y +95% a year; 10y +37%; ±77%; consensus Strong Buy
+PLTR,Palantir Technologies,,43.0,not added,645.4,8.06,128.28,51.73,,60.84,-48.22,0.0,,6.1,5y +52% a year; ±61%
+PIC.AX,Perpetual Equity Investment Company Ltd,,42.9,not added,0.4,-5.49,7.57,2.54,7.0,18.4,-10.95,7.21,,10.0,5y +3% a year; 10y +7%; ±18%
+CGFPD.AX,Challenger Limited,yes,42.9,kept (active),,2.28,5.1,1.43,1.59,6.44,-3.28,0.26,no coverage,3.5,5y +1% a year; 10y +2%; ±6%
+AON,Aon plc,,42.7,not added,81.3,-10.38,-3.08,1.11,12.08,28.45,-29.17,0.54,,10.0,5y +1% a year; 10y +12%; ±28%
+QRI.AX,Qualitas Real Estate Income Fund,,42.6,not added,0.9,-0.84,5.51,5.85,,13.29,-10.3,8.18,,7.9,5y +6% a year; ±13%
+MLM,Martin Marietta Materials,,42.5,not added,48.7,-17.37,4.73,7.46,10.35,28.46,-33.19,0.65,,10.0,5y +7% a year; 10y +10%; ±28%
+TSN,Tyson Foods,,42.5,not added,26.0,13.35,7.12,-2.31,3.25,26.76,-25.28,3.6,,10.0,5y -2% a year; 10y +3%; ±27%
+ARES,Ares Management,,42.4,not added,38.0,-14.25,7.24,12.65,27.74,43.32,-45.52,4.23,,10.0,5y +13% a year; 10y +28%; ±43%
+BWP.AX,Bwp Group,,42.4,not added,2.8,-4.43,8.41,1.37,7.27,14.49,-13.16,5.46,,10.0,5y +1% a year; 10y +7%; ±14%
+MLX.AX,Metals X Ltd,,42.4,not added,1.5,71.51,74.0,33.1,9.47,58.17,-32.03,0.0,,10.0,5y +33% a year; 10y +9%; ±58%
+BVS.AX,Bravura Solutions Ltd.,,42.3,not added,1.5,18.43,77.29,12.33,15.45,57.76,-40.79,7.74,,9.9,5y +12% a year; 10y +15%; ±58%
+AUB.AX,Aub Group Ltd,,42.2,not added,3.7,-5.52,6.07,9.6,15.15,36.48,-41.84,3.33,,10.0,5y +10% a year; 10y +15%; ±36%
+YAL.AX,Yancoal Australia Ltd,yes,42.2,kept (active),7.9,17.22,14.45,29.77,4.7,44.54,-39.77,3.19,no coverage,10.0,5y +30% a year; 10y +5%; ±45%
+BEN.AX,Bendigo And Adelaide Bank Ltd,,42.1,not added,6.0,-11.75,12.9,8.88,4.51,25.3,-22.04,5.96,,10.0,5y +9% a year; 10y +5%; ±25%
+CRED.AX,Betashares Australian Investment Grade Corporate Bond ETF,yes,42.1,kept (active),,-1.86,6.96,1.79,,4.66,-4.01,5.56,no coverage,8.4,5y +2% a year; ±5%
+KP2.AX,Kore Potash Plc,,42.0,not added,0.4,-1.52,93.3,25.35,,44.79,-29.41,0.0,,8.9,5y +25% a year; ±45%
+EVT.AX,Evt Ltd,,41.9,not added,2.4,16.75,16.85,0.91,3.58,26.71,-22.91,2.71,,10.0,5y +1% a year; 10y +4%; ±27%
+NEM.AX,Newmont Corporation,yes,41.8,kept (active),163.4,17.3,39.83,,,46.54,-31.61,0.94,Strong Buy,3.0,no 5 year record; ±47%; consensus Strong Buy
+PYC.AX,Pyc Therapeutics Ltd,,41.8,not added,1.8,46.5,46.74,5.17,28.78,54.57,-38.83,0.0,,10.0,5y +5% a year; 10y +29%; ±55%
+UDR,"UDR, Inc.",,41.8,not added,15.2,3.1,5.1,-3.3,4.98,20.61,-18.39,4.02,,10.0,5y -3% a year; 10y +5%; ±21%
+AMCR,Amcor,,41.8,excluded by standing instruction,27.5,19.15,3.47,1.0,2.91,31.53,-26.51,5.63,,10.0,5y +1% a year; 10y +3%; ±32%
+BOQ.AX,Bank Of Queensland Ltd.,yes,41.7,kept (active),4.6,7.84,17.67,1.52,1.36,22.15,-16.46,7.77,Underperform,10.0,5y +2% a year; 10y +1%; ±22%; consensus Underperform
+PCI.AX,Perpetual Credit Income Trust,,41.7,not added,0.8,-4.82,7.88,6.17,,14.29,-13.87,6.73,,7.4,5y +6% a year; ±14%
+HSY,Hershey Company (The),,41.6,not added,45.8,-1.35,-2.79,3.78,9.33,27.38,-32.25,3.29,,10.0,5y +4% a year; 10y +9%; ±27%
+RMS.AX,Ramelius Resources Ltd,,41.5,not added,6.8,-4.51,28.82,18.06,22.6,52.49,-43.63,1.81,,10.0,5y +18% a year; 10y +23%; ±52%
+WLE.AX,Wam Leaders Ltd,,41.5,not added,2.0,-3.53,3.25,3.53,6.47,14.56,-10.68,7.54,,10.0,5y +4% a year; 10y +6%; ±15%
+AES,AES Corporation,,41.2,not added,15.1,10.6,1.38,-4.85,7.31,26.14,-18.98,4.71,,10.0,5y -5% a year; 10y +7%; ±26%
+AUC.AX,Ausgold Ltd,,41.2,not added,0.7,39.05,59.42,20.63,14.83,66.35,-42.31,0.0,,10.0,5y +21% a year; 10y +15%; ±66%
+REL.L,RELX PLC,yes,41.2,kept (active),100.6,-11.78,2.17,6.27,7.68,36.02,-42.65,2.27,Strong Buy,10.7,5y +6% a year; 10y +8%; ±36%; consensus Strong Buy
+DJW.AX,Djerriwarrh Investments Ltd,,41.1,not added,0.8,1.33,8.4,2.37,3.15,12.79,-10.03,5.29,,10.0,5y +2% a year; 10y +3%; ±13%
+VAF.AX,Vanguard Australian Fixed Interest ETF,yes,41.1,kept (active),,-0.75,4.48,0.77,1.77,3.63,-3.29,3.48,no coverage,10.0,5y +1% a year; 10y +2%; ±4%
+ACF.AX,Acrow Ltd,,41.0,not added,0.4,-22.17,3.71,19.13,20.19,33.03,-29.02,7.58,,10.0,5y +19% a year; 10y +20%; ±33%
+CRM,Salesforce,yes,41.0,kept (active),286.6,-2.28,4.21,-2.16,14.13,47.26,-43.33,0.7,Strong Buy,10.0,5y -2% a year; 10y +14%; ±47%; consensus Strong Buy
+IAF.AX,iShares Core Composite Bond ETF,yes,41.0,kept (active),,-0.82,4.42,0.77,1.77,3.59,-3.31,3.22,no coverage,10.0,5y +1% a year; 10y +2%; ±4%
+PTC,PTC Inc.,,41.0,not added,22.2,-5.15,7.78,10.29,15.68,49.29,-45.15,0.0,,10.0,5y +10% a year; 10y +16%; ±49%
+CQR.AX,Charter Hall Retail Reit,,40.9,not added,2.0,-9.08,13.7,4.43,5.18,19.68,-19.74,7.19,,10.0,5y +4% a year; 10y +5%; ±20%
+NHF.AX,Nib Holdings Ltd,,40.9,not added,3.3,-4.66,1.87,4.33,7.18,22.39,-21.4,5.08,,10.0,5y +4% a year; 10y +7%; ±22%
+BRO,Brown &amp; Brown,,40.8,not added,28.5,-16.18,-0.64,5.32,14.8,31.9,-37.75,0.9,,10.0,5y +5% a year; 10y +15%; ±32%
+CIN.AX,Carlton Investments Ltd,,40.5,not added,0.9,2.01,11.5,-1.09,4.0,19.78,-12.58,3.54,,10.0,5y -1% a year; 10y +4%; ±20%
+SNPS,Synopsys,,40.3,not added,133.6,-6.72,-6.38,6.45,22.5,44.51,-31.21,0.0,,10.0,5y +6% a year; 10y +22%; ±45%
+ATM.AX,Pt Antam (Persero) Tbk,,40.2,not added,5.5,9.78,4.72,5.43,3.34,27.81,-23.08,5.82,,10.0,5y +5% a year; 10y +3%; ±28%
+ON,ON Semiconductor,,40.2,not added,47.0,40.47,1.63,10.09,20.88,62.2,-50.27,0.0,,10.0,5y +10% a year; 10y +21%; ±62%
+IHCB.AX,iShares Core Global Corporate Bond (AUD Hedged) ETF,yes,40.2,kept (active),,-0.77,5.6,-0.33,1.35,4.48,-3.48,4.51,no coverage,10.7,5y -0% a year; 10y +1%; ±4%
+JMS.AX,Jupiter Mines Ltd.,,40.1,not added,0.5,-0.92,15.75,7.74,,33.26,-18.88,5.42,,8.5,5y +8% a year; ±33%
+VGB.AX,Vanguard Australian Government Bond ETF,yes,40.1,kept (active),,-1.23,4.21,0.37,1.54,3.95,-3.6,3.31,no coverage,10.0,5y +0% a year; 10y +2%; ±4%
+BX,Blackstone Inc.,,40.0,not added,119.4,-21.71,7.65,1.29,22.35,37.42,-36.82,4.49,,10.0,5y +1% a year; 10y +22%; ±37%
+FMG.AX,Fortescue Ltd,yes,39.7,kept (watchlist),43.9,-27.57,-7.66,9.12,20.83,29.62,-36.27,7.57,Hold,10.0,5y +9% a year; 10y +21%; ±30%; consensus Hold
+IGB.AX,iShares Treasury ETF,yes,39.7,kept (active),,-1.2,3.92,0.27,1.4,3.84,-3.64,2.65,no coverage,10.0,5y +0% a year; 10y +1%; ±4%
+CMM.AX,Capricorn Metals Ltd,,39.6,not added,6.3,-4.04,38.2,37.18,39.15,57.35,-41.12,0.81,,10.0,5y +37% a year; 10y +39%; ±57%
+CNC,Centene Corporation,,39.6,not added,44.3,106.26,-2.33,1.3,10.2,47.1,-32.73,0.0,,10.0,5y +1% a year; 10y +10%; ±47%
+IFF,International Flavors &amp; Fragrances,,39.6,not added,29.9,45.3,9.85,-4.93,0.51,35.56,-19.26,1.71,,10.0,5y -5% a year; 10y +1%; ±36%
+VAP.AX,Vanguard Australian Property Securities ETF,yes,39.6,kept (active),,-18.6,10.6,2.13,5.74,18.13,-21.96,3.33,no coverage,10.0,5y +2% a year; 10y +6%; ±18%
+DUR.AX,Duratec Ltd,,39.5,not added,0.5,-6.22,20.9,43.26,,42.85,-34.9,2.23,,5.9,5y +43% a year; ±43%
+HAL,Halliburton,,39.2,not added,37.8,27.77,-5.67,9.97,-1.88,32.61,-27.12,1.99,,10.0,5y +10% a year; 10y -2%; ±33%
+VLTO,Veralto,,39.2,not added,32.8,0.16,9.12,,,23.4,-21.2,0.5,,3.0,no 5 year record; ±23%
+GDI.AX,Gdi Property Group,,39.1,not added,0.3,4.98,16.57,-4.19,1.88,16.9,-9.32,7.81,,10.0,5y -4% a year; 10y +2%; ±17%
+SLF.AX,SPDR S&P/ASX 200 Listed Property ETF,yes,39.1,kept (active),,-19.42,10.91,2.32,5.45,19.47,-22.29,5.43,no coverage,10.0,5y +2% a year; 10y +5%; ±19%
+NRG,NRG Energy,,39.0,not added,28.5,-43.66,26.98,22.67,26.79,49.4,-50.14,2.05,,10.0,5y +23% a year; 10y +27%; ±49%
+VEFI.AX,Vanguard Ethically Conscious Global Aggregate Bond Index (Hedged) ETF,yes,39.0,kept (esg),,-1.29,4.08,-1.0,1.59,3.8,-3.88,2.34,no coverage,8.1,5y -1% a year; 10y +2%; ±4%
+RHC.AX,Ramsay Health Care Ltd,yes,38.9,kept (active),12.6,77.54,6.1,-3.24,-0.7,30.11,-18.2,1.66,Hold,10.0,5y -3% a year; 10y -1%; ±30%; consensus Hold
+AIA.AX,Auckland International Airport Ltd,yes,38.8,kept (active),11.5,-4.73,1.72,-1.01,2.86,16.07,-13.78,1.76,Hold,10.0,5y -1% a year; 10y +3%; ±16%; consensus Hold
+PLA.AX,Pacific Lime And Cement Ltd,,38.7,not added,0.3,20.69,16.74,11.84,,60.29,-21.87,0.0,,9.1,5y +12% a year; ±60%
+REA.AX,Rea Group Ltd,yes,38.7,kept (active),21.5,-24.84,5.81,1.72,13.74,33.36,-40.47,1.81,Buy,10.0,5y +2% a year; 10y +14%; ±33%; consensus Buy
+BR,Broadridge Financial Solutions,,38.7,not added,25.2,-18.46,1.19,3.97,13.85,29.92,-40.73,2.17,,10.0,5y +4% a year; 10y +14%; ±30%
+JKHY,Jack Henry &amp; Associates,,38.5,not added,14.2,4.52,2.43,1.96,8.4,29.82,-35.4,1.5,,10.0,5y +2% a year; 10y +8%; ±30%
+MAA,Mid-America Apartment Communities,,38.2,not added,19.0,-5.98,1.75,-5.14,7.29,19.47,-18.75,5.08,,10.0,5y -5% a year; 10y +7%; ±19%
+SW,Smurfit Westrock,,38.1,not added,31.8,-1.32,8.88,0.32,11.08,43.88,-30.5,3.29,,10.0,5y +0% a year; 10y +11%; ±44%
+RRL.AX,Regis Resources Ltd,,37.9,not added,5.1,1.07,54.49,26.42,10.91,54.13,-41.77,5.79,,10.0,5y +26% a year; 10y +11%; ±54%
+BIIB,Biogen,,37.8,not added,46.2,65.7,-1.72,-0.01,-1.05,34.09,-14.34,0.0,,10.0,5y -0% a year; 10y -1%; ±34%
+MTS.AX,Metcash Ltd,yes,37.8,kept (active),3.5,-11.78,0.72,0.54,9.71,23.54,-31.52,5.62,Buy,10.0,5y +1% a year; 10y +10%; ±24%; consensus Buy
+TCG.AX,Turaco Gold Ltd,,37.8,not added,0.8,38.04,128.82,33.46,32.15,68.4,-49.43,0.0,,10.0,5y +33% a year; 10y +32%; ±68%
+DG,Dollar General,,37.7,not added,37.3,33.41,2.87,-6.69,7.86,38.0,-34.57,1.75,,10.0,5y -7% a year; 10y +8%; ±38%
+DRR.AX,Deterra Royalties Ltd,yes,37.7,kept (active),2.0,-3.32,-1.0,6.24,,25.13,-16.64,6.06,Buy,6.0,5y +6% a year; ±25%; consensus Buy
+EQR.AX,Eq Resources Ltd,,37.7,not added,1.4,476.09,55.85,32.05,28.0,109.0,-47.0,0.0,,10.0,5y +32% a year; 10y +28%; ±109%
+AMP.AX,Amp Ltd,,37.6,not added,5.8,36.92,35.69,20.38,-3.42,41.93,-36.16,2.07,,10.0,5y +20% a year; 10y -3%; ±42%
+MOT.AX,Metrics Income Opportunities Trust,,37.6,not added,0.5,-16.89,-4.45,1.11,40.92,17.49,-22.4,10.56,,10.0,5y +1% a year; 10y +41%; ±17%
+SDF.AX,Steadfast Group Ltd,,37.6,not added,6.5,1.04,6.0,7.82,14.13,45.26,-39.91,3.61,,10.0,5y +8% a year; 10y +14%; ±45%
+IR,Ingersoll Rand,,37.4,not added,42.0,-8.71,3.15,7.99,,33.02,-30.56,0.11,,9.4,5y +8% a year; ±33%
+AGL.AX,Agl Energy Ltd.,,37.3,not added,5.9,4.48,0.09,15.02,-2.99,24.63,-21.47,5.48,,10.0,5y +15% a year; 10y -3%; ±25%
+P,Everpure,,37.3,not added,,29.63,48.03,37.01,25.13,69.95,-42.26,0.0,,10.0,5y +37% a year; 10y +25%; ±70%
+AGVT.AX,Betashares Australian Government Bond ETF,yes,37.3,kept (active),,-2.38,4.97,-0.24,,5.33,-4.96,4.36,no coverage,7.2,5y -0% a year; ±5%
+DOC,Healthpeak Properties,,37.1,not added,19.1,11.39,11.14,-4.9,1.64,29.86,-18.12,6.33,,10.0,5y -5% a year; 10y +2%; ±30%
+DDOG,Datadog,,37.0,not added,141.6,67.67,42.72,10.88,,70.57,-48.62,0.0,,7.1,5y +11% a year; ±71%
+AXON,Axon Enterprise,yes,36.9,kept (active),47.9,-42.01,22.48,19.8,32.43,62.12,-54.45,0.0,Strong Buy,10.0,5y +20% a year; 10y +32%; ±62%; consensus Strong Buy
+SKS.AX,Sks Technologies Group Ltd,,36.9,not added,0.7,40.57,211.87,97.77,31.51,72.01,-49.42,1.77,,10.0,5y +98% a year; 10y +32%; ±72%
+EUR.AX,European Lithium Ltd,,36.8,not added,0.7,33.96,76.1,21.33,21.14,117.36,-49.48,0.0,,10.0,5y +21% a year; 10y +21%; ±117%
+SGLLV.AX,Ricegrowers Ltd,,36.8,not added,1.0,-19.34,39.08,23.4,,38.47,-35.16,5.06,,7.5,5y +23% a year; ±38%
+UHS,Universal Health Services,,36.8,not added,14.7,-9.68,11.01,10.68,5.46,32.26,-42.0,0.43,,10.0,5y +11% a year; 10y +5%; ±32%
+VIF.AX,Vanguard International Fixed Interest (Hedged) ETF,yes,36.8,kept (active),,-1.57,2.88,-1.24,0.69,4.19,-3.87,9.25,no coverage,10.0,5y -1% a year; 10y +1%; ±4%
+EOS.AX,Electro Optic Systems Holdings Ltd,,36.6,not added,2.1,38.92,111.83,21.54,19.93,96.22,-50.24,0.0,,10.0,5y +22% a year; 10y +20%; ±96%
+LUV,Southwest Airlines,,36.6,not added,29.6,31.98,21.18,0.21,0.58,44.14,-33.49,1.75,,10.0,5y +0% a year; 10y +1%; ±44%
+KMB,Kimberly-Clark,,36.5,not added,44.7,-1.71,-1.65,2.22,3.9,28.8,-20.98,4.59,,10.0,5y +2% a year; 10y +4%; ±29%
+PPC.AX,Peet Ltd,,36.3,not added,0.7,-15.61,13.39,12.38,9.34,37.0,-30.2,8.81,,10.0,5y +12% a year; 10y +9%; ±37%
+DXI.AX,Dexus Industria Reit.,,36.2,not added,0.7,-12.09,6.48,-0.88,8.47,16.35,-19.16,6.95,,10.0,5y -1% a year; 10y +8%; ±16%
+SUL.AX,Super Retail Group Ltd,,36.2,not added,3.0,-13.74,7.01,7.72,9.92,32.73,-33.52,4.8,,10.0,5y +8% a year; 10y +10%; ±33%
+IMD.AX,Imdex Ltd,,36.0,not added,1.7,-12.23,25.05,3.44,20.21,42.18,-29.64,1.1,,10.0,5y +3% a year; 10y +20%; ±42%
+PME.AX,Pro Medicus Ltd,yes,36.0,kept (watchlist),20.7,-29.26,39.05,30.56,44.53,54.63,-61.67,0.35,Buy,10.0,5y +31% a year; 10y +45%; ±55%; consensus Buy
+VBND.AX,Vanguard Global Aggregate Bond (Hedged) ETF,yes,36.0,kept (active),,-1.15,3.98,-0.94,,3.87,-3.68,9.58,no coverage,9.0,5y -1% a year; ±4%
+SRL.AX,Sunrise Energy Metals Ltd,,35.9,not added,2.5,166.95,159.57,46.1,13.2,106.45,-45.18,0.0,,10.0,5y +46% a year; 10y +13%; ±106%
+CARR,Carrier Global,,35.9,not added,64.7,-1.2,3.1,4.06,,34.98,-28.85,1.7,,6.6,5y +4% a year; ±35%
+EHL.AX,Emeco Holdings Ltd,,35.8,not added,0.7,6.2,30.74,4.5,6.88,35.35,-34.83,0.0,,10.0,5y +4% a year; 10y +7%; ±35%
+LDOS,Leidos,,35.7,not added,21.0,-29.37,7.95,8.74,12.55,35.18,-49.47,1.29,,10.0,5y +9% a year; 10y +13%; ±35%
+ETPMAG.AX,Global X Physical Silver,yes,35.6,kept (active),,2.44,27.62,18.88,12.75,59.59,-53.99,0.0,no coverage,10.0,5y +19% a year; 10y +13%; ±60%
+GDDY,GoDaddy,,35.6,not added,17.5,-14.14,12.01,11.95,13.2,49.59,-44.53,0.0,,10.0,5y +12% a year; 10y +13%; ±50%
+DLTR,Dollar Tree,,35.5,not added,29.9,22.85,0.19,4.15,4.1,41.75,-38.53,0.0,,10.0,5y +4% a year; 10y +4%; ±42%
+F,Ford Motor Company,,35.5,not added,68.7,-1.91,8.49,-0.24,5.63,38.23,-32.97,5.19,,10.0,5y -0% a year; 10y +6%; ±38%
+FAIR.AX,Betashares Australian Sustainability Leaders ETF,yes,35.4,kept (esg),,-11.92,7.75,1.6,,13.61,-18.26,3.07,no coverage,8.9,5y +2% a year; ±14%
+EGH.AX,Eureka Group Holdings Ltd,,35.3,not added,0.3,19.41,13.25,0.36,0.14,31.95,-18.61,2.43,,10.0,5y +0% a year; 10y +0%; ±32%
+UPS,United Parcel Service,,35.2,not added,112.6,22.85,-8.62,-8.63,3.06,30.03,-20.56,6.54,,10.0,5y -9% a year; 10y +3%; ±30%
+RDX.AX,Redox Ltd,,35.1,not added,1.8,26.77,19.53,,,36.2,-19.57,3.71,,3.2,no 5 year record; ±36%
+WPR.AX,Waypoint Reit,yes,35.0,kept (active),1.4,-15.52,7.37,1.85,6.26,16.67,-20.55,7.95,Hold,10.0,5y +2% a year; 10y +6%; ±17%; consensus Hold
+SOLV,Solventum,,35,not added,21.3,19.95,,,,29.72,-27.46,0.0,,2.6,no 5 year record; ±30%; under 3 years listed
+YLDX.XA,Coolabah Global Floating-Rate High Yield Complex ETF,yes,35,kept (active),,4.98,,,,1.83,-0.65,6.42,no coverage,1.5,no 5 year record; ±2%; under 3 years listed
+GIFL.XA,Lazard Global Listed Infrastructure Active ETF,yes,35,kept (active),,6.46,15.77,6.61,7.15,12.52,-12.79,10.2,no coverage,2.3,5y +7% a year; 10y +7%; ±13%; under 3 years listed
+MQSD.AX,Macquarie Subordinated Debt Active ETF,yes,35,kept (active),,5.27,6.69,1.43,1.59,0.74,-0.24,5.51,no coverage,1.6,5y +1% a year; 10y +2%; ±1%; under 3 years listed
+SET.AX,Solaris Australian Equity Income Plus Ltd,yes,35,kept (active),,,12.28,7.11,8.94,21.69,-7.98,0.73,no coverage,0.5,5y +7% a year; 10y +9%; ±22%; under 3 years listed
+DXCM,Dexcom,,34.7,not added,45.8,10.46,-7.17,-11.62,17.89,40.32,-22.61,0.0,,10.0,5y -12% a year; 10y +18%; ±40%
+PNI.AX,Pinnacle Investment Management Group Ltd,yes,34.7,kept (active),3.5,-27.08,26.98,-0.14,22.9,45.76,-36.1,4.16,Strong Buy,10.0,5y -0% a year; 10y +23%; ±46%; consensus Strong Buy
+PE1.AX,Pengana Private Equity Trust,yes,34.7,kept (active),,14.5,4.26,5.33,,39.59,-30.65,4.52,no coverage,7.5,5y +5% a year; ±40%
+GEN,Gen Digital,,34.5,not added,18.7,-6.48,12.75,3.02,8.54,39.97,-35.54,2.01,,10.0,5y +3% a year; 10y +9%; ±40%
+ROP,Roper Technologies,,34.4,not added,49.9,-6.44,-5.63,0.13,10.84,31.01,-33.96,0.82,,10.0,5y +0% a year; 10y +11%; ±31%
+TXT,Textron,,34.2,not added,18.9,-3.54,-2.94,2.2,6.06,26.4,-27.48,0.1,,10.0,5y +2% a year; 10y +6%; ±26%
+TWLO,Twilio,,33.8,not added,,134.57,66.07,-0.97,23.53,64.26,-24.73,0.0,,10.0,5y -1% a year; 10y +24%; ±64%
+HII,Huntington Ingalls Industries,,33.7,not added,15.1,-4.3,6.04,9.87,7.0,38.4,-42.84,2.02,,10.0,5y +10% a year; 10y +7%; ±38%
+XYZ,"Block, Inc.",,33.3,not added,63.5,-0.94,20.52,-20.02,20.58,46.27,-38.78,0.0,,10.0,5y -20% a year; 10y +21%; ±46%
+JHX.AX,James Hardie Industries Plc,yes,33.0,kept (active),21.8,12.36,-1.34,-5.89,7.26,42.47,-30.15,0.0,Buy,10.0,5y -6% a year; 10y +7%; ±42%; consensus Buy
+ADSK,Autodesk,,32.9,not added,63.1,-18.4,5.0,-3.17,14.11,39.33,-40.13,0.0,,10.0,5y -3% a year; 10y +14%; ±39%
+XYL,Xylem Inc.,,32.8,not added,33.8,-25.32,2.96,-1.07,9.79,25.43,-33.12,1.55,,10.0,5y -1% a year; 10y +10%; ±25%
+APE.AX,Eagers Automotive Ltd,,32.7,not added,5.1,-36.95,18.09,9.51,12.11,38.18,-46.49,4.03,,10.0,5y +10% a year; 10y +12%; ±38%
+PPG,PPG Industries,,32.5,not added,33.3,9.96,-4.28,-3.85,4.03,30.46,-25.68,2.59,,10.0,5y -4% a year; 10y +4%; ±30%
+HUM,Humana,,32.5,not added,66.4,45.37,-9.15,0.32,8.66,46.73,-44.29,0.63,,10.0,5y +0% a year; 10y +9%; ±47%
+CIP.AX,Centuria Industrial Reit,,32.4,not added,1.7,-16.57,4.91,-0.08,7.42,16.43,-20.3,6.04,,10.0,5y -0% a year; 10y +7%; ±16%
+GPC,Genuine Parts Company,,32.4,not added,25.0,-2.61,-1.06,3.4,6.46,33.66,-37.48,3.37,,10.0,5y +3% a year; 10y +6%; ±34%
+BCN.AX,Beacon Minerals Ltd,,32.3,not added,0.3,9.93,39.17,19.59,43.37,64.48,-55.02,5.64,,10.0,5y +20% a year; 10y +43%; ±64%
+CDW,CDW Corporation,,32.3,not added,23.7,5.56,-8.15,0.14,14.55,46.81,-37.1,1.54,,10.0,5y +0% a year; 10y +15%; ±47%
+DN1.AX,Dominion Income Trust 1,,32.2,not added,0.3,5.6,,,,10.03,-5.29,7.62,,1.6,no 5 year record; ±10%; under 3 years listed
+RG8.AX,Regal Asian Investments Ltd,,32.2,not added,0.3,-6.17,9.98,5.4,,27.05,-27.32,8.45,,6.9,5y +5% a year; ±27%
+WGX.AX,Westgold Resources Ltd.,,32.2,not added,4.8,-7.29,33.39,20.53,,54.79,-45.96,2.09,,9.8,5y +21% a year; ±55%
+RMC.AX,Resimac Group Ltd,,32.0,not added,0.3,-14.94,11.5,-3.53,14.59,35.15,-27.1,23.9,,10.0,5y -4% a year; 10y +15%; ±35%
+VICI,Vici Properties,,32.0,not added,35.5,-18.62,-2.48,2.86,,18.87,-22.7,7.57,,8.8,5y +3% a year; ±19%
+HDN.AX,Homeco Daily Needs Reit,yes,31.9,kept (active),2.3,-14.24,8.59,1.64,,18.95,-21.62,7.71,Buy,5.9,5y +2% a year; ±19%; consensus Buy
+CEN.AX,Contact Energy Ltd,,31.7,not added,7.4,-13.39,0.84,2.29,10.3,36.67,-19.01,4.57,,10.0,5y +2% a year; 10y +10%; ±37%
+MIN.AX,Mineral Resources Ltd,yes,31.7,kept (watchlist),8.4,1.72,-9.33,3.03,16.05,47.75,-42.25,1.96,Buy,10.0,5y +3% a year; 10y +16%; ±48%; consensus Buy
+NOW,ServiceNow,yes,31.6,kept (active),228.2,-16.69,6.63,3.63,26.09,58.04,-56.14,0.0,Strong Buy,10.0,5y +4% a year; 10y +26%; ±58%; consensus Strong Buy
+REV.AX,Revolution Private Credit Income Trust,,31.6,not added,0.4,3.91,,,,10.31,-4.36,8.2,,1.1,no 5 year record; ±10%; under 3 years listed
+SGP.AX,Stockland,yes,31.6,kept (active),10.3,-33.36,12.02,4.55,5.94,30.14,-43.86,5.93,Buy,10.0,5y +5% a year; 10y +6%; ±30%; consensus Buy
+RMS.PA,Hermès International Société en commandite par actions,yes,31.5,moved to watchlist,207.7,-42.77,-8.62,-0.87,13.97,32.48,-43.95,1.45,Buy,10.7,5y -1% a year; 10y +14%; ±32%; consensus Buy
+AMI.AX,Aurelia Metals Ltd,,31.4,not added,0.7,53.66,59.32,1.17,13.06,63.17,-37.14,2.67,,10.0,5y +1% a year; 10y +13%; ±63%
+CBE.AX,Cobre Ltd,,31.3,not added,0.3,161.9,69.72,18.29,,111.23,-48.24,0.0,,6.8,5y +18% a year; ±111%
+SWK,Stanley Black &amp; Decker,,31.3,not added,19.6,45.81,5.69,-6.78,1.45,36.5,-26.14,3.38,,10.0,5y -7% a year; 10y +1%; ±36%
+AFP.AX,Aft Pharmaceuticals Ltd,,31.2,not added,0.4,39.69,4.73,-1.14,2.44,38.78,-17.27,0.37,,10.0,5y -1% a year; 10y +2%; ±39%
+BNZ.AX,Benz Mining Corp.,,31.2,not added,1.6,135.87,114.16,40.85,,91.6,-48.3,0.0,,5.8,5y +41% a year; ±92%
+NEU.AX,Neuren Pharmaceuticals Ltd,,31.0,not added,2.5,-5.81,22.54,59.85,31.55,59.64,-48.59,0.77,,10.0,5y +60% a year; 10y +32%; ±60%
+CCL.AX,Cuscal Ltd,,30.9,not added,1.2,44.46,,,,32.19,-15.41,1.97,,1.9,no 5 year record; ±32%; under 3 years listed
+INVH,Invitation Homes,,30.9,not added,21.9,-0.49,-1.8,-3.24,,21.27,-14.7,4.36,,9.8,5y -3% a year; ±21%
+MXT.AX,Metrics Master Income Trust,,30.7,not added,2.0,-7.12,0.69,2.9,,17.53,-15.46,9.75,,9.1,5y +3% a year; ±18%
+EIX,Edison International,,30.5,not added,29.5,5.18,-1.46,4.34,3.17,36.37,-35.97,6.16,,10.0,5y +4% a year; 10y +3%; ±36%
+ORCL,Oracle Corporation,yes,30.3,kept (active),543.0,-54.42,4.62,8.55,14.65,57.0,-59.02,1.59,Strong Buy,10.0,5y +9% a year; 10y +15%; ±57%; consensus Strong Buy
+WGB.AX,Wam Global Ltd,yes,30.2,kept (active),,-15.74,8.21,0.07,,20.6,-20.9,6.6,no coverage,8.3,5y +0% a year; ±21%
+LYC.AX,Lynas Rare Earths Ltd,yes,30.1,kept (active),10.8,-43.84,14.96,7.88,32.43,55.54,-51.47,0.0,Buy,10.0,5y +8% a year; 10y +32%; ±56%; consensus Buy
+CAR.AX,Car Group Ltd,yes,29.9,kept (active),9.5,-27.49,-0.75,3.46,12.68,36.99,-40.56,3.44,Buy,10.0,5y +3% a year; 10y +13%; ±37%; consensus Buy
+RWC.AX,Reliance Worldwide Corporation Ltd,,29.9,not added,3.2,11.78,9.46,-3.12,6.1,40.96,-30.86,0.64,,10.0,5y -3% a year; 10y +6%; ±41%
+WHF.AX,Whitefield Industrials Ltd,,29.9,not added,0.6,-11.55,0.71,-0.24,4.94,13.65,-16.81,5.63,,10.0,5y -0% a year; 10y +5%; ±14%
+ERIE,Erie Indemnity,,29.6,not added,16.5,-19.9,-4.18,7.8,12.25,38.21,-36.5,2.3,,10.0,5y +8% a year; 10y +12%; ±38%
+KKC.AX,Kkr Credit Income Fund,,29.6,not added,0.7,-2.35,4.7,-0.72,,14.34,-12.25,9.92,,6.9,5y -1% a year; ±14%
+WMX.AX,Wam Income Maximiser Ltd,,29.6,not added,0.5,-0.34,,,,15.62,-10.79,4.32,,1.4,no 5 year record; ±16%; under 3 years listed
+TECH,Bio-Techne,,29.5,not added,16.2,10.51,6.92,-9.49,12.09,43.54,-39.26,0.44,,10.0,5y -9% a year; 10y +12%; ±44%
+4DX.AX,4Dmedical Ltd,,29.2,not added,2.3,84.89,99.1,22.05,,103.12,-54.26,0.0,,6.2,5y +22% a year; ±103%
+CLW.AX,Charter Hall Long Wale Reit,,29.2,not added,2.4,-18.55,10.6,-0.81,4.77,17.7,-24.26,7.63,,9.9,5y -1% a year; 10y +5%; ±18%
+KCN.AX,Kingsgate Consolidated Ltd.,,29.2,not added,1.2,5.78,52.47,20.45,32.84,72.14,-49.38,5.08,,10.0,5y +20% a year; 10y +33%; ±72%
+A2M.AX,The A2 Milk Company Ltd,,29.0,not added,4.9,-20.62,24.76,3.6,12.21,38.97,-47.45,6.37,,10.0,5y +4% a year; 10y +12%; ±39%
+VRSK,Verisk Analytics,,28.9,not added,30.4,-13.33,-6.38,1.22,10.62,36.47,-32.93,0.97,,10.0,5y +1% a year; 10y +11%; ±36%
+LYB,LyondellBasell,,28.9,not added,26.9,48.13,-7.31,1.17,3.0,42.78,-35.51,5.27,,10.0,5y +1% a year; 10y +3%; ±43%
+ILMN,"Illumina, Inc.",,28.7,not added,,169.41,31.69,-6.57,8.3,49.81,-25.66,0.0,,10.0,5y -7% a year; 10y +8%; ±50%
+IPG.AX,Ipd Group Ltd,,28.6,not added,0.6,45.99,15.32,,,43.41,-25.98,2.81,,4.8,no 5 year record; ±43%
+MA1.AX,Ma Credit Income Trust,,28.4,not added,0.5,-3.92,,,,10.58,-9.98,8.56,,1.6,no 5 year record; ±11%; under 3 years listed
+CWP.AX,Cedar Woods Properties Ltd,,28.1,not added,0.5,-23.03,16.43,5.44,7.1,31.96,-31.86,6.48,,10.0,5y +5% a year; 10y +7%; ±32%
+PRN.AX,Perenti Ltd,,28.1,not added,1.9,-28.73,26.92,16.38,8.94,42.9,-40.16,4.08,,10.0,5y +16% a year; 10y +9%; ±43%
+BE,Bloom Energy,,27.8,not added,,88.43,155.75,45.76,,112.07,-52.65,0.0,,8.2,5y +46% a year; ±112%
+GWA.AX,Gwa Group Ltd.,,27.3,not added,0.5,-12.63,12.44,0.47,2.35,25.49,-23.57,8.17,,10.0,5y +0% a year; 10y +2%; ±25%
+LII,Lennox International,,27.0,not added,17.5,-23.26,-1.92,7.33,11.79,39.41,-38.88,1.42,,10.0,5y +7% a year; 10y +12%; ±39%
+FRW.AX,Freightways Group Ltd,,26.6,not added,1.8,-16.23,15.16,,,22.99,-19.29,3.74,,3.0,no 5 year record; ±23%
+OTIS,Otis Worldwide,,26.6,not added,34.7,-17.16,-2.26,1.78,,22.56,-30.75,2.28,,6.6,5y +2% a year; ±23%
+UOS.AX,United Overseas Australia Ltd,,26.6,not added,1.1,-2.64,10.59,0.96,4.49,39.43,-19.39,6.56,,10.0,5y +1% a year; 10y +4%; ±39%
+DECK,Deckers Brands,,26.4,not added,15.3,-18.99,-8.87,6.2,24.7,44.32,-35.91,0.0,,10.0,5y +6% a year; 10y +25%; ±44%
+SBAC,SBA Communications,,26.4,not added,23.9,-0.08,-4.07,-8.42,8.61,36.66,-28.46,2.54,,10.0,5y -8% a year; 10y +9%; ±37%
+HM1.AX,Hearts And Minds Investments Ltd,,26.3,not added,0.6,-8.32,15.58,-2.37,,23.16,-17.22,6.99,,7.9,5y -2% a year; ±23%
+MAD.AX,Mader Group Ltd,,26.3,not added,1.3,-33.37,0.01,27.9,,36.65,-39.04,0.0,,7.1,5y +28% a year; ±37%
+NXG.AX,Nexgen Energy (Canada) Ltd,yes,26.2,kept (active),7.7,-12.1,8.03,8.93,,52.09,-41.55,0.0,Strong Buy,5.2,5y +9% a year; ±52%; consensus Strong Buy
+BGL.AX,Bellevue Gold Ltd,,26.0,not added,2.1,12.02,-3.34,8.7,43.63,59.9,-40.2,0.0,,10.0,5y +9% a year; 10y +44%; ±60%
+EOL.AX,Energy One Ltd,,26.0,not added,0.5,-27.06,46.58,17.03,45.76,55.45,-48.16,0.0,,10.0,5y +17% a year; 10y +46%; ±55%
+TAH.AX,Tabcorp Holdings Ltd,,26.0,not added,2.0,-18.0,5.99,10.38,25.31,49.34,-42.06,3.51,,10.0,5y +10% a year; 10y +25%; ±49%
+UNI.AX,Universal Store Holdings Ltd,,26.0,not added,0.6,-4.0,40.85,4.74,,37.45,-34.36,5.38,,5.9,5y +5% a year; ±37%
+NMG.AX,New Murchison Gold Ltd,,25.9,not added,0.7,103.7,90.15,45.85,7.08,74.88,-50.67,0.0,,10.0,5y +46% a year; 10y +7%; ±75%
+TLX.AX,Telix Pharmaceuticals Ltd,,25.8,not added,4.9,-21.49,14.27,16.95,,54.16,-48.23,0.0,,8.9,5y +17% a year; ±54%
+FSLR,First Solar,,25.8,not added,26.7,-25.49,2.74,8.84,19.78,54.31,-46.39,0.0,,10.0,5y +9% a year; 10y +20%; ±54%
+GNE.AX,Genesis Energy Ltd,,25.7,not added,2.5,-6.99,1.94,-3.54,6.19,28.99,-17.79,6.42,,10.0,5y -4% a year; 10y +6%; ±29%
+AOS,A. O. Smith,,25.7,not added,11.0,-8.64,-5.51,-0.24,4.84,27.28,-30.42,2.33,,10.0,5y -0% a year; 10y +5%; ±27%
+GEV,GE Vernova,,25.6,not added,374.7,34.71,,,,53.47,-31.89,0.19,,2.6,no 5 year record; ±53%; under 3 years listed
+TGN.AX,Tungsten Mining Nl,,25.6,not added,0.3,89.47,33.89,3.04,17.4,97.2,-54.43,0.0,,10.0,5y +3% a year; 10y +17%; ±97%
+ROL,"Rollins, Inc.",,25.5,not added,20.6,-36.77,-3.91,2.84,11.63,29.16,-54.23,2.07,,10.0,5y +3% a year; 10y +12%; ±29%
+ELS.AX,Elsight Ltd,,25.2,not added,0.7,116.09,95.05,46.35,,80.72,-66.35,0.0,,9.3,5y +46% a year; ±81%
+AYUPA.AX,Australian Unity Limited,yes,25.1,kept (active),,-10.76,-0.51,-2.75,1.59,19.6,-28.67,7.52,no coverage,5.8,5y -3% a year; 10y +2%; ±20%
+KOA.AX,The Koala Company Ltd,,24.9,not added,0.5,34.21,,,,37.1,-24.48,0.0,,0.6,no 5 year record; ±37%; under 3 years listed
+BA,Boeing,,24.6,not added,217.7,-15.24,-3.69,-0.96,3.48,34.23,-26.87,0.0,,10.0,5y -1% a year; 10y +3%; ±34%
+RBTZ.AX,Betashares Global Robotics and AI ETF,yes,24.6,kept (active),,-18.4,9.26,-1.37,,24.92,-21.03,0.06,no coverage,8.1,5y -1% a year; ±25%
+HVN.AX,Harvey Norman Holdings Ltd,,24.3,not added,5.2,-39.06,9.68,2.43,5.7,24.93,-44.27,6.59,,10.0,5y +2% a year; 10y +6%; ±25%
+FDS,FactSet,,24.1,not added,13.5,18.85,-10.01,-3.14,9.56,47.87,-35.99,1.35,,10.0,5y -3% a year; 10y +10%; ±48%
+LOV.AX,Lovisa Holdings Ltd,,24.1,not added,2.8,-30.49,17.8,6.88,26.89,48.95,-46.21,3.33,,10.0,5y +7% a year; 10y +27%; ±49%
+SLC.AX,Superloop Ltd,,23.9,not added,1.4,-16.77,64.8,16.18,0.69,39.19,-36.44,0.0,,10.0,5y +16% a year; 10y +1%; ±39%
+SRV.AX,Servcorp Ltd,,23.9,not added,0.5,-25.54,26.91,11.37,1.75,33.3,-32.78,6.1,,10.0,5y +11% a year; 10y +2%; ±33%
+ELD.AX,Elders Ltd,yes,23.8,kept (active),1.4,-10.25,7.98,-7.27,9.12,35.12,-33.01,5.66,Buy,10.0,5y -7% a year; 10y +9%; ±35%; consensus Buy
+RF1.AX,Regal Investment Fund,,23.7,not added,0.6,-7.93,9.59,1.12,,29.92,-22.61,4.05,,7.3,5y +1% a year; ±30%
+TRMB,Trimble Inc.,,23.1,not added,19.1,-20.87,6.92,-4.86,9.23,32.0,-41.49,0.0,,10.0,5y -5% a year; 10y +9%; ±32%
+CCI,Crown Castle,,22.9,not added,40.2,-5.87,0.21,-7.73,5.57,36.07,-29.41,4.83,,10.0,5y -8% a year; 10y +6%; ±36%
+CTSH,Cognizant,,22.9,not added,37.5,7.55,1.97,1.32,4.76,42.82,-54.78,1.82,,10.0,5y +1% a year; 10y +5%; ±43%
+ZBH,Zimmer Biomet,,22.9,not added,24.0,-3.4,-4.17,-4.5,1.44,32.76,-22.46,0.97,,10.0,5y -4% a year; 10y +1%; ±33%
+WHI.AX,Whitefield Income Ltd,,22.7,not added,0.4,-11.02,,,,22.03,-14.97,6.08,,1.8,no 5 year record; ±22%; under 3 years listed
+LNW.AX,Light & Wonder Inc.,yes,22.6,kept (watchlist),9.7,9.04,4.3,,,46.79,-43.75,0.0,Strong Buy,3.4,no 5 year record; ±47%; consensus Strong Buy
+SHA.AX,Shape Australia Corporation Ltd,,22.4,not added,0.6,9.33,67.45,,,43.85,-24.97,5.12,,4.8,no 5 year record; ±44%
+ALX.AX,Atlas Arteria,,22.3,not added,5.3,-19.25,-3.62,-1.43,4.05,22.29,-24.74,10.81,,10.0,5y -1% a year; 10y +4%; ±22%
+FDC.AX,Fdc Consolidated Holdings Ltd,,22.2,not added,1.1,-2.01,,,,28.52,-15.59,0.0,,0.2,no 5 year record; ±29%; under 3 years listed
+KHC,Kraft Heinz,,22.2,not added,37.4,5.29,-5.2,-0.78,-6.43,27.89,-19.66,6.39,,10.0,5y -1% a year; 10y -6%; ±28%
+NGI.AX,Navigator Global Investments Ltd,,22.2,not added,1.3,-11.79,24.19,6.13,5.09,42.12,-38.46,0.0,,10.0,5y +6% a year; 10y +5%; ±42%
+AAC.AX,Australian Agricultural Company Ltd.,,22.0,not added,0.8,-4.24,2.86,-3.03,-2.0,21.89,-14.72,0.0,,10.0,5y -3% a year; 10y -2%; ±22%
+HOOD,Robinhood Markets,,21.8,not added,144.2,-27.85,112.57,24.3,,71.62,-55.7,0.0,,5.2,5y +24% a year; ±72%
+MC.PA,"LVMH Moët Hennessy - Louis Vuitton, Société Européenne",yes,21.7,kept (watchlist),301.3,-36.73,-15.11,-8.75,10.6,26.81,-41.0,3.39,Buy,10.7,5y -9% a year; 10y +11%; ±27%; consensus Buy
+MP1.AX,Megaport Ltd,yes,21.6,kept (active),3.8,4.83,18.56,-2.41,20.23,72.46,-62.11,0.0,Strong Buy,10.0,5y -2% a year; 10y +20%; ±72%; consensus Strong Buy
+LIN.AX,Lindian Resources Ltd,,21.4,not added,0.8,-2.6,32.83,66.85,34.39,90.32,-62.69,0.0,,10.0,5y +67% a year; 10y +34%; ±90%
+USL.AX,Unico Silver Ltd,,21.3,not added,0.4,2.78,74.19,18.75,,93.53,-51.32,0.0,,9.5,5y +19% a year; ±94%
+CSL.AX,Csl Ltd,yes,20.8,kept (watchlist),94.4,-7.23,-3.53,-6.58,8.82,40.92,-56.03,2.06,Buy,10.0,5y -7% a year; 10y +9%; ±41%; consensus Buy
+CPRT,Copart,,20.7,not added,35.9,-35.19,-15.53,-4.39,16.39,32.34,-41.18,0.0,,10.0,5y -4% a year; 10y +16%; ±32%
+REG.AX,Regis Healthcare Ltd,,20.5,not added,1.4,-24.87,27.67,23.27,5.73,45.81,-45.18,3.85,,10.0,5y +23% a year; 10y +6%; ±46%
+RXL.AX,Rox Resources Ltd,,20.5,not added,0.8,7.45,27.26,5.3,9.49,65.79,-39.67,0.0,,10.0,5y +5% a year; 10y +9%; ±66%
+6324.T,Harmonic Drive Systems Inc.,yes,20.4,kept (watchlist),4.2,64.26,15.3,-1.65,5.59,76.41,-45.08,0.41,Buy,10.7,5y -2% a year; 10y +6%; ±76%; consensus Buy
+DPM.AX,Dpm Metals Inc.,yes,20.3,kept (active),12.3,62.76,,,,52.86,-30.84,0.41,thin coverage,1.1,no 5 year record; ±53%; consensus thin coverage; under 3 years listed
+CKF.AX,Collins Foods Ltd,,20.2,not added,1.1,-15.47,2.44,-4.22,7.32,26.41,-32.24,3.14,,10.0,5y -4% a year; 10y +7%; ±26%
+SK1.AX,Skinkandy Ltd,,20.2,not added,0.3,14.89,,,,42.87,-16.21,0.0,,0.4,no 5 year record; ±43%; under 3 years listed
+CMG,Chipotle Mexican Grill,,20.2,not added,58.4,-33.89,-13.65,-3.63,14.13,43.1,-32.91,0.0,,10.0,5y -4% a year; 10y +14%; ±43%
+TSCO,Tractor Supply,,20.0,not added,23.1,-38.17,-5.34,-1.64,11.06,33.48,-47.42,2.79,,10.0,5y -2% a year; 10y +11%; ±33%
+GEHC,GE HealthCare,,19.9,not added,41.3,-8.01,-1.08,,,34.67,-32.47,0.2,,3.8,no 5 year record; ±35%
+MGR.AX,Mirvac Group,,19.8,not added,7.1,-21.03,4.83,-4.07,3.25,23.55,-32.06,5.25,,10.0,5y -4% a year; 10y +3%; ±24%
+BKY.AX,Berkeley Energia Ltd,,19.6,not added,0.3,35.85,29.05,17.24,-0.74,92.39,-38.21,0.0,,10.0,5y +17% a year; 10y -1%; ±92%
+SMCI,Supermicro,,19.3,not added,40.8,-30.3,8.18,58.89,29.54,92.72,-61.04,0.0,,10.0,5y +59% a year; 10y +30%; ±93%
+PAF.AX,Pan African Resources Plc,,19.2,not added,5.3,6.0,,,,44.2,-18.15,0.0,,0.3,no 5 year record; ±44%; under 3 years listed
+GDG.AX,Generation Development Group Ltd,yes,19.1,kept (watchlist),1.2,-58.11,27.72,18.41,23.22,69.19,-65.14,0.65,Strong Buy,10.0,5y +18% a year; 10y +23%; ±69%; consensus Strong Buy
+SKT.AX,Sky Network Television Ltd.,,19.1,not added,0.4,6.37,11.38,17.68,-14.48,35.66,-18.5,9.01,,10.0,5y +18% a year; 10y -14%; ±36%
+AVH.AX,Avita Medical Inc.,,19.0,not added,0.6,244.22,14.47,-0.55,6.06,75.98,-29.18,0.0,,10.0,5y -1% a year; 10y +6%; ±76%
+CQE.AX,Charter Hall Social Infrastructure Reit,,19.0,not added,0.9,-24.23,6.64,-3.42,5.61,24.17,-31.14,7.15,,10.0,5y -3% a year; 10y +6%; ±24%
+NCK.AX,Nick Scali Ltd,yes,19.0,kept (active),1.1,-40.19,10.0,2.59,13.6,43.28,-50.86,6.17,Hold,10.0,5y +3% a year; 10y +14%; ±43%; consensus Hold
+APP,AppLovin,,18.9,not added,128.2,-55.43,86.92,23.42,,71.81,-64.26,0.0,,5.5,5y +23% a year; ±72%
+GLF.AX,Gemlife Communities Group,yes,18.8,kept (watchlist),1.5,-21.59,,,,27.13,-25.99,0.28,Strong Buy,1.2,no 5 year record; ±27%; consensus Strong Buy; under 3 years listed
+XYZ.AX,"Block, Inc.",,18.4,not added,67.7,-4.42,22.61,,,52.93,-43.31,0.0,,4.8,no 5 year record; ±53%
+GOZ.AX,Growthpoint Properties Australia,,18.3,not added,1.5,-20.24,8.16,-7.39,2.14,19.48,-24.81,9.41,,10.0,5y -7% a year; 10y +2%; ±19%
+GNRC,Generac,,18.2,not added,18.2,-3.99,25.08,-17.16,16.93,58.16,-40.78,0.0,,10.0,5y -17% a year; 10y +17%; ±58%
+KGN.AX,Kogan.Com Ltd,,18.1,not added,0.3,16.89,-2.93,-16.62,12.83,45.12,-31.45,4.43,,10.0,5y -17% a year; 10y +13%; ±45%
+OML.AX,Ooh!Media Ltd,,18.1,not added,0.9,23.96,12.98,1.69,-3.87,45.78,-37.26,3.6,,10.0,5y +2% a year; 10y -4%; ±46%
+ACL.AX,Australian Clinical Labs Ltd,,18.0,not added,0.5,12.13,7.58,-2.19,,34.07,-36.05,4.44,,5.4,5y -2% a year; ±34%
+INA.AX,Ingenia Communities Group,,18.0,not added,1.9,-16.45,9.1,-3.71,8.74,36.21,-37.56,2.02,,10.0,5y -4% a year; 10y +9%; ±36%
+LGF.AX,L1 Gold Fund Ltd,,17.9,not added,1.4,27.25,,,,50.72,-21.03,0.0,,0.5,no 5 year record; ±51%; under 3 years listed
+ACN,Accenture,,17.2,not added,173.2,2.21,-7.05,-4.14,10.17,49.39,-56.51,2.0,,10.0,5y -4% a year; 10y +10%; ±49%
+SHL.AX,Sonic Healthcare Ltd,yes,17.1,kept (watchlist),9.3,-8.07,-9.15,-10.53,2.07,25.58,-21.43,5.72,Hold,10.0,5y -11% a year; 10y +2%; ±26%; consensus Hold
+CYL.AX,Catalyst Metals Ltd,,17.0,not added,1.4,-32.05,89.32,17.96,25.49,68.83,-51.04,0.0,,10.0,5y +18% a year; 10y +25%; ±69%
+DPZ,Domino's,,17.0,not added,14.0,-23.74,-4.07,-5.8,8.49,31.22,-34.72,2.45,,10.0,5y -6% a year; 10y +8%; ±31%
+WMI.AX,Wam Microcap Ltd,,17.0,not added,0.3,-23.29,2.71,0.5,,21.32,-25.53,9.07,,9.3,5y +0% a year; ±21%
+BXP,"BXP, Inc.",,16.8,not added,13.7,-12.75,6.73,-5.48,-2.14,27.87,-30.29,4.56,,10.0,5y -5% a year; 10y -2%; ±28%
+CBO.AX,Cobram Estate Olives Ltd,,16.7,not added,1.3,-22.49,30.22,7.5,,45.56,-39.93,3.46,,5.2,5y +8% a year; ±46%
+STZ,Constellation Brands,,16.6,not added,27.4,2.31,-16.98,-5.57,1.36,30.93,-31.36,2.95,,10.0,5y -6% a year; 10y +1%; ±31%
+DXS.AX,Dexus,,16.0,not added,6.0,-19.77,2.02,-6.57,0.72,20.89,-29.12,6.43,,10.0,5y -7% a year; 10y +1%; ±21%
+PLS.AX,Pls Group Ltd,yes,16.0,moved to watchlist,8.5,-10.67,-10.35,4.92,18.78,57.04,-60.77,1.91,Buy,10.0,5y +5% a year; 10y +19%; ±57%; consensus Buy
+CCL,Carnival Corporation,,15.9,not added,49.3,-9.52,28.16,5.17,-4.8,49.59,-34.86,1.72,,10.0,5y +5% a year; 10y -5%; ±50%
+A1M.AX,Aic Mines Ltd,,15.8,not added,0.6,51.65,32.0,23.01,-5.62,63.74,-41.5,0.0,,10.0,5y +23% a year; 10y -6%; ±64%
+BSX,Boston Scientific,,15.7,not added,87.9,-55.29,-6.8,2.58,9.13,38.52,-60.39,0.0,,10.0,5y +3% a year; 10y +9%; ±39%
+ALGN,Align Technology,,15.6,not added,14.5,13.64,-8.88,-23.36,5.89,39.29,-29.18,0.0,,10.0,5y -23% a year; 10y +6%; ±39%
+LEN,Lennar,,15.6,not added,27.4,-32.72,-8.21,0.15,9.52,39.43,-43.53,2.39,,10.0,5y +0% a year; 10y +10%; ±39%
+CCP.AX,Credit Corp Group Ltd,yes,15.3,kept (active),1.0,4.28,11.72,-10.53,1.38,32.91,-35.1,5.25,no coverage,10.0,5y -11% a year; 10y +1%; ±33%
+DOW,Dow Inc.,,15.2,not added,28.8,35.8,-10.94,-4.42,,41.77,-34.81,4.41,,7.6,5y -4% a year; ±42%
+SKG.AX,Storage King Group,,15.1,not added,1.4,-22.14,7.9,,,24.22,-33.29,5.71,,3.2,no 5 year record; ±24%
+MEI.AX,Meteoric Resources Ltd,,15.0,not added,0.7,-6.67,-5.01,61.69,34.64,99.48,-45.1,0.0,,10.0,5y +62% a year; 10y +35%; ±99%
+MM8.AX,Medallion Metals Ltd.,,14.9,not added,0.4,-24.75,89.32,15.24,,72.1,-37.74,0.0,,5.6,5y +15% a year; ±72%
+FICO,Fair Isaac,,14.9,not added,20.3,-49.42,-4.34,17.06,22.78,62.46,-67.89,0.0,,10.0,5y +17% a year; 10y +23%; ±62%
+ABG.AX,Abacus Group,,14.8,not added,0.7,-28.09,1.6,-4.67,5.58,23.83,-32.39,10.56,,10.0,5y -5% a year; 10y +6%; ±24%
+GNC.AX,Graincorp Ltd,,14.7,not added,1.4,-20.46,4.13,6.8,5.88,37.76,-45.84,5.84,,10.0,5y +7% a year; 10y +6%; ±38%
+EFX,Equifax,,14.0,not added,23.4,-19.03,0.49,-5.74,6.63,41.1,-40.63,1.18,,10.0,5y -6% a year; 10y +7%; ±41%
+Q,Qnity Electronics,,13.9,not added,39.1,11.8,,,,54.95,-39.46,0.28,,1.0,no 5 year record; ±55%; under 3 years listed
+CEG,Constellation Energy,,13.5,not added,129.8,-31.19,27.02,,,48.69,-40.85,0.67,,4.8,no 5 year record; ±49%
+IDX.AX,Integral Diagnostics Ltd,,13.4,not added,0.8,-16.03,-5.09,-12.47,9.47,27.56,-26.62,4.45,,10.0,5y -12% a year; 10y +9%; ±28%
+LFG.AX,Liberty Financial Group,,13.4,not added,1.0,-10.51,5.93,-1.66,,32.31,-25.98,16.67,,5.8,5y -2% a year; ±32%
+GPN,Global Payments,,13.3,not added,29.5,-3.09,-9.67,-8.01,3.29,40.45,-28.04,1.2,,10.0,5y -8% a year; 10y +3%; ±40%
+SWKS,Skyworks Solutions,,12.9,not added,18.2,13.78,-1.4,-9.28,3.65,50.98,-33.05,2.55,,10.0,5y -9% a year; 10y +4%; ±51%
+DGE.L,Diageo plc,yes,12.8,kept (watchlist),76.5,-1.25,-16.37,-13.08,-1.85,31.71,-27.29,2.07,Buy,10.7,5y -13% a year; 10y -2%; ±32%; consensus Buy
+DASH,DoorDash,,12.7,not added,116.6,-27.37,30.68,0.3,,48.64,-44.9,0.0,,5.8,5y +0% a year; ±49%
+COG.AX,Cog Financial Services Ltd,,12.5,not added,0.4,-21.34,16.94,11.4,3.99,50.08,-50.16,3.98,,10.0,5y +11% a year; 10y +4%; ±50%
+FML.AX,Focus Minerals Ltd,,12.4,not added,0.5,-18.22,112.1,43.73,13.72,75.32,-65.8,4.83,,10.0,5y +44% a year; 10y +14%; ±75%
+WIA.AX,Wia Gold Ltd,,12.2,not added,0.9,17.91,126.48,58.48,-7.42,65.54,-33.33,0.0,,10.0,5y +58% a year; 10y -7%; ±66%
+DVP.AX,Develop Global Ltd,,12.0,not added,1.3,-9.73,3.36,3.38,20.66,61.78,-50.6,0.0,,10.0,5y +3% a year; 10y +21%; ±62%
+IPH.AX,Iph Ltd,yes,12.0,kept (active),0.9,13.8,-11.96,-10.14,2.06,32.63,-22.54,10.49,no coverage,10.0,5y -10% a year; 10y +2%; ±33%
+MIR.AX,Mirrabooka Investments Ltd,,12.0,not added,0.5,-25.59,-2.62,-4.71,2.34,18.29,-27.76,6.03,,10.0,5y -5% a year; 10y +2%; ±18%
+TEA.AX,Tasmea Ltd,,11.9,not added,2.5,77.35,,,,53.99,-33.21,2.87,,2.5,no 5 year record; ±54%; under 3 years listed
+AKAM,Akamai Technologies,,11.9,not added,22.3,22.26,-7.16,-1.51,3.86,61.94,-45.85,0.0,,10.0,5y -2% a year; 10y +4%; ±62%
+HGEN.AX,Betashares Global Healthcare ETF,yes,11.6,kept (active),,12.62,22.97,-6.29,,48.56,-38.08,0.88,no coverage,5.0,5y -6% a year; ±49%
+TYL,Tyler Technologies,,11.4,not added,18.8,-24.16,-1.89,-5.18,10.85,41.97,-46.1,0.0,,10.0,5y -5% a year; 10y +11%; ±42%
+L1G.AX,L1 Group Ltd,,11.2,not added,2.8,4.86,,,,45.22,-26.77,2.82,,1.0,no 5 year record; ±45%; under 3 years listed
+CMA,CMA Cash Account,yes,11.0,kept (active),,,,,,,,,no coverage,,no 5 year record
+DMNHA.AX,Dominion Investment Group notes,yes,11.0,kept (watchlist),,,,,,,,,no coverage,,no 5 year record
+GSBK54.AX,Commonwealth Treasury Bond 4.75% 2054,yes,11.0,kept (active),,,,,,,,,no coverage,,no 5 year record
+SPPHA.AX,Stonepeak-Plus Infra Debt notes,yes,11.0,kept (active),,,,,,,,,no coverage,,no 5 year record
+AAI.AX,Alcoa Corporation,yes,10.8,kept (watchlist),14.2,-2.96,,,,49.07,-53.79,1.05,Strong Buy,2.2,no 5 year record; ±49%; consensus Strong Buy; under 3 years listed
+PPM.AX,Pepper Money Ltd,,10.8,not added,0.7,-13.66,22.27,1.85,,46.37,-37.4,8.85,,5.4,5y +2% a year; ±46%
+WOR.AX,Worley Ltd,,10.8,not added,4.6,-29.57,-13.45,1.02,4.75,28.83,-33.6,5.26,,10.0,5y +1% a year; 10y +5%; ±29%
+WDAY,"Workday, Inc.",,10.4,not added,63.8,-13.68,-3.53,-4.97,10.32,54.18,-53.66,0.0,,10.0,5y -5% a year; 10y +10%; ±54%
+CVNA,Carvana,,10.3,not added,65.3,-15.65,112.98,0.34,,61.06,-41.21,0.0,,9.5,5y +0% a year; ±61%
+SBM.AX,St Barbara Ltd,,10.2,not added,1.0,41.11,66.75,4.94,1.77,73.87,-52.33,6.54,,10.0,5y +5% a year; 10y +2%; ±74%
+DRO.AX,Droneshield Ltd,,10.0,not added,1.4,-69.34,74.51,54.13,19.76,97.06,-70.11,0.0,,10.0,5y +54% a year; 10y +20%; ±97%
+ASB.AX,Austal Ltd,,9.9,not added,1.8,-39.71,34.76,18.96,10.59,65.24,-61.3,0.0,,10.0,5y +19% a year; 10y +11%; ±65%
+MI6.AX,Minerals 260 Ltd,,9.7,not added,1.8,112.9,27.29,1.28,,85.27,-41.62,0.0,,5.0,5y +1% a year; ±85%
+EQT.AX,Eqt Holdings Ltd,,9.6,not added,0.6,-0.38,-1.27,-1.45,6.15,47.48,-40.48,3.52,,10.0,5y -1% a year; 10y +6%; ±47%
+ASL.AX,Andean Silver Ltd,,9.2,not added,0.3,-25.77,80.58,43.87,,87.26,-54.31,0.0,,5.1,5y +44% a year; ±87%
+360.AX,Life360 Inc.,,8.9,not added,5.2,-53.85,40.97,14.59,,73.38,-65.13,0.0,,7.4,5y +15% a year; ±73%
+BMN.AX,Bannerman Energy Ltd,,8.9,not added,0.8,-5.66,5.43,-1.59,28.48,73.98,-41.43,0.0,,10.0,5y -2% a year; 10y +28%; ±74%
+RSG.AX,Resolute Mining Ltd,,8.9,not added,2.4,-10.39,42.19,22.43,-0.33,61.22,-45.43,0.0,,10.0,5y +22% a year; 10y -0%; ±61%
+SLS.AX,Solstice Minerals Ltd,,8.8,not added,0.4,473.02,150.38,,,111.9,-37.54,0.0,,4.4,no 5 year record; ±112%
+COF.AX,Centuria Office Reit,,8.3,not added,0.5,-19.71,1.56,-10.61,-0.48,18.96,-26.65,11.36,,10.0,5y -11% a year; 10y -0%; ±19%
+PNR,Pentair,,8.2,not added,12.0,-49.76,-4.09,-3.29,5.87,32.93,-52.04,1.93,,10.0,5y -3% a year; 10y +6%; ±33%
+BF-B,Brown–Forman,,8.1,not added,17.1,10.71,-19.38,-11.87,0.63,39.02,-25.48,3.07,,10.0,5y -12% a year; 10y +1%; ±39%
+FFM.AX,Firefly Metals Ltd,,8.0,not added,1.2,-22.47,38.11,1.72,22.77,71.82,-47.2,0.0,,10.0,5y +2% a year; 10y +23%; ±72%
+WY,Weyerhaeuser,,8.0,not added,19.0,-14.95,-12.11,-6.46,-0.17,27.45,-30.03,4.29,,10.0,5y -6% a year; 10y -0%; ±27%
+HRL,Hormel Foods,,7.8,not added,15.9,-6.17,-12.49,-8.54,-1.38,29.73,-26.74,5.55,,10.0,5y -9% a year; 10y -1%; ±30%
+KLS.AX,Kelsian Group Ltd,,7.8,not added,1.1,-15.77,-8.87,-7.85,3.66,29.73,-21.77,4.5,,10.0,5y -8% a year; 10y +4%; ±30%
+EL,Estée Lauder Companies (The),,7.6,not added,47.4,10.21,-7.07,-17.36,5.34,47.75,-43.62,1.29,,10.0,5y -17% a year; 10y +5%; ±48%
+SNDK,Sandisk,,7.5,not added,358.4,661.7,,,,113.33,-56.49,0.0,,1.7,no 5 year record; ±113%; under 3 years listed
+COO,Cooper Companies (The),,7.3,not added,15.4,-17.79,-10.77,-8.88,4.75,31.95,-36.82,0.0,,10.0,5y -9% a year; 10y +5%; ±32%
+MRNA,Moderna,,7.3,not added,107.9,663.05,33.82,-9.02,,194.65,-34.16,0.0,,7.8,5y -9% a year; ±195%
+CMCSA,Comcast,,7.1,not added,108.9,-11.87,-15.41,-9.5,-0.16,32.39,-33.76,5.75,,10.0,5y -10% a year; 10y -0%; ±32%
+CSC.AX,Capstone Copper Corp.,yes,6.8,kept (watchlist),8.5,-9.91,,,,55.72,-45.27,0.0,Strong Buy,2.5,no 5 year record; ±56%; consensus Strong Buy; under 3 years listed
+SYL.AX,Symal Group Ltd,,6.8,not added,0.6,12.46,,,,50.6,-39.48,3.24,,1.9,no 5 year record; ±51%; under 3 years listed
+AFG.AX,Australian Finance Group Ltd,,6.7,not added,0.4,-42.48,8.72,-5.95,8.68,40.35,-47.75,6.67,,10.0,5y -6% a year; 10y +9%; ±40%
+VMM.AX,Viridis Mining And Minerals Ltd,,6.2,not added,0.6,116.0,43.61,,,98.07,-45.54,0.0,,4.8,no 5 year record; ±98%
+MKC,McCormick &amp; Company,,5.9,not added,17.1,-25.42,-9.29,-6.12,3.34,30.95,-37.28,3.96,,10.0,5y -6% a year; 10y +3%; ±31%
+ARF.AX,Arena Reit.,,5.8,not added,1.1,-28.52,-1.08,-5.8,9.23,35.63,-45.84,7.23,,10.0,5y -6% a year; 10y +9%; ±36%
+BTR.AX,Brightstar Resources Ltd,,5.8,not added,0.7,9.71,29.11,-13.62,22.58,76.56,-55.56,0.0,,10.0,5y -14% a year; 10y +23%; ±77%
+IP,International Paper,,5.6,not added,24.1,-29.57,0.26,-2.37,1.48,44.61,-39.68,5.62,,10.0,5y -2% a year; 10y +1%; ±45%
+AYA.AX,Artrya Ltd,,5.2,not added,0.4,-32.88,123.31,13.92,,84.67,-60.93,0.0,,4.9,5y +14% a year; ±85%
+PYPL,PayPal,,5.2,not added,64.3,-16.51,0.53,-23.18,4.68,42.61,-46.36,0.97,,10.0,5y -23% a year; 10y +5%; ±43%
+MAQ.AX,Macquarie Technology Group Ltd,,5.1,not added,1.2,-31.9,-9.87,-8.51,16.07,39.27,-43.9,0.0,,10.0,5y -9% a year; 10y +16%; ±39%
+HGH.AX,Heartland Group Holdings Ltd,,5.0,not added,1.0,14.07,-4.5,-9.57,,31.75,-23.72,5.67,,8.0,5y -10% a year; ±32%
+OPH.AX,Ophir High Conviction Fund,,4.9,not added,0.5,-27.98,7.69,-4.54,,27.99,-29.71,16.82,,7.8,5y -5% a year; ±28%
+WC8.AX,Wildcat Resources Ltd,,4.9,not added,0.4,0.0,-32.69,33.87,27.06,76.19,-67.18,0.0,,10.0,5y +34% a year; 10y +27%; ±76%
+MSB.AX,Mesoblast Ltd,,4.7,not added,2.4,-31.73,74.06,3.32,4.61,55.28,-42.67,0.0,,10.0,5y +3% a year; 10y +5%; ±55%
+PPT.AX,Perpetual Ltd,,4.7,not added,2.0,-5.21,2.31,-9.01,-4.32,34.2,-18.9,7.14,,10.0,5y -9% a year; 10y -4%; ±34%
+AEF.AX,Australian Ethical Investment Ltd,,4.6,not added,0.5,-41.32,5.19,-19.44,19.44,43.39,-46.46,4.31,,10.0,5y -19% a year; 10y +19%; ±43%
+PODD,Insulet Corporation,,4.6,not added,13.0,-54.3,0.26,-12.62,16.8,45.07,-62.33,0.0,,10.0,5y -13% a year; 10y +17%; ±45%
+NWL.AX,Netwealth Group Ltd,,4.5,not added,4.2,-45.46,12.79,1.68,,46.08,-50.62,2.41,,8.9,5y +2% a year; ±46%
+ADBE,Adobe Inc.,yes,3.9,kept (watchlist),148.4,-23.97,-22.9,-15.02,10.89,41.61,-46.26,0.0,Hold,10.0,5y -15% a year; 10y +11%; ±42%; consensus Hold
+LVS,Las Vegas Sands,,3.8,not added,33.4,-34.78,-9.72,1.31,-2.45,30.52,-47.56,3.17,,10.0,5y +1% a year; 10y -2%; ±31%
+ABB.AX,Aussie Broadband Ltd,,3.6,not added,1.3,-28.87,3.78,-2.09,,32.17,-32.36,1.43,,6.0,5y -2% a year; ±32%
+OMA.AX,Omega Oil & Gas Ltd,,3.6,not added,0.4,89.74,54.67,,,72.85,-53.33,0.0,,4.0,no 5 year record; ±73%
+EIQ.AX,Echoiq Ltd,,3.4,not added,0.3,137.84,34.71,23.2,-4.98,106.93,-76.57,0.0,,10.0,5y +23% a year; 10y -5%; ±107%
+GIS,General Mills,,3.3,not added,24.4,-22.16,-17.48,-5.75,-1.06,30.1,-33.25,6.99,,10.0,5y -6% a year; 10y -1%; ±30%
+AGI.AX,Ainsworth Game Technology Ltd,,3.1,not added,0.4,18.81,6.25,-1.57,-3.21,60.15,-34.38,0.0,,10.0,5y -2% a year; 10y -3%; ±60%
+WAM.AX,Wam Capital Ltd,,3.1,not added,1.2,-34.88,-2.42,-3.32,-0.39,24.39,-39.43,15.5,,10.0,5y -3% a year; 10y -0%; ±24%
+CMW.AX,Cromwell Property Group,,3.0,not added,0.9,-23.54,8.8,-9.59,-2.39,27.46,-30.74,9.17,,10.0,5y -10% a year; 10y -2%; ±27%
+OBL.AX,Omni Bridgeway Ltd,,3.0,not added,0.4,-2.52,0.65,-12.94,0.08,39.31,-23.5,0.0,,10.0,5y -13% a year; 10y +0%; ±39%
+GYG.AX,Guzman Y Gomez Ltd,yes,2.9,kept (watchlist),2.6,6.41,,,,52.75,-42.94,1.89,Hold,2.3,no 5 year record; ±53%; consensus Hold; under 3 years listed
+CLX,Clorox,,2.6,not added,13.8,-22.3,-9.31,-7.47,0.77,31.92,-35.22,4.27,,10.0,5y -7% a year; 10y +1%; ±32%
+SLX.AX,Silex Systems Ltd,,2.3,not added,1.0,-61.76,0.1,19.52,23.41,81.72,-69.3,0.0,,10.0,5y +20% a year; 10y +23%; ±82%
+GGP.AX,Greatland Resources Ltd,,2.1,not added,6.4,10.43,,,,61.8,-43.01,0.0,,1.3,no 5 year record; ±62%; under 3 years listed
+THL.AX,Tourism Holdings Rentals Ltd,,2.1,not added,0.5,7.17,-7.64,,,52.87,-30.97,3.88,,3.8,no 5 year record; ±53%
+WYNN,Wynn Resorts,,1.5,not added,11.1,-40.12,-7.52,-1.68,-1.42,31.5,-44.2,1.34,,10.0,5y -2% a year; 10y -1%; ±32%
+IMR.AX,Imricor Medical Systems Inc.,,1.3,not added,0.5,-10.65,27.99,-0.75,,54.71,-40.91,0.0,,7.2,5y -1% a year; ±55%
+INTU,Intuit,,1.3,not added,106.9,-47.35,-12.97,-8.99,13.66,50.59,-62.49,1.42,,10.0,5y -9% a year; 10y +14%; ±51%
+EDV.AX,Endeavour Group Ltd,,0.6,not added,5.8,-5.34,-8.94,-10.19,,24.92,-27.71,3.63,,5.3,5y -10% a year; ±25%
+SX2.AX,Southern Cross Gold Consolidated Ltd.,,0.6,not added,2.7,7.54,,,,60.21,-34.88,0.0,,1.8,no 5 year record; ±60%; under 3 years listed
+ING.AX,Inghams Group Ltd,,0.5,not added,0.8,-9.8,-11.24,-5.77,0.86,32.87,-35.2,4.68,,9.9,5y -6% a year; 10y +1%; ±33%
+ORE.AX,Orezone Gold Corporation,,0.4,not added,2.1,70.79,,,,71.16,-38.91,0.0,,1.2,no 5 year record; ±71%; under 3 years listed
+29M.AX,29Metals Ltd,,0,not added,0.5,-34.15,-24.2,-35.91,,81.5,-66.41,0.0,,5.2,5y -36% a year; ±82%
+A4N.AX,Alpha Hpa Ltd,,0,not added,0.6,-51.88,-20.63,-6.01,44.95,64.87,-58.6,0.0,,10.0,5y -6% a year; 10y +45%; ±65%
+AEL.AX,Amplitude Energy Ltd,,0,not added,0.6,-26.5,22.25,-8.38,-4.37,61.72,-60.75,0.0,,10.0,5y -8% a year; 10y -4%; ±62%
+AIS.AX,Aeris Resources Ltd,,0,not added,0.7,-23.81,42.49,-17.43,5.81,73.36,-48.89,0.0,,10.0,5y -17% a year; 10y +6%; ±73%
+AIZ.AX,Air New Zealand Ltd,,0,not added,1.0,-41.83,-18.74,-17.95,-9.94,34.47,-45.45,0.0,,10.0,5y -18% a year; 10y -10%; ±34%
+ALB,Albemarle Corporation,,0,not added,17.6,-3.98,-11.46,-15.88,2.55,55.53,-56.88,1.76,,10.0,5y -16% a year; 10y +3%; ±56%
+AOV.AX,Amotiv Ltd,,0,not added,0.7,-32.86,-15.26,-10.02,-1.45,29.05,-36.03,7.64,,10.0,5y -10% a year; 10y -1%; ±29%
+APTV,Aptiv,,0,not added,12.9,-49.99,-23.86,-23.43,-1.4,43.62,-52.08,0.0,,10.0,5y -23% a year; 10y -1%; ±44%
+ARB.AX,Arb Corporation Ltd.,,0,not added,1.4,-50.91,-13.5,-16.56,2.3,40.5,-53.38,3.98,,10.0,5y -17% a year; 10y +2%; ±40%
+ARE,Alexandria Real Estate Equities,,0,not added,11.6,-40.83,-21.08,-22.25,-4.94,48.16,-46.51,6.71,,10.0,5y -22% a year; 10y -5%; ±48%
+ARU.AX,Arafura Rare Earths Ltd,,0,not added,0.9,-68.48,-7.8,-8.0,10.29,69.44,-65.06,0.0,,10.0,5y -8% a year; 10y +10%; ±69%
+AVR.AX,Anteris Technologies Global Corp.,,0,not added,0.9,-4.09,-24.68,-0.14,-13.61,74.01,-44.84,0.0,,10.0,5y -0% a year; 10y -14%; ±74%
+AX1.AX,Accent Group Ltd,,0,not added,0.4,-47.79,-26.03,-19.11,-1.86,53.8,-59.03,6.87,,10.0,5y -19% a year; 10y -2%; ±54%
+AXQ.AX,"Aura Consolidated Group, Inc.",,0,not added,0.9,-50.8,,,,99.05,-55.41,0.0,,0.2,no 5 year record; ±99%; under 3 years listed
+AZY.AX,Antipa Minerals Ltd,,0,not added,0.3,-25.42,46.48,-2.52,6.3,60.28,-47.31,0.0,,10.0,5y -3% a year; 10y +6%; ±60%
+BAP.AX,Bapcor Ltd,,0,not added,0.5,-67.84,-45.68,-35.35,-15.07,90.4,-86.26,0.0,,10.0,5y -35% a year; 10y -15%; ±90%
+BAX,Baxter International,,0,not added,17.3,11.68,-8.96,-17.5,-3.36,43.25,-31.74,0.16,,10.0,5y -18% a year; 10y -3%; ±43%
+BC8.AX,Black Cat Syndicate Ltd,,0,not added,0.5,-50.0,39.61,1.24,,73.68,-63.21,0.0,,8.8,5y +1% a year; ±74%
+BLX.AX,Beacon Lighting Group Ltd,,0,not added,0.4,-37.97,1.68,-0.85,5.22,45.62,-50.33,4.25,,10.0,5y -1% a year; 10y +5%; ±46%
+BM1.AX,Ballard Mining Ltd,,0,not added,0.3,18.0,,,,71.89,-43.65,0.0,,1.2,no 5 year record; ±72%; under 3 years listed
+BMC.AX,Bmc Minerals Ltd.,,0,not added,0.7,-4.0,,,,72.44,-44.62,0.0,,0.8,no 5 year record; ±72%; under 3 years listed
+BOE.AX,Boss Energy Ltd,,0,not added,0.6,-27.63,-34.66,-13.16,12.71,81.38,-50.73,0.0,,10.0,5y -13% a year; 10y +13%; ±81%
+BPT.AX,Beach Energy Ltd,,0,not added,2.2,-22.31,-11.48,-4.4,4.39,34.53,-37.5,3.19,,10.0,5y -4% a year; 10y +4%; ±35%
+BRE.AX,Brazilian Rare Earths Ltd,,0,not added,0.5,-68.64,,,,76.65,-73.9,0.0,,2.8,no 5 year record; ±77%; under 3 years listed
+BTL.AX,Beetaloo Energy Australia Ltd,,0,not added,0.3,-24.14,16.26,-10.82,6.88,67.06,-38.57,0.0,,10.0,5y -11% a year; 10y +7%; ±67%
+C79.AX,Chrysos Corporation Ltd,,0,not added,0.8,-14.07,0.24,,,49.09,-46.73,0.0,,4.4,no 5 year record; ±49%
+CAT.AX,Catapult Sports Ltd,,0,not added,1.0,-55.89,51.18,11.93,-0.5,64.52,-62.47,0.0,,10.0,5y +12% a year; 10y -0%; ±65%
+CHN.AX,Chalice Mining Ltd,,0,not added,0.4,-57.69,-21.08,-33.1,18.95,71.23,-66.54,0.0,,10.0,5y -33% a year; 10y +19%; ±71%
+CHTR,Charter Communications,,0,not added,17.8,-54.92,-37.23,-29.48,-8.27,52.82,-58.82,0.0,,10.0,5y -29% a year; 10y -8%; ±53%
+CIA.AX,Champion Iron Ltd,,0,not added,1.3,-54.19,-30.01,-9.83,18.19,40.57,-66.44,5.9,,10.0,5y -10% a year; 10y +18%; ±41%
+CNI.AX,Centuria Capital Group,,0,not added,1.1,-51.34,4.33,-14.66,6.53,37.08,-53.91,9.43,,10.0,5y -15% a year; 10y +7%; ±37%
+COH.AX,Cochlear Ltd,yes,0,kept (watchlist),9.6,-48.47,-13.76,-6.35,3.63,54.69,-69.23,2.35,Hold,10.0,5y -6% a year; 10y +4%; ±55%; consensus Hold
+COIN,Coinbase,,0,not added,68.7,-47.85,25.57,-10.79,,72.54,-60.96,0.0,,5.5,5y -11% a year; ±73%
+CRN.AX,Coronado Global Resources Inc.,,0,not added,0.3,-50.77,-54.45,-31.24,,95.58,-69.39,0.0,,8.0,5y -31% a year; ±96%
+CSGP,CoStar Group,,0,not added,15.8,-54.8,-24.39,-15.3,6.97,46.49,-65.55,0.0,,10.0,5y -15% a year; 10y +7%; ±46%
+CTD.AX,Corporate Travel Management Ltd,,0,not added,0.5,-76.91,-38.69,-30.82,-13.41,95.54,-87.55,0.0,,10.0,5y -31% a year; 10y -13%; ±96%
+CU6.AX,Clarity Pharmaceuticals Ltd,,0,not added,0.7,-65.8,14.35,6.89,,79.11,-67.96,0.0,,5.2,5y +7% a year; ±79%
+CUV.AX,Clinuvel Pharmaceuticals Ltd,,0,not added,0.4,-36.39,-21.08,-28.42,-1.0,41.59,-46.24,0.7,,10.0,5y -28% a year; 10y -1%; ±42%
+CXO.AX,Core Lithium Ltd,,0,not added,0.7,85.71,-18.48,-19.31,10.31,90.31,-53.57,0.0,,10.0,5y -19% a year; 10y +10%; ±90%
+DGT.AX,Digico Infrastructure Reit,,0,not added,1.1,-26.41,,,,52.54,-41.1,6.19,,1.8,no 5 year record; ±53%; under 3 years listed
+DMP.AX,Domino'S Pizza Enterprises Ltd,,0,not added,2.1,44.26,-22.63,-28.92,-8.81,46.31,-36.55,2.68,,10.0,5y -29% a year; 10y -9%; ±46%
+DTR.AX,Dateline Resources Ltd,,0,not added,0.3,-80.81,86.19,-4.2,-7.21,136.75,-88.65,0.0,,10.0,5y -4% a year; 10y -7%; ±137%
+DYL.AX,Deep Yellow Ltd,,0,not added,0.7,-61.43,-18.68,-7.56,13.05,71.25,-76.8,0.0,,10.0,5y -8% a year; 10y +13%; ±71%
+EBO.AX,Ebos Group Ltd,,0,not added,3.6,-29.46,-16.77,-10.8,3.94,27.99,-38.29,5.13,,10.0,5y -11% a year; 10y +4%; ±28%
+ELV.AX,Elevra Lithium Ltd,,0,not added,0.7,-16.26,-32.89,-32.35,0.54,78.15,-75.36,0.0,,10.0,5y -32% a year; 10y +1%; ±78%
+FBU.AX,Fletcher Building Ltd,,0,not added,2.9,-5.73,-13.04,-14.84,-9.7,28.5,-32.74,0.0,,10.0,5y -15% a year; 10y -10%; ±28%
+FCL.AX,Fineos Corporation Holdings Plc,,0,not added,0.6,-34.58,5.26,-13.56,,56.46,-45.82,0.0,,7.2,5y -14% a year; ±56%
+FDXF,FedEx Freight,,0,not added,24.0,-28.7,,,,62.11,-42.87,0.0,,0.4,no 5 year record; ±62%; under 3 years listed
+FIS,Fidelity National Information Services,,0,not added,23.8,-41.99,-8.97,-16.05,-4.55,33.83,-50.44,4.56,,10.0,5y -16% a year; 10y -5%; ±34%
+FISV,Fiserv,,0,not added,33.6,-59.72,-26.47,-11.5,0.16,58.37,-64.94,0.0,,10.0,5y -12% a year; 10y +0%; ±58%
+FLT.AX,Flight Centre Travel Group Ltd,,0,not added,2.3,-2.82,-12.94,-9.1,-7.31,37.17,-40.88,3.73,,10.0,5y -9% a year; 10y -7%; ±37%
+FRS.AX,Forrestania Resources Ltd,,0,not added,0.9,38.64,109.86,-3.53,,85.19,-59.44,0.0,,5.1,5y -4% a year; ±85%
+GQG.AX,Gqg Partners Inc.,,0,not added,3.0,-31.37,-0.58,-4.74,,36.82,-44.93,15.14,,5.0,5y -5% a year; ±37%
+GTK.AX,Gentrack Group Ltd,,0,not added,0.4,-55.0,-7.95,14.16,1.36,64.03,-69.92,0.0,,10.0,5y +14% a year; 10y +1%; ±64%
+HCW.AX,Healthco Healthcare And Wellness Reit,,0,not added,0.4,9.47,-15.92,-15.33,,34.6,-27.11,2.04,,5.1,5y -15% a year; ±35%
+HMC.AX,Hmc Capital Ltd,,0,not added,1.1,-13.06,-12.07,,,54.39,-49.55,4.49,,4.8,no 5 year record; ±54%
+HONA,Honeywell Aerospace,,0,not added,69.7,-20.0,,,,85.44,-43.85,0.0,,0.3,no 5 year record; ±85%; under 3 years listed
+HSN.AX,Hansen Technologies Ltd,,0,not added,0.7,-35.5,-9.45,-8.64,0.19,44.11,-50.47,2.77,,10.0,5y -9% a year; 10y +0%; ±44%
+IEL.AX,Idp Education Ltd,,0,not added,0.6,-59.72,-51.97,-41.99,-4.49,64.36,-75.3,4.07,,10.0,5y -42% a year; 10y -4%; ±64%
+IGO.AX,Igo Ltd,,0,not added,4.0,-10.96,-18.52,-10.7,3.23,53.92,-52.15,1.05,,10.0,5y -11% a year; 10y +3%; ±54%
+ILU.AX,Iluka Resources Ltd,,0,not added,2.2,-35.92,-10.85,-9.5,8.23,52.46,-41.74,1.21,,10.0,5y -10% a year; 10y +8%; ±52%
+INR.AX,Ioneer Ltd,,0,not added,0.3,-53.5,-12.75,-32.93,2.91,82.21,-59.57,0.0,,10.0,5y -33% a year; 10y +3%; ±82%
+IPX.AX,Iperionx Ltd,,0,not added,0.7,-76.17,12.4,12.16,,81.82,-78.79,0.0,,8.5,5y +12% a year; ±82%
+IRE.AX,Iress Ltd,,0,not added,1.0,-33.48,6.97,-11.29,-3.58,35.1,-44.78,4.72,,10.0,5y -11% a year; 10y -4%; ±35%
+IT,Gartner,,0,not added,16.6,-7.26,-14.13,-5.62,9.24,56.93,-50.81,0.0,,10.0,5y -6% a year; 10y +9%; ±57%
+JDO.AX,Judo Capital Holdings Ltd,,0,not added,1.1,-48.6,2.69,-17.09,,58.35,-54.05,0.0,,5.0,5y -17% a year; ±58%
+JIN.AX,Jumbo Interactive Ltd,,0,not added,0.4,-52.53,-22.01,-16.1,18.12,42.45,-54.38,4.61,,10.0,5y -16% a year; 10y +18%; ±42%
+KAR.AX,Karoon Energy Ltd,,0,not added,1.2,8.94,-9.68,0.4,0.83,56.88,-43.75,2.57,,10.0,5y +0% a year; 10y +1%; ±57%
+KGL.AX,Kgl Resources Ltd,,0,not added,0.3,-17.65,8.37,-25.97,-4.46,93.56,-60.56,0.0,,10.0,5y -26% a year; 10y -4%; ±94%
+LIC.AX,Lifestyle Communities Ltd,,0,not added,0.5,-24.49,-36.0,-28.26,2.03,39.81,-37.27,0.0,,10.0,5y -28% a year; 10y +2%; ±40%
+LLC.AX,Lendlease Group,,0,not added,1.7,-55.5,-24.3,-23.22,-13.49,35.39,-56.64,6.56,,10.0,5y -23% a year; 10y -13%; ±35%
+LRV.AX,Larvotto Resources Ltd,,0,not added,0.4,-39.42,73.16,,,76.36,-54.23,0.0,,4.8,no 5 year record; ±76%
+LTR.AX,Liontown Ltd,,0,not added,2.2,-42.08,-26.47,-19.56,44.86,77.58,-75.76,0.0,,10.0,5y -20% a year; 10y +45%; ±78%
+LULU,Lululemon Athletica,,0,not added,14.9,-44.11,-38.69,-25.47,6.51,45.78,-57.44,0.0,,10.0,5y -25% a year; 10y +7%; ±46%
+MAF.AX,Ma Financial Group Ltd,,0,not added,1.0,-51.68,4.71,-8.44,,49.63,-59.9,4.92,,9.5,5y -8% a year; ±50%
+MC2.AX,Marimaca Copper Corp.,,0,not added,1.0,-42.03,,,,48.17,-46.0,0.0,,1.1,no 5 year record; ±48%; under 3 years listed
+MFG.AX,Magellan Financial Group Ltd,,0,not added,2.5,-24.52,11.81,-20.06,-4.87,49.85,-34.59,8.86,,10.0,5y -20% a year; 10y -5%; ±50%
+MGH.AX,Maas Group Holdings Ltd,,0,not added,1.2,-21.77,2.67,-4.44,,60.73,-53.31,0.98,,5.8,5y -4% a year; ±61%
+MGM,MGM Resorts,,0,not added,11.1,-13.24,-9.34,-8.18,1.22,39.03,-43.84,0.0,,10.0,5y -8% a year; 10y +1%; ±39%
+MGX.AX,Mgx Resources Ltd,,0,not added,0.4,-37.23,-15.85,-6.82,1.33,47.77,-39.8,0.0,,10.0,5y -7% a year; 10y +1%; ±48%
+MOS,Mosaic Company (The),,0,not added,9.5,-39.86,-19.29,-12.89,-2.6,44.43,-44.13,5.12,,10.0,5y -13% a year; 10y -3%; ±44%
+MYR.AX,Myer Holdings Ltd,,0,not added,0.4,-50.3,-23.32,-13.05,-14.06,49.95,-62.34,7.32,,10.0,5y -13% a year; 10y -14%; ±50%
+NAN.AX,Nanosonics Ltd,,0,not added,0.9,-31.69,-6.59,-12.48,-1.0,40.42,-41.7,0.0,,10.0,5y -12% a year; 10y -1%; ±40%
+NCLH,Norwegian Cruise Line Holdings,,0,not added,9.9,-36.82,-0.47,-9.22,-8.92,54.59,-43.57,0.0,,10.0,5y -9% a year; 10y -9%; ±55%
+NEC.AX,Nine Entertainment Co. Holdings Ltd,,0,not added,1.1,-38.72,-14.19,-13.88,6.29,31.48,-44.82,11.03,,10.0,5y -14% a year; 10y +6%; ±31%
+NIC.AX,Nickel Industries Ltd,,0,not added,2.9,-10.34,-1.73,-6.03,,42.11,-40.91,0.0,,8.2,5y -6% a year; ±42%
+NKE,"Nike, Inc.",yes,0,kept (watchlist),79.6,-43.99,-29.07,-23.33,-0.75,35.72,-49.38,4.34,Hold,10.0,5y -23% a year; 10y -1%; ±36%; consensus Hold
+NUF.AX,Nufarm Ltd,,0,not added,1.2,40.19,-10.93,-6.14,-8.83,39.34,-29.1,0.0,,10.0,5y -6% a year; 10y -9%; ±39%
+NXL.AX,Nuix Ltd,,0,not added,0.6,-36.82,9.64,-9.74,,73.95,-63.01,0.0,,5.8,5y -10% a year; ±74%
+NXT.AX,Nextdc Ltd,yes,0,kept (watchlist),4.3,-65.35,-21.84,-13.57,6.06,60.03,-67.56,0.0,Strong Buy,10.0,5y -14% a year; 10y +6%; ±60%; consensus Strong Buy
+OBM.AX,Ora Banda Mining Ltd,,0,not added,2.6,-13.28,90.72,70.08,-3.5,78.75,-40.3,0.0,,10.0,5y +70% a year; 10y -4%; ±79%
+OCA.AX,Oceania Healthcare Ltd,,0,not added,0.4,-15.62,-7.17,-15.3,,44.36,-36.59,0.0,,9.4,5y -15% a year; ±44%
+OCL.AX,Objective Corporation Ltd,,0,not added,0.6,-65.4,-13.18,-19.48,15.61,59.85,-71.4,3.96,,10.0,5y -19% a year; 10y +16%; ±60%
+ORA.AX,Orora Ltd,,0,not added,1.8,-21.76,-10.77,-8.97,-1.11,36.68,-45.33,5.9,,10.0,5y -9% a year; 10y -1%; ±37%
+PC2.AX,Pc Gold Ltd,,0,not added,0.3,246.15,,,,78.59,-45.58,0.0,,1.0,no 5 year record; ±79%; under 3 years listed
+PCG,PG&amp;E Corporation,,0,not added,52.6,-21.38,-10.43,3.61,-13.35,34.73,-37.11,1.58,,10.0,5y +4% a year; 10y -13%; ±35%
+PDN.AX,Paladin Energy Ltd,,0,not added,3.3,-18.0,-10.04,-4.8,24.04,68.45,-52.68,0.0,,10.0,5y -5% a year; 10y +24%; ±68%
+PFP.AX,Propel Funeral Partners Ltd,,0,not added,0.4,-45.64,-14.02,-6.49,,32.3,-47.74,5.56,,8.9,5y -6% a year; ±32%
+PMT.AX,Pmet Resources Inc.,,0,not added,0.6,-22.08,-36.1,,,77.2,-62.26,0.0,,3.8,no 5 year record; ±77%
+PMV.AX,Premier Investments Ltd,,0,not added,2.1,-16.58,-11.24,-10.49,4.19,35.94,-37.56,6.82,,10.0,5y -10% a year; 10y +4%; ±36%
+PNR.AX,Pantoro Gold Ltd,,0,not added,1.1,-53.93,68.01,-7.16,-2.24,70.65,-67.49,0.0,,10.0,5y -7% a year; 10y -2%; ±71%
+PNV.AX,Polynovo Ltd,,0,not added,0.6,-30.43,-8.67,-13.53,12.44,51.08,-41.79,0.0,,10.0,5y -14% a year; 10y +12%; ±51%
+PXA.AX,Pexa Group Ltd,,0,not added,1.2,-56.25,-14.94,-15.56,,44.05,-61.06,0.0,,5.3,5y -16% a year; ±44%
+QAL.AX,Qualitas Ltd,,0,not added,0.7,-35.54,2.72,,,37.68,-44.2,5.0,,4.8,no 5 year record; ±38%
+RAC.AX,Racura Oncology Ltd,,0,not added,0.3,-57.62,19.88,-13.54,22.61,62.58,-55.86,0.0,,10.0,5y -14% a year; 10y +23%; ±63%
+RDDT,Reddit,,0,not added,40.5,-25.91,,,,70.05,-52.94,0.0,,2.6,no 5 year record; ±70%; under 3 years listed
+RPL.AX,Regal Partners Ltd,,0,not added,0.8,-31.99,11.11,-8.96,,41.64,-38.68,13.53,,7.3,5y -9% a year; ±42%
+RYM.AX,Ryman Healthcare Ltd,,0,not added,1.5,-40.73,,,,41.11,-48.28,0.0,,1.0,no 5 year record; ±41%; under 3 years listed
+SDR.AX,Siteminder Ltd,,0,not added,0.8,-61.63,-12.04,-16.86,,62.17,-67.88,0.0,,4.9,5y -17% a year; ±62%
+SEK.AX,Seek Ltd,yes,0,kept (watchlist),4.9,-49.03,-10.72,-14.17,1.27,42.93,-59.24,3.8,Buy,10.0,5y -14% a year; 10y +1%; ±43%; consensus Buy
+SGR.AX,The Star Entertainment Group Ltd,,0,not added,0.8,30.43,-39.05,-47.87,-29.59,72.59,-48.89,0.0,,10.0,5y -48% a year; 10y -30%; ±73%
+SHV.AX,Select Harvests Ltd,,0,not added,0.6,1.14,0.98,-11.31,-3.33,37.76,-31.92,0.89,,10.0,5y -11% a year; 10y -3%; ±38%
+SKC.AX,Skycity Entertainment Group Ltd,,0,not added,0.6,-13.28,-30.56,-27.51,-15.38,45.19,-55.29,0.0,,10.0,5y -28% a year; 10y -15%; ±45%
+SKYD,Skydance Corporation,,0,not added,,-51.55,-11.82,-23.6,-16.34,57.85,-58.63,2.55,,10.0,5y -24% a year; 10y -16%; ±58%
+SMI.AX,Santana Minerals Ltd,,0,not added,0.4,-53.57,27.09,36.16,-9.25,61.06,-66.67,0.0,,10.0,5y +36% a year; 10y -9%; ±61%
+SNZ.AX,Summerset Group Holdings Ltd,,0,not added,1.3,-47.28,-14.41,-15.77,2.98,36.39,-52.58,2.22,,10.0,5y -16% a year; 10y +3%; ±36%
+SPK.AX,Spark New Zealand Ltd,yes,0,kept (active),2.9,-22.36,-24.36,-12.65,-1.46,21.97,-30.27,7.88,no coverage,10.0,5y -13% a year; 10y -1%; ±22%
+STN.AX,Saturn Metals Ltd,,0,not added,0.3,-24.76,41.3,-1.59,,77.27,-40.0,0.0,,8.6,5y -2% a year; ±77%
+STX.AX,Strike Energy Ltd,,0,not added,0.4,-14.78,-36.9,-10.43,2.46,59.65,-32.14,0.0,,10.0,5y -10% a year; 10y +2%; ±60%
+TBN.AX,Tamboran Resources Corporation,,0,not added,1.4,-2.56,12.9,-12.79,,62.88,-42.2,0.0,,5.2,5y -13% a year; ±63%
+TOK.AX,Tolu Minerals Ltd.,,0,not added,0.3,-23.57,30.8,,,58.29,-35.15,0.0,,2.9,no 5 year record; ±58%; under 3 years listed
+TPG.AX,Tpg Telecom Ltd.,,0,not added,7.6,-24.1,-5.47,-7.07,-2.61,38.43,-36.91,4.92,,10.0,5y -7% a year; 10y -3%; ±38%
+TPW.AX,Temple & Webster Group Ltd,,0,not added,0.5,-77.18,-0.96,-15.59,44.61,83.86,-83.97,0.0,,10.0,5y -16% a year; 10y +45%; ±84%
+TRE.AX,Toubani Resources Ltd,,0,not added,0.3,-37.21,30.14,,,77.94,-64.89,0.0,,3.7,no 5 year record; ±78%
+TUA.AX,Tuas Ltd,,0,not added,1.0,-73.04,-4.35,5.39,,80.35,-79.78,0.0,,6.3,5y +5% a year; ±80%
+TVN.AX,Tivan Ltd,,0,not added,0.4,-17.14,26.28,2.21,-0.45,82.74,-69.15,0.0,,10.0,5y +2% a year; 10y -0%; ±83%
+TWE.AX,Treasury Wine Estates Ltd,,0,not added,4.8,-7.04,-19.44,-10.36,-3.67,41.66,-45.91,0.0,,10.0,5y -10% a year; 10y -4%; ±42%
+TYR.AX,Tyro Payments Ltd,,0,not added,0.4,-38.96,-6.41,-29.47,,36.31,-43.83,0.0,,6.8,5y -29% a year; ±36%
+VGL.AX,Vista Group International Ltd.,,0,not added,0.5,-10.79,20.95,-2.82,-2.43,57.7,-45.6,0.0,,10.0,5y -3% a year; 10y -2%; ±58%
+VGN.AX,Virgin Australia Holdings Ltd.,,0,not added,1.9,-30.44,,,,44.89,-38.64,3.22,,1.3,no 5 year record; ±45%; under 3 years listed
+VSL.AX,Vulcan Steel Ltd,,0,not added,0.8,-20.99,-6.41,-6.9,,49.46,-39.54,1.02,,4.9,5y -7% a year; ±49%
+VUL.AX,Vulcan Energy Resources Ltd,,0,not added,0.5,-84.25,-20.63,-39.25,,61.74,-84.87,0.0,,8.4,5y -39% a year; ±62%
+WA1.AX,Wa1 Resources Ltd,,0,not added,0.6,-61.75,-3.5,,,52.21,-61.87,0.0,,4.7,no 5 year record; ±52%
+WBT.AX,Weebit Nano Ltd,,0,not added,0.6,-50.63,-10.54,-6.85,11.29,87.1,-72.47,0.0,,10.0,5y -7% a year; 10y +11%; ±87%
+WEB.AX,Webbeds Group Ltd,,0,not added,1.3,-19.68,-17.1,-11.3,-6.25,58.02,-55.67,0.0,,10.0,5y -11% a year; 10y -6%; ±58%
+WTC.AX,Wisetech Global Ltd,yes,0,kept (active),13.5,-51.45,-11.36,-4.45,21.83,66.66,-66.32,0.55,Buy,10.0,5y -4% a year; 10y +22%; ±67%; consensus Buy
+WTM.AX,Waratah Minerals Ltd,,0,not added,0.3,-5.56,143.67,11.76,-14.72,82.34,-46.25,0.0,,10.0,5y +12% a year; 10y -15%; ±82%
+XRO.AX,Xero Ltd,yes,0,kept (watchlist),11.3,-57.34,-15.58,-15.56,14.51,50.17,-64.03,0.0,Strong Buy,10.0,5y -16% a year; 10y +15%; ±50%; consensus Strong Buy
+ZIM.AX,Zimplats Holdings Ltd,,0,not added,1.5,-24.96,-11.17,-5.38,17.92,53.01,-48.33,0.0,,10.0,5y -5% a year; 10y +18%; ±53%
+ZIP.AX,Zip Co Ltd..,,0,not added,2.6,-63.59,72.39,-25.82,5.73,85.56,-64.76,0.0,,10.0,5y -26% a year; 10y +6%; ±86%
+ZTS,Zoetis,,0,not added,41.0,-43.35,-21.31,-15.72,6.52,38.42,-52.26,2.57,,10.0,5y -16% a year; 10y +7%; ±38%

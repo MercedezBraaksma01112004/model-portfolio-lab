@@ -1,0 +1,4703 @@
+{
+ "generated_at": "2026-10-23T23:57+10:00",
+ "date": "2026-10-23",
+ "numbers": [
+  {
+   "key": "asx200",
+   "label": "ASX 200",
+   "value": 8795.2001953125,
+   "prev": 8793.2001953125,
+   "change": 2.0,
+   "change_pct": 0.022744847786658657,
+   "unit": "points",
+   "as_of": "2026-10-23",
+   "source": "Yahoo Finance",
+   "note": "",
+   "decimals": 2,
+   "group": "Markets"
+  },
+  {
+   "key": "allords",
+   "label": "All Ordinaries",
+   "value": 8905.7998046875,
+   "prev": 8917.099609375,
+   "change": -11.2998046875,
+   "change_pct": -0.12672062870779127,
+   "unit": "points",
+   "as_of": "2026-10-23",
+   "source": "Yahoo Finance",
+   "note": "",
+   "decimals": 2,
+   "group": "Markets"
+  },
+  {
+   "key": "audusd",
+   "label": "AUD/USD",
+   "value": 0.7033832669258118,
+   "prev": 0.7029299139976501,
+   "change": 0.0004533529281616211,
+   "change_pct": 0.06449475532821564,
+   "unit": "USD",
+   "as_of": "2026-10-23",
+   "source": "Yahoo Finance",
+   "note": "",
+   "decimals": 4,
+   "group": "Markets"
+  },
+  {
+   "key": "sp500",
+   "label": "S&P 500",
+   "value": 7631.22021484375,
+   "prev": 7663.43017578125,
+   "change": -32.2099609375,
+   "change_pct": -0.420307358437129,
+   "unit": "points",
+   "as_of": "2026-10-23",
+   "source": "Yahoo Finance",
+   "note": "",
+   "decimals": 2,
+   "group": "Markets"
+  },
+  {
+   "key": "us10y",
+   "label": "US 10 year yield",
+   "value": 4.977999687194824,
+   "prev": 4.953000068664551,
+   "change": 0.024999618530273438,
+   "change_pct": null,
+   "unit": "%",
+   "as_of": "2026-10-23",
+   "source": "Yahoo Finance",
+   "note": "",
+   "decimals": 3,
+   "group": "Commodities and rates"
+  },
+  {
+   "key": "gold",
+   "label": "Gold (USD an ounce)",
+   "value": 4031.300048828125,
+   "prev": 4060.39990234375,
+   "change": -29.099853515625,
+   "change_pct": -0.7166745693897771,
+   "unit": "USD",
+   "as_of": "2026-10-23",
+   "source": "Yahoo Finance",
+   "note": "",
+   "decimals": 2,
+   "group": "Commodities and rates"
+  },
+  {
+   "key": "brent",
+   "label": "Brent oil (USD a barrel)",
+   "value": 111.45999908447266,
+   "prev": 113.16999816894531,
+   "change": -1.7099990844726562,
+   "change_pct": -1.5110003641776966,
+   "unit": "USD",
+   "as_of": "2026-10-23",
+   "source": "Yahoo Finance",
+   "note": "",
+   "decimals": 2,
+   "group": "Commodities and rates"
+  },
+  {
+   "key": "iron",
+   "label": "Iron ore 62% (USD a tonne, indicative)",
+   "value": 90.7300033569336,
+   "prev": 90.8499984741211,
+   "change": -0.1199951171875,
+   "change_pct": -0.13208048343741138,
+   "unit": "USD",
+   "as_of": "2026-10-22",
+   "source": "Yahoo Finance",
+   "note": "Front-month futures settlement; treat as indicative",
+   "decimals": 2,
+   "group": "Commodities and rates"
+  },
+  {
+   "key": "btc",
+   "label": "Bitcoin (AUD)",
+   "value": 116414.1640625,
+   "prev": 115840.3359375,
+   "change": 573.828125,
+   "change_pct": 0.49536124041422047,
+   "unit": "AUD",
+   "as_of": "2026-10-23",
+   "source": "Yahoo Finance",
+   "note": "",
+   "decimals": 2,
+   "group": "Markets"
+  },
+  {
+   "key": "gold_aud",
+   "label": "Gold (AUD an ounce)",
+   "value": 5731.2993333594895,
+   "prev": 5776.393665268489,
+   "change": -45.094331908999266,
+   "change_pct": -0.7806658361970084,
+   "unit": "AUD",
+   "as_of": "2026-10-23",
+   "source": "Calculated: gold in USD divided by AUD/USD",
+   "note": "",
+   "decimals": 0,
+   "group": "Commodities and rates"
+  },
+  {
+   "key": "cash_rate",
+   "label": "RBA cash rate target",
+   "value": 4.6,
+   "prev": null,
+   "change": null,
+   "change_pct": null,
+   "unit": "%",
+   "as_of": "2026-10-22",
+   "source": "Reserve Bank of Australia, table F1",
+   "note": "Last change 30 September 2026: up 0.25 to 4.60%. Next decision Tuesday 03 November 2026",
+   "decimals": 2,
+   "group": "Australian economy"
+  },
+  {
+   "key": "au3y",
+   "label": "Australian 3 year bond yield",
+   "value": 4.908,
+   "prev": 4.848,
+   "change": 0.0600000000000005,
+   "change_pct": null,
+   "unit": "%",
+   "as_of": "2026-10-21",
+   "source": "Reserve Bank of Australia, table F2",
+   "note": "The RBA publishes these about two business days behind",
+   "decimals": 3,
+   "group": "Commodities and rates"
+  },
+  {
+   "key": "au10y",
+   "label": "Australian 10 year bond yield",
+   "value": 5.277,
+   "prev": 5.25,
+   "change": 0.027000000000000135,
+   "change_pct": null,
+   "unit": "%",
+   "as_of": "2026-10-21",
+   "source": "Reserve Bank of Australia, table F2",
+   "note": "The RBA publishes these about two business days behind",
+   "decimals": 3,
+   "group": "Commodities and rates"
+  },
+  {
+   "key": "cpi_headline",
+   "label": "CPI inflation (annual, monthly CPI)",
+   "value": 4.0,
+   "prev": 3.5,
+   "change": 0.5,
+   "change_pct": null,
+   "unit": "%",
+   "as_of": null,
+   "source": "Australian Bureau of Statistics",
+   "note": "August 2026",
+   "decimals": 1,
+   "group": "Australian economy"
+  },
+  {
+   "key": "cpi_trimmed",
+   "label": "Trimmed mean inflation (annual)",
+   "value": 3.6,
+   "prev": 3.6,
+   "change": 0.0,
+   "change_pct": null,
+   "unit": "%",
+   "as_of": null,
+   "source": "Australian Bureau of Statistics",
+   "note": "August 2026 (seasonally adjusted)",
+   "decimals": 1,
+   "group": "Australian economy"
+  },
+  {
+   "key": "unemployment",
+   "label": "Unemployment rate",
+   "value": 4.71834873,
+   "prev": 4.65160785,
+   "change": 0.06674087999999934,
+   "change_pct": null,
+   "unit": "%",
+   "as_of": null,
+   "source": "Australian Bureau of Statistics",
+   "note": "September 2026 (seasonally adjusted)",
+   "decimals": 1,
+   "group": "Australian economy"
+  },
+  {
+   "key": "wpi",
+   "label": "Wage price index (annual)",
+   "value": 3.2,
+   "prev": 3.2,
+   "change": 0.0,
+   "change_pct": null,
+   "unit": "%",
+   "as_of": null,
+   "source": "Australian Bureau of Statistics",
+   "note": "June quarter 2026",
+   "decimals": 1,
+   "group": "Australian economy"
+  }
+ ],
+ "extra": {
+  "last_rate_change": {
+   "date": "2026-09-30",
+   "change": 0.25,
+   "new_rate": 4.6
+  },
+  "next_rba_decision": "2026-11-03",
+  "abs_upcoming": [
+   {
+    "date": "2026-10-28",
+    "name": "Consumer Price Index, Australia"
+   }
+  ]
+ },
+ "announcements": [
+  {
+   "code": "TCL",
+   "name": "TRANSURBAN GROUP",
+   "headline": "Change in substantial holding",
+   "date": "2026-10-23T18:59+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152616-3A704862"
+  },
+  {
+   "code": "YAL",
+   "name": "YANCOAL AUSTRALIA LIMITED",
+   "headline": "HKEX - CCT, acquisition financing and Director election",
+   "date": "2026-10-23T18:47+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152612-2A1705937"
+  },
+  {
+   "code": "BSL",
+   "name": "BLUESCOPE STEEL LIMITED",
+   "headline": "Change in substantial holding",
+   "date": "2026-10-23T18:44+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152611-3A704861"
+  },
+  {
+   "code": "YAL",
+   "name": "YANCOAL AUSTRALIA LIMITED",
+   "headline": "HKEX - Continuing Connected Transactions",
+   "date": "2026-10-23T18:34+10:00",
+   "price_sensitive": false,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152609-2A1705936"
+  },
+  {
+   "code": "YAL",
+   "name": "YANCOAL AUSTRALIA LIMITED",
+   "headline": "Board changes",
+   "date": "2026-10-23T18:31+10:00",
+   "price_sensitive": false,
+   "type": "Company Administration",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152608-2A1705935"
+  },
+  {
+   "code": "SET",
+   "name": "SOLARIS AUSTRALIAN EQUITY INCOME PLUS LIMITED",
+   "headline": "Net Tangible Asset Backing",
+   "date": "2026-10-23T17:57+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152601-2A1705934"
+  },
+  {
+   "code": "PL8",
+   "name": "PLATO INCOME MAXIMISER LIMITED.",
+   "headline": "Net Tangible Asset Backing",
+   "date": "2026-10-23T17:40+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152586-2A1705931"
+  },
+  {
+   "code": "CCP",
+   "name": "CREDIT CORP GROUP LIMITED",
+   "headline": "Ceasing to be a substantial holder from MUFG",
+   "date": "2026-10-23T17:00+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152559-2A1705925"
+  },
+  {
+   "code": "DRR",
+   "name": "DETERRA ROYALTIES LIMITED",
+   "headline": "Application for quotation of securities - DRR",
+   "date": "2026-10-23T16:43+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152555-6A1351064"
+  },
+  {
+   "code": "S32",
+   "name": "SOUTH32 LIMITED",
+   "headline": "Appendix 3Y - Stephen Pearce",
+   "date": "2026-10-23T16:36+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152547-6A1351062"
+  },
+  {
+   "code": "MQG",
+   "name": "MACQUARIE GROUP LIMITED",
+   "headline": "Ceasing to be a substantial holder from MQG",
+   "date": "2026-10-23T16:22+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152533-6A1351053"
+  },
+  {
+   "code": "SGH",
+   "name": "SGH LIMITED",
+   "headline": "Notification regarding unquoted securities - SGH",
+   "date": "2026-10-23T15:41+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152492-2A1705903"
+  },
+  {
+   "code": "TLS",
+   "name": "TELSTRA GROUP LIMITED",
+   "headline": "Update - Notification of buy-back - TLS",
+   "date": "2026-10-23T15:40+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152490-3A704839"
+  },
+  {
+   "code": "SGH",
+   "name": "SGH LIMITED",
+   "headline": "Notification of cessation of securities - SGH",
+   "date": "2026-10-23T15:36+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152485-2A1705900"
+  },
+  {
+   "code": "MP1",
+   "name": "MEGAPORT LIMITED",
+   "headline": "Change in substantial holding",
+   "date": "2026-10-23T15:02+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152454-2A1705880"
+  },
+  {
+   "code": "BXB",
+   "name": "BRAMBLES LIMITED",
+   "headline": "Application for quotation of securities - BXB",
+   "date": "2026-10-23T15:02+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152455-2A1705881"
+  },
+  {
+   "code": "BXB",
+   "name": "BRAMBLES LIMITED",
+   "headline": "Application for quotation of securities - BXB",
+   "date": "2026-10-23T14:58+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152452-2A1705878"
+  },
+  {
+   "code": "BXB",
+   "name": "BRAMBLES LIMITED",
+   "headline": "Application for quotation of securities - BXB",
+   "date": "2026-10-23T14:55+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152451-2A1705877"
+  },
+  {
+   "code": "SIG",
+   "name": "SIGMA HEALTHCARE LIMITED",
+   "headline": "Notification of cessation of securities - SIG",
+   "date": "2026-10-23T14:34+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152435-3A704834"
+  },
+  {
+   "code": "GCI",
+   "name": "GRYPHON CAPITAL INCOME TRUST",
+   "headline": "Net Tangible Asset Backing",
+   "date": "2026-10-23T14:30+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152430-2A1705867"
+  },
+  {
+   "code": "PRU",
+   "name": "PERSEUS MINING LIMITED",
+   "headline": "Notification regarding unquoted securities - PRU",
+   "date": "2026-10-23T12:40+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152357-6A1350961"
+  },
+  {
+   "code": "PLS",
+   "name": "PLS GROUP LIMITED",
+   "headline": "Notice of Annual General Meeting/Proxy Form",
+   "date": "2026-10-23T11:17+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152284-6A1350928"
+  },
+  {
+   "code": "PRU",
+   "name": "PERSEUS MINING LIMITED",
+   "headline": "Return of Capital - PRU",
+   "date": "2026-10-23T11:02+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152271-6A1350924"
+  },
+  {
+   "code": "MMS",
+   "name": "MCMILLAN SHAKESPEARE LIMITED",
+   "headline": "Final Director's Interest Notice",
+   "date": "2026-10-23T10:56+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152264-3A704808"
+  },
+  {
+   "code": "MMS",
+   "name": "MCMILLAN SHAKESPEARE LIMITED",
+   "headline": "Results of Meeting",
+   "date": "2026-10-23T10:55+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152262-3A704807"
+  },
+  {
+   "code": "CBAPM",
+   "name": "COMMONWEALTH BANK OF AUSTRALIA.",
+   "headline": "Ceasing to be a substantial holder from CBA",
+   "date": "2026-10-23T10:47+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152256-3A704802"
+  },
+  {
+   "code": "PRU",
+   "name": "PERSEUS MINING LIMITED",
+   "headline": "Notice of Annual General Meeting/Proxy Form",
+   "date": "2026-10-23T10:37+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152254-6A1350921"
+  },
+  {
+   "code": "NWS",
+   "name": "NEWS CORPORATION..",
+   "headline": "Appendix 3C",
+   "date": "2026-10-23T08:03+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152063-2A1705727"
+  },
+  {
+   "code": "NWS",
+   "name": "NEWS CORPORATION..",
+   "headline": "Appendix 3C",
+   "date": "2026-10-23T08:03+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152062-2A1705725"
+  },
+  {
+   "code": "REA",
+   "name": "REA GROUP LTD",
+   "headline": "Investor Day Presentation",
+   "date": "2026-10-23T07:54+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152036-3A704754"
+  },
+  {
+   "code": "AFI",
+   "name": "AUSTRALIAN FOUNDATION INVESTMENT COMPANY LIMITED",
+   "headline": "Update - Notification of buy-back - AFI",
+   "date": "2026-10-23T07:54+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152042-3A704755"
+  },
+  {
+   "code": "JHX",
+   "name": "JAMES HARDIE INDUSTRIES PLC",
+   "headline": "Notification of Results/Reporting Date",
+   "date": "2026-10-23T07:35+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152001-2A1705697"
+  },
+  {
+   "code": "WTC",
+   "name": "WISETECH GLOBAL LIMITED",
+   "headline": "Notification regarding unquoted securities - WTC",
+   "date": "2026-10-23T07:34+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151999-2A1705696"
+  },
+  {
+   "code": "NEM",
+   "name": "NEWMONT CORPORATION",
+   "headline": "Dividend/Distribution - NEM",
+   "date": "2026-10-23T07:30+10:00",
+   "price_sensitive": false,
+   "type": "Distribution Announcement",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151992-3A704739"
+  },
+  {
+   "code": "ARG",
+   "name": "ARGO INVESTMENTS LIMITED",
+   "headline": "Update - Notification of buy-back - ARG",
+   "date": "2026-10-23T07:29+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151988-2A1705688"
+  },
+  {
+   "code": "RIO",
+   "name": "RIO TINTO LIMITED",
+   "headline": "Investing $1.9b to develop Kangwinan bauxite project",
+   "date": "2026-10-23T07:21+10:00",
+   "price_sensitive": false,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151968-3A704736"
+  },
+  {
+   "code": "NEM",
+   "name": "NEWMONT CORPORATION",
+   "headline": "Newmont Q3 2026 Form 10-Q As Filed",
+   "date": "2026-10-23T07:21+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151965-3A704735"
+  },
+  {
+   "code": "NEM",
+   "name": "NEWMONT CORPORATION",
+   "headline": "Newmont Q3 2026 Earnings Release Form 8-K As Filed",
+   "date": "2026-10-23T07:21+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151963-3A704730"
+  },
+  {
+   "code": "BOQ",
+   "name": "BANK OF QUEENSLAND LIMITED.",
+   "headline": "Update - Notification of buy-back - BOQ",
+   "date": "2026-10-23T07:21+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151969-2A1705679"
+  },
+  {
+   "code": "MMS",
+   "name": "MCMILLAN SHAKESPEARE LIMITED",
+   "headline": "2026 Annual General Meeting Presentation",
+   "date": "2026-10-23T07:19+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151953-3A704722"
+  },
+  {
+   "code": "MMS",
+   "name": "MCMILLAN SHAKESPEARE LIMITED",
+   "headline": "Chair and CEO AGM Addresses",
+   "date": "2026-10-23T07:19+10:00",
+   "price_sensitive": false,
+   "type": "Chairman'S Address",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151951-3A704720"
+  },
+  {
+   "code": "RIO",
+   "name": "RIO TINTO LIMITED",
+   "headline": "Shareholdings of KMP / PDMR",
+   "date": "2026-10-23T07:17+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151935-3A704716"
+  },
+  {
+   "code": "S32",
+   "name": "SOUTH32 LIMITED",
+   "headline": "Update - Notification of buy-back - S32",
+   "date": "2026-10-23T07:17+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151929-6A1350800"
+  },
+  {
+   "code": "PLS",
+   "name": "PLS GROUP LIMITED",
+   "headline": "Change in substantial holding",
+   "date": "2026-10-23T07:17+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151933-6A1350815"
+  },
+  {
+   "code": "IFT",
+   "name": "INFRATIL LIMITED.",
+   "headline": "Ongoing Disclosure Notices - Directors",
+   "date": "2026-10-23T06:30+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151889-2A1705666"
+  },
+  {
+   "code": "STW",
+   "name": "STATE STREET SPDR S&P/ASX 200 ETF",
+   "headline": "Daily Fund Update",
+   "date": "2026-10-22T17:57+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151863-2A1705654"
+  },
+  {
+   "code": "SLF",
+   "name": "STATE STREET SPDR S&P/ASX 200 LISTED PROPERTY ETF",
+   "headline": "Daily Fund Update",
+   "date": "2026-10-22T17:56+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151862-2A1705653"
+  },
+  {
+   "code": "MQG",
+   "name": "MACQUARIE GROUP LIMITED",
+   "headline": "Becoming a substantial holder from MQG",
+   "date": "2026-10-22T17:09+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151847-2A1705649"
+  },
+  {
+   "code": "SET",
+   "name": "SOLARIS AUSTRALIAN EQUITY INCOME PLUS LIMITED",
+   "headline": "Net Tangible Asset Backing",
+   "date": "2026-10-22T17:07+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151846-2A1705647"
+  },
+  {
+   "code": "TLS",
+   "name": "TELSTRA GROUP LIMITED",
+   "headline": "Update - Notification of buy-back - TLS",
+   "date": "2026-10-22T15:55+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151825-3A704706"
+  },
+  {
+   "code": "CCP",
+   "name": "CREDIT CORP GROUP LIMITED",
+   "headline": "Ceasing to be a substantial holder",
+   "date": "2026-10-22T15:39+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151818-2A1705637"
+  },
+  {
+   "code": "APA",
+   "name": "APA GROUP",
+   "headline": "Results of 2026 Annual Meeting",
+   "date": "2026-10-22T15:29+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151810-2A1705629"
+  },
+  {
+   "code": "PLS",
+   "name": "PLS GROUP LIMITED",
+   "headline": "Change in substantial holding",
+   "date": "2026-10-22T15:21+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151805-6A1350725"
+  },
+  {
+   "code": "BHP",
+   "name": "BHP GROUP LIMITED",
+   "headline": "Results of 2026 Annual General Meeting",
+   "date": "2026-10-22T13:38+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151740-3A704697"
+  },
+  {
+   "code": "IAG",
+   "name": "INSURANCE AUSTRALIA GROUP LIMITED",
+   "headline": "2026 IAG AGM Voting Results",
+   "date": "2026-10-22T13:09+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151727-2A1705594"
+  },
+  {
+   "code": "ASX",
+   "name": "ASX LIMITED",
+   "headline": "Results of Annual General Meeting",
+   "date": "2026-10-22T12:55+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151722-2A1705591"
+  },
+  {
+   "code": "GCI",
+   "name": "GRYPHON CAPITAL INCOME TRUST",
+   "headline": "Net Tangible Asset Backing",
+   "date": "2026-10-22T12:41+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151717-2A1705587"
+  },
+  {
+   "code": "BXB",
+   "name": "BRAMBLES LIMITED",
+   "headline": "Results of Meeting",
+   "date": "2026-10-22T12:02+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151687-2A1705557"
+  },
+  {
+   "code": "BOQ",
+   "name": "BANK OF QUEENSLAND LIMITED.",
+   "headline": "Change of Director's Interest Notice - Andrew Fraser",
+   "date": "2026-10-22T11:41+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151675-2A1705552"
+  },
+  {
+   "code": "AIA",
+   "name": "AUCKLAND INTERNATIONAL AIRPORT LIMITED",
+   "headline": "AIA - Shareholder Poll 2026 Annual Meeting",
+   "date": "2026-10-22T10:33+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151648-3A704687"
+  },
+  {
+   "code": "NWS",
+   "name": "NEWS CORPORATION..",
+   "headline": "Appendix 3C",
+   "date": "2026-10-22T09:03+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151620-2A1705528"
+  },
+  {
+   "code": "NWS",
+   "name": "NEWS CORPORATION..",
+   "headline": "Appendix 3C",
+   "date": "2026-10-22T09:01+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151618-2A1705526"
+  },
+  {
+   "code": "CBAPM",
+   "name": "COMMONWEALTH BANK OF AUSTRALIA.",
+   "headline": "Becoming a substantial holder from CBA",
+   "date": "2026-10-22T08:55+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151607-3A704676"
+  },
+  {
+   "code": "BHP",
+   "name": "BHP GROUP LIMITED",
+   "headline": "BHP 2026 AGM Addresses",
+   "date": "2026-10-22T08:45+10:00",
+   "price_sensitive": false,
+   "type": "Chairman'S Address",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151588-3A704674"
+  },
+  {
+   "code": "STO",
+   "name": "SANTOS LIMITED",
+   "headline": "2026 Santos Third Quarter Report",
+   "date": "2026-10-22T08:28+10:00",
+   "price_sensitive": true,
+   "type": "Quarterly Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151557-2A1705494"
+  },
+  {
+   "code": "IAG",
+   "name": "INSURANCE AUSTRALIA GROUP LIMITED",
+   "headline": "2026 AGM Addresses",
+   "date": "2026-10-22T08:07+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151520-2A1705482"
+  },
+  {
+   "code": "GMD",
+   "name": "GENESIS MINERALS LIMITED",
+   "headline": "Quarterly Activities Report - September 2026",
+   "date": "2026-10-22T08:04+10:00",
+   "price_sensitive": true,
+   "type": "Quarterly Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151504-6A1350600"
+  },
+  {
+   "code": "EVN",
+   "name": "EVOLUTION MINING LIMITED",
+   "headline": "Notice of Annual General Meeting/Proxy Form",
+   "date": "2026-10-22T07:33+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151463-2A1705469"
+  },
+  {
+   "code": "NCK",
+   "name": "NICK SCALI LIMITED",
+   "headline": "Initial Director's Interest Notice - C Garnsey",
+   "date": "2026-10-22T07:33+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151464-2A1705470"
+  },
+  {
+   "code": "EVN",
+   "name": "EVOLUTION MINING LIMITED",
+   "headline": "FY26 Appendix 4G and Corporate Governance Statement",
+   "date": "2026-10-22T07:30+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151461-2A1705467"
+  },
+  {
+   "code": "EVN",
+   "name": "EVOLUTION MINING LIMITED",
+   "headline": "Annual Report to shareholders",
+   "date": "2026-10-22T07:29+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151459-2A1705463"
+  },
+  {
+   "code": "ARG",
+   "name": "ARGO INVESTMENTS LIMITED",
+   "headline": "Update - Notification of buy-back - ARG",
+   "date": "2026-10-22T07:28+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151458-2A1705465"
+  },
+  {
+   "code": "APA",
+   "name": "APA GROUP",
+   "headline": "2026 Annual Meeting Addresses",
+   "date": "2026-10-22T07:27+10:00",
+   "price_sensitive": false,
+   "type": "Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151457-2A1705461"
+  },
+  {
+   "code": "APA",
+   "name": "APA GROUP",
+   "headline": "APA to progress Bulloo Interlink Pipeline",
+   "date": "2026-10-22T07:26+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151455-2A1705458"
+  },
+  {
+   "code": "EVN",
+   "name": "EVOLUTION MINING LIMITED",
+   "headline": "Change of Registered Office Address",
+   "date": "2026-10-22T07:24+10:00",
+   "price_sensitive": false,
+   "type": "Company Administration",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151451-2A1705459"
+  },
+  {
+   "code": "ASX",
+   "name": "ASX LIMITED",
+   "headline": "AGM Addresses by the Chair & the Managing Director and CEO",
+   "date": "2026-10-22T07:22+10:00",
+   "price_sensitive": false,
+   "type": "Chairman'S Address",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151434-2A1705456"
+  },
+  {
+   "code": "BXB",
+   "name": "BRAMBLES LIMITED",
+   "headline": "Brambles 2026 AGM Addresses",
+   "date": "2026-10-22T07:21+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151425-2A1705439"
+  },
+  {
+   "code": "BOQ",
+   "name": "BANK OF QUEENSLAND LIMITED.",
+   "headline": "Update - Notification of buy-back - BOQ",
+   "date": "2026-10-22T07:20+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151417-2A1705454"
+  },
+  {
+   "code": "S32",
+   "name": "SOUTH32 LIMITED",
+   "headline": "Update - Notification of buy-back - S32",
+   "date": "2026-10-22T07:18+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151406-6A1350552"
+  },
+  {
+   "code": "AFI",
+   "name": "AUSTRALIAN FOUNDATION INVESTMENT COMPANY LIMITED",
+   "headline": "Update - Dividend/Distribution - AFI",
+   "date": "2026-10-22T07:08+10:00",
+   "price_sensitive": false,
+   "type": "Distribution Announcement",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151370-3A704651"
+  },
+  {
+   "code": "AIA",
+   "name": "AUCKLAND INTERNATIONAL AIRPORT LIMITED",
+   "headline": "AIA - 2026 Annual Meeting Addresses",
+   "date": "2026-10-22T07:03+10:00",
+   "price_sensitive": false,
+   "type": "Chairman'S Address",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151369-3A704648"
+  },
+  {
+   "code": "FPH",
+   "name": "FISHER & PAYKEL HEALTHCARE CORPORATION LIMITED",
+   "headline": "F&P Healthcare statement regarding cyber incident",
+   "date": "2026-10-22T06:30+10:00",
+   "price_sensitive": false,
+   "type": "Company Administration",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151361-2A1705430"
+  },
+  {
+   "code": "SET",
+   "name": "SOLARIS AUSTRALIAN EQUITY INCOME PLUS LIMITED",
+   "headline": "Net Tangible Asset Backing",
+   "date": "2026-10-21T18:26+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151337-2A1705413"
+  },
+  {
+   "code": "NCK",
+   "name": "NICK SCALI LIMITED",
+   "headline": "Trading Update and 1H FY27 Profit Guidance",
+   "date": "2026-10-21T18:10+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151333-2A1705410"
+  },
+  {
+   "code": "PLS",
+   "name": "PLS GROUP LIMITED",
+   "headline": "Change in substantial holding from MUFG",
+   "date": "2026-10-21T17:55+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151328-6A1350504"
+  },
+  {
+   "code": "MMS",
+   "name": "MCMILLAN SHAKESPEARE LIMITED",
+   "headline": "Ceasing to be a substantial holder",
+   "date": "2026-10-21T17:48+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151321-3A704635"
+  },
+  {
+   "code": "STW",
+   "name": "STATE STREET SPDR S&P/ASX 200 ETF",
+   "headline": "Daily Fund Update",
+   "date": "2026-10-21T17:42+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151318-2A1705404"
+  },
+  {
+   "code": "SLF",
+   "name": "STATE STREET SPDR S&P/ASX 200 LISTED PROPERTY ETF",
+   "headline": "Daily Fund Update",
+   "date": "2026-10-21T17:41+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151316-2A1705403"
+  },
+  {
+   "code": "DRR",
+   "name": "DETERRA ROYALTIES LIMITED",
+   "headline": "Becoming a substantial holder",
+   "date": "2026-10-21T17:38+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151311-6A1350513"
+  },
+  {
+   "code": "CAR",
+   "name": "CAR GROUP LIMITED",
+   "headline": "Ceasing to be a substantial holder",
+   "date": "2026-10-21T17:22+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151304-3A704631"
+  },
+  {
+   "code": "MQG",
+   "name": "MACQUARIE GROUP LIMITED",
+   "headline": "Becoming a substantial holder from MQG",
+   "date": "2026-10-21T16:15+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151272-6A1350489"
+  },
+  {
+   "code": "TLS",
+   "name": "TELSTRA GROUP LIMITED",
+   "headline": "Update - Notification of buy-back - TLS",
+   "date": "2026-10-21T15:56+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151258-3A704625"
+  },
+  {
+   "code": "CGFPD",
+   "name": "CHALLENGER LIMITED",
+   "headline": "Change in substantial holding from CGF",
+   "date": "2026-10-21T15:56+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151257-2A1705378"
+  },
+  {
+   "code": "BOQ",
+   "name": "BANK OF QUEENSLAND LIMITED.",
+   "headline": "Change of Director's Interest Notice - Rod Finch",
+   "date": "2026-10-21T15:42+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151250-2A1705372"
+  },
+  {
+   "code": "PLS",
+   "name": "PLS GROUP LIMITED",
+   "headline": "Change in substantial holding from MS",
+   "date": "2026-10-21T15:15+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151231-6A1350472"
+  },
+  {
+   "code": "SIG",
+   "name": "SIGMA HEALTHCARE LIMITED",
+   "headline": "Sigma AGM Results of Meeting",
+   "date": "2026-10-21T15:03+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151221-3A704621"
+  },
+  {
+   "code": "GCI",
+   "name": "GRYPHON CAPITAL INCOME TRUST",
+   "headline": "Net Tangible Asset Backing",
+   "date": "2026-10-21T14:35+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151201-2A1705349"
+  },
+  {
+   "code": "ARG",
+   "name": "ARGO INVESTMENTS LIMITED",
+   "headline": "AGM Results",
+   "date": "2026-10-21T14:27+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151195-2A1705345"
+  },
+  {
+   "code": "MP1",
+   "name": "MEGAPORT LIMITED",
+   "headline": "Becoming a substantial holder",
+   "date": "2026-10-21T14:08+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151186-2A1705338"
+  },
+  {
+   "code": "TCL",
+   "name": "TRANSURBAN GROUP",
+   "headline": "Results of 2026 Annual General Meetings",
+   "date": "2026-10-21T13:36+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151169-3A704613"
+  },
+  {
+   "code": "CBAPM",
+   "name": "COMMONWEALTH BANK OF AUSTRALIA.",
+   "headline": "Ceasing to be a substantial holder from CBA",
+   "date": "2026-10-21T12:15+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151120-3A704606"
+  },
+  {
+   "code": "CBAPM",
+   "name": "COMMONWEALTH BANK OF AUSTRALIA.",
+   "headline": "Becoming a substantial holder from CBA",
+   "date": "2026-10-21T12:10+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151118-3A704605"
+  },
+  {
+   "code": "CAR",
+   "name": "CAR GROUP LIMITED",
+   "headline": "Ceasing to be a substantial holder",
+   "date": "2026-10-21T12:06+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151115-3A704604"
+  },
+  {
+   "code": "IFT",
+   "name": "INFRATIL LIMITED.",
+   "headline": "Australian data centre update",
+   "date": "2026-10-21T11:33+10:00",
+   "price_sensitive": false,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151096-2A1705310"
+  },
+  {
+   "code": "MEZ",
+   "name": "MERIDIAN ENERGY LIMITED",
+   "headline": "Issue of Share Rights",
+   "date": "2026-10-21T11:18+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151090-2A1705307"
+  },
+  {
+   "code": "ORG",
+   "name": "ORIGIN ENERGY LIMITED",
+   "headline": "Appendix 3Y",
+   "date": "2026-10-21T09:59+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151059-2A1705291"
+  },
+  {
+   "code": "ORG",
+   "name": "ORIGIN ENERGY LIMITED",
+   "headline": "Notification regarding unquoted securities - ORG",
+   "date": "2026-10-21T09:56+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151057-2A1705288"
+  },
+  {
+   "code": "ORG",
+   "name": "ORIGIN ENERGY LIMITED",
+   "headline": "Notification regarding unquoted securities - ORG",
+   "date": "2026-10-21T09:55+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151056-2A1705287"
+  },
+  {
+   "code": "NWS",
+   "name": "NEWS CORPORATION..",
+   "headline": "Appendix 3C",
+   "date": "2026-10-21T08:39+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150995-2A1705254"
+  },
+  {
+   "code": "ARG",
+   "name": "ARGO INVESTMENTS LIMITED",
+   "headline": "AGM - Chairman & MD Addresses and presentation slides",
+   "date": "2026-10-21T08:36+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150988-2A1705249"
+  },
+  {
+   "code": "BSL",
+   "name": "BLUESCOPE STEEL LIMITED",
+   "headline": "BlueScope North America leadership update",
+   "date": "2026-10-21T08:06+10:00",
+   "price_sensitive": false,
+   "type": "Company Administration",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150946-3A704577"
+  },
+  {
+   "code": "WDS",
+   "name": "WOODSIDE ENERGY GROUP LTD",
+   "headline": "Third Quarter 2026 Report",
+   "date": "2026-10-21T08:03+10:00",
+   "price_sensitive": true,
+   "type": "Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150942-6A1350348"
+  },
+  {
+   "code": "TCL",
+   "name": "TRANSURBAN GROUP",
+   "headline": "2026 Annual General Meetings - Presentation",
+   "date": "2026-10-21T07:42+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150908-3A704570"
+  },
+  {
+   "code": "QBE",
+   "name": "QBE INSURANCE GROUP LIMITED",
+   "headline": "Notification regarding unquoted securities - QBE",
+   "date": "2026-10-21T07:42+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150909-2A1705213"
+  },
+  {
+   "code": "SGP",
+   "name": "STOCKLAND",
+   "headline": "Appendix 3Y - Mr T Gupta",
+   "date": "2026-10-21T07:37+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150903-2A1705210"
+  },
+  {
+   "code": "TCL",
+   "name": "TRANSURBAN GROUP",
+   "headline": "2026 Annual General Meetings - Address by Chair and CEO",
+   "date": "2026-10-21T07:36+10:00",
+   "price_sensitive": false,
+   "type": "Chairman'S Address",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150898-3A704567"
+  },
+  {
+   "code": "SGP",
+   "name": "STOCKLAND",
+   "headline": "Notification regarding unquoted securities - SGP",
+   "date": "2026-10-21T07:36+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150899-2A1705209"
+  },
+  {
+   "code": "SIG",
+   "name": "SIGMA HEALTHCARE LIMITED",
+   "headline": "AGM Trading Update - 21 October 2026",
+   "date": "2026-10-21T07:33+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150890-3A704564"
+  },
+  {
+   "code": "SGP",
+   "name": "STOCKLAND",
+   "headline": "Appendix 3Z - Mr A Stevens",
+   "date": "2026-10-21T07:33+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150894-2A1705207"
+  },
+  {
+   "code": "SGP",
+   "name": "STOCKLAND",
+   "headline": "Appendix 3Z - Mr T Pockett",
+   "date": "2026-10-21T07:33+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150891-2A1705206"
+  },
+  {
+   "code": "SIG",
+   "name": "SIGMA HEALTHCARE LIMITED",
+   "headline": "AGM Presentation to Shareholders",
+   "date": "2026-10-21T07:32+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150884-3A704561"
+  },
+  {
+   "code": "SIG",
+   "name": "SIGMA HEALTHCARE LIMITED",
+   "headline": "AGM Chairman & CEO Address to Shareholders",
+   "date": "2026-10-21T07:31+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150882-3A704559"
+  },
+  {
+   "code": "BOQ",
+   "name": "BANK OF QUEENSLAND LIMITED.",
+   "headline": "Update - Notification of buy-back - BOQ",
+   "date": "2026-10-21T07:30+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150875-2A1705195"
+  },
+  {
+   "code": "TCL",
+   "name": "TRANSURBAN GROUP",
+   "headline": "September quarter 2026 traffic",
+   "date": "2026-10-21T07:29+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150872-3A704560"
+  },
+  {
+   "code": "ARG",
+   "name": "ARGO INVESTMENTS LIMITED",
+   "headline": "Update - Notification of buy-back - ARG",
+   "date": "2026-10-21T07:26+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150864-2A1705188"
+  },
+  {
+   "code": "DBI",
+   "name": "DALRYMPLE BAY INFRASTRUCTURE LIMITED",
+   "headline": "Issuer Quarterly Report",
+   "date": "2026-10-21T07:22+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150839-2A1705163"
+  },
+  {
+   "code": "S32",
+   "name": "SOUTH32 LIMITED",
+   "headline": "Update - Notification of buy-back - S32",
+   "date": "2026-10-21T07:21+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150832-6A1350305"
+  },
+  {
+   "code": "NST",
+   "name": "NORTHERN STAR RESOURCES LTD",
+   "headline": "September 2026 Quarterly Activities Report",
+   "date": "2026-10-21T07:19+10:00",
+   "price_sensitive": true,
+   "type": "Quarterly Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150816-6A1350291"
+  },
+  {
+   "code": "SPK",
+   "name": "SPARK NEW ZEALAND LIMITED",
+   "headline": "Ongoing Disclosure Notice",
+   "date": "2026-10-21T06:30+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150770-2A1705176"
+  },
+  {
+   "code": "STW",
+   "name": "STATE STREET SPDR S&P/ASX 200 ETF",
+   "headline": "Daily Fund Update",
+   "date": "2026-10-20T18:59+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150760-2A1705158"
+  },
+  {
+   "code": "SLF",
+   "name": "STATE STREET SPDR S&P/ASX 200 LISTED PROPERTY ETF",
+   "headline": "Daily Fund Update",
+   "date": "2026-10-20T18:37+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150749-2A1705154"
+  },
+  {
+   "code": "YAL",
+   "name": "YANCOAL AUSTRALIA LIMITED",
+   "headline": "Quarterly Activities Report - 3Q 2026",
+   "date": "2026-10-20T18:33+10:00",
+   "price_sensitive": true,
+   "type": "Quarterly Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150744-2A1705151"
+  },
+  {
+   "code": "GMD",
+   "name": "GENESIS MINERALS LIMITED",
+   "headline": "Application for quotation of securities - GMD",
+   "date": "2026-10-20T18:08+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150734-6A1350254"
+  },
+  {
+   "code": "DRR",
+   "name": "DETERRA ROYALTIES LIMITED",
+   "headline": "Final Director's Interest Notice - A Morrison",
+   "date": "2026-10-20T17:27+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150718-6A1350243"
+  },
+  {
+   "code": "SET",
+   "name": "SOLARIS AUSTRALIAN EQUITY INCOME PLUS LIMITED",
+   "headline": "Net Tangible Asset Backing",
+   "date": "2026-10-20T17:19+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150717-2A1705144"
+  },
+  {
+   "code": "TLS",
+   "name": "TELSTRA GROUP LIMITED",
+   "headline": "Update - Notification of buy-back - TLS",
+   "date": "2026-10-20T15:56+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150654-3A704528"
+  },
+  {
+   "code": "CDA",
+   "name": "CODAN LIMITED",
+   "headline": "Results of Meeting",
+   "date": "2026-10-20T15:53+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150652-2A1705123"
+  },
+  {
+   "code": "PL8",
+   "name": "PLATO INCOME MAXIMISER LIMITED.",
+   "headline": "September 2026 Investment update",
+   "date": "2026-10-20T15:48+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150648-2A1705121"
+  },
+  {
+   "code": "CAR",
+   "name": "CAR GROUP LIMITED",
+   "headline": "Change in substantial holding",
+   "date": "2026-10-20T15:32+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150638-3A704525"
+  },
+  {
+   "code": "TLS",
+   "name": "TELSTRA GROUP LIMITED",
+   "headline": "Change of Director's Interest Notice",
+   "date": "2026-10-20T15:20+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150626-3A704521"
+  },
+  {
+   "code": "MQG",
+   "name": "MACQUARIE GROUP LIMITED",
+   "headline": "Ceasing to be a substantial holder from MQG",
+   "date": "2026-10-20T15:13+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150620-6A1350195"
+  },
+  {
+   "code": "GCI",
+   "name": "GRYPHON CAPITAL INCOME TRUST",
+   "headline": "Net Tangible Asset Backing",
+   "date": "2026-10-20T14:08+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150593-2A1705095"
+  },
+  {
+   "code": "MEZ",
+   "name": "MERIDIAN ENERGY LIMITED",
+   "headline": "Capital Change Notice - Allotment of Shares",
+   "date": "2026-10-20T13:46+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150580-2A1705089"
+  },
+  {
+   "code": "ANZ",
+   "name": "ANZ GROUP HOLDINGS LIMITED",
+   "headline": "Shareholder resolution for consideration at ANZ's 2026 AGM",
+   "date": "2026-10-20T13:32+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150569-3A704511"
+  },
+  {
+   "code": "RHC",
+   "name": "RAMSAY HEALTH CARE LIMITED",
+   "headline": "Dividend/Distribution - RHCPA",
+   "date": "2026-10-20T11:53+10:00",
+   "price_sensitive": false,
+   "type": "Distribution Announcement",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150536-2A1705068"
+  },
+  {
+   "code": "VTS",
+   "name": "VANGUARD MORNINGSTAR US TOTAL MKT SHARES INDEX ETF",
+   "headline": "Distribution FX Rate Announcement",
+   "date": "2026-10-20T11:09+10:00",
+   "price_sensitive": false,
+   "type": "Distribution Announcement",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150523-2A1705064"
+  },
+  {
+   "code": "CBAPM",
+   "name": "COMMONWEALTH BANK OF AUSTRALIA.",
+   "headline": "Notification of cessation of securities - CBA",
+   "date": "2026-10-20T10:55+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150517-2A1705059"
+  },
+  {
+   "code": "MEZ",
+   "name": "MERIDIAN ENERGY LIMITED",
+   "headline": "Annual Shareholder Meeting Voting Results",
+   "date": "2026-10-20T09:28+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150478-2A1705037"
+  },
+  {
+   "code": "MEZ",
+   "name": "MERIDIAN ENERGY LIMITED",
+   "headline": "Meridian Energy monthly operating report for September 2026",
+   "date": "2026-10-20T08:28+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150404-2A1704921"
+  },
+  {
+   "code": "SOL",
+   "name": "WASHINGTON H. SOUL PATTINSON AND COMPANY LIMITED",
+   "headline": "Notification regarding unquoted securities - SOL",
+   "date": "2026-10-20T08:24+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150399-2A1705001"
+  },
+  {
+   "code": "CDA",
+   "name": "CODAN LIMITED",
+   "headline": "2026 AGM Chair's Address and CEO's Address",
+   "date": "2026-10-20T07:52+10:00",
+   "price_sensitive": true,
+   "type": "Chairman'S Address",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150342-2A1704983"
+  },
+  {
+   "code": "NAB",
+   "name": "NATIONAL AUSTRALIA BANK LIMITED",
+   "headline": "NAB simplifying operating model and improving alignment",
+   "date": "2026-10-20T07:30+10:00",
+   "price_sensitive": false,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150315-3A704448"
+  },
+  {
+   "code": "NABPI",
+   "name": "NATIONAL AUSTRALIA BANK LIMITED",
+   "headline": "NAB simplifying operating model and improving alignment",
+   "date": "2026-10-20T07:30+10:00",
+   "price_sensitive": false,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150315-3A704448"
+  },
+  {
+   "code": "BHP",
+   "name": "BHP GROUP LIMITED",
+   "headline": "Quarterly Activities Report",
+   "date": "2026-10-20T07:24+10:00",
+   "price_sensitive": true,
+   "type": "Quarterly Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150302-3A704449"
+  },
+  {
+   "code": "TNE",
+   "name": "TECHNOLOGY ONE LIMITED",
+   "headline": "Becoming a substantial holder",
+   "date": "2026-10-20T07:18+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150251-2A1704945"
+  },
+  {
+   "code": "LYC",
+   "name": "LYNAS RARE EARTHS LIMITED",
+   "headline": "Becoming a substantial holder",
+   "date": "2026-10-20T07:17+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150247-6A1350073"
+  },
+  {
+   "code": "DBI",
+   "name": "DALRYMPLE BAY INFRASTRUCTURE LIMITED",
+   "headline": "Investor Presentation",
+   "date": "2026-10-20T07:13+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150227-2A1704938"
+  },
+  {
+   "code": "SUN",
+   "name": "SUNCORP GROUP LIMITED",
+   "headline": "Update - Notification of buy-back - SUN",
+   "date": "2026-10-20T07:12+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150219-2A1704958"
+  },
+  {
+   "code": "STW",
+   "name": "STATE STREET SPDR S&P/ASX 200 ETF",
+   "headline": "Daily Fund Update",
+   "date": "2026-10-20T07:12+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150221-2A1704935"
+  },
+  {
+   "code": "SLF",
+   "name": "STATE STREET SPDR S&P/ASX 200 LISTED PROPERTY ETF",
+   "headline": "Daily Fund Update",
+   "date": "2026-10-20T07:12+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150220-2A1704934"
+  },
+  {
+   "code": "MEZ",
+   "name": "MERIDIAN ENERGY LIMITED",
+   "headline": "Meridian Annual Shareholder Meeting",
+   "date": "2026-10-20T06:30+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150208-2A1704944"
+  },
+  {
+   "code": "PNI",
+   "name": "PINNACLE INVESTMENT MANAGEMENT GROUP LIMITED",
+   "headline": "Change in substantial holding",
+   "date": "2026-10-19T18:31+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150192-2A1704928"
+  },
+  {
+   "code": "SET",
+   "name": "SOLARIS AUSTRALIAN EQUITY INCOME PLUS LIMITED",
+   "headline": "Net Tangible Asset Backing",
+   "date": "2026-10-19T17:45+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150164-2A1704915"
+  },
+  {
+   "code": "MQG",
+   "name": "MACQUARIE GROUP LIMITED",
+   "headline": "Becoming a substantial holder from MQG",
+   "date": "2026-10-19T16:16+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150104-6A1349956"
+  },
+  {
+   "code": "SGP",
+   "name": "STOCKLAND",
+   "headline": "Stockland 2026 AGM Results of Meeting",
+   "date": "2026-10-19T15:58+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150087-2A1704887"
+  },
+  {
+   "code": "WBC",
+   "name": "WESTPAC BANKING CORPORATION",
+   "headline": "Items Impacting Full Year 2026 Results",
+   "date": "2026-10-19T15:50+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150079-2A1704884"
+  },
+  {
+   "code": "SFR",
+   "name": "SANDFIRE RESOURCES LIMITED",
+   "headline": "Change in substantial holding",
+   "date": "2026-10-19T15:42+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150075-6A1349943"
+  },
+  {
+   "code": "GMG",
+   "name": "GOODMAN GROUP",
+   "headline": "Notice of Annual General Meetings",
+   "date": "2026-10-19T15:25+10:00",
+   "price_sensitive": false,
+   "type": "Notice Of Meeting",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150062-2A1704871"
+  },
+  {
+   "code": "GCI",
+   "name": "GRYPHON CAPITAL INCOME TRUST",
+   "headline": "Net Tangible Asset Backing",
+   "date": "2026-10-19T13:23+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03150011-2A1704854"
+  },
+  {
+   "code": "PL8",
+   "name": "PLATO INCOME MAXIMISER LIMITED.",
+   "headline": "Dividend/Distribution - PL8",
+   "date": "2026-10-19T12:18+10:00",
+   "price_sensitive": false,
+   "type": "Distribution Announcement",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149972-2A1704832"
+  },
+  {
+   "code": "PL8",
+   "name": "PLATO INCOME MAXIMISER LIMITED.",
+   "headline": "Dividend Details",
+   "date": "2026-10-19T12:15+10:00",
+   "price_sensitive": true,
+   "type": "Distribution Announcement",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149969-2A1704831"
+  },
+  {
+   "code": "SOL",
+   "name": "WASHINGTON H. SOUL PATTINSON AND COMPANY LIMITED",
+   "headline": "Change of Director's Interest Notice - A Loveridge",
+   "date": "2026-10-19T12:10+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149968-2A1704830"
+  },
+  {
+   "code": "SOL",
+   "name": "WASHINGTON H. SOUL PATTINSON AND COMPANY LIMITED",
+   "headline": "Change of Director's Interest Notice - J Pollard",
+   "date": "2026-10-19T12:07+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149966-2A1704829"
+  },
+  {
+   "code": "SOL",
+   "name": "WASHINGTON H. SOUL PATTINSON AND COMPANY LIMITED",
+   "headline": "Change of Director's Interest Notice - V Bansal",
+   "date": "2026-10-19T12:03+10:00",
+   "price_sensitive": false,
+   "type": "Security Holder Details",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149964-2A1704828"
+  },
+  {
+   "code": "SOL",
+   "name": "WASHINGTON H. SOUL PATTINSON AND COMPANY LIMITED",
+   "headline": "Notification regarding unquoted securities - SOL",
+   "date": "2026-10-19T10:49+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149936-2A1704813"
+  },
+  {
+   "code": "RHC",
+   "name": "RAMSAY HEALTH CARE LIMITED",
+   "headline": "Ramsay Sante Demerger Booklet Registered with ASIC",
+   "date": "2026-10-19T10:27+10:00",
+   "price_sensitive": true,
+   "type": "Takeover Announcements/Scheme Announcements",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149924-2A1704803"
+  },
+  {
+   "code": "MP1",
+   "name": "MEGAPORT LIMITED",
+   "headline": "Notice of Annual General Meeting/Proxy Form",
+   "date": "2026-10-19T09:06+10:00",
+   "price_sensitive": false,
+   "type": "Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149889-2A1704783"
+  },
+  {
+   "code": "AFI",
+   "name": "AUSTRALIAN FOUNDATION INVESTMENT COMPANY LIMITED",
+   "headline": "Weekly Estimated NTA as at 16 October 2026",
+   "date": "2026-10-19T08:40+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149838-3A704383"
+  },
+  {
+   "code": "CGFPD",
+   "name": "CHALLENGER LIMITED",
+   "headline": "Update - Notification of buy-back - CGF",
+   "date": "2026-10-19T08:04+10:00",
+   "price_sensitive": false,
+   "type": "Issued Capital",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149746-2A1704722"
+  },
+  {
+   "code": "MTS",
+   "name": "METCASH LIMITED",
+   "headline": "Metcash exercises right to acquire Peries Group",
+   "date": "2026-10-19T07:49+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149726-2A1704708"
+  },
+  {
+   "code": "S32",
+   "name": "SOUTH32 LIMITED",
+   "headline": "Quarterly Report September 2026",
+   "date": "2026-10-19T07:28+10:00",
+   "price_sensitive": true,
+   "type": "Quarterly Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149696-6A1349816"
+  },
+  {
+   "code": "ALD",
+   "name": "AMPOL LIMITED",
+   "headline": "3Q 2026 Trading Update",
+   "date": "2026-10-19T07:25+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149686-2A1704688"
+  },
+  {
+   "code": "DRR",
+   "name": "DETERRA ROYALTIES LIMITED",
+   "headline": "Corporate Presentation - October 2026",
+   "date": "2026-10-19T07:11+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149677-6A1349791"
+  },
+  {
+   "code": "LYC",
+   "name": "LYNAS RARE EARTHS LIMITED",
+   "headline": "Date for Quarterly Report and Briefing",
+   "date": "2026-10-19T07:08+10:00",
+   "price_sensitive": false,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149663-6A1349784"
+  },
+  {
+   "code": "DRR",
+   "name": "DETERRA ROYALTIES LIMITED",
+   "headline": "Resignation of Director - A Morrison",
+   "date": "2026-10-19T07:06+10:00",
+   "price_sensitive": false,
+   "type": "Company Administration",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149647-6A1349776"
+  },
+  {
+   "code": "CGFPD",
+   "name": "CHALLENGER LIMITED",
+   "headline": "First quarter update",
+   "date": "2026-10-19T07:01+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149621-2A1704680"
+  },
+  {
+   "code": "CGFPD",
+   "name": "CHALLENGER LIMITED",
+   "headline": "Indicative non-binding offer received",
+   "date": "2026-10-19T07:01+10:00",
+   "price_sensitive": true,
+   "type": "Takeover Announcements/Scheme Announcements",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03149620-2A1704679"
+  }
+ ],
+ "market_price_sensitive": [
+  {
+   "code": "CZR",
+   "name": "CZR RESOURCES LTD",
+   "headline": "Results of Meeting",
+   "date": "2026-10-23T19:01+10:00",
+   "price_sensitive": true,
+   "type": "Takeover - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152618-6A1351106",
+   "held": false
+  },
+  {
+   "code": "GSS",
+   "name": "GENETIC SIGNATURES LIMITED",
+   "headline": "Addendum to Notice of Annual General Meeting",
+   "date": "2026-10-23T18:52+10:00",
+   "price_sensitive": true,
+   "type": "Scheme Of Arrangement",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152613-2A1705938",
+   "held": false
+  },
+  {
+   "code": "CYQ",
+   "name": "CYCLIQ GROUP LTD",
+   "headline": "Quarterly Activities/Appendix 4C Cash Flow Report",
+   "date": "2026-10-23T17:55+10:00",
+   "price_sensitive": true,
+   "type": "Commitments Test Entity - First Quarter Activity Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152598-6A1351094",
+   "held": false
+  },
+  {
+   "code": "SGA",
+   "name": "SARYTOGAN GRAPHITE LIMITED",
+   "headline": "Reinstatement to Quotation",
+   "date": "2026-10-23T17:38+10:00",
+   "price_sensitive": true,
+   "type": "Reinstatement To Official Quotation",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152583-6A1351083",
+   "held": false
+  },
+  {
+   "code": "SGA",
+   "name": "SARYTOGAN GRAPHITE LIMITED",
+   "headline": "Update on Court Application",
+   "date": "2026-10-23T17:38+10:00",
+   "price_sensitive": true,
+   "type": "Issued Capital - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152582-6A1351073",
+   "held": false
+  },
+  {
+   "code": "NOU",
+   "name": "NOUMI LIMITED",
+   "headline": "Appendix 4C for the Quarter Ended 30 September 2026",
+   "date": "2026-10-23T17:20+10:00",
+   "price_sensitive": true,
+   "type": "Commitments Test Entity - First Quarter Activity Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152573-2A1705930",
+   "held": false
+  },
+  {
+   "code": "CDT",
+   "name": "CASTLE MINERALS LIMITED",
+   "headline": "Castle Minerals becomes TerraNova Metals Ltd",
+   "date": "2026-10-23T17:12+10:00",
+   "price_sensitive": true,
+   "type": "Company Administration - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152566-6A1351069",
+   "held": false
+  },
+  {
+   "code": "SDF",
+   "name": "STEADFAST GROUP LIMITED",
+   "headline": "Scheme Booklet registered with ASIC",
+   "date": "2026-10-23T16:56+10:00",
+   "price_sensitive": true,
+   "type": "Scheme Of Arrangement",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152557-2A1705923",
+   "held": false
+  },
+  {
+   "code": "EVG",
+   "name": "EVION GROUP NL",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T16:31+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152543-6A1351060",
+   "held": false
+  },
+  {
+   "code": "PBL",
+   "name": "PARABELLUM RESOURCES LIMITED",
+   "headline": "Appendix 5B - Quarterly Cash Flow Report",
+   "date": "2026-10-23T16:20+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Cash Flow Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152532-6A1351050",
+   "held": false
+  },
+  {
+   "code": "PBL",
+   "name": "PARABELLUM RESOURCES LIMITED",
+   "headline": "Quarterly Activities Report",
+   "date": "2026-10-23T16:16+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152526-6A1351045",
+   "held": false
+  },
+  {
+   "code": "10X",
+   "name": "EXULTANT MINING LIMITED",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T16:16+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152525-6A1351046",
+   "held": false
+  },
+  {
+   "code": "OZZ",
+   "name": "OZZ RESOURCES LIMITED",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T16:09+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152521-6A1351041",
+   "held": false
+  },
+  {
+   "code": "IG6",
+   "name": "INTERNATIONAL GRAPHITE LIMITED",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T15:48+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152496-6A1351033",
+   "held": false
+  },
+  {
+   "code": "N1H",
+   "name": "N1 HOLDINGS LIMITED",
+   "headline": "Quarterly Activities/Appendix 4C Cash Flow Report",
+   "date": "2026-10-23T15:15+10:00",
+   "price_sensitive": true,
+   "type": "Commitments Test Entity - First Quarter Activity Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152459-2A1705883",
+   "held": false
+  },
+  {
+   "code": "OML",
+   "name": "OOH!MEDIA LIMITED",
+   "headline": "OIO Condition Satisfied for Proposed Scheme",
+   "date": "2026-10-23T14:53+10:00",
+   "price_sensitive": true,
+   "type": "Scheme Of Arrangement",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152450-2A1705875",
+   "held": false
+  },
+  {
+   "code": "SMX",
+   "name": "STRATA MINERALS LIMITED.",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T14:42+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152442-6A1351012",
+   "held": false
+  },
+  {
+   "code": "ZNC",
+   "name": "ZENITH MINERALS LIMITED",
+   "headline": "Sixth Supplementary Target's Statement",
+   "date": "2026-10-23T14:15+10:00",
+   "price_sensitive": true,
+   "type": "Supplementary Target'S Statement",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152412-6A1350991",
+   "held": false
+  },
+  {
+   "code": "ORP",
+   "name": "ORPHEUS URANIUM LIMITED",
+   "headline": "Oobagooma Uranium Project - Acquisition Complete",
+   "date": "2026-10-23T13:40+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152389-2A1705858",
+   "held": false
+  },
+  {
+   "code": "GBL",
+   "name": "GREAT BEAR EXPLORATION LTD",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T13:05+10:00",
+   "price_sensitive": true,
+   "type": "Third Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152370-2A1705852",
+   "held": false
+  },
+  {
+   "code": "SFI",
+   "name": "SEED FINANCIAL INCOME FUND ACTIVE ETF",
+   "headline": "Estimated Distribution Announcement",
+   "date": "2026-10-23T13:05+10:00",
+   "price_sensitive": true,
+   "type": "Dividend Reinvestment Plan",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152369-2A1705853",
+   "held": false
+  },
+  {
+   "code": "C29",
+   "name": "C29 METALS LIMITED",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T12:49+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152364-6A1350965",
+   "held": false
+  },
+  {
+   "code": "EG1",
+   "name": "EVERGOLD MINERALS LIMITED",
+   "headline": "Quarterly Activities and Cash Flow Report",
+   "date": "2026-10-23T12:12+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152348-6A1350956",
+   "held": false
+  },
+  {
+   "code": "AUR",
+   "name": "AURIS MINERALS LIMITED",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T12:00+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152334-6A1350952",
+   "held": false
+  },
+  {
+   "code": "OVT",
+   "name": "OVANTI LIMITED",
+   "headline": "Issue of Shortfall shares",
+   "date": "2026-10-23T11:48+10:00",
+   "price_sensitive": true,
+   "type": "Non-Renounceable Issue",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152321-2A1705825",
+   "held": false
+  },
+  {
+   "code": "JNS",
+   "name": "JANUS ELECTRIC HOLDINGS LIMITED",
+   "headline": "Janus Electric secures A$11m in CBA facilities",
+   "date": "2026-10-23T11:48+10:00",
+   "price_sensitive": true,
+   "type": "Debt Facility",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152320-2A1705828",
+   "held": false
+  },
+  {
+   "code": "SNL",
+   "name": "SUPPLY NETWORK LIMITED",
+   "headline": "2026 AGM Presentation",
+   "date": "2026-10-23T11:40+10:00",
+   "price_sensitive": true,
+   "type": "Company Presentation",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152308-2A1705823",
+   "held": false
+  },
+  {
+   "code": "SNL",
+   "name": "SUPPLY NETWORK LIMITED",
+   "headline": "Chairman's Address",
+   "date": "2026-10-23T11:38+10:00",
+   "price_sensitive": true,
+   "type": "Chair'S Address To Shareholders",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152307-2A1705821",
+   "held": false
+  },
+  {
+   "code": "GPR",
+   "name": "GEOPACIFIC RESOURCES LTD",
+   "headline": "Bond Facility Agreement Provides $8M of Funding",
+   "date": "2026-10-23T11:25+10:00",
+   "price_sensitive": true,
+   "type": "Issued Capital - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152288-6A1350929",
+   "held": false
+  },
+  {
+   "code": "LF1",
+   "name": "LA TROBE PRIVATE CREDIT FUND",
+   "headline": "Dividend/Distribution - LF1",
+   "date": "2026-10-23T11:17+10:00",
+   "price_sensitive": true,
+   "type": "Dividend Reinvestment Plan",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152282-2A1705814",
+   "held": false
+  },
+  {
+   "code": "OEC",
+   "name": "ORBITAL CORPORATION LIMITED",
+   "headline": "Quarterly Activities/Appendix 4C Cash Flow Report",
+   "date": "2026-10-23T10:23+10:00",
+   "price_sensitive": true,
+   "type": "Commitments Test Entity - First Quarter Activity Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152249-6A1350917",
+   "held": false
+  },
+  {
+   "code": "KYP",
+   "name": "KINATICO LTD",
+   "headline": "CEO presentation to investors post-AGM",
+   "date": "2026-10-23T09:58+10:00",
+   "price_sensitive": true,
+   "type": "Company Presentation",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152243-6A1350913",
+   "held": false
+  },
+  {
+   "code": "AL3",
+   "name": "AML3D LIMITED",
+   "headline": "Quarterly Activities/Appendix 4C Cash Flow Report",
+   "date": "2026-10-23T09:33+10:00",
+   "price_sensitive": true,
+   "type": "Commitments Test Entity - First Quarter Activity Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152228-6A1350905",
+   "held": false
+  },
+  {
+   "code": "WZR",
+   "name": "WISR LIMITED",
+   "headline": "Notice of Annual General Meeting/Proxy Form",
+   "date": "2026-10-23T09:27+10:00",
+   "price_sensitive": true,
+   "type": "Capital Reconstruction",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152220-2A1705791",
+   "held": false
+  },
+  {
+   "code": "SDF",
+   "name": "STEADFAST GROUP LIMITED",
+   "headline": "Scheme of Arrangement - Outcome of First Court Hearing",
+   "date": "2026-10-23T09:22+10:00",
+   "price_sensitive": true,
+   "type": "Scheme Of Arrangement",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152217-2A1705790",
+   "held": false
+  },
+  {
+   "code": "IKE",
+   "name": "IKEGPS GROUP LIMITED",
+   "headline": "ikeGPS 1H FY27 Investor Presentation",
+   "date": "2026-10-23T09:13+10:00",
+   "price_sensitive": true,
+   "type": "Company Presentation",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152207-3A704789",
+   "held": false
+  },
+  {
+   "code": "LU7",
+   "name": "LITHIUM UNIVERSE LIMITED",
+   "headline": "Management Transition",
+   "date": "2026-10-23T09:11+10:00",
+   "price_sensitive": true,
+   "type": "Ceo/Managing Director - Appointment Resignation",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152204-6A1350900",
+   "held": false
+  },
+  {
+   "code": "SPG",
+   "name": "SPC GLOBAL HOLDINGS LTD",
+   "headline": "SPC Global Proposes Corporate Name Change",
+   "date": "2026-10-23T09:09+10:00",
+   "price_sensitive": true,
+   "type": "Notice Of Meeting - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152201-3A704786",
+   "held": false
+  },
+  {
+   "code": "KKO",
+   "name": "KINETIKO ENERGY LTD",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T09:07+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152200-6A1350899",
+   "held": false
+  },
+  {
+   "code": "RCT",
+   "name": "REEF CASINO TRUST",
+   "headline": "Target's Statement",
+   "date": "2026-10-23T09:06+10:00",
+   "price_sensitive": true,
+   "type": "Target'S Statement - Off-Market Bid",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152199-2A1705780",
+   "held": false
+  },
+  {
+   "code": "BTR",
+   "name": "BRIGHTSTAR RESOURCES LIMITED",
+   "headline": "Trading Halt",
+   "date": "2026-10-23T09:03+10:00",
+   "price_sensitive": true,
+   "type": "Trading Halt",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152197-6A1350898",
+   "held": false
+  },
+  {
+   "code": "BAS",
+   "name": "BASS OIL LIMITED",
+   "headline": "Quarterly Activities Report and Appendix 5B - September 2026",
+   "date": "2026-10-23T09:02+10:00",
+   "price_sensitive": true,
+   "type": "Third Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152196-3A704785",
+   "held": false
+  },
+  {
+   "code": "ID8",
+   "name": "IDENTITII LIMITED",
+   "headline": "Prospectus - Bonus Options and Piggyback Options",
+   "date": "2026-10-23T08:58+10:00",
+   "price_sensitive": true,
+   "type": "Non-Renounceable Issue",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152187-2A1705777",
+   "held": false
+  },
+  {
+   "code": "BTR",
+   "name": "BRIGHTSTAR RESOURCES LIMITED",
+   "headline": "Pause in Trading",
+   "date": "2026-10-23T08:57+10:00",
+   "price_sensitive": true,
+   "type": "Notice Pending",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152184-6A1350893",
+   "held": false
+  },
+  {
+   "code": "ASQ",
+   "name": "AUSTRALIAN SILICA QUARTZ GROUP LTD",
+   "headline": "September 2026 Quarterly Activities and Cashflow Report",
+   "date": "2026-10-23T08:51+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152178-6A1350889",
+   "held": false
+  },
+  {
+   "code": "CEL",
+   "name": "CHALLENGER GOLD LIMITED",
+   "headline": "Challenger Closes US$15M Tranche 1 Convertible Debentures",
+   "date": "2026-10-23T08:48+10:00",
+   "price_sensitive": true,
+   "type": "Issued Capital - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152176-6A1350887",
+   "held": false
+  },
+  {
+   "code": "EMH",
+   "name": "EUROPEAN METALS HOLDINGS LIMITED",
+   "headline": "Cinovec Project - Tunnel Kiln Update",
+   "date": "2026-10-23T08:48+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152173-6A1350883",
+   "held": false
+  },
+  {
+   "code": "GHY",
+   "name": "GOLD HYDROGEN LIMITED",
+   "headline": "R&D Funding Arrangements",
+   "date": "2026-10-23T08:46+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152167-2A1705770",
+   "held": false
+  },
+  {
+   "code": "ORP",
+   "name": "ORPHEUS URANIUM LIMITED",
+   "headline": "Quarterly Activities Report - September 2026",
+   "date": "2026-10-23T08:46+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152164-2A1705768",
+   "held": false
+  },
+  {
+   "code": "DVL",
+   "name": "DORSAVI LTD",
+   "headline": "Quarterly Activities/Appendix 4C Cash Flow Report",
+   "date": "2026-10-23T08:44+10:00",
+   "price_sensitive": true,
+   "type": "Commitments Test Entity - First Quarter Activity Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152160-3A704779",
+   "held": false
+  },
+  {
+   "code": "ORP",
+   "name": "ORPHEUS URANIUM LIMITED",
+   "headline": "Quarterly Cashflow Report - September 2026",
+   "date": "2026-10-23T08:43+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Cash Flow Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152151-2A1705767",
+   "held": false
+  },
+  {
+   "code": "BTE",
+   "name": "BOTALA ENERGY LTD",
+   "headline": "A$1.35 million targeted placement",
+   "date": "2026-10-23T08:43+10:00",
+   "price_sensitive": true,
+   "type": "Placement",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152150-6A1350864",
+   "held": false
+  },
+  {
+   "code": "CTM",
+   "name": "CENTAURUS METALS LIMITED",
+   "headline": "Multiple Drill-Ready Copper-Gold Targets Defined at Boi Novo",
+   "date": "2026-10-23T08:41+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152144-6A1350872",
+   "held": false
+  },
+  {
+   "code": "HMG",
+   "name": "HAMELIN GOLD LIMITED",
+   "headline": "Diamond Drilling Commences - Day Dawn Gold Project",
+   "date": "2026-10-23T08:41+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152143-6A1350871",
+   "held": false
+  },
+  {
+   "code": "KKC",
+   "name": "KKR CREDIT INCOME FUND",
+   "headline": "Dividend/Distribution - KKC",
+   "date": "2026-10-23T08:40+10:00",
+   "price_sensitive": true,
+   "type": "Dividend Reinvestment Plan",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152142-2A1705765",
+   "held": false
+  },
+  {
+   "code": "A8G",
+   "name": "AUSTRALASIAN METALS LIMITED",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T08:38+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152139-6A1350868",
+   "held": false
+  },
+  {
+   "code": "OEC",
+   "name": "ORBITAL CORPORATION LIMITED",
+   "headline": "Orbital secures its first Power by the Hour contract",
+   "date": "2026-10-23T08:37+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152137-6A1350867",
+   "held": false
+  },
+  {
+   "code": "NS1",
+   "name": "NODESTREAM LTD",
+   "headline": "Nodestream Launches Missions",
+   "date": "2026-10-23T08:37+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152136-6A1350866",
+   "held": false
+  },
+  {
+   "code": "AIQ",
+   "name": "ALTERNATIVE INVESTMENT TRUST",
+   "headline": "Dividend/Distribution - AIQ",
+   "date": "2026-10-23T08:36+10:00",
+   "price_sensitive": true,
+   "type": "Dividend Record Date",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152135-2A1705763",
+   "held": false
+  },
+  {
+   "code": "KME",
+   "name": "KIP MCGRATH EDUCATION CENTRES LIMITED",
+   "headline": "Supplementary Bidder's Statement",
+   "date": "2026-10-23T08:30+10:00",
+   "price_sensitive": true,
+   "type": "Takeover - Extension Of Offer Period",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152127-2A1705757",
+   "held": false
+  },
+  {
+   "code": "PCX",
+   "name": "PENGANA GLOBAL PRIVATE CREDIT TRUST",
+   "headline": "Dividend/Distribution - PCX",
+   "date": "2026-10-23T08:29+10:00",
+   "price_sensitive": true,
+   "type": "Dividend Reinvestment Plan",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152124-2A1705756",
+   "held": false
+  },
+  {
+   "code": "ADS",
+   "name": "ADSLOT LTD.",
+   "headline": "Quarterly Activities and Appendix 4C Cash Flow Report",
+   "date": "2026-10-23T08:28+10:00",
+   "price_sensitive": true,
+   "type": "Commitments Test Entity - First Quarter Activity Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152122-3A704776",
+   "held": false
+  },
+  {
+   "code": "DXB",
+   "name": "DIMERIX LIMITED",
+   "headline": "New Data Supports Biological Rationale for DMX-200 in FSGS",
+   "date": "2026-10-23T08:27+10:00",
+   "price_sensitive": true,
+   "type": "Company Presentation",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152119-3A704774",
+   "held": false
+  },
+  {
+   "code": "EXR",
+   "name": "ELIXIR ENERGY LIMITED",
+   "headline": "Strategic Portfolio Farmout to Beach Energy",
+   "date": "2026-10-23T08:26+10:00",
+   "price_sensitive": true,
+   "type": "Company Presentation",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152117-6A1350849",
+   "held": false
+  },
+  {
+   "code": "E25",
+   "name": "ELEMENT 25 LIMITED",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T08:26+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152116-6A1350858",
+   "held": false
+  },
+  {
+   "code": "WC8",
+   "name": "WILDCAT RESOURCES LIMITED",
+   "headline": "Trading Halt",
+   "date": "2026-10-23T08:26+10:00",
+   "price_sensitive": true,
+   "type": "Trading Halt",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152115-6A1350859",
+   "held": false
+  },
+  {
+   "code": "INN",
+   "name": "INNOVAERO TECHNOLOGIES LIMITED",
+   "headline": "Quarterly Activities/Appendix 4C Cash Flow Report",
+   "date": "2026-10-23T08:24+10:00",
+   "price_sensitive": true,
+   "type": "Commitments Test Entity - First Quarter Activity Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152112-6A1350857",
+   "held": false
+  },
+  {
+   "code": "AXL",
+   "name": "AXEL REE LIMITED",
+   "headline": "Trading Halt",
+   "date": "2026-10-23T08:24+10:00",
+   "price_sensitive": true,
+   "type": "Trading Halt",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152110-3A704772",
+   "held": false
+  },
+  {
+   "code": "BPT",
+   "name": "BEACH ENERGY LIMITED",
+   "headline": "Beach to materially expand acreage position in the Taroom",
+   "date": "2026-10-23T08:23+10:00",
+   "price_sensitive": true,
+   "type": "Company Presentation",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152109-2A1705750",
+   "held": false
+  },
+  {
+   "code": "EVT",
+   "name": "EVT LIMITED",
+   "headline": "AGM addresses - Strong Q1, Hotels growth strategy advances",
+   "date": "2026-10-23T08:23+10:00",
+   "price_sensitive": true,
+   "type": "Trading Update",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152108-2A1705747",
+   "held": false
+  },
+  {
+   "code": "ABB",
+   "name": "AUSSIE BROADBAND LIMITED",
+   "headline": "AGM Presentations and Trading Update",
+   "date": "2026-10-23T08:22+10:00",
+   "price_sensitive": true,
+   "type": "Trading Update",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152106-3A704771",
+   "held": false
+  },
+  {
+   "code": "FLG",
+   "name": "FLAGSHIP MINERALS LIMITED",
+   "headline": "Rosario Copper - Option Agreement Terms Update",
+   "date": "2026-10-23T08:21+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152103-6A1350856",
+   "held": false
+  },
+  {
+   "code": "ELK",
+   "name": "",
+   "headline": "Trading Halt",
+   "date": "2026-10-23T08:20+10:00",
+   "price_sensitive": true,
+   "type": "Trading Halt",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152101-6A1350855",
+   "held": false
+  },
+  {
+   "code": "ZNO",
+   "name": "",
+   "headline": "Offer Document - Rights Issue",
+   "date": "2026-10-23T08:19+10:00",
+   "price_sensitive": true,
+   "type": "Non-Renounceable Issue",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152099-2A1705744",
+   "held": false
+  },
+  {
+   "code": "ZNC",
+   "name": "ZENITH MINERALS LIMITED",
+   "headline": "TOV: ZNC - Panel Declines to Conduct Proceedings",
+   "date": "2026-10-23T08:17+10:00",
+   "price_sensitive": true,
+   "type": "Company Administration - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152096_PS-6A1350854",
+   "held": false
+  },
+  {
+   "code": "KAN",
+   "name": "",
+   "headline": "High-Grade Intersections Extend Emily Star Mineralisation",
+   "date": "2026-10-23T08:16+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152095-2A1705739",
+   "held": false
+  },
+  {
+   "code": "NDO",
+   "name": "",
+   "headline": "NDO Acquisition of 9 Early Education Services",
+   "date": "2026-10-23T08:15+10:00",
+   "price_sensitive": true,
+   "type": "Asset Acquisition",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152094-3A704769",
+   "held": false
+  },
+  {
+   "code": "SKN",
+   "name": "",
+   "headline": "Trading Halt",
+   "date": "2026-10-23T08:15+10:00",
+   "price_sensitive": true,
+   "type": "Trading Halt",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152093-6A1350853",
+   "held": false
+  },
+  {
+   "code": "HWK",
+   "name": "",
+   "headline": "Olympus Scandium Project Update WA",
+   "date": "2026-10-23T08:12+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152088-6A1350852",
+   "held": false
+  },
+  {
+   "code": "HPC",
+   "name": "",
+   "headline": "Prospectus - Non Renounceable Rights Issue",
+   "date": "2026-10-23T08:11+10:00",
+   "price_sensitive": true,
+   "type": "Non-Renounceable Issue",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152085-3A704766",
+   "held": false
+  },
+  {
+   "code": "ZNO",
+   "name": "",
+   "headline": "Non-Renounceable Rights Issue",
+   "date": "2026-10-23T08:10+10:00",
+   "price_sensitive": true,
+   "type": "Non-Renounceable Issue",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152084-2A1705735",
+   "held": false
+  },
+  {
+   "code": "HPC",
+   "name": "",
+   "headline": "Rights Issue and UMP Share Sale Facility",
+   "date": "2026-10-23T08:09+10:00",
+   "price_sensitive": true,
+   "type": "Non-Renounceable Issue",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152083-3A704765",
+   "held": false
+  },
+  {
+   "code": "RHT",
+   "name": "",
+   "headline": "Trading Halt",
+   "date": "2026-10-23T08:08+10:00",
+   "price_sensitive": true,
+   "type": "Trading Halt",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152081-6A1350846",
+   "held": false
+  },
+  {
+   "code": "FAR",
+   "name": "",
+   "headline": "Quarterly Activities Report and Appendix 5B",
+   "date": "2026-10-23T08:07+10:00",
+   "price_sensitive": true,
+   "type": "Third Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152079-3A704764",
+   "held": false
+  },
+  {
+   "code": "NHU",
+   "name": "",
+   "headline": "Major 2km Uranium Target Emerges at Storvallflon - Sweden",
+   "date": "2026-10-23T08:07+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152080-6A1350848",
+   "held": false
+  },
+  {
+   "code": "SRL",
+   "name": "",
+   "headline": "September 2026 Quarterly Activities and Cash Flow",
+   "date": "2026-10-23T08:06+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152075-3A704762",
+   "held": false
+  },
+  {
+   "code": "ERE",
+   "name": "",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T08:04+10:00",
+   "price_sensitive": true,
+   "type": "Third Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152069-2A1705724",
+   "held": false
+  },
+  {
+   "code": "BMN",
+   "name": "",
+   "headline": "Positive Final Investment Decision for Etango Mine",
+   "date": "2026-10-23T08:04+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152067-6A1350843",
+   "held": false
+  },
+  {
+   "code": "MXI",
+   "name": "",
+   "headline": "Trading Update",
+   "date": "2026-10-23T08:03+10:00",
+   "price_sensitive": true,
+   "type": "Trading Update",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152064-3A704760",
+   "held": false
+  },
+  {
+   "code": "PL3",
+   "name": "",
+   "headline": "Environmental Application Passes Stage One",
+   "date": "2026-10-23T07:58+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152050-3A704756",
+   "held": false
+  },
+  {
+   "code": "EQU",
+   "name": "",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T07:57+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152048-6A1350841",
+   "held": false
+  },
+  {
+   "code": "SWP",
+   "name": "",
+   "headline": "Sydney Fibre Divestment",
+   "date": "2026-10-23T07:55+10:00",
+   "price_sensitive": true,
+   "type": "Asset Disposal",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152043-2A1705713",
+   "held": false
+  },
+  {
+   "code": "EMA",
+   "name": "",
+   "headline": "Eminence Exercise Options over Cote d Ivoire Gold Portfolio",
+   "date": "2026-10-23T07:54+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152038-6A1350834",
+   "held": false
+  },
+  {
+   "code": "X2M",
+   "name": "",
+   "headline": "Signs Binding Agreement to Deliver AI-Enabled Data Centre",
+   "date": "2026-10-23T07:51+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152030-3A704751",
+   "held": false
+  },
+  {
+   "code": "QML",
+   "name": "",
+   "headline": "QMines Completes $1.4 Million Sale of Drilling Business",
+   "date": "2026-10-23T07:50+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152026-6A1350835",
+   "held": false
+  },
+  {
+   "code": "PAR",
+   "name": "",
+   "headline": "Extension of Convening Period",
+   "date": "2026-10-23T07:48+10:00",
+   "price_sensitive": true,
+   "type": "Company Administration - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152023-3A704728",
+   "held": false
+  },
+  {
+   "code": "FRE",
+   "name": "",
+   "headline": "September 2026 Quarterly Activity Report & Appendix 4C",
+   "date": "2026-10-23T07:39+10:00",
+   "price_sensitive": true,
+   "type": "Commitments Test Entity - First Quarter Activity Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152008-6A1350831",
+   "held": false
+  },
+  {
+   "code": "WHC",
+   "name": "",
+   "headline": "September 2026 Quarterly Report",
+   "date": "2026-10-23T07:37+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152006-2A1705694",
+   "held": false
+  },
+  {
+   "code": "ACE",
+   "name": "",
+   "headline": "Acusensus awarded major territory-wide contract with the ACT",
+   "date": "2026-10-23T07:37+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152004-2A1705700",
+   "held": false
+  },
+  {
+   "code": "CBY",
+   "name": "",
+   "headline": "Briggs Drilling Update",
+   "date": "2026-10-23T07:36+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152003-2A1705698",
+   "held": false
+  },
+  {
+   "code": "ZNO",
+   "name": "ZOONO GROUP LIMITED",
+   "headline": "Placement provides Zoono A$250K in working capital",
+   "date": "2026-10-23T07:34+10:00",
+   "price_sensitive": true,
+   "type": "Placement",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03152000-2A1705695",
+   "held": false
+  },
+  {
+   "code": "PIQ",
+   "name": "PROTEOMICS INTERNATIONAL LABORATORIES LTD",
+   "headline": "National Rollout of PromarkerD and PromarkerEso",
+   "date": "2026-10-23T07:33+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151998-3A704744",
+   "held": false
+  },
+  {
+   "code": "FEX",
+   "name": "FENIX RESOURCES LTD",
+   "headline": "Hedge Book Update",
+   "date": "2026-10-23T07:30+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151993-6A1350830",
+   "held": false
+  },
+  {
+   "code": "ALA",
+   "name": "AROVELLA THERAPEUTICS LIMITED",
+   "headline": "Quarterly Activities/Appendix 4C Cash Flow Report",
+   "date": "2026-10-23T07:27+10:00",
+   "price_sensitive": true,
+   "type": "Commitments Test Entity - First Quarter Activity Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151986-3A704740",
+   "held": false
+  },
+  {
+   "code": "ALK",
+   "name": "ALKANE RESOURCES LIMITED",
+   "headline": "Q1 FY27 Earnings Conference Call Presentation",
+   "date": "2026-10-23T07:23+10:00",
+   "price_sensitive": true,
+   "type": "Company Presentation",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151980-6A1350827",
+   "held": false
+  },
+  {
+   "code": "ALK",
+   "name": "ALKANE RESOURCES LIMITED",
+   "headline": "Quarterly Report - September 2026",
+   "date": "2026-10-23T07:23+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151978-6A1350826",
+   "held": false
+  },
+  {
+   "code": "BLG",
+   "name": "BLUGLASS LIMITED",
+   "headline": "Quarterly Activities/Appendix 4C Cash Flow Report",
+   "date": "2026-10-23T07:23+10:00",
+   "price_sensitive": true,
+   "type": "Commitments Test Entity - First Quarter Activity Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151977-2A1705681",
+   "held": false
+  },
+  {
+   "code": "ZIP",
+   "name": "ZIP CO LIMITED..",
+   "headline": "1Q FY27 results update",
+   "date": "2026-10-23T07:22+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151974-2A1705677",
+   "held": false
+  },
+  {
+   "code": "NEM",
+   "name": "NEWMONT CORPORATION",
+   "headline": "Newmont Q3 2026 Form 10-Q As Filed",
+   "date": "2026-10-23T07:21+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151965-3A704735",
+   "held": true
+  },
+  {
+   "code": "NEM",
+   "name": "NEWMONT CORPORATION",
+   "headline": "Newmont Q3 2026 Earnings Release Form 8-K As Filed",
+   "date": "2026-10-23T07:21+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151963-3A704730",
+   "held": true
+  },
+  {
+   "code": "TPW",
+   "name": "TEMPLE & WEBSTER GROUP LTD",
+   "headline": "2026 AGM Presentation and Strategy Update",
+   "date": "2026-10-23T07:20+10:00",
+   "price_sensitive": true,
+   "type": "Company Presentation",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151956-2A1705669",
+   "held": false
+  },
+  {
+   "code": "TPW",
+   "name": "TEMPLE & WEBSTER GROUP LTD",
+   "headline": "2026 AGM Addresses and Strategy Update",
+   "date": "2026-10-23T07:19+10:00",
+   "price_sensitive": true,
+   "type": "Company Administration - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151954-2A1705668",
+   "held": false
+  },
+  {
+   "code": "IIQ",
+   "name": "INOVIQ LTD",
+   "headline": "INOVIQ Announces Leadership Change",
+   "date": "2026-10-23T07:19+10:00",
+   "price_sensitive": true,
+   "type": "Ceo/Managing Director - Appointment Resignation",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151949-3A704733",
+   "held": false
+  },
+  {
+   "code": "BWN",
+   "name": "BHAGWAN MARINE LIMITED",
+   "headline": "Annual General Meeting Chair's Address and MD's Presentation",
+   "date": "2026-10-23T07:18+10:00",
+   "price_sensitive": true,
+   "type": "Trading Update",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151938-6A1350802",
+   "held": false
+  },
+  {
+   "code": "BC8",
+   "name": "BLACK CAT SYNDICATE LIMITED",
+   "headline": "Quarterly Activities Report",
+   "date": "2026-10-23T07:17+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151934-6A1350816",
+   "held": false
+  },
+  {
+   "code": "OBM",
+   "name": "ORA BANDA MINING LTD",
+   "headline": "September 2026 Quarterly Activities Report",
+   "date": "2026-10-23T07:16+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151927-6A1350811",
+   "held": false
+  },
+  {
+   "code": "SVY",
+   "name": "STAVELY MINERALS LIMITED",
+   "headline": "Quarterly Cashflow Report - September 2026",
+   "date": "2026-10-23T07:16+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Cash Flow Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151924-6A1350810",
+   "held": false
+  },
+  {
+   "code": "DRE",
+   "name": "DREADNOUGHT RESOURCES LTD",
+   "headline": "Quarterly Cashflow Report - September 2026",
+   "date": "2026-10-23T07:16+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Cash Flow Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151923-6A1350797",
+   "held": false
+  },
+  {
+   "code": "DRE",
+   "name": "DREADNOUGHT RESOURCES LTD",
+   "headline": "Quarterly Activities Report - September 2026",
+   "date": "2026-10-23T07:16+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151921-6A1350796",
+   "held": false
+  },
+  {
+   "code": "SVY",
+   "name": "STAVELY MINERALS LIMITED",
+   "headline": "Quarterly Activities Report - September 2026",
+   "date": "2026-10-23T07:15+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151920-6A1350808",
+   "held": false
+  },
+  {
+   "code": "RGT",
+   "name": "ARGENT BIOPHARMA LIMITED",
+   "headline": "Quarterly Activities/Appendix 4C Cash Flow Report",
+   "date": "2026-10-23T07:15+10:00",
+   "price_sensitive": true,
+   "type": "Commitments Test Entity - First Quarter Activity Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151917-6A1350807",
+   "held": false
+  },
+  {
+   "code": "WC1",
+   "name": "WEST COBAR METALS LIMITED",
+   "headline": "Commencement Of Scandium Drilling At Salazar",
+   "date": "2026-10-23T07:15+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151912-6A1350805",
+   "held": false
+  },
+  {
+   "code": "ALM",
+   "name": "ALMA METALS LIMITED",
+   "headline": "Drilling Results - Briggs Copper Project",
+   "date": "2026-10-23T07:15+10:00",
+   "price_sensitive": true,
+   "type": "Progress Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151911-6A1350790",
+   "held": false
+  },
+  {
+   "code": "CLA",
+   "name": "CELSIUS RESOURCES LIMITED.",
+   "headline": "Corporate Update",
+   "date": "2026-10-23T07:14+10:00",
+   "price_sensitive": true,
+   "type": "Asset Disposal",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151910-6A1350804",
+   "held": false
+  },
+  {
+   "code": "MIN",
+   "name": "MINERAL RESOURCES LIMITED",
+   "headline": "Quarterly Activity Report - Q1 FY27",
+   "date": "2026-10-23T07:14+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151908-6A1350789",
+   "held": false
+  },
+  {
+   "code": "VTA",
+   "name": "VITA RESOURCES NL",
+   "headline": "SPP Offer Document",
+   "date": "2026-10-23T07:11+10:00",
+   "price_sensitive": true,
+   "type": "Disclosure Document",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151893-2A1705663",
+   "held": false
+  },
+  {
+   "code": "VTA",
+   "name": "VITA RESOURCES NL",
+   "headline": "Share Purchase Plan",
+   "date": "2026-10-23T07:11+10:00",
+   "price_sensitive": true,
+   "type": "Security Purchase Plan",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151892-2A1705662",
+   "held": false
+  },
+  {
+   "code": "TLM",
+   "name": "TALISMAN MINING LIMITED",
+   "headline": "Quarterly Activities/Appendix 5B Cash Flow Report",
+   "date": "2026-10-23T07:11+10:00",
+   "price_sensitive": true,
+   "type": "First Quarter Activities Report",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151891-6A1350779",
+   "held": false
+  },
+  {
+   "code": "IKE",
+   "name": "IKEGPS GROUP LIMITED",
+   "headline": "IKE 2Q / 1H FY27 Performance Update",
+   "date": "2026-10-23T06:59+10:00",
+   "price_sensitive": true,
+   "type": "Periodic Reports - Other",
+   "url": "https://asx.api.markitdigital.com/asx-research/1.0/file/2924-03151890-3A704726",
+   "held": false
+  }
+ ],
+ "regulatory": [
+  {
+   "source": "ASIC",
+   "title": "26-255MR ASIC seeks leave to appeal NSW Supreme Court decision against former Rex non-executive directors",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-255mr-asic-seeks-leave-to-appeal-nsw-supreme-court-decision-against-former-rex-non-executive-directors",
+   "date": "2026-10-24T02:00+10:00",
+   "summary": "ASIC is seeking leave to appeal the decision of the Supreme Court of NSW that former Regional Express Holdings Limited (Rex) non-executive directors The Hon John Sharp AM, Siddharth Khotkar and Lincoln Pan did not contravene their\u2026",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "ASIC",
+   "title": "26-256MR Financial Services and Credit Panel cancels registration of NSW financial adviser Evan Byrnes for two and a half years",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-256mr-financial-services-and-credit-panel-cancels-registration-of-nsw-financial-adviser-evan-byrnes-for-two-and-a-half-years",
+   "date": "2026-10-24T01:40+10:00",
+   "summary": "The Financial Services and Credit Panel (FSCP) has cancelled financial adviser Evan James Byrnes\u2019 registration and prohibited him from being registered as a relevant provider for two and a half years.",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "Treasury",
+   "title": "Consultation on the Banking Regulation 2026",
+   "link": "https://treasury.gov.au/consultation/c2026-816568",
+   "date": "2026-10-23T22:00+10:00",
+   "summary": "Open for comment until 30 October 2026",
+   "tag": "Consultation",
+   "relevant": false
+  },
+  {
+   "source": "Treasury",
+   "title": "Consultation on implementing parts of the better regulation measures",
+   "link": "https://treasury.gov.au/consultation/c2026-813364",
+   "date": "2026-10-23T22:00+10:00",
+   "summary": "Open for comment until 20 November 2026",
+   "tag": "Consultation",
+   "relevant": false
+  },
+  {
+   "source": "Treasury",
+   "title": "Reforms to the bankruptcy system",
+   "link": "https://treasury.gov.au/consultation/c2026-812354",
+   "date": "2026-10-23T22:00+10:00",
+   "summary": "Open for comment until 03 November 2026",
+   "tag": "Consultation",
+   "relevant": false
+  },
+  {
+   "source": "ASIC",
+   "title": "26-254MR ASIC accepts cancellation of company auditor Benjamin Peters\u2019 registration after audit surveillance",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-254mr-asic-accepts-cancellation-of-company-auditor-benjamin-peters-registration-after-audit-surveillance",
+   "date": "2026-10-23T20:00+10:00",
+   "summary": "ASIC has accepted Benjamin Alfred Peters\u2019 application for the cancellation of his registration as a company auditor after raising concerns about his role as lead auditor and engagement partner in the audit of a large proprietary company.",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "AFCA",
+   "title": "How to view and download case data - Australian Financial Complaints Authority (AFCA)",
+   "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNRHBFaVh5eGYwZGlvOWg3Q20yTmNvZzh0VmlaOXFwWllNRzNSS1pUcjhoWXlLVHF2M0lKLWRsNFhTQVVXSEZoVE1MYmZnc2dZMUd2Q3J5MVVrYkVFWlFocWd0bzNpNTJUcG9qaWV5eTYzMzR6WjV2YS1Rb1BQVGdwcl9pMWE5dm02dVVHRmUxWTY1OGNraHZZYmcyOXk5ZVdkR3Eyckh1dGFXS2ZEY3RnSG1sWGtud0JOSHlnN05aNFhlanR6NDdSVXk3dG5ldw?oc=5",
+   "date": "2026-10-23T16:19+10:00",
+   "summary": "How to view and download case data Australian Financial Complaints Authority (AFCA)",
+   "tag": "Complaints",
+   "relevant": true
+  },
+  {
+   "source": "Federal Court",
+   "title": "Australian Securities and Investments Commission v Marco (No 22) [2026] FCA 1543",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1543",
+   "date": "2026-10-23T12:41+10:00",
+   "summary": "CORPORATIONS \u2013 application by Court appointed Receivers for fixing remuneration and interim payment of remuneration pending determination by a Registrar \u2013 fixing of an appropriate percentage for interim payment \u2013 whether interim payment\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "Financial Services minister",
+   "title": "Expressions of interest for the Financial Innovation Committee",
+   "link": "https://ministers.treasury.gov.au/ministers/Daniel-Mulino-2025/media-releases/Expressions-of-interest-for-the-Financial-Innovation-Committee",
+   "date": "2026-10-23T12:10+10:00",
+   "summary": "The Albanese Government is seeking expressions of interest from financial sector leaders and experts to join the new Financial Innovation Committee. The Committee will bring together government, regulators and industry to identify and\u2026",
+   "tag": "Minister",
+   "relevant": false
+  },
+  {
+   "source": "Treasurer",
+   "title": "Boosting competition and productivity in the financial sector",
+   "link": "https://ministers.treasury.gov.au/ministers/Jim-Chalmers-2022/media-releases/Boosting-competition-and-productivity-in-the-financial-sector",
+   "date": "2026-10-23T09:41+10:00",
+   "summary": "Today we are opening consultation on the next phase of our deregulation agenda to boost productivity and competition in the financial sector. We are cutting red tape across the financial services industry by $780 million a year which is\u2026",
+   "tag": "Minister",
+   "relevant": false
+  },
+  {
+   "source": "Financial Services minister",
+   "title": "Boosting competition and productivity in the financial sector",
+   "link": "https://ministers.treasury.gov.au/ministers/Daniel-Mulino-2025/media-releases/Boosting-competition-and-productivity-in-the-financial-sector",
+   "date": "2026-10-23T09:41+10:00",
+   "summary": "Today we are opening consultation on the next phase of our deregulation agenda to boost productivity and competition in the financial sector. We are cutting red tape across the financial services industry by $780 million a year which is\u2026",
+   "tag": "Minister",
+   "relevant": false
+  },
+  {
+   "source": "APRA",
+   "title": "APRA consults on confidentiality of data collected under SRS 604.0 RSE Licensee Profile",
+   "link": "https://www.apra.gov.au/news-and-publications/apra-consults-confidentiality-data-collected-under-srs-6040-rse-licensee",
+   "date": "2026-10-23T00:00+10:00",
+   "summary": "",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "AFCA",
+   "title": "Scams Prevention Framework - Australian Financial Complaints Authority (AFCA)",
+   "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE1vdW1DLXA5MnRpOVZvcHZYWHZibFUxdVU0TlFxUDV5bGR6WURTU3dPbFRZQ1pGeTNsZm51dFpsTDNKSjh2UmZ1ZjYwRTI4dVJJUzB3LW9Wa2I4c0dsYUZfaUdTeXdHcVJJLWNHLUhUYzNvQQ?oc=5",
+   "date": "2026-10-22T16:31+10:00",
+   "summary": "Scams Prevention Framework Australian Financial Complaints Authority (AFCA)",
+   "tag": "Complaints",
+   "relevant": true
+  },
+  {
+   "source": "AFCA",
+   "title": "Customer experience and service improvement - Australian Financial Complaints Authority (AFCA)",
+   "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPeEVBZzI0TUxwY0JRWl9iVTFieUkwUUhWTjJZMkZxRUt0OThVbGpwYTUyeWpYVXUtTmdINDBGUVVRel9ySGxlSnowTEc5OXZqSEdsb3V6WGd4N0tWc09wZVpWOFZzT1ZGX2J2V0xYYU9iRVlwLVpqTjY4TjBGTm9XQjljM1VBTnJF?oc=5",
+   "date": "2026-10-22T16:00+10:00",
+   "summary": "Customer experience and service improvement Australian Financial Complaints Authority (AFCA)",
+   "tag": "Complaints",
+   "relevant": true
+  },
+  {
+   "source": "AFCA",
+   "title": "Annual Review 2025-26 - Australian Financial Complaints Authority (AFCA)",
+   "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9weHhTME1FaThIQ3ZTZm94aDlBUnBJRDc1WEhVcFNZbWtRb0otaENwNFNydnQ5TDY4VHJycGFsbXZhRDV1WmtOTHZiZUNveXU2bmQ2UHlB?oc=5",
+   "date": "2026-10-22T15:28+10:00",
+   "summary": "Annual Review 2025-26 Australian Financial Complaints Authority (AFCA)",
+   "tag": "Complaints",
+   "relevant": true
+  },
+  {
+   "source": "AFCA",
+   "title": "Annual Review 2025-26: AFCA reports continued rise in complaints - Australian Financial Complaints Authority (AFCA)",
+   "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOenV6bmdLY2ZjemhSWWhFQVNob2NVblRrUHE0Tm5NMUZoMXVqdnA2QkJWalJWcjNEOVNCWUt1VFduV0pmTElUZVFCVktTSDJOVldhLUhRYWxwMnBJTWlfV3FHcS1MTFFhVnFKT2RFY0VpZmxDZEo4NzAzQ2JPbmllbEV4Nmp4d3k1b2Z3OUVVSHY2YlRqLWRPX1hqb0pvMlhSSjN5RXEyUzhHcVU?oc=5",
+   "date": "2026-10-22T10:35+10:00",
+   "summary": "Annual Review 2025-26: AFCA reports continued rise in complaints Australian Financial Complaints Authority (AFCA)",
+   "tag": "Complaints",
+   "relevant": true
+  },
+  {
+   "source": "ATO",
+   "title": "ATO targets promoters of early release of super schemes - Australian Taxation Office",
+   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQM2V4MHh6ZTNPdEJVbC1Tc2xJZEF5MUlIWHg0amtsLWJoaGlaRUxpcXpHMGVKZGVtSDJUTTIxWjBsQ3dxTk1FQ050ck00amE5QUVWZGxoN0lyeExSN3NDeDdYTDVNV0xuUGNPdVlGTDBSRmFRMXBwcXVoeFhweFVfTy0zbDRIY0U?oc=5",
+   "date": "2026-10-22T10:27+10:00",
+   "summary": "ATO targets promoters of early release of super schemes Australian Taxation Office",
+   "tag": "Tax",
+   "relevant": true
+  },
+  {
+   "source": "Federal Court",
+   "title": "Zhang v Commissioner of Taxation [2026] FCAFC 137",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/full/2026/2026fcafc0137",
+   "date": "2026-10-22T10:12+10:00",
+   "summary": "TAXATION \u2013 appeal from dismissal of application for judicial review \u2013 garnishee notice \u2013 allegations of fraud, misfeasance and maladministration not raised or particularised in originating application \u2013 leave to amend properly refused \u2013\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "ATO",
+   "title": "Consultation, open forums and speakers - Australian Taxation Office",
+   "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOdTJMOTFrdmJ3QmV1Ri1fd1lPd3lSNGNMdWRtVnduX2NLeFFqalJxeEhWUnlFc204dkZSc3U4QjNXa3RIQVZyaXRpMmFyUUc4YkFvZFlkT0pReC1qTW9oRFZ5ZlNPOTk5MURNTTZkd2Fka3lzSTlVSzU2dXNWU1daNGNFR3Z0Rzc0cW5sRDJXbXhBdjA0d0ZlZ3BqTlV0UE1oeEpKLUtsOUFZOHBiTElhTld4THdGamFtZDlfbURld2J3XzYxUTdMMEE5RUNibEdl?oc=5",
+   "date": "2026-10-22T09:17+10:00",
+   "summary": "Consultation, open forums and speakers Australian Taxation Office",
+   "tag": "Tax",
+   "relevant": false
+  },
+  {
+   "source": "ASIC",
+   "title": "26-253MR ASIC cancels Australian credit licence of Walker Stores Pty Ltd (in Liquidation) (Receivers and Managers Appointed)",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-253mr-asic-cancels-australian-credit-licence-of-walker-stores-pty-ltd-in-liquidation-receivers-and-managers-appointed",
+   "date": "2026-10-22T02:30+10:00",
+   "summary": "ASIC has cancelled the Australian credit licence of Walker Stores Pty Ltd (in Liquidation) (Walker Stores) following two payments of compensation by the Compensation Scheme of Last Resort (CSLR).",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "APRA",
+   "title": "APRA publishes Deputy Chair David Bradbury\u2019s speech to FSC Retirement Summit",
+   "link": "https://www.apra.gov.au/news-and-publications/apra-publishes-deputy-chair-david-bradburys-speech-fsc-retirement-summit",
+   "date": "2026-10-22T00:00+10:00",
+   "summary": "",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "ASIC",
+   "title": "26-252MR Visy and Pratt companies pay over $4.1 million in infringement notices for failing to lodge financial reports on time",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-252mr-visy-and-pratt-companies-pay-over-41-million-in-infringement-notices-for-failing-to-lodge-financial-reports-on-time",
+   "date": "2026-10-21T20:30+10:00",
+   "summary": "Infringement notices totalling $4.158 million have been paid by 21 companies within the Visy/Pratt group for allegedly failing to lodge their financial reports for the year ended 30 June 2025 on time.",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "ASIC",
+   "title": "26-251MR ASIC cancels AFS licence of Kyle Clifford Frost",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-251mr-asic-cancels-afs-licence-of-kyle-clifford-frost",
+   "date": "2026-10-21T19:07+10:00",
+   "summary": "ASIC has cancelled the Australian financial services (AFS) licence of NSW financial adviser Kyle Clifford Frost (AFS licence number 543780). The licence cancellation took effect on 15 October 2026.",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "ATO",
+   "title": "Disaster event support - Australian Taxation Office",
+   "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQYkdXUWpxRTc4MEVTZkxfZF9YZEFJb2RjRldTUTVfNEpONWMtcnRiNnphV2tPOG9xTTljWTYwamo4U2VqcUlhcGpqR2VHMFRXYUtBUGo2c1RWZmJYMW1uRWhtdnY5V2tiNU4wUXdrTnpLRmlXTmoxb3hfU0N0QU1uS0o5dW56TzZiVnVLSFFEMF9zVDlLSGNvcUk3VERfZVBRSjB2YVRXR1A4UHpqb2ZfbFVWelBwakpUSEk2a2trZFdyampu?oc=5",
+   "date": "2026-10-21T11:33+10:00",
+   "summary": "Disaster event support Australian Taxation Office",
+   "tag": "Tax",
+   "relevant": false
+  },
+  {
+   "source": "ASIC",
+   "title": "26-250MR Former Rex director Lim Kim Hai disqualified for 4 years and ordered to pay $800,000 penalty for directors\u2019 duties and continuous disclosure contraventions",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-250mr-former-rex-director-lim-kim-hai-disqualified-for-4-years-and-ordered-to-pay-800-000-penalty-for-directors-duties-and-continuous-disclosure-contraventions",
+   "date": "2026-10-20T22:00+10:00",
+   "summary": "The NSW Supreme Court has disqualified former Rex chief executive officer and executive chair Lim Kim Hai from managing corporations for four years and ordered him to pay a pecuniary penalty of $800,000.",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "ASIC",
+   "title": "26-249MR Panacea Capital director Brian Creigh charged with criminal offences",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-249mr-panacea-capital-director-brian-creigh-charged-with-criminal-offences",
+   "date": "2026-10-20T19:30+10:00",
+   "summary": "Brian Jacques Creigh, of Morton Bay, Queensland, has been charged with carrying on a financial services business without an Australian Financial Services (AFS) licence and dealing with proceeds of crime.",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "ATO",
+   "title": "Registered agent phone line - Australian Taxation Office",
+   "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNbkhkRG5UOTVvbGp3NjV2Mm54M2F3UVptMVhrTUFELWJXaGh6MWEwd1plVTZLS2xTXzNmaHFXN2VWcFFHRW1WVlNMVktPNjUxSW1yRm1HalhzNjVoTndxSHFhSHE5R0g2WHF3OHo2dXNBLTRJWDNsdXBYcGk5ZHZEQmJSNzJZa0p4SzNfNm9meTY0U0l1QVZXVDF4NERJQ2llWHQxb2VRcHVLZ3I5ZjZPeFo2Nk1FZmN2ZzJsb3haT2Q5WWc3SXYzYmhyVQ?oc=5",
+   "date": "2026-10-20T17:00+10:00",
+   "summary": "Registered agent phone line Australian Taxation Office",
+   "tag": "Tax",
+   "relevant": false
+  },
+  {
+   "source": "FAAA",
+   "title": "FAAA welcomes Government action on financial abuse",
+   "link": "https://faaa.au/faaa-welcomes-government-action-on-financial-abuse/",
+   "date": "2026-10-20T12:49+10:00",
+   "summary": "The Financial Advice Association Australia (FAAA) welcomes the Australian Government\u2019s response to the 2024 Parliamentary Joint Committee inquiry into financial abuse and its commitment to working with the financial services [\u2026] The post\u2026",
+   "tag": "Industry",
+   "relevant": true
+  },
+  {
+   "source": "Federal Court",
+   "title": "Gemi Asset Management Pty Ltd v Australian Securities and Investments Commission [2026] FCA 1562",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1562",
+   "date": "2026-10-20T11:44+10:00",
+   "summary": "PRACTICE AND PROCEDURE \u2013 costs \u2013 judicial review proceeding rendered otiose following withdrawal of impugned direction \u2013 proceeding concluding without adjudication on the merits \u2013 whether applicant had no reasonable alternative but to\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "ASIC",
+   "title": "26-248MR ASIC's annual report outlines strong enforcement and consumer outcomes",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-248mr-asics-annual-report-outlines-strong-enforcement-and-consumer-outcomes",
+   "date": "2026-10-20T00:30+10:00",
+   "summary": "ASIC published its Annual Report for 2025-26 which showed ASIC secured court orders for civil penalties of $830 million and helped secure more than $580 million in repayments and refunds for consumers and investors during 2025-26.",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "Treasury",
+   "title": "Raising the reporting threshold for large proprietary companies",
+   "link": "https://treasury.gov.au/consultation/c2026-811281",
+   "date": "2026-10-19T22:00+10:00",
+   "summary": "Open for comment until 02 November 2026",
+   "tag": "Consultation",
+   "relevant": false
+  },
+  {
+   "source": "ASIC",
+   "title": "26-247MR ASIC cancels Australian credit licence of MWL Financial Services Pty Ltd (In Liquidation)",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-247mr-asic-cancels-australian-credit-licence-of-mwl-financial-services-pty-ltd-in-liquidation",
+   "date": "2026-10-19T21:40+10:00",
+   "summary": "ASIC has cancelled the Australian credit licence of MWL Financial Services Pty Ltd (In Liquidation) ACN 095 907 574 (MWL) following a payment by the Compensation Scheme of Last Resort (CSLR).",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "Federal Court",
+   "title": "Australian Securities and Investments Commission v NGS Crypto Pty Ltd (No 7) [2026] FCA 1545",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1545",
+   "date": "2026-10-19T15:45+10:00",
+   "summary": "CORPORATIONS \u2013 interlocutory application \u2013 asset preservation orders under s 1323 of the Corporations Act 2001 (Cth) \u2013 undertaking given by non-party as condition of release of $135,000 to enable purchase of real property \u2013 application to\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "ATO",
+   "title": "Media grabs: Reminder to lodge - Australian Taxation Office",
+   "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5vbDZNZ0dhRlpyWExqVUc5TEhERVBZY3o0aTJVb283dEszdlhhNUlMdTdhd0UxOFBYS2NFQi1Cb3hSWUNtX05oY01oNzQ2WGdyN0E1dlRjSm1YNmpBeWt3MVcwb2hiZFF3OW5nUEVwOWFWM3M?oc=5",
+   "date": "2026-10-19T14:15+10:00",
+   "summary": "Media grabs: Reminder to lodge Australian Taxation Office",
+   "tag": "Tax",
+   "relevant": false
+  },
+  {
+   "source": "ATO",
+   "title": "CGT reform \u2013 guidance and market valuations - Australian Taxation Office",
+   "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPLWRVVzhURjd5eklKdEFLTUZseERaRnBjZkRtX1ZkUm9rcV9FajFtMXQ1MVBlTXZVSVNaR1VlQ2dhcF8yclQ2M3QzeHlyZlMySEJBWmJjd1JkUlJEU1Q1VHBoaDhUeDZBdHJFTEtfU3JVZlE2a05NTC0tREVULTh0LWhmdlVwZ1N3eVdVdHJPQVBiMWxnTEFXNDZfazNmSmZnZ3NuZjBWSXl4ZS13bW5CM1FTVktjc1NaN0dCRXRyN3ZSd0xSR25yOFN3cUNzZFVyVTVtd2NkU3A?oc=5",
+   "date": "2026-10-19T13:17+10:00",
+   "summary": "CGT reform \u2013 guidance and market valuations Australian Taxation Office",
+   "tag": "Tax",
+   "relevant": false
+  },
+  {
+   "source": "Treasurer",
+   "title": "Raising reporting thresholds for proprietary companies",
+   "link": "https://ministers.treasury.gov.au/ministers/Jim-Chalmers-2022/media-releases/Raising-reporting-thresholds-for-proprietary-companies",
+   "date": "2026-10-19T10:16+10:00",
+   "summary": "The Albanese Government is delivering reforms to reduce regulatory burden on business by making company reporting better targeted and more effective. These changes will save business over $210 million in compliance costs each year and are\u2026",
+   "tag": "Minister",
+   "relevant": false
+  },
+  {
+   "source": "Treasurer",
+   "title": "APEC Finance Ministers\u2019 Meeting",
+   "link": "https://ministers.treasury.gov.au/ministers/Jim-Chalmers-2022/media-releases/APEC-Finance-Ministers%E2%80%99-Meeting",
+   "date": "2026-10-19T09:09+10:00",
+   "summary": "On Tuesday I will join my international counterparts at the Asia\u2011Pacific Economic Cooperation (APEC) Finance Ministers\u2019 Meeting in Hong Kong, meet bilaterally with the Chinese Finance Minister, and engage with big investors from across\u2026",
+   "tag": "Minister",
+   "relevant": true
+  },
+  {
+   "source": "ASIC",
+   "title": "26-246MR ASIC bans former MWL financial adviser Pardeep Singh for four years",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-246mr-asic-bans-former-mwl-financial-adviser-pardeep-singh-for-four-years",
+   "date": "2026-10-16T22:15+10:00",
+   "summary": "ASIC has banned former MWL Financial Services Pty Ltd (MWL) financial adviser Pardeep Singh (authorised representative number 001264972) from providing any financial services for four years.",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (Amendment) Instrument 2026/708",
+   "link": "https://www.legislation.gov.au/F2026L01391/asmade",
+   "date": "2026-10-16T20:58+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "Corporations (Financial Services Compensation Scheme of Last Resort Operator \u2013 Independent Member and Chair) Appointment (No. 1) 2026",
+   "link": "https://www.legislation.gov.au/F2026N00768/asmade",
+   "date": "2026-10-16T19:02+10:00",
+   "summary": "NotifiableInstrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "ATO",
+   "title": "Better Targeted Superannuation Concessions Working Group key messages August 2026 - Australian Taxation Office",
+   "link": "https://news.google.com/rss/articles/CBMi2gJBVV95cUxNQTdTZXliOGN1MmFERDZZdTA0N2IxcGdXNzNhV3hPSkhrWXg0QmJjbjVVT1dvSkI0S0hMa1JIb1d0eDlQZDFwcUY5TEVGX3Y2M0U1bW9CX0VrV1FtYUduNzRMQmIwcmcwZE9MbzUxcEtuaDRnTFcwN1pZZlhGeTZCYkMwRjd5cFNXdGdzMTh0TWtvbllpcENXd1dvVWVOcWR3WnZnRzJBbFlkUWtMdGJXU3ZIMDVORUxwMGJ0TzZTRWg1OXpLMXZHbmdPTl9FUnpMRkFPUWs5aUVyMnRYeW9tVzdtNmM3MVZGd3J6ZlhwU2NYUWMtXzVxd245c0gwMnhqcjFrdHhXUjhoZnhsZmdWZDM1UXhUR1dnS05vZzFQTmEycVJRVFNFa2F5dldxUXhOdkp6Yk5XNGtobk5QckVha2Y2ZnlWTXVIRngzbGlMMnZrVFFta3dYYl93?oc=5",
+   "date": "2026-10-16T17:00+10:00",
+   "summary": "Better Targeted Superannuation Concessions Working Group key messages August 2026 Australian Taxation Office",
+   "tag": "Tax",
+   "relevant": true
+  },
+  {
+   "source": "ATO",
+   "title": "Help with paying - Australian Taxation Office",
+   "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNRzVpc29ueHk3cVVWaEJYVXV2R0g0ZFBPb0pmOEw2SzEyS1Z3QXVnWVExOGJPSUlNY2czRll6SFp5cm5OMW10d1B4MWJ0TjV0aUJtdmJRSG5jWlBJYXAwX3dTNmYweTI4S29lSkhhZFA5dmtOVGdiVjBRQVJwZHdQMEhIdUhfNGtlSXZSeDVJM0NMUTMzSEhpRGNB?oc=5",
+   "date": "2026-10-16T17:00+10:00",
+   "summary": "Help with paying Australian Taxation Office",
+   "tag": "Tax",
+   "relevant": false
+  },
+  {
+   "source": "AFCA",
+   "title": "AFCA welcomes new members ahead of expanded scams role - Australian Financial Complaints Authority (AFCA)",
+   "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQM0c4YjlxVmVweFRYS0g0LTg0RGV2QVFvQWoyYktXQ0RrNmFjN1BIQ0VscVl1a1VSQTExQmRNbnlwLVFJWkwzWmVXSmVQNHpwZFFWR21OSGZhZ3ZkTmJrNmdPdUZwajNwYU1JaEtnay1HdGNSTXVkZ0FTZmtaNV83MDJmLTR3dExaSDFlaW5RVGROajhVZ1YxRUt6RQ?oc=5",
+   "date": "2026-10-16T17:00+10:00",
+   "summary": "AFCA welcomes new members ahead of expanded scams role Australian Financial Complaints Authority (AFCA)",
+   "tag": "Complaints",
+   "relevant": true
+  },
+  {
+   "source": "Financial Services minister",
+   "title": "Appointments \u2013 Members \u2013 Tax Practitioners Board",
+   "link": "https://ministers.treasury.gov.au/ministers/Daniel-Mulino-2025/media-releases/Appointments-%E2%80%93-Members-%E2%80%93-Tax-Practitioners-Board",
+   "date": "2026-10-16T08:38+10:00",
+   "summary": "The Albanese Government has appointed Mr Mark Friezer and Ms Paula Tallon Bennett as part\u2011time members of the Tax Practitioners Board (TPB). The TPB is the national body responsible for the registration and regulation of tax\u2026",
+   "tag": "Minister",
+   "relevant": true
+  },
+  {
+   "source": "Treasurer",
+   "title": "First meeting between UK Chancellor Healey and Australian Treasurer Chalmers",
+   "link": "https://ministers.treasury.gov.au/ministers/Jim-Chalmers-2022/media-releases/First-meeting-between-UK-Chancellor-Healey-and-Australian-Treasurer-Chalmers",
+   "date": "2026-10-16T07:59+10:00",
+   "summary": "UK Chancellor of the Exchequer, the Rt Hon John Healey MP, and Australian Treasurer, the Hon Dr Jim Chalmers MP, have met on the sidelines of the IMF-World Bank Group Annual Meetings and G20 Finance Ministers Meeting in Bangkok, Thailand.\u2026",
+   "tag": "Minister",
+   "relevant": false
+  },
+  {
+   "source": "APRA",
+   "title": "APRA and ASIC publish latest data on life insurance claims and disputes \u2013 June 2026",
+   "link": "https://www.apra.gov.au/news-and-publications/apra-and-asic-publish-latest-data-life-insurance-claims-and-disputes-june-3",
+   "date": "2026-10-16T00:00+10:00",
+   "summary": "",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "Treasury",
+   "title": "Crypto asset tax transparency - draft legislation",
+   "link": "https://treasury.gov.au/consultation/c2026-813391",
+   "date": "2026-10-15T22:00+10:00",
+   "summary": "Open for comment until 28 October 2026",
+   "tag": "Consultation",
+   "relevant": false
+  },
+  {
+   "source": "ATO",
+   "title": "Public CBC reporting lodgment deferral - Australian Taxation Office",
+   "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNOXhiemlWbFpnUnlpcXFnMzdvajJzdWRhWjl4S2pjZmRudENlSmtYdmhsLTNBOEV6WWRxckFYOUpqUHYyRWlnR1p6WGtlUmJwVHVhdFBabms1MjZVbXZjcXlQTTJadXdEUzkxaXJfS1JHTVNmLW4wNkhicE1SNXJ1ZXY4M3RYb0I5NHZTa3EwSk5zcjBvUGthSnRBcThmM2JKX2VYTTRsbmZCNkxWQWtudm5xd3lhX1VMVWc?oc=5",
+   "date": "2026-10-15T20:57+10:00",
+   "summary": "Public CBC reporting lodgment deferral Australian Taxation Office",
+   "tag": "Tax",
+   "relevant": false
+  },
+  {
+   "source": "ASIC",
+   "title": "26-245MR ASIC consults on implementation of new digital asset laws",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-245mr-asic-consults-on-implementation-of-new-digital-asset-laws",
+   "date": "2026-10-15T18:30+10:00",
+   "summary": "ASIC has today commenced consultation on guidance and standards to implement new laws for digital asset platforms and tokenised custody platforms commencing on 8 April 2027.",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "AFCA",
+   "title": "Update on Interprac complaints - Australian Financial Complaints Authority (AFCA)",
+   "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE44NWkyN2lCcE5mTEVtQnUwWFh0cUs3NEc1YV9fZ3BvWkE0M1JfM1BUNUJORWd6RmFodEp4dGRvZFlTSHZwVjVJR1BqUENyLTE3bFQxQVRuWnljNkdjSklyREpPS2VtQzNhTUF4aWF6akNORVhYSlVKclFEbw?oc=5",
+   "date": "2026-10-15T17:00+10:00",
+   "summary": "Update on Interprac complaints Australian Financial Complaints Authority (AFCA)",
+   "tag": "Complaints",
+   "relevant": true
+  },
+  {
+   "source": "APRA",
+   "title": "APRA welcomes Basel endorsement of Australia\u2019s bank leverage ratio framework",
+   "link": "https://www.apra.gov.au/news-and-publications/apra-welcomes-basel-endorsement-australias-bank-leverage-ratio-framework",
+   "date": "2026-10-15T00:00+10:00",
+   "summary": "",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "APRA",
+   "title": "APRA and RBNZ complete joint bank stress test to promote trans-Tasman resilience",
+   "link": "https://www.apra.gov.au/news-and-publications/apra-and-rbnz-complete-joint-bank-stress-test-promote-trans-tasman-resilience",
+   "date": "2026-10-15T00:00+10:00",
+   "summary": "",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "Treasury",
+   "title": "Tackling fraud and financial abuse",
+   "link": "https://treasury.gov.au/consultation/c2026-812389",
+   "date": "2026-10-14T22:00+10:00",
+   "summary": "Open for comment until 27 November 2026",
+   "tag": "Consultation",
+   "relevant": false
+  },
+  {
+   "source": "ASIC",
+   "title": "26-244MR Fortnum Private Wealth penalised $1.35 million for cybersecurity failures",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-244mr-fortnum-private-wealth-penalised-135-million-for-cybersecurity-failures",
+   "date": "2026-10-14T19:30+10:00",
+   "summary": "Fortnum Private Wealth Ltd has been ordered by the Supreme Court of NSW to pay a $1.35 million penalty after admitting it failed to adequately manage cybersecurity risks across its financial advice network.",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "ASIC",
+   "title": "26-243MR ASIC review highlights need for stronger scrutiny of super fund valuations",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-243mr-asic-review-highlights-need-for-stronger-scrutiny-of-super-fund-valuations",
+   "date": "2026-10-14T19:00+10:00",
+   "summary": "ASIC\u2019s second review into the financial reporting and audit of superannuation funds has found further improvement is needed in how some super funds and auditors assess and scrutinise the value of unlisted investments.",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "Treasurer",
+   "title": "IMF-World Bank Group Annual Meetings and G20 Finance Ministers and Central Bank Governors Meeting in Bangkok, Thailand",
+   "link": "https://ministers.treasury.gov.au/ministers/Jim-Chalmers-2022/media-releases/IMF-World-Bank-Group-Annual-Meetings-and-G20-Finance-Ministers-and-Central-Bank-Governors-Meeting-in-Bangkok%2C-Thailand",
+   "date": "2026-10-14T16:52+10:00",
+   "summary": "Tomorrow I will join international counterparts in Bangkok for the IMF\u2011World Bank Group Annual Meetings and G20 Finance Ministers and Central Bank Governors Meeting. This is all about working with other countries to manage the economic\u2026",
+   "tag": "Minister",
+   "relevant": true
+  },
+  {
+   "source": "AFCA",
+   "title": "AFCA Word template - Australian Financial Complaints Authority (AFCA)",
+   "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQMDZaV1MtSWtZaW1ZRVpqWWo2RE1xTGNpTzFheEZoc0E3eFV5cmlzWjNiOFRtYWxkb0piWVI1Xy1sQ1RKaDQyc2N2R1ozaDFIeGZnOVRjUEJBQWowaWIwZXJCWGNnUnUtckJvaTNSZVFOQVRBbUI0YlduR0Y4eDZVZUgtbko5c2ZBTGQxa1o4R2dUckE?oc=5",
+   "date": "2026-10-14T16:41+10:00",
+   "summary": "AFCA Word template Australian Financial Complaints Authority (AFCA)",
+   "tag": "Complaints",
+   "relevant": true
+  },
+  {
+   "source": "Federal Court",
+   "title": "Deputy Commissioner of Taxation v Medicheckr Pty Ltd [2026] FCA 1524",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1524",
+   "date": "2026-10-14T15:43+10:00",
+   "summary": "CORPORATIONS \u2013 application for order to wind up company in insolvency \u2013 where non-compliance with statutory demand \u2013 ss 459A and 459P of the Corporations Act 2001 (Cth) \u2013 discretion to order winding up \u2013 order winding up company made\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "RBA",
+   "title": "Appointment of Chief Risk Officer",
+   "link": "https://www.rba.gov.au/media-releases/2026/mr-26-29.html",
+   "date": "2026-10-14T13:00+10:00",
+   "summary": "Media release number 2026-29: Rachael Phelan has been appointed as Chief Risk Officer at the RBA, leading our Risk function and responsible for the delivery of the Bank's risk strategy.",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "Treasurer",
+   "title": "Tax reform for a fairer tax system",
+   "link": "https://ministers.treasury.gov.au/ministers/Jim-Chalmers-2022/media-releases/Tax-reform-for-a-fairer-tax-system",
+   "date": "2026-10-14T09:13+10:00",
+   "summary": "The Albanese Government has introduced the next tranche of legislation to implement the most ambitious tax reform package in a generation. These reforms are all about making the tax system fairer and more sustainable and funding income\u2026",
+   "tag": "Minister",
+   "relevant": true
+  },
+  {
+   "source": "Financial Services minister",
+   "title": "Albanese government advancing reforms to combat financial abuse",
+   "link": "https://ministers.treasury.gov.au/ministers/Daniel-Mulino-2025/media-releases/Albanese-government-advancing-reforms-to-combat-financial-abuse",
+   "date": "2026-10-14T08:39+10:00",
+   "summary": "The Albanese Government is strengthening protections for victim\u2011survivors of financial abuse through reforms across superannuation, tax, corporate accountability, and child support. Today, the Government has tabled its response to the\u2026",
+   "tag": "Minister",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "Financial Sector (Shareholdings) approval to hold a stake No. 19 of 2026 \u2013 Guild Insurance Limited",
+   "link": "https://www.legislation.gov.au/F2026N00755/asmade",
+   "date": "2026-10-14T00:58+10:00",
+   "summary": "NotifiableInstrument",
+   "tag": "New law or instrument",
+   "relevant": false
+  },
+  {
+   "source": "APRA",
+   "title": "APRA releases latest Points of Presence Statistics for authorised deposit-taking institutions",
+   "link": "https://www.apra.gov.au/news-and-publications/apra-releases-latest-points-presence-statistics-authorised-deposit-taking-2026",
+   "date": "2026-10-14T00:00+10:00",
+   "summary": "",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "APRA",
+   "title": "APRA publishes 2025-26 Annual Report",
+   "link": "https://www.apra.gov.au/news-and-publications/apra-publishes-2025-26-annual-report",
+   "date": "2026-10-14T00:00+10:00",
+   "summary": "",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "ASIC",
+   "title": "26-242MR Former financial adviser Ezzat-Daniel Nesseim charged with breaching ASIC banning orders",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-242mr-former-financial-adviser-ezzat-daniel-nesseim-charged-with-breaching-asic-banning-orders",
+   "date": "2026-10-13T23:30+10:00",
+   "summary": "Former NSW financial adviser Ezzat-Daniel Nesseim, of Pymble, NSW, appeared today in the Sydney Downing Centre Local Court, charged with seven offences of engaging in conduct in breach of permanent banning orders issued by ASIC.",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "ASIC",
+   "title": "26-241MR ASIC issues DDO stop order against Fidante Partners Limited for TMD deficiencies",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-241mr-asic-issues-ddo-stop-order-against-fidante-partners-limited-for-tmd-deficiencies",
+   "date": "2026-10-13T21:00+10:00",
+   "summary": "ASIC has made an interim stop order preventing Fidante Partners Limited (Fidante) from issuing Class A units in the Ares Global Credit Income Fund (Product) over concerns its target market determination (TMD) is not appropriate.",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "ASIC",
+   "title": "26-228MR NSW concrete contractor Ali Youssef charged with dishonesty offences and dealing with proceeds of crime",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-228mr-nsw-concrete-contractor-ali-youssef-charged-with-dishonesty-offences-and-dealing-with-proceeds-of-crime",
+   "date": "2026-10-13T20:00+10:00",
+   "summary": "Ali Youssef, a director of Allscope Concrete & Pumping Pty Ltd (Allscope), has been charged with dishonestly using his position as a company director and dealing with proceeds of crime.",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "ASIC",
+   "title": "26-240MR ASIC review finds room for improvement in mortgage brokers\u2019 best interests duty practices",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-240mr-asic-review-finds-room-for-improvement-in-mortgage-brokers-best-interests-duty-practices",
+   "date": "2026-10-13T19:00+10:00",
+   "summary": "An ASIC review has found the mortgage broking industry should strengthen how it demonstrates that home loan recommendations are in their customers\u2019 best interests.",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "ATO",
+   "title": "Overseas obligations when repaying loans - Australian Taxation Office",
+   "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOaGdBMzlxWFU0TVdVeFpDZEpiREl2c0JxaTFvbFMycVA5S25wc1FEcmZrbG5LT1VLVXRyU2VKOEdwQkZ5Qll2UHF6VkZKelY1NEpfT1dYTDlCSElSNDZjaDNxSTRPUDZPSGhLZzdQRnZyM010OE4tRVZ4bE5oVVh0LVVlM0kzTi1DMEkza2tmZl9hNHg5US1ySmdxckZrajNsX1E?oc=5",
+   "date": "2026-10-13T17:00+10:00",
+   "summary": "Overseas obligations when repaying loans Australian Taxation Office",
+   "tag": "Tax",
+   "relevant": false
+  },
+  {
+   "source": "ATO",
+   "title": "FBT changes to salary sacrificed work-related benefits - Australian Taxation Office",
+   "link": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOTVNXOXQ5aHZ2bVpWT3dLM1BWZWVMY1F4ZzVOY0tOc1FHZnRjQzk5UU5VUVJ0eGpCNEtLQURMSlR0N0xCMTBTeW1uXzZYMXgyS3lBNXh4WU1aa0FFaGowM1d0U2oyaDBrc2s3M20xRklWeHBmdXNuQThzX09RMVVnWGdkYW5uaXpnV2FFUUhtTnhnUkl0WjB4eWZyVkNfek94eFA3aFU1M3IzWG91d3NBbGJRQ0lrdGtHQVk1THc3dTY4cDlqbXdnWnd5a1dMSXY3cmdtMmxSeDRQYnFiX3h2VVZraWh6T09KbXh6bDc3dmE?oc=5",
+   "date": "2026-10-13T17:00+10:00",
+   "summary": "FBT changes to salary sacrificed work-related benefits Australian Taxation Office",
+   "tag": "Tax",
+   "relevant": false
+  },
+  {
+   "source": "ATO",
+   "title": "Reconciliation Action Plan 2025\u201326 end-of-year achievements - Australian Taxation Office",
+   "link": "https://news.google.com/rss/articles/CBMigwJBVV95cUxOZDh4WEZIdnRJc0hCdWJPZUJJNlFVZ05nS3VKcGtiVXYzdFRQRnRlV0NhckVGcWgtQWJaQlBlbS11T2dOOFhRdC13cnVleU4zSW5PU3FjdmE2OElqaEw4a2pBbVRqTEpXUlhJbUhRZ01kanBBYjN2V09Lc0pNeXc4cUtmZV8zZFNWYk4tNS1rXzhFOVlwRWJnajZWQnpRYWppUUpVZm01Smp2UlF6WThYUVo0RS0wcURTUEItdFZtNjZVU3FaRlRWTVlhMjlCRFJTX2JVaUhFRnI4c3h1M3JBY3NxdEtTelZpc2Q2bTIzQjJfa0ZLNl8tVXNLMTlHZDNFQnBJ?oc=5",
+   "date": "2026-10-13T03:29+10:00",
+   "summary": "Reconciliation Action Plan 2025\u201326 end-of-year achievements Australian Taxation Office",
+   "tag": "Tax",
+   "relevant": false
+  },
+  {
+   "source": "Legislation",
+   "title": "Corporations (Financial Services Compensation Scheme of Last Resort\u2014Special Levy) Determination 2026",
+   "link": "https://www.legislation.gov.au/F2026L01379/asmade",
+   "date": "2026-10-12T23:40+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "ASIC",
+   "title": "26-239MR ASIC moves to extend and strengthen CFD consumer protections",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-239mr-asic-moves-to-extend-and-strengthen-cfd-consumer-protections",
+   "date": "2026-10-12T20:00+10:00",
+   "summary": "ASIC is seeking feedback on its proposal to extend and amend the consumer protection measures governing contracts for difference (CFDs), with the product intervention order (PIO) proposed to remain in place for a further 10 years.",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "ASIC",
+   "title": "26-238MR ASIC Annual Forum 2026 explores how Australia can stay ahead of the next wave of global change",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-238mr-asic-annual-forum-2026-explores-how-australia-can-stay-ahead-of-the-next-wave-of-global-change",
+   "date": "2026-10-12T19:00+10:00",
+   "summary": "ASIC has released the program for its Annual Forum 2026, which will bring together leaders from business, financial services, markets, government, and the community in Sydney on 17 and 18 November.",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "ASIC",
+   "title": "26-237MR Full Federal Court dismisses appeal by former auditor Reginald Lance Williams",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-237mr-full-federal-court-dismisses-appeal-by-former-auditor-reginald-lance-williams",
+   "date": "2026-10-10T02:00+10:00",
+   "summary": "The Full Court of the Federal Court has dismissed an appeal by former registered company auditor Reginald Lance Williams, upholding an earlier judgment and leaving in place a disciplinary decision cancelling his registration as a company\u2026",
+   "tag": "Enforcement",
+   "relevant": true
+  },
+  {
+   "source": "ASIC",
+   "title": "26-235MR ASIC cancels liquidator registration of James Gerard Thackray",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-235mr-asic-cancels-liquidator-registration-of-james-gerard-thackray",
+   "date": "2026-10-09T23:00+10:00",
+   "summary": "ASIC has cancelled the liquidator registration of James Gerard Thackray for failing to pay Industry Funding Model levies (IFM Levies) and associated late payment penalties for at least 12 months after their due date.",
+   "tag": "Enforcement",
+   "relevant": true
+  },
+  {
+   "source": "Treasurer",
+   "title": "Another ratings agency affirms Australia's AAA credit rating",
+   "link": "https://ministers.treasury.gov.au/ministers/Jim-Chalmers-2022/media-releases/Another-ratings-agency-affirms-Australia%26#039;s-AAA-credit-rating",
+   "date": "2026-10-09T18:55+10:00",
+   "summary": "The international ratings agency Fitch has just reaffirmed Australia\u2019s AAA credit rating. This is another clear endorsement of Australia\u2019s strong economic fundamentals and this Government\u2019s responsible economic management. All three major\u2026",
+   "tag": "Minister",
+   "relevant": true
+  },
+  {
+   "source": "Federal Court",
+   "title": "Bekier, in the matter of an application by Bekier [2026] FCA 1499",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1499",
+   "date": "2026-10-09T15:08+10:00",
+   "summary": "CORPORATIONS \u2013 application under s 206G(1) of the Corporations Act 2001 (Cth) for leave to manage company \u2013 company acts solely as trustee of family self-managed superannuation fund \u2013 limited risk to third parties or public \u2013 ASIC\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "Federal Court",
+   "title": "Chambers v Hunter [2026] FCA 1502",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1502",
+   "date": "2026-10-09T13:02+10:00",
+   "summary": "CORPORATIONS \u2013 application to set aside orders of Registrar appointing receivers and managers to trusts \u2013 where Registrar lacked power to appoint receivers \u2013 whether orders should be set aside under r 39.05 of the Federal Court Rules 2011\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "Federal Court",
+   "title": "Macrolend Pty Ltd v Deputy Commissioner of Taxation [2026] FCA 1501",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1501",
+   "date": "2026-10-09T12:57+10:00",
+   "summary": "PRACTICE AND PROCEDURE \u2013 application for recusal on ground of apprehended bias \u2013 where spouse of judge made previous findings of fact with some overlap to the issues in dispute \u2013 whether logical connection between prior findings and\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "Treasurer",
+   "title": "Changes to disaster recovery funding arrangement reforms to support Australian communities",
+   "link": "https://ministers.treasury.gov.au/ministers/Jim-Chalmers-2022/media-releases/Changes-to-disaster-recovery-funding-arrangement-reforms-to-support-Australian-communities",
+   "date": "2026-10-09T12:00+10:00",
+   "summary": "The Albanese Government will change the proposed new Disaster Recovery Funding Framework to deliver more funding for communities after disasters, following extensive consultation. This means more certain funding for communities across the\u2026",
+   "tag": "Minister",
+   "relevant": false
+  },
+  {
+   "source": "Treasurer",
+   "title": "ATO to continue accepting credit cards until 30 June 2027",
+   "link": "https://ministers.treasury.gov.au/ministers/Jim-Chalmers-2022/media-releases/ATO-to-continue-accepting-credit-cards-until-30-June-2027",
+   "date": "2026-10-09T11:22+10:00",
+   "summary": "The Albanese Government has stepped in to ensure small businesses and other taxpayers have a longer transition period before the ATO phases out credit card payments. This decision is about putting small business first. Australian small\u2026",
+   "tag": "Minister",
+   "relevant": false
+  },
+  {
+   "source": "Federal Court",
+   "title": "Australian Securities and Investments Commission v Hollard Insurance Partners Limited [2026] FCA 1487",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1487",
+   "date": "2026-10-09T09:16+10:00",
+   "summary": "INSURANCE \u2013 agreed contravention of the Insurance Contracts Act 1984 (Cth) \u2013 single contravention constituted by combined failures in claims handling in respect of an insured couple over an extended period \u2013 principles applicable to\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "ASIC",
+   "title": "26-234MR ASIC halts offers in mortgage schemes managed by Australian Secure Capital Fund",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-234mr-asic-halts-offers-in-mortgage-schemes-managed-by-australian-secure-capital-fund",
+   "date": "2026-10-08T20:30+10:00",
+   "summary": "ASIC has made an interim stop order on the product disclosure statement (PDS) issued by Australian Secure Capital Fund Limited (ASCF) offering units in three registered managed investment schemes.",
+   "tag": "Enforcement",
+   "relevant": true
+  },
+  {
+   "source": "Federal Court",
+   "title": "Safarimaznabi v Commissioner of Taxation (No 3) [2026] FCA 1479",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1479",
+   "date": "2026-10-08T09:23+10:00",
+   "summary": "PRACTICE AND PROCEDURE \u2013 application under rr 39.04 and 39.05 of the Federal Court Rules 2011 (Cth) to vary or set aside costs order \u2013 where costs order made against applicant in respect of respondents\u2019 strike out applications \u2013 where\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "ASIC",
+   "title": "26-233MR ASIC sues Osama Saad alleging conflicted remuneration avoidance schemes and advice failures",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-233mr-asic-sues-osama-saad-alleging-conflicted-remuneration-avoidance-schemes-and-advice-failures",
+   "date": "2026-10-07T21:13+10:00",
+   "summary": "ASIC has commenced civil penalty proceedings against former financial adviser Osama Saad, alleging he carried out schemes to avoid conflicted remuneration laws and contravened his best interest obligations when providing financial advice\u2026",
+   "tag": "Enforcement",
+   "relevant": true
+  },
+  {
+   "source": "Treasurer",
+   "title": "Dwelling commencements, completions up in June quarter",
+   "link": "https://ministers.treasury.gov.au/ministers/Jim-Chalmers-2022/media-releases/Dwelling-commencements%2C-completions-up-in-June-quarter",
+   "date": "2026-10-07T12:46+10:00",
+   "summary": "New ABS data shows dwelling commencements and completions increased substantially in the June quarter, after the Budget. Commencements and completions are both up in these figures but were both falling when we came to office. These are\u2026",
+   "tag": "Minister",
+   "relevant": false
+  },
+  {
+   "source": "Federal Court",
+   "title": "Australian Securities and Investments Commission v Star Investment Group Australia Pty Ltd (No 2) [2026] FCA 1472",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1472",
+   "date": "2026-10-07T11:41+10:00",
+   "summary": "CORPORATIONS \u2013 previous interim ex parte freezing and travel restraint orders \u2013 investment scheme under investigation by Australian Securities and Investments Commission \u2013 Corporations Act 2001 (Cth) s 1323 \u2013 interim orders continued \u2013\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "Federal Court",
+   "title": "Australian Securities and Investments Commission v Keystone Asset Management Limited (receivers and managers appointed) (in liquidation) (No 6) [2026] FCA 1463",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1463",
+   "date": "2026-10-07T09:04+10:00",
+   "summary": "CORPORATIONS \u2013 external administration \u2013 where receivers and managers appointed \u2013 where company in liquidation \u2013 where receivers and managers and liquidators sought judicial advice relating to an interim distribution of funds to\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "Financial Sector (Collection of Data) (reporting standard) determination No. 10 of 2026",
+   "link": "https://www.legislation.gov.au/F2026L01360/asmade",
+   "date": "2026-10-06T21:16+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": false
+  },
+  {
+   "source": "Legislation",
+   "title": "Financial Sector (Collection of Data) (reporting standard) determination No. 9 of 2026",
+   "link": "https://www.legislation.gov.au/F2026L01358/asmade",
+   "date": "2026-10-06T19:13+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": false
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (Amendment) Instrument 2026/772",
+   "link": "https://www.legislation.gov.au/F2026L01343/asmade",
+   "date": "2026-10-01T22:05+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "Federal Court",
+   "title": "Sunna v Commissioner of Taxation [2026] FCAFC 133",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/full/2026/2026fcafc0133",
+   "date": "2026-10-01T15:19+10:00",
+   "summary": "TAXATION \u2013 appeal from judgment of primary judge dismissing taxpayer\u2019s appeal in part \u2013 where taxpayer entered into contract for disposal of CGT asset in 2019 Year \u2013 where taxpayer disposed of asset in 2023 Year \u2013 where taxpayer deemed to\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "Federal Court",
+   "title": "Deputy Commissioner of Taxation v Kuppan (ex parte Freezing Order) [2026] FCA 1444",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1444",
+   "date": "2026-10-01T11:28+10:00",
+   "summary": "PRACTICE AND PROCEDURE \u2013 ex parte application for freezing orders \u2013 orders made",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "Financial Services minister",
+   "title": "Credit and debit card surcharges end today",
+   "link": "https://ministers.treasury.gov.au/ministers/Daniel-Mulino-2025/media-releases/Credit-and-debit-card-surcharges-end-today",
+   "date": "2026-10-01T10:32+10:00",
+   "summary": "Consumers will no longer pay around $1.6 billion in card surcharges when debit and credit surcharging ends today. These changes are all about taking pressure off consumers and businesses and helping with the cost of living. Australians\u2026",
+   "tag": "Minister",
+   "relevant": false
+  },
+  {
+   "source": "Federal Court",
+   "title": "Seal v Australian Securities and Investments Commission, in the matter of Berwick South Enterprises Pty Ltd (Deregistered) [2026] FCA 1441",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1441",
+   "date": "2026-10-01T09:41+10:00",
+   "summary": "CORPORATIONS \u2013 reinstatement of companies \u2013 administrative requirements overlooked \u2013 disclosure of litigation to liquidator \u2013 relief from potential liability - termination of winding up \u2013 orders made",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "Financial Services minister",
+   "title": "Share of large companies paying income tax reaches record high",
+   "link": "https://ministers.treasury.gov.au/ministers/Daniel-Mulino-2025/media-releases/Share-of-large-companies-paying-income-tax-reaches-record-high",
+   "date": "2026-10-01T09:08+10:00",
+   "summary": "A record share of Australia\u2019s large companies are paying income tax, according to the latest ATO corporate tax transparency report. Australians expect big business to pay their fair share of tax, just like Australian workers do. The\u2026",
+   "tag": "Minister",
+   "relevant": false
+  },
+  {
+   "source": "Federal Court",
+   "title": "Kerrigan Law Pty Ltd v Commissioner of Taxation [2026] FCA 1438",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1438",
+   "date": "2026-09-30T11:03+10:00",
+   "summary": "PRACTICE AND PROCEDURE \u2013 application to amend further amended originating application \u2013 where amendments introduce further grounds of judicial review \u2013 where additional grounds do not require further evidence \u2013 where respondent contends\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "APRA",
+   "title": "APRA releases proposals to strengthen trustee investment governance",
+   "link": "https://www.apra.gov.au/news-and-publications/apra-releases-proposals-strengthen-trustee-investment-governance",
+   "date": "2026-09-30T00:00+10:00",
+   "summary": "",
+   "tag": "Media release",
+   "relevant": true
+  },
+  {
+   "source": "APRA",
+   "title": "APRA releases Monthly Authorised Deposit-taking Institution Statistics for August 2026",
+   "link": "https://www.apra.gov.au/news-and-publications/apra-releases-monthly-authorised-deposit-taking-institution-statistics-56",
+   "date": "2026-09-30T00:00+10:00",
+   "summary": "",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "Federal Court",
+   "title": "Australian Securities and Investments Commission v Ryzon Materials Limited (Interim Injunction) [2026] FCA 1428",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1428",
+   "date": "2026-09-29T14:04+10:00",
+   "summary": "CORPORATIONS \u2013 application for interim injunction pursuant to s 1324(4) of the Corporations Act 2001 (Cth) \u2013 proposed capital reduction pursuant to s 256B of the Corporations Act \u2013 where liability judgment reserved \u2013 where material\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "APRA",
+   "title": "APRA releases intermediated general insurance statistics for June 2026",
+   "link": "https://www.apra.gov.au/news-and-publications/apra-releases-intermediated-general-insurance-statistics-june-2026",
+   "date": "2026-09-29T00:00+10:00",
+   "summary": "",
+   "tag": "Media release",
+   "relevant": false
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (Wholly-owned Companies) Instrument 2026/533",
+   "link": "https://www.legislation.gov.au/F2026L01307/asmade",
+   "date": "2026-09-28T21:24+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "Federal Court",
+   "title": "Commissioner of Taxation v Li (No 2) [2026] FCA 1424",
+   "link": "https://www.judgments.fedcourt.gov.au/judgments/Judgments/fca/single/2026/2026fca1424",
+   "date": "2026-09-28T13:44+10:00",
+   "summary": "FOREIGN ACQUISITIONS \u2013 acquisition of real property \u2013 residential property \u2013 contraventions of Foreign Acquisitions and Takeovers Act 1975 (Cth) \u2013 contraventions of s 96(1) concerning failure to comply with conditions of no objection\u2026",
+   "tag": "Judgment",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (Approval of Auditing Competency Standard) Instrument 2026/733",
+   "link": "https://www.legislation.gov.au/F2026L01295/asmade",
+   "date": "2026-09-26T01:29+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (Charitable Investment Fundraising) Instrument 2026/730",
+   "link": "https://www.legislation.gov.au/F2026L01285/asmade",
+   "date": "2026-09-25T23:59+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (Serviced Apartment and Property Rental Schemes) Instrument 2026/192",
+   "link": "https://www.legislation.gov.au/F2026L01284/asmade",
+   "date": "2026-09-25T23:59+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "Financial Sector (Collection of Data) (reporting standard) determination No. 11 of 2026",
+   "link": "https://www.legislation.gov.au/F2026L01291/asmade",
+   "date": "2026-09-25T23:50+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": false
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (Low Volume Financial Markets) Instrument 2026/756",
+   "link": "https://www.legislation.gov.au/F2026L01296/asmade",
+   "date": "2026-09-25T20:46+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "ASIC",
+   "title": "26-229MR Former Warwick Gold and Impact Gold director Yuetu Ma disqualified from managing corporations for four years",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-229mr-former-warwick-gold-and-impact-gold-director-yuetu-ma-disqualified-from-managing-corporations-for-four-years",
+   "date": "2026-09-25T20:30+10:00",
+   "summary": "ASIC has disqualified former Queensland resident Yuetu Ma (also known as Jack Ma) from managing corporations for four years arising from his role as a director of failed companies Warwick Gold Holdings Pty Ltd and Impact Gold Ltd.",
+   "tag": "Enforcement",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (Managed Discretionary Account Services) Instrument 2026/720",
+   "link": "https://www.legislation.gov.au/F2026L01297/asmade",
+   "date": "2026-09-25T19:34+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "AFCA",
+   "title": "AFCA Approach schedule - Australian Financial Complaints Authority (AFCA)",
+   "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNdXFSYmZGV0J2UFpKVWExOXA4MG1BWTE1WlAybGxtb2F4TTlLVWpuYWE4NnhlZUFQRmRRY2VkRW4xb2xlT2dreDA5a0g3UHVoYUpVUkF6d1Buajc4MFp0ZVdwOHEzV3l4TlRURlVaWU5JREs5ZUFhLXpzbk40UWpGdDFKNmF0dU43MHhIaldrYzh6Mzh3SDBuYXoyQVpncXJQdDdBQVY4Rk1mRUltcjNJSERXM2lpZTFXazgyczVkOEIzdURs?oc=5",
+   "date": "2026-09-25T16:57+10:00",
+   "summary": "AFCA Approach schedule Australian Financial Complaints Authority (AFCA)",
+   "tag": "Complaints",
+   "relevant": true
+  },
+  {
+   "source": "ASIC",
+   "title": "26-227MR Former financial services provider employee Emre Basar charged with misappropriation of client funds after ASIC investigation",
+   "link": "https://www.asic.gov.au/about-asic/news-centre/find-a-media-release/2026-releases/26-227mr-former-financial-services-provider-employee-emre-basar-charged-with-misappropriation-of-client-funds-after-asic-investigation",
+   "date": "2026-09-25T02:00+10:00",
+   "summary": "Following an ASIC investigation, Mr Emre Tahsin Basar of Docklands, Victoria has been arrested and charged with eight (8) counts of dishonestly using his position as an employee to gain a financial advantage.",
+   "tag": "Enforcement",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (School Enrolment Deposits) Instrument 2026/709",
+   "link": "https://www.legislation.gov.au/F2026L01286/asmade",
+   "date": "2026-09-25T01:11+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (Attribution Managed Investment Trusts) Instrument 2026/726",
+   "link": "https://www.legislation.gov.au/F2026L01287/asmade",
+   "date": "2026-09-25T00:49+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (Client Money\u2014Cash Common Funds) Instrument 2026/727",
+   "link": "https://www.legislation.gov.au/F2026L01290/asmade",
+   "date": "2026-09-24T23:45+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (Disclosure in Dollars) Instrument 2026/719",
+   "link": "https://www.legislation.gov.au/F2026L01289/asmade",
+   "date": "2026-09-24T23:45+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (Horse Schemes) Instrument 2026/723",
+   "link": "https://www.legislation.gov.au/F2026L01283/asmade",
+   "date": "2026-09-24T22:50+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  },
+  {
+   "source": "Legislation",
+   "title": "ASIC Corporations (Financial Product Advice\u2014Exempt Documents) Instrument 2026/718",
+   "link": "https://www.legislation.gov.au/F2026L01281/asmade",
+   "date": "2026-09-24T21:05+10:00",
+   "summary": "Legislative instrument",
+   "tag": "New law or instrument",
+   "relevant": true
+  }
+ ],
+ "wrap": [
+  {
+   "source": "Yahoo Finance",
+   "title": "\u2018Script flipped\u2019: ASX defies global AI falls",
+   "link": "https://au.finance.yahoo.com/news/script-flipped-asx-defies-global-064402964.html",
+   "date": "2026-10-23T17:34+10:00",
+   "summary": "",
+   "tag": "Market",
+   "relevant": false
+  },
+  {
+   "source": "Yahoo Finance",
+   "title": "Australian Shares Little Changed; Zip Co Plummets After Disclosure of US Fraud Event",
+   "link": "https://au.finance.yahoo.com/news/australian-shares-little-changed-zip-055657718.html",
+   "date": "2026-10-23T15:56+10:00",
+   "summary": "",
+   "tag": "Market",
+   "relevant": false
+  },
+  {
+   "source": "Yahoo Finance",
+   "title": "ASX Midday Sector Update: Consumer Discretionary Stocks Advance, Materials Sector Struggles",
+   "link": "https://au.finance.yahoo.com/news/asx-midday-sector-consumer-discretionary-020604958.html",
+   "date": "2026-10-23T12:06+10:00",
+   "summary": "",
+   "tag": "Market",
+   "relevant": false
+  },
+  {
+   "source": "Yahoo Finance",
+   "title": "ASX Preview: Australian Shares to Fall as Oil Surges; Newmont Q3 Adjusted Net Income, Sales Up",
+   "link": "https://au.finance.yahoo.com/news/asx-preview-australian-shares-fall-230836504.html",
+   "date": "2026-10-23T09:08+10:00",
+   "summary": "",
+   "tag": "Market",
+   "relevant": false
+  },
+  {
+   "source": "ABC News",
+   "title": "ASX ends slightly up, ABC's The Business to end this year \u2014 as it happened",
+   "link": "https://www.abc.net.au/news/2026-10-23/asx-markets-business-news-live-updates-oct-23/107291840",
+   "date": "2026-10-23T06:33+10:00",
+   "summary": "",
+   "tag": "Market",
+   "relevant": false
+  }
+ ],
+ "movers": {
+  "as_of": "2026-10-23",
+  "up": [
+   {
+    "ticker": "OR.PA",
+    "name": "L'Oreal",
+    "change_pct": 5.8,
+    "price": 436.95
+   },
+   {
+    "ticker": "NCK.AX",
+    "name": "Nick Scali",
+    "change_pct": 5.15,
+    "price": 12.65
+   },
+   {
+    "ticker": "WES.AX",
+    "name": "Wesfarmers",
+    "change_pct": 3.76,
+    "price": 80.29
+   },
+   {
+    "ticker": "NAB.AX",
+    "name": "National Australia Bank",
+    "change_pct": 3.25,
+    "price": 41.31
+   },
+   {
+    "ticker": "RMD.AX",
+    "name": "Resmed Inc",
+    "change_pct": 3.16,
+    "price": 35.91
+   },
+   {
+    "ticker": "WBC.AX",
+    "name": "Westpac",
+    "change_pct": 3.11,
+    "price": 36.79
+   },
+   {
+    "ticker": "BP.L",
+    "name": "BP",
+    "change_pct": 3.02,
+    "price": 6.304
+   },
+   {
+    "ticker": "SHEL.L",
+    "name": "Shell",
+    "change_pct": 2.79,
+    "price": 39.97
+   }
+  ],
+  "down": [
+   {
+    "ticker": "PLS.AX",
+    "name": "Pls Group Ltd",
+    "change_pct": -8.07,
+    "price": 2.62
+   },
+   {
+    "ticker": "GMD.AX",
+    "name": "Genesis Minerals Ltd",
+    "change_pct": -7.78,
+    "price": 6.16
+   },
+   {
+    "ticker": "SFR.AX",
+    "name": "Sandfire Resources Ltd",
+    "change_pct": -6.91,
+    "price": 18.45
+   },
+   {
+    "ticker": "PRU.AX",
+    "name": "Perseus Mining Ltd",
+    "change_pct": -6.4,
+    "price": 5.41
+   },
+   {
+    "ticker": "MP1.AX",
+    "name": "Megaport",
+    "change_pct": -6.16,
+    "price": 15.85
+   },
+   {
+    "ticker": "LYC.AX",
+    "name": "Lynas Rare Earths Ltd",
+    "change_pct": -5.89,
+    "price": 10.71
+   },
+   {
+    "ticker": "S32.AX",
+    "name": "South32 Ltd",
+    "change_pct": -5.28,
+    "price": 4.13
+   },
+   {
+    "ticker": "NEM.AX",
+    "name": "Newmont Corporation",
+    "change_pct": -4.93,
+    "price": 155.03
+   }
+  ],
+  "breadth": {
+   "up": 138,
+   "down": 257,
+   "flat": 8
+  }
+ },
+ "sources": [
+  {
+   "name": "Yahoo Finance ^AXJO",
+   "url": "https://finance.yahoo.com/quote/^AXJO",
+   "ok": true,
+   "items": 1,
+   "note": ""
+  },
+  {
+   "name": "Yahoo Finance ^AORD",
+   "url": "https://finance.yahoo.com/quote/^AORD",
+   "ok": true,
+   "items": 1,
+   "note": ""
+  },
+  {
+   "name": "Yahoo Finance AUDUSD=X",
+   "url": "https://finance.yahoo.com/quote/AUDUSD=X",
+   "ok": true,
+   "items": 1,
+   "note": ""
+  },
+  {
+   "name": "Yahoo Finance ^GSPC",
+   "url": "https://finance.yahoo.com/quote/^GSPC",
+   "ok": true,
+   "items": 1,
+   "note": ""
+  },
+  {
+   "name": "Yahoo Finance ^TNX",
+   "url": "https://finance.yahoo.com/quote/^TNX",
+   "ok": true,
+   "items": 1,
+   "note": ""
+  },
+  {
+   "name": "Yahoo Finance GC=F",
+   "url": "https://finance.yahoo.com/quote/GC=F",
+   "ok": true,
+   "items": 1,
+   "note": ""
+  },
+  {
+   "name": "Yahoo Finance BZ=F",
+   "url": "https://finance.yahoo.com/quote/BZ=F",
+   "ok": true,
+   "items": 1,
+   "note": ""
+  },
+  {
+   "name": "Yahoo Finance TIO=F",
+   "url": "https://finance.yahoo.com/quote/TIO=F",
+   "ok": true,
+   "items": 1,
+   "note": ""
+  },
+  {
+   "name": "Yahoo Finance BTC-AUD",
+   "url": "https://finance.yahoo.com/quote/BTC-AUD",
+   "ok": true,
+   "items": 1,
+   "note": ""
+  },
+  {
+   "name": "RBA cash rate target (table F1)",
+   "url": "https://www.rba.gov.au/statistics/tables/#interest-rates",
+   "ok": true,
+   "items": 4001,
+   "note": ""
+  },
+  {
+   "name": "RBA cash rate changes (table A2)",
+   "url": "https://www.rba.gov.au/statistics/cash-rate/",
+   "ok": true,
+   "items": 95,
+   "note": ""
+  },
+  {
+   "name": "RBA board meeting schedule",
+   "url": "https://www.rba.gov.au/schedules-events/board-meeting-schedules.html",
+   "ok": true,
+   "items": 16,
+   "note": ""
+  },
+  {
+   "name": "RBA bond yields (table F2)",
+   "url": "https://www.rba.gov.au/statistics/tables/#interest-rates",
+   "ok": true,
+   "items": 2,
+   "note": ""
+  },
+  {
+   "name": "ABS monthly CPI",
+   "url": "https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation",
+   "ok": true,
+   "items": 2,
+   "note": ""
+  },
+  {
+   "name": "ABS unemployment rate",
+   "url": "https://www.abs.gov.au/statistics/labour/employment-and-unemployment",
+   "ok": true,
+   "items": 2,
+   "note": ""
+  },
+  {
+   "name": "ABS wage price index",
+   "url": "https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/wage-price-index-australia",
+   "ok": true,
+   "items": 2,
+   "note": ""
+  },
+  {
+   "name": "ABS release calendar",
+   "url": "https://www.abs.gov.au/release-calendar/future-releases",
+   "ok": true,
+   "items": 12,
+   "note": ""
+  },
+  {
+   "name": "ASX announcements (universe holdings)",
+   "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements",
+   "ok": true,
+   "items": 187,
+   "note": ""
+  },
+  {
+   "name": "ASX price-sensitive announcements (whole market)",
+   "url": "https://www.asx.com.au/markets/trade-our-cash-market/announcements",
+   "ok": true,
+   "items": 129,
+   "note": ""
+  },
+  {
+   "name": "ASIC media releases",
+   "url": "https://www.asic.gov.au/newsroom/",
+   "ok": true,
+   "items": 20,
+   "note": ""
+  },
+  {
+   "name": "ASIC financial advice enforcement and bannings",
+   "url": "https://www.asic.gov.au/newsroom/",
+   "ok": true,
+   "items": 22,
+   "note": ""
+  },
+  {
+   "name": "APRA media releases",
+   "url": "https://www.apra.gov.au/news-and-publications",
+   "ok": true,
+   "items": 10,
+   "note": ""
+  },
+  {
+   "name": "Treasury consultations",
+   "url": "https://treasury.gov.au/consultation",
+   "ok": true,
+   "items": 7,
+   "note": ""
+  },
+  {
+   "name": "Federal Register of Legislation",
+   "url": "https://www.legislation.gov.au/",
+   "ok": true,
+   "items": 20,
+   "note": ""
+  },
+  {
+   "name": "Treasurer media releases",
+   "url": "https://ministers.treasury.gov.au/ministers/jim-chalmers-2022/media-releases/feed",
+   "ok": true,
+   "items": 10,
+   "note": ""
+  },
+  {
+   "name": "Financial Services minister media releases",
+   "url": "https://ministers.treasury.gov.au/ministers/daniel-mulino-2025/media-releases/feed",
+   "ok": true,
+   "items": 10,
+   "note": ""
+  },
+  {
+   "name": "RBA media releases",
+   "url": "https://www.rba.gov.au/rss/rss-cb-media-releases.xml",
+   "ok": true,
+   "items": 1,
+   "note": ""
+  },
+  {
+   "name": "FAAA media releases",
+   "url": "https://faaa.au/category/media-releases/feed/",
+   "ok": true,
+   "items": 10,
+   "note": ""
+  },
+  {
+   "name": "Federal Court judgments (ASIC, tax, super, advice)",
+   "url": "https://www.judgments.fedcourt.gov.au/rss/fca-judgments",
+   "ok": true,
+   "items": 25,
+   "note": ""
+  },
+  {
+   "name": "ATO news (via Google News)",
+   "url": "https://news.google.com/rss/search?q=site:ato.gov.au+when:14d&hl=en-AU&gl=AU&ceid=AU:en",
+   "ok": true,
+   "items": 12,
+   "note": ""
+  },
+  {
+   "name": "AFCA news and determinations (via Google News)",
+   "url": "https://news.google.com/rss/search?q=site:afca.org.au+when:14d&hl=en-AU&gl=AU&ceid=AU:en",
+   "ok": true,
+   "items": 10,
+   "note": ""
+  },
+  {
+   "name": "Yahoo Finance Australia top stories",
+   "url": "https://au.finance.yahoo.com/rss/topstories",
+   "ok": true,
+   "items": 4,
+   "note": ""
+  },
+  {
+   "name": "ABC News business",
+   "url": "https://www.abc.net.au/news/feed/51892/rss.xml",
+   "ok": true,
+   "items": 1,
+   "note": ""
+  },
+  {
+   "name": "Universe price moves (build price cache)",
+   "url": "",
+   "ok": true,
+   "items": 403,
+   "note": ""
+  }
+ ]
+}
